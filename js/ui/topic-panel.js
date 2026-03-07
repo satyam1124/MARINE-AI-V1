@@ -31,8 +31,11 @@ function selectTopic(topicId, title, desc, icon, sectionName) {
 
   // Pre-fill search with a suggested question (shorter) — user decides when to ask
   const levelLabel = APP.currentLevel.fullTitle;
-  // Update quiz topic label
-  document.getElementById('quizTopic').textContent = title;
+  // Update quiz topic label (if quiz v2 setup note exists)
+  const quizTopicEl = document.getElementById('quizTopic');
+  if (quizTopicEl) quizTopicEl.textContent = title;
+  const qv2Note = document.getElementById('qv2SetupNote');
+  if (qv2Note) qv2Note.textContent = `Select difficulty and start the quiz for: ${title}`;
 }
 
 function showTopicZone() {
@@ -71,36 +74,9 @@ function loadVideos(videos) {
   }).join('');
 }
 
-function loadFormulas(formulas) {
-  document.getElementById('formulaGrid').innerHTML = formulas.length
-    ? formulas.map(f => `
-      <div class="fml-card">
-        <div class="fml-label">${esc(f.label)}</div>
-        <div class="fml-eq">${esc(f.eq)}</div>
-        <div class="fml-note">${esc(f.note)}</div>
-        ${f.source ? `<div class="fml-source">📚 ${esc(f.source)}</div>` : ''}
-      </div>`).join('')
-    : `<div style="color:var(--tx3);padding:20px;font-size:0.82rem;">Ask the AI below for formulas specific to this topic.</div>`;
-}
-
-function loadFlashcards(cards) {
-  APP.fcCards  = [...cards];
-  APP.fcIndex  = 0;
-  if (APP.fcCards.length) renderFlashcard();
-}
-
-function renderFlashcard() {
-  const c = APP.fcCards[APP.fcIndex];
-  if (!c) return;
-  document.getElementById('fcQ').textContent = c.q;
-  document.getElementById('fcA').textContent = c.a;
-  document.getElementById('fcCounter').textContent = `${APP.fcIndex + 1} / ${APP.fcCards.length}`;
-  document.getElementById('flashcardWrap').classList.remove('flipped');
-}
-
-function fcFlip()    { document.getElementById('flashcardWrap').classList.toggle('flipped'); }
-function fcNav(dir)  { APP.fcIndex = (APP.fcIndex + dir + APP.fcCards.length) % APP.fcCards.length; renderFlashcard(); }
-function fcShuffle() { APP.fcCards.sort(() => Math.random() - 0.5); APP.fcIndex = 0; renderFlashcard(); }
+/* loadFormulas, loadFlashcards, renderFlashcard, fcFlip, fcNav, fcShuffle
+   are defined in their respective modules (formulas-v3.js, flashcards.js).
+   Do NOT redeclare them here — topic-panel.js loads after those modules. */
 
 /* ─────────── MM PANEL SWITCHER ─────────── */
 function switchPanel(panelId, btn) {
