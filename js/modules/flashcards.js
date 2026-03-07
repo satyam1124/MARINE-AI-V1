@@ -4,7 +4,17 @@
 function loadFlashcards(cards) {
   APP.fcCards  = [...cards];
   APP.fcIndex  = 0;
-  if (APP.fcCards.length) renderFlashcard();
+  if (APP.fcCards.length) {
+    renderFlashcard();
+  } else {
+    // Clear stale flashcard display when topic has no cards
+    const q = document.getElementById('fcQ');
+    const a = document.getElementById('fcA');
+    const c = document.getElementById('fcCounter');
+    if (q) q.textContent = 'No flashcards for this topic';
+    if (a) a.textContent = '';
+    if (c) c.textContent = '0 / 0';
+  }
 }
 
 function renderFlashcard() {
@@ -17,6 +27,19 @@ function renderFlashcard() {
 }
 
 function fcFlip()    { document.getElementById('flashcardWrap').classList.toggle('flipped'); }
-function fcNav(dir)  { APP.fcIndex = (APP.fcIndex + dir + APP.fcCards.length) % APP.fcCards.length; renderFlashcard(); }
-function fcShuffle() { APP.fcCards.sort(() => Math.random() - 0.5); APP.fcIndex = 0; renderFlashcard(); }
+function fcNav(dir)  {
+  if (!APP.fcCards.length) return;
+  APP.fcIndex = (APP.fcIndex + dir + APP.fcCards.length) % APP.fcCards.length;
+  renderFlashcard();
+}
+function fcShuffle() {
+  // Fisher-Yates shuffle (unbiased)
+  const arr = APP.fcCards;
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  APP.fcIndex = 0;
+  renderFlashcard();
+}
 

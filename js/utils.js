@@ -50,10 +50,11 @@ function setAnswerBadges(modelLabel, modelCls, timeStr, examFlag) {
 function esc(s = '') {
   return String(s)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 function escJ(s = '') {
-  return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+  // Safe for use inside onclick="fn('...')" — escapes for JS string inside HTML attribute
+  return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
 }
 
 /* ─────────── ANSWER BODY RENDERER ─────────── */

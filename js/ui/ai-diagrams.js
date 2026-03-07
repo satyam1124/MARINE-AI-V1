@@ -42,6 +42,12 @@ function sanitizeSVG(raw) {
   let svg = raw.slice(svgStart, svgEnd + 6);
   // Remove any <script> tags for safety
   svg = svg.replace(/<script[\s\S]*?<\/script>/gi, '');
+  // Remove <foreignObject> elements (can embed arbitrary HTML)
+  svg = svg.replace(/<foreignObject[\s\S]*?<\/foreignObject>/gi, '');
+  // Remove all event handler attributes (onclick, onload, onerror, etc.)
+  svg = svg.replace(/\s+on\w+\s*=\s*["'][^"']*["']/gi, '');
+  // Remove javascript: URIs
+  svg = svg.replace(/href\s*=\s*["']\s*javascript:[^"']*["']/gi, '');
   // Remove any external URL references (security)
   svg = svg.replace(/xlink:href\s*=\s*["']https?:[^"']+["']/gi, '');
   svg = svg.replace(/href\s*=\s*["']https?:[^"']+["']/gi, '');

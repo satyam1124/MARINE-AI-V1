@@ -34,13 +34,13 @@ function closeSidebar() {
   const mainEl   = document.getElementById('mainEl');
   if (!sidebar) return;
 
+  sidebar.classList.remove('visible');
+  if (mainEl) mainEl.classList.remove('sb-open');
   if (window.innerWidth <= 768) {
-    sidebar.classList.remove('visible');
     if (overlay) overlay.classList.remove('show');
     document.body.style.overflow = '';
     if (ham) ham.classList.remove('open');
   }
-  // On desktop: sidebar stays open (only goHome closes it)
 }
 
 /* ── Override enterLevel to use new sidebar functions ── */

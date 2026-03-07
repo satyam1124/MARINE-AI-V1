@@ -19,6 +19,16 @@ const APP = {
   timerIv:     null,
   activeRefBook: localStorage.getItem('marineiq_refbook') || null,
   refMode: localStorage.getItem('marineiq_refmode') || 'bookfirst',
+  // Properties needed by sidebar-enhanced, topic-zone, topbar-init
+  streak:       JSON.parse(localStorage.getItem('miq_streak') || '{"count":0,"last":""}'),
+  bookmarks:    JSON.parse(localStorage.getItem('miq_bookmarks') || '[]'),
+  recentTopics: JSON.parse(localStorage.getItem('miq_recent') || '[]'),
+  stats:        JSON.parse(localStorage.getItem('miq_stats') || '{"fcFlipped":0,"quizTaken":0,"aiAsked":0}'),
+  tabMemory:    JSON.parse(localStorage.getItem('miq_tabmemory') || '{}'),
+  lightMode:    localStorage.getItem('miq_lightmode') === 'true',
+  lastTopic:    localStorage.getItem('miq_lasttopic') || null,
+  lastLevel:    localStorage.getItem('miq_lastlevel') || null,
+  quizWrong:    [],
 };
 
 const MODELS = {

@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     openApiModal();
   }
   buildRankGrid();
-  updateNotesPip();
-  renderNotesList();
+  if (typeof updateNotesPip === 'function') updateNotesPip();
+  if (typeof renderNotesList === 'function') renderNotesList();
   // Restore saved reference book selection
   setTimeout(function(){ if(typeof updateRefBadge==='function') updateRefBadge(); }, 100);
   document.getElementById('searchInput').addEventListener('keydown', e => {
@@ -28,12 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ── Wire up global keyboard shortcut for search (/) ── */
 /* ── Defined in modules/search.js ── */
 
-/* ── Final boot: build grid if API key exists ── */
+/* ── Final boot: build search index (rank grid already built above) ── */
 document.addEventListener('DOMContentLoaded', () => {
-  // Build rank grid on home screen
-  if (typeof buildRankGrid === 'function') buildRankGrid();
   // Build global search index
   if (typeof buildTopicsIndex === 'function') buildTopicsIndex();
-  // Show ref badge if book selected
-  if (typeof updateRefBadge === 'function') updateRefBadge();
 });

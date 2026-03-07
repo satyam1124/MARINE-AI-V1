@@ -238,6 +238,18 @@ async function quizStart() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error?.message||`OpenRouter ${res.status}`);
       raw = data.choices?.[0]?.message?.content || '';
+
+    } else if (pid === 'anthropic') {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method:'POST',
+        headers:{'Content-Type':'application/json','x-api-key':APP.apiKey,
+          'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+        body:JSON.stringify({ model: AI_PROVIDERS.anthropic.models.fast, max_tokens:4000,
+          system:sysMsg, messages:[{role:'user',content:userMsg}] })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error?.message||`Anthropic ${res.status}`);
+      raw = data.content?.[0]?.text || '';
     }
 
     // Parse JSON — strip markdown fences

@@ -202,13 +202,24 @@ OUTPUT RULES — Follow exactly or response will be rejected:
           if (!res.ok){if(res.status===429||res.status===503)continue;throw new Error(JSON.stringify(d.error));}
           raw=d.candidates?.[0]?.content?.parts?.[0]?.text||''; break;
         }
-      } else {
+      } else if (pid === 'openrouter') {
         const orRes = await fetch('https://openrouter.ai/api/v1/chat/completions',{
-          method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+APP.apiKey},
+          method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+APP.apiKey,'HTTP-Referer':'https://marineiq.study'},
           body:JSON.stringify({model:'meta-llama/llama-3.1-8b-instruct:free',max_tokens:4096,temperature:0.72,
             messages:[{role:'system',content:sysMsg},{role:'user',content:userMsg}]})});
         const d = await orRes.json();
+        if (!orRes.ok) throw new Error(d.error?.message||`OpenRouter ${orRes.status}`);
         raw=d.choices?.[0]?.message?.content||'';
+      } else {
+        // Anthropic
+        const antRes = await fetch('https://api.anthropic.com/v1/messages',{
+          method:'POST',headers:{'Content-Type':'application/json','x-api-key':APP.apiKey,
+            'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+          body:JSON.stringify({model:(typeof AI_PROVIDERS!=='undefined'&&AI_PROVIDERS.anthropic?.models?.fast)||'claude-haiku-4-5-20251001',
+            max_tokens:4096,system:sysMsg,messages:[{role:'user',content:userMsg}]})});
+        const d = await antRes.json();
+        if (!antRes.ok) throw new Error(d.error?.message||`Anthropic ${antRes.status}`);
+        raw=d.content?.[0]?.text||'';
       }
 
       // Extract JSON from response
@@ -297,11 +308,13 @@ document.addEventListener('DOMContentLoaded', function(){
   }, 800);
 });
 
-// Update when topic changes
-(function(){
-  const _o = selectTopic;
-  selectTopic = function(...a){ _o(...a); setTimeout(updateQRoundInfo, 300); };
-})();
+// Update quiz round info when topic changes
+document.addEventListener('DOMContentLoaded', function() {
+  // Use a MutationObserver or periodic check instead of fragile monkey-patching
+  setInterval(function() {
+    if (document.getElementById('qv2RoundInfo')) updateQRoundInfo();
+  }, 2000);
+});
 
 console.log('%cMarineIQ — Formula Viz v3 + Quiz Engine v3 loaded', 'color:#4ade80;font-weight:bold');
 
@@ -336,7 +349,7 @@ console.log('%cMarineIQ — Formula Viz v3 + Quiz Engine v3 loaded', 'color:#4ad
         f.note = 'Pm=Mean Effective Pressure(bar), L=stroke(m), A=piston area(m²), N=rev/min, k=number of cylinders. Derived: Pm×10⁵ Pa × L×A×N/60 s⁻¹ ÷ 1000 = Pm×L×A×N×k/0.6 kW. Example: Pm=18 bar, L=2.4m, A=0.503m², N=100rpm, k=6 → IHP=18×2.4×0.503×100×6/0.6=21,730 kW. Source: Reed\'s Vol.8 Ch.2';
       }
       // Also fix the common wrong form in notes
-      if(f.note && f.note.includes('60,000')) f.note = f.note.replace('/\s*60[,.]?000/g','÷ 0.6 [see corrected formula]');
+      if(f.note && f.note.includes('60,000')) f.note = f.note.replace(/\s*60[,.]?000/g,'÷ 0.6 [see corrected formula]');
     });
   }
 })();

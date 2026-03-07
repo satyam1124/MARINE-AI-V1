@@ -156,6 +156,7 @@ async function doAsk() {
   document.getElementById('thinkDetail').textContent = mode === 'deep' ? 'Deep research mode — may take 8–15 seconds' : '';
 
   const t0 = Date.now();
+  clearTimer();
   APP.timerIv = setInterval(() => {
     document.getElementById('thinkTimer').textContent = ((Date.now() - t0) / 1000).toFixed(1) + 's';
   }, 100);
@@ -164,7 +165,10 @@ async function doAsk() {
     if (mode === 'live') await askLive(q, t0);
     else await askStream(q, mode, t0);
 
-    if (APP.currentTopic) markStudied(APP.currentTopic);
+    if (APP.currentTopic && typeof markStudied === 'function') markStudied(APP.currentTopic);
+    // Track AI ask stats
+    APP.stats.aiAsked = (APP.stats.aiAsked || 0) + 1;
+    try { localStorage.setItem('miq_stats', JSON.stringify(APP.stats)); } catch(_) {}
   } catch (e) {
     clearTimer();
     hideEl('thinkingEl');
@@ -302,7 +306,11 @@ async function askLive(q, t0) {
     const uniqueUrls = [...new Set(urls.map(u => u.domain))].slice(0, 5);
     document.getElementById('srcChips').innerHTML = urls
       .filter((u, i) => uniqueUrls.indexOf(u.domain) === i)
-      .map(u => `<a class="src-chip" href="${u.url}" target="_blank" rel="noopener">🔗 ${u.domain}</a>`)
+      .map(u => {
+        // Validate URL protocol to prevent javascript: injection
+        try { const p = new URL(u.url).protocol; if (p !== 'https:' && p !== 'http:') return ''; } catch(_) { return ''; }
+        return `<a class="src-chip" href="${esc(u.url)}" target="_blank" rel="noopener">🔗 ${esc(u.domain)}</a>`;
+      })
       .join('');
   } else {
     srcBar.style.display = 'none';

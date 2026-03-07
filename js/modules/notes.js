@@ -16,7 +16,7 @@ function saveNote() {
     ts: new Date().toLocaleDateString()
   };
   APP.notes = [note, ...APP.notes].slice(0, 50);
-  localStorage.setItem('marineiq_notes', JSON.stringify(APP.notes));
+  try { localStorage.setItem('marineiq_notes', JSON.stringify(APP.notes)); } catch(_) {}
   updateNotesPip();
   renderNotesList();
   const btn = document.getElementById('saveNoteBtn');

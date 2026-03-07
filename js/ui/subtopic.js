@@ -281,6 +281,24 @@ async function launchSearchQuiz(topic, difficulty){
           body:JSON.stringify({contents:[{parts:[{text:sysMsg+'\n\n'+userMsg}]}],generationConfig:{maxOutputTokens:4096,temperature:0.72}})});
         const d = await res.json();
         raw = d.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      } else if(pid === 'openrouter'){
+        const res = await fetch('https://openrouter.ai/api/v1/chat/completions',{
+          method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer '+APP.apiKey,'HTTP-Referer':'https://marineiq.study'},
+          body:JSON.stringify({model:'meta-llama/llama-3.1-8b-instruct:free',max_tokens:4096,temperature:0.72,
+            messages:[{role:'system',content:sysMsg},{role:'user',content:userMsg}]})
+        });
+        const d = await res.json();
+        raw = d.choices?.[0]?.message?.content || '';
+      } else {
+        // Anthropic
+        const res = await fetch('https://api.anthropic.com/v1/messages',{
+          method:'POST', headers:{'Content-Type':'application/json','x-api-key':APP.apiKey,
+            'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+          body:JSON.stringify({model:(typeof AI_PROVIDERS!=='undefined'&&AI_PROVIDERS.anthropic?.models?.fast)||'claude-haiku-4-5-20251001',
+            max_tokens:4096,system:sysMsg,messages:[{role:'user',content:userMsg}]})
+        });
+        const d = await res.json();
+        raw = d.content?.[0]?.text || '';
       }
       const s=raw.indexOf('['),e=raw.lastIndexOf(']');
       if(s<0||e<0) throw new Error('No JSON');
