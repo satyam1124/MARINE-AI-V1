@@ -20,6 +20,23 @@
           onerror="window.renderMathInElement=function(){}"
           onload="try{renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});}catch(e){}"></script>
 
+  <!-- PDF.js for client-side PDF text extraction -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs" type="module"></script>
+  <script>
+    // Load PDF.js via CDN (fallback-safe)
+    (function() {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.js';
+      s.onload = function() {
+        if (typeof pdfjsLib !== 'undefined') {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.js';
+        }
+      };
+      s.onerror = function() { console.warn('PDF.js CDN unavailable'); };
+      document.head.appendChild(s);
+    })();
+  </script>
+
   <!-- ═══════════════════════════════════════════════════════════
        CSS — split by concern, easy to edit
        ═══════════════════════════════════════════════════════════ -->
@@ -238,10 +255,53 @@
                 placeholder="Ask any marine engineering question…" autocomplete="off"/>
             </div>
             <button class="ref-lib-btn" id="refLibBtn" onclick="openRefLibrary()" title="Select Reference Book">📚 Book</button>
+            <button class="ref-lib-btn pdf-upload-btn" id="pdfUploadBtn" onclick="togglePdfPanel()" title="Upload PDF Documents">
+              📎 PDF<span class="pdf-badge" id="pdfBadge" style="display:none">0</span>
+            </button>
             <button class="ask-btn-outer" id="askBtn" onclick="doAsk()">ASK AI →</button>
           </div>
           <div class="ref-badge-row">
             <span class="ref-active-badge" id="refBadge" style="display:none" onclick="selectRefBook(null);updateRefBadge()"></span>
+          </div>
+
+          <!-- PDF Upload Panel -->
+          <div class="pdf-panel" id="pdfPanel" style="display:none">
+            <div class="pdf-panel-header">
+              <div class="pdf-panel-title">📎 Document Knowledge Base (RAG)</div>
+              <button class="pdf-panel-close" onclick="closePdfPanel()">✕</button>
+            </div>
+            <div class="pdf-panel-desc">Upload PDF documents  to get accurate, source-cited answers. Your documents are chunked, embedded, and searched automatically.</div>
+
+            <div class="pdf-drop-zone" id="pdfDropZone" onclick="document.getElementById('pdfFileInput').click()">
+              <div class="pdf-drop-icon">📄</div>
+              <div class="pdf-drop-text">Drag & drop PDF here, or click to browse</div>
+              <div class="pdf-drop-hint">Max 100 MB · Text-based PDFs only</div>
+              <input type="file" id="pdfFileInput" accept=".pdf" multiple
+                     style="display:none" onchange="handlePdfSelect(event)"/>
+            </div>
+
+            <div class="pdf-progress" id="pdfProgress" style="display:none">
+              <div class="pdf-progress-bar" id="pdfProgressBar"></div>
+            </div>
+            <div class="pdf-status" id="pdfStatus"></div>
+
+            <div class="pdf-doc-list" id="pdfDocList">
+              <div class="pdf-empty">No documents uploaded yet</div>
+            </div>
+
+            <div class="pdf-actions">
+              <button class="action-btn" onclick="showEmbedKeyInput()">🔑 Embedding Key</button>
+              <button class="action-btn" onclick="deleteAllPdfs()" style="color:#f87171">🗑 Clear All</button>
+            </div>
+
+            <div class="pdf-embed-key-row" id="pdfEmbedKeyRow" style="display:none">
+              <div class="pdf-embed-key-hint">Optional: Add a free Gemini API key for high-quality semantic search. Without it, keyword search is used instead.</div>
+              <div class="pdf-embed-key-input-row">
+                <input class="pdf-embed-key-input" id="pdfEmbedKeyInput" type="password"
+                       placeholder="AIza… (free at aistudio.google.com)" autocomplete="off"/>
+                <button class="action-btn primary" onclick="saveEmbedKey()">Save</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -329,6 +389,8 @@
 <script src="js/modules/ai-engine.js"></script>
 <script src="js/modules/ai-providers.js"></script>
 <script src="js/modules/ref-library.js"></script>
+<script src="js/modules/rag-engine.js"></script>
+<script src="js/modules/pdf-parser.js"></script>
 <script src="js/modules/quiz-v2.js"></script>
 <script src="js/modules/quiz-advanced.js"></script>
 <script src="js/modules/formulas-v3.js"></script>
@@ -348,6 +410,7 @@
 <script src="js/ui/video-zoom.js"></script>
 <script src="js/ui/subtopic.js"></script>
 <script src="js/ui/api-button.js"></script>
+<script src="js/ui/pdf-upload.js"></script>
 
 <!-- 5. BTech chapter data (requires TOPIC_KNOWLEDGE + setChapters from btec-nav) -->
 <script src="js/ui/btec-nav.js"></script>

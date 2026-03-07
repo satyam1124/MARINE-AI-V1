@@ -108,7 +108,7 @@ async function callGemini(q, mode, onChunk, onDone, onError) {
   const maxOut   = { fast: 800, bal: 1600, deep: 3500, live: 1600 }[mode] || 1600;
   const url      = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse&key=${APP.apiKey}`;
 
-  const systemPrompt = buildSystemPrompt(mode);
+  const systemPrompt = buildSystemPrompt(mode, q);
   const body = {
     contents: [{ role: 'user', parts: [{ text: systemPrompt + '\n\n---\n\n' + q }] }],
     generationConfig: {
@@ -166,7 +166,7 @@ async function callGroq(q, mode, onChunk, onDone, onError) {
   const model    = provider.models[mode] || provider.models.bal;
   const maxOut   = { fast: 800, bal: 1600, deep: 3500, live: 1600 }[mode] || 1600;
 
-  const systemPrompt = buildSystemPrompt(mode);
+  const systemPrompt = buildSystemPrompt(mode, q);
   const body = {
     model,
     max_tokens: maxOut,
@@ -229,7 +229,7 @@ async function callOpenRouter(q, mode, onChunk, onDone, onError) {
   const model    = provider.models[mode] || provider.models.bal;
   const maxOut   = { fast: 600, bal: 1400, deep: 2500, live: 1400 }[mode] || 1400;
 
-  const systemPrompt = buildSystemPrompt(mode);
+  const systemPrompt = buildSystemPrompt(mode, q);
   const body = {
     model,
     max_tokens: maxOut,
@@ -291,7 +291,7 @@ async function callAnthropic(q, mode, onChunk, onDone, onError) {
     model:      MODELS[mode]?.id || 'claude-haiku-4-5-20251001',
     max_tokens: maxTokens,
     stream:     true,
-    system:     buildSystemPrompt(mode),
+    system:     buildSystemPrompt(mode, q),
     messages:   [{ role: 'user', content: q }]
   };
 

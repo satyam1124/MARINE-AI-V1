@@ -134,7 +134,19 @@ RESPOND WITH:
 - Never invent specifications or regulation numbers
 
 ${examInstr}
-${depthInstr}${refCtx}${diagCtx}${miCtx}`;
+${depthInstr}${refCtx}${diagCtx}${miCtx}
+
+STRUCTURED ANSWER FORMAT:
+Organise your answer with clear sections using **bold headers**.
+For technical questions, use this structure when appropriate:
+1. **Direct Answer** — one-line summary
+2. **Detailed Explanation** — with FORMULA: prefix for equations (use KaTeX: $formula$)
+3. **Working Principle / Mechanism** — step-by-step if applicable
+4. **Practical / Shipboard Application** — real-world relevance
+5. **Key Points to Remember** — bullet list of exam-critical facts
+6. NOTE: for cautions, EXAM TIP: for exam advice
+Always define variables after formulas (e.g. "where P = pressure (bar), T = temperature (K)").
+${APP._ragContext || ''}`;
 }
 
 /* ─────────── MAIN ASK FUNCTION ─────────── */
@@ -146,13 +158,24 @@ async function doAsk() {
   APP.lastQuery = q;
   const mode = APP.currentModel;
 
+  // Pre-fetch RAG context from uploaded documents
+  APP._ragContext = '';
+  if (typeof buildRAGContext === 'function') {
+    try {
+      const ragCtx = await buildRAGContext(q);
+      APP._ragContext = ragCtx;
+    } catch (e) { console.warn('RAG context fetch failed:', e); }
+  }
+
   hideEl('answerCard');
   hideEl('errorEl');
   showEl('thinkingEl');
   document.getElementById('askBtn').disabled = true;
   document.getElementById('askBtn').textContent = 'THINKING…';
 
-  document.getElementById('thinkStage').textContent  = mode === 'live' ? 'Searching web…' : 'Consulting marine engineering knowledge base…';
+  document.getElementById('thinkStage').textContent  = mode === 'live' ? 'Searching web…' :
+    APP._ragContext ? 'Found relevant passages — generating answer…' :
+    'Consulting marine engineering knowledge base…';
   document.getElementById('thinkDetail').textContent = mode === 'deep' ? 'Deep research mode — may take 8–15 seconds' : '';
 
   const t0 = Date.now();
