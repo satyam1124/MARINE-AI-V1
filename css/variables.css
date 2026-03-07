@@ -1,0 +1,37 @@
+/* ── MarineIQ CSS Variables & Theme Tokens ── */
+
+/* ── CSS VARIABLES ── */
+:root {
+  /* Core palette - deep ocean */
+  --bg:       #030b14;
+  --bg1:      #06111f;
+  --bg2:      #091929;
+  --bg3:      #0d2038;
+  --bg4:      #122844;
+
+  /* Borders */
+  --b0: #132333;
+  --b1: #1a3048;
+  --b2: #22405e;
+
+  /* Typography */
+  --tx:  #cde1f5;
+  --tx2: #7aaccf;
+  --tx3: #3d6a8a;
+
+  /* Rank colours — authentic merchant navy palette */
+  --cadet:  #22c55e;   /* engine cadet — green (trainee) */
+  --c4:     #60a5fa;   /* MEO Class 4 — blue */
+  --c3:     #f59e0b;   /* MEO Class 3 — amber */
+  --c2:     #f97316;   /* MEO Class 2 — orange */
+  --c1:     #a78bfa;   /* MEO Class 1 / Chief — purple-gold */
+
+  /* Accent */
+  --ac:  #0ea5e9;
+  --acL: #38bdf8;
+  --acD: #0369a1;
+
+  /* Sidebar width */
+  --sb: 290px;
+  --top: 54px;
+}

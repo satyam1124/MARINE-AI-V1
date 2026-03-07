@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MarineIQ — Merchant Navy Engineering Academy</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <!-- KaTeX (optional — graceful fallback if CDN unavailable) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+        onerror="console.log('KaTeX CSS unavailable')">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+          onerror="window.katex=null;console.log('KaTeX unavailable')"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onerror="window.renderMathInElement=function(){}"
+          onload="try{renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});}catch(e){}"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CSS — split by concern, easy to edit
+       ═══════════════════════════════════════════════════════════ -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="logo" onclick="goHome()">
+    <span class="logo-anchor">⚓</span>
+    Marine<em>IQ</em>
+  </div>
+  <nav class="breadcrumb" id="breadcrumb">
+    <span class="bc-item active" onclick="goHome()">HOME</span>
+  </nav>
+  <div class="topbar-actions">
+    <button class="tbtn" id="btnExam"  onclick="toggleExamMode()"><span class="tbtn-icon">📝</span>EXAM MODE</button>
+    <button class="tbtn" id="btnQuiz"  onclick="openQuiz()"><span class="tbtn-icon">🎯</span>QUIZ</button>
+    <button class="tbtn" style="position:relative" onclick="toggleNotes()">
+      <span class="tbtn-icon">📚</span>NOTES
+      <span class="notes-count-pip" id="notesPip" style="display:none">0</span>
+    </button>
+    <button class="tbtn" onclick="openApiModal()"><span class="tbtn-icon">⚙</span></button>
+  </div>
+</header>
+
+<!-- SIDEBAR — hidden until rank selected -->
+<aside class="sidebar" id="sidebar">
+  <div id="sidebarContent"></div>
+</aside>
+
+<!-- NOTES DRAWER -->
+<div class="notes-drawer" id="notesDrawer">
+  <div class="notes-drawer-title">
+    📚 Study Notes
+    <button style="margin-left:auto;background:none;border:none;color:var(--tx3);cursor:pointer;font-size:1.1rem;" onclick="toggleNotes()">✕</button>
+  </div>
+  <div id="notesList"></div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+  <main class="main" id="mainEl">
+
+    <!-- ════ HOME SCREEN ════ -->
+    <div id="homeScreen" class="home-screen">
+
+      <div class="home-hero">
+        <span class="home-ship-anim">🚢</span>
+        <h1 class="home-title">
+          The Complete<br/><em>Merchant Navy</em><br/>Engineering Academy
+        </h1>
+        <p class="home-sub">
+          From Engine Cadet to Chief Engineer — every rank, every exam, every oral question.
+          Accurate knowledge sourced from IMO, DG Shipping, STCW, Reed's Marine Engineering Series and Pounder's.
+        </p>
+        <div class="home-source-strip">
+          <span class="home-source-dot"></span>
+          Sources: IMO · DG Shipping India · STCW 2010 · Reed's Series · Pounder's · MAN B&W · Alfa Laval
+        </div>
+      </div>
+
+      <!-- Info strip -->
+      <div class="info-strip">
+        <div class="info-card">
+          <div class="ic-icon">🎓</div>
+          <div class="ic-title">5 Career Stages</div>
+          <div class="ic-text">Engine Cadet → 4th Eng → 3rd Eng → 2nd Eng → Chief Engineer. Every stage has dedicated syllabus, COC requirements and oral prep.</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-icon">📜</div>
+          <div class="ic-title">Authentic MMD Syllabus</div>
+          <div class="ic-text">MEO Class IV & II written papers (EK-General, EK-Motor, Electrotechnology, Naval Architecture, Applied Heat) and oral examination question banks.</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-icon">🧠</div>
+          <div class="ic-title">Multimodal Learning</div>
+          <div class="ic-text">Animated engine diagrams, real YouTube video references, formula cards, flip flashcards and AI-generated MCQ quizzes per topic.</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-icon">🤖</div>
+          <div class="ic-title">4 AI Modes</div>
+          <div class="ic-text">Haiku (quick answers), Sonnet (detailed study), Opus (research-grade depth), Live Web (current regulations and IMO circulars).</div>
+        </div>
+      </div>
+
+      <!-- Career Ladder -->
+      <div class="ladder-heading">── SELECT YOUR CAREER STAGE ──</div>
+      <div class="rank-grid" id="rankGrid">
+        <!-- Injected by JS from LEVELS data -->
+      </div>
+
+    </div><!-- /homeScreen -->
+
+    <!-- ════ LEVEL PAGE ════ -->
+    <div id="levelPage" class="level-page">
+
+      <!-- Banner injected by JS -->
+      <div id="lpBanner"></div>
+
+      <!-- Eligibility block injected by JS -->
+      <div id="lpEligibility"></div>
+
+      <!-- MMD Exam Papers -->
+      <div id="lpExamPapers"></div>
+
+      <!-- Topic selected zone -->
+      <div id="topicZone" style="display:none">
+
+        <!-- Multimodal tabs -->
+        <div class="mm-section">
+          <div class="mm-tabs" id="mmTabs">
+            <button class="mm-tab active" data-panel="diagrams"   onclick="switchPanel('diagrams',this)">📊 Diagrams</button>
+            <button class="mm-tab"        data-panel="videos"     onclick="switchPanel('videos',this)">▶ Videos</button>
+            <button class="mm-tab"        data-panel="formulas"   onclick="switchPanel('formulas',this)">Σ Formulas</button>
+            <button class="mm-tab"        data-panel="flashcards" onclick="switchPanel('flashcards',this)">⚡ Flashcards</button>
+            <button class="mm-tab"        data-panel="quiz"       onclick="switchPanel('quiz',this)">🎯 Quiz</button>
+          </div>
+
+          <!-- Diagrams -->
+          <div class="mm-panel active" id="panel-diagrams">
+            <div class="diag-grid" id="diagGrid"></div>
+          </div>
+
+          <!-- Videos -->
+          <div class="mm-panel" id="panel-videos">
+            <div class="video-grid" id="videoGrid"></div>
+          </div>
+
+          <!-- Formulas -->
+          <div class="mm-panel" id="panel-formulas">
+            <div class="formula-grid" id="formulaGrid"></div>
+          </div>
+
+          <!-- Flashcards -->
+          <div class="mm-panel" id="panel-flashcards">
+            <div class="fc-header">
+              <span style="font-weight:700;font-size:0.85rem;">⚡ FLASHCARDS</span>
+              <span class="fc-counter" id="fcCounter">1 / 1</span>
+              <div class="fc-controls">
+                <button class="fc-ctrl-btn" onclick="fcNav(-1)" title="Previous">←</button>
+                <button class="fc-ctrl-btn" onclick="fcNav(1)"  title="Next">→</button>
+                <button class="fc-ctrl-btn" onclick="fcShuffle()" title="Shuffle">⇄</button>
+              </div>
+            </div>
+            <div class="flashcard-wrap" id="flashcardWrap" onclick="fcFlip()">
+              <div class="fc-inner" id="fcInner">
+                <div class="fc-face fc-front">
+                  <div class="fc-face-tag">Question</div>
+                  <div class="fc-question" id="fcQ"></div>
+                  <div class="fc-tap-hint">tap to reveal answer</div>
+                </div>
+                <div class="fc-face fc-back">
+                  <div class="fc-face-tag">Answer</div>
+                  <div class="fc-answer" id="fcA"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quiz -->
+          <div class="mm-panel" id="panel-quiz">
+            <div class="quiz-wrap">
+              <div class="quiz-meta">
+                <span>🎯 QUIZ MODE — <span id="quizScore">0/0</span></span>
+                <span id="quizTopic" style="color:var(--tx3)">Select a topic first</span>
+              </div>
+              <div class="quiz-q" id="quizQ">Click "New Quiz" to start a quiz for the current topic.</div>
+              <div class="quiz-opts" id="quizOpts"></div>
+              <div class="quiz-result" id="quizResult"></div>
+              <div class="quiz-actions">
+                <button class="action-btn primary" onclick="quizNext()">Next →</button>
+                <button class="action-btn" onclick="quizGenerate()">🔄 New Quiz</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /mm-section -->
+
+        <!-- AI search -->
+        <div class="ai-section">
+          <div class="model-pills" id="modelPills">
+            <div class="model-pill mp-fast" data-model="fast" onclick="selectModel('fast')">
+              <span>⚡</span>
+              <div><div class="mp-name">FAST</div><div class="mp-sub">Haiku · ~1s</div></div>
+            </div>
+            <div class="model-pill mp-bal active" data-model="bal" onclick="selectModel('bal')">
+              <span>🧠</span>
+              <div><div class="mp-name">BALANCED</div><div class="mp-sub">Sonnet · ~3s</div></div>
+              <span class="model-auto-badge">AUTO</span>
+            </div>
+            <div class="model-pill mp-deep" data-model="deep" onclick="selectModel('deep')">
+              <span>🔬</span>
+              <div><div class="mp-name">DEEP</div><div class="mp-sub">Opus · ~8s</div></div>
+            </div>
+            <div class="model-pill mp-live" data-model="live" onclick="selectModel('live')">
+              <span>🌐</span>
+              <div><div class="mp-name">LIVE WEB</div><div class="mp-sub">Search · real-time</div></div>
+            </div>
+          </div>
+
+          <div class="search-row">
+            <div class="search-wrap">
+              <span class="search-icon">🔍</span>
+              <input class="search-input" id="searchInput" type="text"
+                placeholder="Ask any marine engineering question…" autocomplete="off"/>
+            </div>
+            <button class="ref-lib-btn" id="refLibBtn" onclick="openRefLibrary()" title="Select Reference Book">📚 Book</button>
+            <button class="ask-btn-outer" id="askBtn" onclick="doAsk()">ASK AI →</button>
+          </div>
+          <div class="ref-badge-row">
+            <span class="ref-active-badge" id="refBadge" style="display:none" onclick="selectRefBook(null);updateRefBadge()"></span>
+          </div>
+        </div>
+
+        <!-- Response area -->
+        <div class="thinking-wrap" id="thinkingEl">
+          <div class="spinner"></div>
+          <div style="flex:1">
+            <div class="thinking-stage" id="thinkStage">Processing…</div>
+            <div class="thinking-detail" id="thinkDetail"></div>
+          </div>
+          <div class="thinking-timer" id="thinkTimer">0.0s</div>
+        </div>
+
+        <div class="error-card" id="errorEl">
+          <div class="error-title">⚠ Error</div>
+          <div id="errorMsg"></div>
+        </div>
+
+        <div class="answer-card" id="answerCard">
+          <div class="ans-header">
+            <div class="ans-query" id="ansQuery"></div>
+            <div class="ans-badges" id="ansBadges"></div>
+          </div>
+          <div class="ans-body" id="ansBody"></div>
+          <div class="ans-sources" id="ansSources">
+            <div class="ans-sources-label">Sources</div>
+            <div class="src-chips" id="srcChips"></div>
+          </div>
+          <div class="ans-actions">
+            <button class="action-btn primary" onclick="copyAnswer()">⎘ Copy</button>
+            <button class="action-btn" id="saveNoteBtn" onclick="saveNote()">🔖 Save Note</button>
+            <button class="action-btn" onclick="clearAnswer()">✕ Clear</button>
+            <button class="action-btn" id="deepBtn" onclick="retryDeep()" style="display:none">🔬 Go Deeper</button>
+          </div>
+        </div>
+
+      </div><!-- /topicZone -->
+
+    </div><!-- /levelPage -->
+
+  </main>
+</div>
+
+<!-- API KEY MODAL -->
+<div class="overlay" id="apiOverlay">
+  <div class="modal-box">
+    <div class="modal-title">⚙ Anthropic API Key</div>
+    <p class="modal-desc">
+      Enter your Anthropic API key once — it's stored securely in your browser and never requested again.
+      Get your key at <strong>console.anthropic.com</strong>
+    </p>
+    <label class="modal-label">API Key</label>
+    <input class="modal-input" type="password" id="apiKeyInput" placeholder="sk-ant-api03-…"/>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeApiModal()">Cancel</button>
+      <button class="modal-save" onclick="saveApiKey()">Save & Start Learning</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     JAVASCRIPT — load order matters (data before logic, logic before UI)
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- 1. Core config (no deps) -->
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+
+<!-- 2. Data layer (pure data, no logic) -->
+<script src="js/data/career-levels.js"></script>
+<script src="js/data/topic-knowledge.js"></script>
+<script src="js/data/diagrams.js"></script>
+<script src="js/data/topic-knowledge-patches.js"></script>
+<script src="js/data/ref-books/diesel-handbook.js"></script>
+<script src="js/data/ref-books/aranha.js"></script>
+<script src="js/data/ref-books/aux-machinery.js"></script>
+<script src="js/data/ref-books/index.js"></script>
+
+<!-- 3. Feature modules (depend on config + data) -->
+<script src="js/modules/formulas.js"></script>
+<script src="js/modules/flashcards.js"></script>
+<script src="js/modules/notes.js"></script>
+<script src="js/modules/quiz.js"></script>
+<script src="js/modules/search.js"></script>
+<script src="js/modules/ai-providers.js"></script>
+<script src="js/modules/ai-engine.js"></script>
+<script src="js/modules/ref-library.js"></script>
+<script src="js/modules/quiz-v2.js"></script>
+<script src="js/modules/quiz-advanced.js"></script>
+<script src="js/modules/formulas-v3.js"></script>
+
+<!-- 4. UI layer (depend on modules + data) -->
+<script src="js/ui/navigation.js"></script>
+<script src="js/ui/topic-panel.js"></script>
+<script src="js/ui/controls.js"></script>
+<script src="js/ui/sidebar.js"></script>
+<script src="js/ui/sidebar-enhanced.js"></script>
+<script src="js/ui/mobile.js"></script>
+<script src="js/ui/exam-renderer.js"></script>
+<script src="js/ui/topbar-init.js"></script>
+<script src="js/ui/upgrade.js"></script>     <!-- must load before topic-zone.js (defines TOPIC_META) -->
+<script src="js/ui/topic-zone.js"></script>
+<script src="js/ui/ai-diagrams.js"></script>
+<script src="js/ui/video-zoom.js"></script>
+<script src="js/ui/subtopic.js"></script>
+<script src="js/ui/api-button.js"></script>
+
+<!-- 5. BTech chapter data (requires TOPIC_KNOWLEDGE + setChapters from btec-nav) -->
+<script src="js/ui/btec-nav.js"></script>
+<script src="js/data/btec-chapters.js"></script>
+
+<!-- 6. Bootstrap — runs last, wires everything -->
+<script src="js/init.js"></script>
+
+</html>
