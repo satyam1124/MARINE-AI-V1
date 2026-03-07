@@ -20,21 +20,14 @@
           onerror="window.renderMathInElement=function(){}"
           onload="try{renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});}catch(e){}"></script>
 
-  <!-- PDF.js for client-side PDF text extraction -->
-  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs" type="module"></script>
+  <!-- PDF.js for client-side PDF text extraction (v3.x legacy build — global pdfjsLib) -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"
+          onerror="console.warn('PDF.js CDN unavailable')"></script>
   <script>
-    // Load PDF.js via CDN (fallback-safe)
-    (function() {
-      var s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.js';
-      s.onload = function() {
-        if (typeof pdfjsLib !== 'undefined') {
-          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.js';
-        }
-      };
-      s.onerror = function() { console.warn('PDF.js CDN unavailable'); };
-      document.head.appendChild(s);
-    })();
+    if (typeof pdfjsLib !== 'undefined') {
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+    }
   </script>
 
   <!-- ═══════════════════════════════════════════════════════════
