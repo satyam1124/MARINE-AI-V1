@@ -397,3 +397,141 @@ body::before {
 
 /* Formula cards */
 .formula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 8px; }
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── TABLET / SMALL LAPTOP (≤768px) ── */
+@media (max-width: 768px) {
+  :root { --sb: 82vw; }
+
+  /* Topbar: shrink actions */
+  .topbar { padding: 0 12px; gap: 8px; }
+  .topbar-actions { gap: 3px; }
+  .tbtn { padding: 5px 8px; font-size: 0.7rem; }
+  .tbtn span:not(.tbtn-icon) { display: none; }  /* hide text, keep icon */
+  .breadcrumb { font-size: 0.56rem; }
+
+  /* Sidebar: overlay mode */
+  .sidebar { z-index: 600; box-shadow: 8px 0 40px rgba(0,0,0,0.6); }
+  .main.sb-open { margin-left: 0; }  /* no push on mobile */
+
+  /* Home: stack rank cards vertically */
+  .rank-grid::before, .rank-node { display: none; }
+  .rank-row { flex-direction: column; }
+  .rank-row:nth-child(odd) .rank-card,
+  .rank-row:nth-child(even) .rank-card { margin: 0; }
+  .rank-card { padding: 18px 20px; }
+
+  .home-screen { padding: 28px 16px 80px; }
+  .home-hero { padding-bottom: 32px; }
+  .home-ship-anim { font-size: 2.2rem; }
+
+  /* Grids single-column on tablet portrait */
+  .video-grid { grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); }
+  .formula-grid { grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); }
+  .diag-grid { grid-template-columns: 1fr; }
+  .info-strip { grid-template-columns: 1fr 1fr; }
+
+  /* Level page */
+  .level-page { padding: 16px 14px 80px; }
+  .lp-banner { padding: 18px 16px; }
+  .lp-title { font-size: 1.2rem; }
+  .lp-desc { font-size: 0.82rem; }
+
+  /* Tabs scrollable */
+  .mm-tabs { gap: 0; padding: 3px; }
+  .mm-tab { padding: 7px 10px; font-size: 0.72rem; }
+
+  /* Eligibility */
+  .elig-grid { grid-template-columns: 1fr; }
+  .exam-papers-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── PHONE (≤480px) ── */
+@media (max-width: 480px) {
+  :root { --sb: 88vw; --top: 52px; }
+
+  .topbar { padding: 0 10px; gap: 6px; height: var(--top); }
+  .logo { font-size: 0.9rem; gap: 6px; }
+  .logo-anchor { font-size: 1rem; }
+  .breadcrumb { display: none; }  /* too cramped */
+  .topbar-actions { gap: 2px; }
+  .tbtn { padding: 4px 6px; border-radius: 6px; }
+
+  /* Home: compact */
+  .home-screen { padding: 20px 12px 60px; }
+  .home-title { font-size: 1.4rem; }
+  .home-sub { font-size: 0.85rem; margin-bottom: 18px; }
+  .home-source-strip { font-size: 0.52rem; padding: 4px 10px; }
+  .info-strip { grid-template-columns: 1fr; gap: 8px; margin-bottom: 32px; }
+
+  /* Rank cards */
+  .rank-card { padding: 16px; border-radius: 12px; }
+  .rc-icon { font-size: 1.4rem; }
+  .rc-title { font-size: 0.9rem; }
+  .rc-sub { font-size: 0.72rem; }
+  .rc-tags { gap: 4px; }
+  .rc-tag { font-size: 0.54rem; padding: 2px 7px; }
+  .rc-enter { bottom: 12px; right: 12px; }
+
+  /* Level page */
+  .level-page { padding: 12px 10px 60px; }
+  .lp-banner { padding: 14px 12px; border-radius: 12px; margin-bottom: 14px; }
+  .lp-title { font-size: 1.05rem; }
+  .lp-desc { font-size: 0.78rem; }
+  .lp-chips { gap: 4px; margin-top: 10px; }
+  .lp-chip { font-size: 0.55rem; padding: 3px 8px; }
+
+  /* Sidebar */
+  .sb-rank-header { padding: 12px 12px 10px; }
+  .sb-rank-title { font-size: 0.85rem; }
+  .sb-topic { font-size: 0.75rem; padding: 7px 8px; }
+
+  /* Grids: single column */
+  .formula-grid,
+  .video-grid,
+  .diag-grid,
+  .exam-papers-grid,
+  .elig-grid { grid-template-columns: 1fr; }
+
+  /* Tabs: horizontal scroll, smaller */
+  .mm-tabs { padding: 2px; }
+  .mm-tab { padding: 6px 8px; font-size: 0.68rem; min-width: 0; }
+
+  /* Videos smaller */
+  .yt-thumb, .yt-fallback-thumb { height: 110px; }
+  .yt-title { font-size: 0.74rem; }
+  .yt-channel { font-size: 0.62rem; }
+
+  /* Diagrams */
+  .diag-card svg { height: 140px; }
+
+  /* Notes drawer */
+  .notes-drawer { width: 92vw; }
+
+  /* Hamburger — ensure visible */
+  .hamburger { display: flex !important; }
+
+  /* Scroll top button safe area */
+  .scroll-top-btn { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); right: 12px; }
+
+  /* Safe area for bottom */
+  body { padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+
+/* ── SMALL PHONE (≤380px) ── */
+@media (max-width: 380px) {
+  :root { --top: 48px; }
+  .logo { font-size: 0.82rem; }
+  .tbtn { padding: 3px 5px; }
+  .tbtn-icon { font-size: 0.8rem; }
+  .home-title { font-size: 1.2rem; }
+  .home-sub { font-size: 0.78rem; }
+  .rank-card { padding: 14px 12px; }
+  .rc-title { font-size: 0.82rem; }
+  .level-page { padding: 10px 8px 50px; }
+  .lp-title { font-size: 0.95rem; }
+  .mm-tab { padding: 5px 6px; font-size: 0.64rem; }
+}

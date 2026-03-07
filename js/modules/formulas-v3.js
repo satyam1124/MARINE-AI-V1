@@ -1,6 +1,18 @@
 /* MarineIQ — Formula Visualizer v3: parse, render, filter, copy with color coding
    Deps: config.js, utils.js (esc) */
 
+/* Math-safe HTML escaper: prevents XSS but preserves Unicode math symbols
+   (subscripts ₀₁₂₃ₛₜ, superscripts ²³, Greek ηρλωαβγ, operators ≤≥≈×÷±→) */
+function escMath(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+  // Note: does NOT escape single quotes or Unicode — preserves ₀₁₂ η ρ ² ³ ≤ ≥ etc.
+}
+
 /* ─── 1a. VARIABLE PARSER ─────────────────────────────── */
 function fmlParseVars(note) {
   const out = []; if (!note) return out;
@@ -42,7 +54,7 @@ function fmlColorEq(eq) {
   let lhs = '', rhs = s, unit = '';
 
   // Extract trailing unit [kW] or (g/kWh)
-  const unitM = s.match(/\s*[\[(]([^\])\n]{1,16})[\])]\s*$/);
+  const unitM = s.match(/\s*[[(]([^\])\n]{1,16})[\])]\s*$/);
   if (unitM) { unit = unitM[0]; s = s.slice(0, -unit.length); rhs = s; }
 
   if (eqIdx > 0) {
@@ -50,21 +62,42 @@ function fmlColorEq(eq) {
     rhs = s.slice(eqIdx + 1); // includes the operator
   }
 
+  /* Token-safe colorizer: replaces text tokens with HTML spans
+     Uses a placeholder approach to prevent already-inserted HTML
+     from being mangled by subsequent regex passes */
   function colorRHS(t) {
-    return t
-      // Greek letters
-      .replace(/\b(η|ρ|α|β|γ|λ|ω|Δ|μ|σ|π|Ω|Σ)\b/g,'<b class="fceq-gr">$1</b>')
-      // Subscripted symbols: P_shaft, T₁, u₂ → rendered with sub
-      .replace(/([A-Za-z])\s*_\s*([A-Za-z0-9]+)/g,'<span class="fceq-v">$1</span><sub class="fceq-sub">$2</sub>')
-      // Standalone numbers with units
-      .replace(/(\d+\.?\d*)\s*(bar|kPa|MPa|kW|rpm|°C|K|m³|m²|m\/s|m|kg|g\/kWh|ppm|%)/g,
-               '<span class="fceq-n">$1</span><span class="fceq-u"> $2</span>')
-      // Pure numbers (constants like 60000, 9.81)
-      .replace(/\b(\d+\.?\d*)\b/g,'<span class="fceq-n">$1</span>')
-      // Operators
-      .replace(/([=≈≥≤×÷±→])/g,'<span class="fceq-op">$1</span>')
-      // Remaining capital variable tokens (A-Z, 1-2 char)
-      .replace(/\b([A-Z][A-Z0-9]?)\b(?![^<]*>)/g,'<span class="fceq-v">$1</span>');
+    const tags = [];
+    let safe = t;
+
+    // Phase 1: apply regexes in order, each time protecting previous spans
+    function applyAndProtect(regex, replacement) {
+      safe = safe.replace(regex, function() {
+        const result = replacement.apply(null, arguments);
+        const placeholder = '\x00' + tags.length + '\x00';
+        tags.push(result);
+        return placeholder;
+      });
+    }
+
+    // Greek letters
+    applyAndProtect(/(η|ρ|α|β|γ|λ|ω|Δ|μ|σ|π|Ω|Σ)/g, (m, g) => '<b class="fceq-gr">' + g + '</b>');
+    // Subscripted symbols: P_shaft, T₁
+    applyAndProtect(/([A-Za-z])\s*_\s*([A-Za-z0-9]+)/g, (m, v, sub) => '<span class="fceq-v">' + v + '</span><sub class="fceq-sub">' + sub + '</sub>');
+    // Numbers with units
+    applyAndProtect(/(\d+\.?\d*)\s*(bar|kPa|MPa|kW|rpm|°C|K|m³|m²|m\/s|m|kg|g\/kWh|ppm|%)/g, (m, n, u) => '<span class="fceq-n">' + n + '</span><span class="fceq-u"> ' + u + '</span>');
+    // Pure numbers (only match if NOT inside a placeholder)
+    applyAndProtect(/\b(\d+\.?\d*)\b/g, (m, n) => '<span class="fceq-n">' + n + '</span>');
+    // Operators
+    applyAndProtect(/([=≈≥≤×÷±→])/g, (m, op) => '<span class="fceq-op">' + op + '</span>');
+    // Remaining capital variable tokens (1-2 char)
+    applyAndProtect(/\b([A-Z][A-Z0-9]?)\b/g, (m, v) => '<span class="fceq-v">' + v + '</span>');
+
+    // Phase 2: restore all placeholders
+    let result = safe;
+    for (let i = tags.length - 1; i >= 0; i--) {
+      result = result.replace('\x00' + i + '\x00', tags[i]);
+    }
+    return result;
   }
 
   const lhsHTML = lhs
@@ -146,12 +179,12 @@ function fv3Render(fmls, container) {
     <div class="fv3-top">
       <div class="fv3-meta">
         <span class="fv3-catbadge">${cat.i} ${cat.l}</span>
-        ${unit ? `<span class="fv3-unit">${esc(unit)}</span>` : ''}
+        ${unit ? `<span class="fv3-unit">${escMath(unit)}</span>` : ''}
       </div>
       <button class="fv3-copy" title="Copy formula" onclick="fv3Copy(this,'${f.eq.replace(/'/g,"\\'").replace(/\\/g,'\\\\')}')">⎘</button>
     </div>
 
-    <div class="fv3-label">${esc(f.label)}</div>
+    <div class="fv3-label">${escMath(f.label)}</div>
 
     <div class="fv3-eq">${eqH}</div>
 
@@ -160,15 +193,15 @@ function fv3Render(fmls, container) {
       <div class="fv3-vars-title">Variables</div>
       ${vars.map(v=>`
         <div class="fv3-vrow">
-          <code class="fv3-vsym">${esc(v.sym)}</code>
-          <span class="fv3-vdesc">${esc(v.desc)}</span>
-          ${v.unit?`<span class="fv3-vunit">${esc(v.unit)}</span>`:''}
+          <code class="fv3-vsym">${escMath(v.sym)}</code>
+          <span class="fv3-vdesc">${escMath(v.desc)}</span>
+          ${v.unit?`<span class="fv3-vunit">${escMath(v.unit)}</span>`:''}
         </div>`).join('')}
     </div>` : ''}
 
-    ${showNote ? `<div class="fv3-note">${esc(noteClean)}</div>` : ''}
+    ${showNote ? `<div class="fv3-note">${escMath(noteClean)}</div>` : ''}
 
-    ${f.source ? `<div class="fv3-src">📚 ${esc(f.source)}</div>` : ''}
+    ${f.source ? `<div class="fv3-src">📚 ${escMath(f.source)}</div>` : ''}
 
   </div>
 </div>`;

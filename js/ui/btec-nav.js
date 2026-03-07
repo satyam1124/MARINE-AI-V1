@@ -96,7 +96,8 @@ document.head.appendChild(styleEl);
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* Helper: push subtopics into existing TK entry OR create new one */
-function setChapters(topicId, icon, subjTitle, subjDesc, semTag, chapters){
+/* Exposed globally so btec-chapters.js can call it */
+window.setChapters = function setChapters(topicId, icon, subjTitle, subjDesc, semTag, chapters){
   if(typeof TOPIC_KNOWLEDGE === 'undefined') return;
   if(!TOPIC_KNOWLEDGE[topicId]) TOPIC_KNOWLEDGE[topicId] = { formulas:[], flashcards:[], videos:[] };
   const entry = TOPIC_KNOWLEDGE[topicId];
@@ -105,12 +106,17 @@ function setChapters(topicId, icon, subjTitle, subjDesc, semTag, chapters){
   entry._subjDesc  = subjDesc;
   entry._semTag    = semTag;
   entry.subtopics  = chapters;
-  // Aggregate all chapter formulas & flashcards to parent level for backward compat
-  const allFmls = [], allFlash = [];
-  chapters.forEach(ch => { allFmls.push(...(ch.formulas||[])); allFlash.push(...(ch.flashcards||[])); });
+  // Aggregate all chapter formulas, flashcards & videos to parent level
+  const allFmls = [], allFlash = [], allVids = [];
+  chapters.forEach(ch => {
+    allFmls.push(...(ch.formulas||[]));
+    allFlash.push(...(ch.flashcards||[]));
+    allVids.push(...(ch.videos||[]));
+  });
   entry.formulas   = allFmls;
   entry.flashcards = allFlash;
-}
+  entry.videos     = allVids;
+};
 
 /* ─────────────────────────────────────────────────────────────────────────
    1. BASIC ELECTRICAL ENGINEERING (bt_elec1)

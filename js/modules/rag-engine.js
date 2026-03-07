@@ -53,8 +53,8 @@ function ragReq(req) {
    2. TEXT CHUNKING — overlap for context continuity
    ═══════════════════════════════════════════════════════════════ */
 function ragChunkText(text, chunkSize, overlap) {
-  chunkSize = chunkSize || 500;
-  overlap   = overlap   || 100;
+  chunkSize = chunkSize || 250;
+  overlap   = overlap   || 60;
   const words  = text.split(/\s+/);
   const chunks = [];
   let i = 0;
@@ -213,7 +213,7 @@ async function ragIngestDocument(docId, docName, fullText, onProgress) {
   if (!onProgress) onProgress = function() {};
 
   onProgress('Chunking text…', 10);
-  const chunks = ragChunkText(fullText, 400, 80);
+  const chunks = ragChunkText(fullText, 250, 60);
   if (!chunks.length) throw new Error('No usable text extracted from document');
 
   onProgress('Computing embeddings (' + chunks.length + ' chunks)…', 30);
@@ -258,7 +258,7 @@ async function ragIngestDocument(docId, docName, fullText, onProgress) {
    6. RETRIEVE — find top-K relevant chunks for a query
    ═══════════════════════════════════════════════════════════════ */
 async function ragRetrieve(query, topK) {
-  topK = topK || 5;
+  topK = topK || 8;
   await ragOpenDB();
 
   // Get all chunks
@@ -291,21 +291,52 @@ async function ragRetrieve(query, topK) {
   });
 
   scored.sort(function(a, b) { return b.score - a.score; });
-  return scored.slice(0, topK).filter(function(s) { return s.score > 0.3; });
+  return scored.slice(0, topK).filter(function(s) { return s.score > 0.12; });
 }
 
-/* Keyword fallback search */
+/* Keyword fallback search — TF-IDF weighted with phrase boosting */
 function ragKeywordSearch(query, chunks, topK) {
-  const qWords = query.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(function(w) { return w.length > 2; });
+  var qLower = query.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
+  var qWords = qLower.split(/\s+/).filter(function(w) { return w.length > 2; });
   if (!qWords.length) return [];
 
-  const scored = chunks.map(function(c) {
-    const hay = c.text.toLowerCase();
-    let score = 0;
+  /* Document frequency for IDF weighting */
+  var df = {};
+  qWords.forEach(function(w) { df[w] = 0; });
+  chunks.forEach(function(c) {
+    var hay = c.text.toLowerCase();
     qWords.forEach(function(w) {
-      const count = (hay.split(w).length - 1);
-      score += count;
+      if (hay.indexOf(w) !== -1) df[w] = (df[w] || 0) + 1;
     });
+  });
+  var N = chunks.length || 1;
+
+  /* Marine-domain boosting terms */
+  var marineBoost = ['marpol','solas','stcw','imo','meo','sfoc','scavenging','turbocharger',
+    'purifier','bernoulli','ohm','kirchhoff','kvl','kcl','impedance','reactance',
+    'transformer','induction','synchronous','piston','crankshaft','governor',
+    'boiler','condenser','evaporator','compressor','refrigerant','stability','metacentric'];
+
+  var scored = chunks.map(function(c) {
+    var hay = c.text.toLowerCase();
+    var score = 0;
+
+    /* TF-IDF weighted term matching */
+    qWords.forEach(function(w) {
+      var tf = (hay.split(w).length - 1);
+      if (tf > 0) {
+        var idf = Math.log(N / (1 + (df[w] || 0)));
+        var boost = marineBoost.indexOf(w) !== -1 ? 1.5 : 1;
+        score += tf * Math.max(idf, 0.5) * boost;
+      }
+    });
+
+    /* Exact phrase boost — if 2+ adjacent query words appear together */
+    if (qWords.length >= 2) {
+      var phrase2 = qWords.slice(0, 3).join(' ');
+      if (hay.indexOf(phrase2) !== -1) score *= 2.0;
+    }
+
     return { chunk: c, score: score };
   });
 
@@ -322,19 +353,20 @@ async function buildRAGContext(query) {
   }
 
   try {
-    const results = await ragRetrieve(query, 5);
+    const results = await ragRetrieve(query, 8);
     if (!results.length) return '';
 
     let ctx = '\n\n════════════════════════════════════════\n';
     ctx += 'UPLOADED DOCUMENT REFERENCES (RAG retrieval)\n';
     ctx += '════════════════════════════════════════\n';
-    ctx += 'INSTRUCTION: The following passages were retrieved from the user\'s uploaded PDF documents.\n';
-    ctx += 'Use these passages as PRIMARY source material for your answer.\n';
-    ctx += '1. Quote or reference specific passages when relevant.\n';
-    ctx += '2. Cite the document name and passage number.\n';
-    ctx += '3. If passages contain formulas, reproduce them accurately.\n';
-    ctx += '4. If passages conflict with your knowledge, prefer the passage and note the discrepancy.\n';
-    ctx += '5. After using passage content, supplement with your own knowledge if needed.\n\n';
+    ctx += 'CRITICAL INSTRUCTION: The following passages were retrieved from the user\'s uploaded study materials (PDFs).\n';
+    ctx += 'These documents are the student\'s primary textbooks — treat them as AUTHORITATIVE sources.\n';
+    ctx += '1. If a passage directly answers the question, use it as your PRIMARY answer source — quote verbatim when appropriate.\n';
+    ctx += '2. Reproduce ALL formulas, equations, and numerical values EXACTLY as they appear in the passages.\n';
+    ctx += '3. Cite the document name and passage number for every fact used.\n';
+    ctx += '4. If passages conflict with your training data, PREFER the passage content and note the discrepancy.\n';
+    ctx += '5. For calculation questions, use constants and methods from the passages first.\n';
+    ctx += '6. After using passage content, supplement with your broader marine engineering knowledge if needed.\n\n';
 
     results.forEach(function(r, i) {
       ctx += '[Passage ' + (i + 1) + ' from "' + r.chunk.docName + '"]\n';

@@ -52,8 +52,25 @@ async function pdfExtractText(file, onProgress) {
     });
     if (lineText.trim()) lines.push(lineText.trim());
 
-    if (lines.length) {
-      fullText += '\n\n--- Page ' + i + ' ---\n' + lines.join('\n');
+    /* Post-process lines for this page */
+    const cleaned = [];
+    for (let li = 0; li < lines.length; li++) {
+      let line = lines[li];
+      /* Merge hyphenated words across line breaks */
+      if (line.endsWith('-') && li + 1 < lines.length) {
+        line = line.slice(0, -1) + lines[li + 1];
+        li++; /* skip next line since it's merged */
+      }
+      /* Skip likely headers/footers: very short lines that are just numbers */
+      if (/^\s*\d{1,4}\s*$/.test(line)) continue;  /* page numbers */
+      if (/^(chapter|page)\s+\d/i.test(line) && line.length < 30) continue; /* chapter headers */
+      /* Normalize excessive whitespace */
+      line = line.replace(/\s{3,}/g, '  ').trim();
+      if (line.length > 0) cleaned.push(line);
+    }
+
+    if (cleaned.length) {
+      fullText += '\n\n--- Page ' + i + ' ---\n' + cleaned.join('\n');
     }
   }
 

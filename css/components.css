@@ -1,4 +1,5 @@
 /* ── MarineIQ Components: Panels, Formulas, Quiz, Flashcards, Answer, Notes, Search, Ref-Library ── */
+.fml-card {
   background: var(--bg1); border: 1px solid var(--b0);
   border-left: 3px solid var(--ac); border-radius: 0 10px 10px 0;
   padding: 12px 15px; transition: border-left-color 0.15s;
@@ -43,10 +44,11 @@
 .fc-face-tag {
   font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
   letter-spacing: 0.12em; color: var(--tx3); text-transform: uppercase; margin-bottom: 10px;
+  flex-shrink: 0;
 }
-.fc-question { font-size: 0.9rem; font-weight: 500; line-height: 1.6; color: var(--tx); }
-.fc-answer { font-size: 0.84rem; line-height: 1.65; color: var(--acL); font-weight: 300; }
-.fc-tap-hint { font-size: 0.66rem; color: var(--tx3); margin-top: 12px; font-style: italic; }
+.fc-question { font-size: 0.9rem; font-weight: 500; line-height: 1.6; color: var(--tx); overflow-y: auto; max-height: 100%; }
+.fc-answer { font-size: 0.84rem; line-height: 1.65; color: var(--acL); font-weight: 300; overflow-y: auto; max-height: 100%; }
+.fc-tap-hint { font-size: 0.66rem; color: var(--tx3); margin-top: 12px; font-style: italic; flex-shrink: 0; }
 
 /* Quiz */
 .quiz-wrap {
@@ -297,13 +299,57 @@
 .modal-cancel { background: transparent; border: 1px solid var(--b1); border-radius: 8px; padding: 10px 16px; font-size: 0.82rem; color: var(--tx2); cursor: pointer; }
 .modal-cancel:hover { color: var(--tx); }
 
-/* Responsive */
+/* Responsive — extended mobile */
 @media (max-width: 700px) {
   :root { --sb: 88vw; }
   .rank-row:nth-child(odd)  .rank-card,
   .rank-row:nth-child(even) .rank-card { margin: 0; }
   .rank-grid::before, .rank-node { display: none; }
   .main.sb-open { margin-left: 0; }
+
+  /* Answer card */
+  .answer-card { margin: 8px; padding: 14px; border-radius: 12px; }
+  .ans-body { font-size: 0.82rem; line-height: 1.65; }
+
+  /* Quiz panel */
+  .quiz-panel { width: 94vw; max-width: none; border-radius: 14px; }
+  .quiz-option { min-height: 44px; font-size: 0.82rem; padding: 12px 14px; }
+
+  /* Flashcards */
+  .fc-card { min-height: 180px; }
+  .fc-face { padding: 18px 14px; font-size: 0.82rem; }
+  .fc-nav-row { gap: 8px; }
+  .fc-nav-btn { min-width: 44px; min-height: 44px; }
+
+  /* Formula cards */
+  .fml-card { padding: 12px; }
+  .fml-label { font-size: 0.72rem; }
+  .fml-eq { font-size: 0.78rem; }
+  .fml-note { font-size: 0.68rem; }
+
+  /* Modals */
+  .modal-content { width: 94vw; max-width: none; padding: 18px 14px; }
+  .modal-title { font-size: 1rem; }
+
+  /* Search bar */
+  .search-bar { flex-direction: column; gap: 8px; }
+  .search-bar input { font-size: 0.85rem; }
+
+  /* Chapter cards grid */
+  .chapter-grid { grid-template-columns: 1fr !important; }
+  .chapter-card { padding: 14px 12px; }
+
+  /* Subject header */
+  .subj-header { flex-direction: column; gap: 10px; }
+  .ch-quiz-btn, .subj-quiz-btn { width: 100%; text-align: center; }
+
+  /* Touch targets — ensure minimum 44px */
+  button, .sb-topic, .tbtn, .mm-tab { min-height: 44px; }
+
+  /* Ref library modal */
+  .ref-lib-panel { max-width: 96vw; }
+  .ref-book-card { padding: 10px 12px; }
+  .rbc-icon { width: 40px; height: 40px; font-size: 20px; }
 }
 
 

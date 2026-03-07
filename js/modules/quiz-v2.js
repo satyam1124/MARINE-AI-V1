@@ -916,40 +916,9 @@ body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 }
 
 /* ══════════════════════════════════════════════════════════
-   LIGHT MODE — Complete rebuild, every component
-   Clean maritime paper aesthetic: warm whites, navy ink, gold accents
+   LIGHT MODE — Component-specific overrides
+   (CSS variables are centralized in variables.css)
    ══════════════════════════════════════════════════════════ */
-
-body.light-mode {
-  /* ── Core palette ── */
-  --bg:   #f4f7fb;   /* warm off-white page */
-  --bg1:  #ffffff;   /* pure white cards */
-  --bg2:  #f0f4f8;   /* subtle tinted surface */
-  --bg3:  #e8edf5;   /* slightly deeper tint */
-  --bg4:  #dde4ef;   /* deepest light bg */
-
-  /* Borders — visible but gentle */
-  --b0: #dde4ee;
-  --b1: #c8d3e2;
-  --b2: #aab8cc;
-
-  /* Typography — deep navy ink */
-  --tx:  #0d1e35;
-  --tx2: #2c4a6a;
-  --tx3: #6680a0;
-
-  /* Accent — deep maritime gold (readable on light) */
-  --ac:  #b07d0a;
-  --acL: #c89010;
-  --acD: #8a6008;
-
-  /* Rank colors — kept vivid for contrast */
-  --cadet: #16a34a;
-  --c4:    #2563eb;
-  --c3:    #d97706;
-  --c2:    #db2777;
-  --c1:    #7c3aed;
-}
 
 /* ── Body background ── */
 body.light-mode { background: var(--bg) !important; }

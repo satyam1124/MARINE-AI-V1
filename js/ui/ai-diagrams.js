@@ -397,20 +397,7 @@ console.log('%cMarineIQ — AI Diagram Generator active. 120+ topic prompts load
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════
-   1. QUIZ STATE
+   1. QUIZ STATE — defined in config.js (single source of truth)
    ══════════════════════════════════════════════════════════ */
-const QUIZ = {
-  data:       [],      // array of question objects
-  index:      0,       // current question index
-  score:      0,       // correct answers
-  total:      0,       // questions answered
-  wrong:      [],      // wrong answer indices for review
-  answered:   false,   // has current Q been answered?
-  difficulty: 'mixed', // easy | medium | hard | mixed
-  count:      10,      // questions per round: 5 | 10 | 15 | 20
-  generating: false,   // lock to prevent double-generate
-};
 
-/* ══════════════════════════════════════════════════════════
-   2. DIFFICULTY-AWARE PROMPT BUILDER
-   ══════════════════════════════════════════════════════════ */
+

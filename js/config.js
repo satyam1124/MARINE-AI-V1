@@ -38,4 +38,17 @@ const MODELS = {
   live: { id: 'claude-sonnet-4-20250514',    label: 'LIVE',   cls: 'abadge-live' },
 };
 
+/* ── Quiz State (single source of truth — used by quiz-v2, quiz-advanced) ── */
+const QUIZ = {
+  data:       [],      // array of question objects
+  index:      0,       // current question index
+  score:      0,       // correct answers
+  total:      0,       // questions answered
+  wrong:      [],      // wrong answer indices for review
+  answered:   false,   // has current Q been answered?
+  difficulty: 'mixed', // easy | medium | hard | mixed
+  count:      10,      // questions per round: 5 | 10 | 15 | 20
+  generating: false,   // lock to prevent double-generate
+};
+
 /* ── INIT ── */

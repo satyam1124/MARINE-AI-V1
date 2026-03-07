@@ -140,47 +140,13 @@ renderQuizQ = function() {
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════
-   1. NEW COLOR SYSTEM — injected via CSS variables override
+   1. COMPONENT STYLE OVERRIDES — variables are now in variables.css
    ══════════════════════════════════════════════════════════════ */
 (function applyNewColors() {
   const s = document.createElement('style');
   s.id = 'color-override';
   s.textContent = `
-:root {
-  /* ── Deep Navy + Warm Gold — Merchant Navy authentic palette ── */
-  --bg:   #020810;
-  --bg1:  #050f1d;
-  --bg2:  #091629;
-  --bg3:  #0e2038;
-  --bg4:  #142944;
-
-  /* Borders — subtle blue-steel */
-  --b0: #0f2235;
-  --b1: #1a3550;
-  --b2: #2a4d6e;
-
-  /* Typography — warm paper white */
-  --tx:   #e8f4ff;
-  --tx2:  #8ab4d4;
-  --tx3:  #4a7a9b;
-
-  /* Accent — maritime gold */
-  --ac:   #d4a017;
-  --acL:  #f0c040;
-  --acD:  #a07810;
-
-  /* Rank colors — IMO / Merchant Navy epaulette inspired */
-  --cadet: #34d399;   /* cadet — mint green */
-  --c4:    #60a5fa;   /* 4th eng — steel blue */
-  --c3:    #fb923c;   /* 3rd eng — copper */
-  --c2:    #f472b6;   /* 2nd eng — rose gold */
-  --c1:    #c084fc;   /* chief — admiral purple */
-  --btech: #38bdf8;   /* b.tech — sky blue */
-
-  /* Sidebar */
-  --sb: 280px;
-  --top: 56px;
-}
+/* ── NOTE: CSS variables (:root) are centralized in variables.css ── */
 
 /* ── Topbar: deep navy with gold accent line ── */
 .topbar {

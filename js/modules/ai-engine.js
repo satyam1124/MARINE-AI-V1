@@ -94,6 +94,16 @@ THERMODYNAMICS (Reed's Vol.2):
 - Carnot: η=1-T_L/T_H (Kelvin). Diesel: η=1-[r^(1-γ)]×[(rc^γ-1)/(γ(rc-1))]. Rankine: η=(h₁-h₂)/(h₁-h₄)
 - Steam dryness x: h=hf+x·hfg. Wet steam (x<1) erodes turbine blades
 
+BASIC ELECTRICAL ENGINEERING (Reed's Vol.4; Theraja; BL Theraja):
+- Ohm's Law: V=IR. KVL: ΣV=0 around loop. KCL: ΣI_in=ΣI_out at node. Thevenin: V_th=V_oc, R_th=V_oc/I_sc
+- AC: V_rms=V_peak/√2=0.707×V_peak. Z=√(R²+X²). X_L=2πfL. X_C=1/(2πfC). PF=cosφ=P/S
+- 3-Phase (ship standard 440V 60Hz): P=√3×V_L×I_L×cosφ. Star: V_L=√3×V_ph, I_L=I_ph. Delta: I_L=√3×I_ph, V_L=V_ph
+- Transformers: V₁/V₂=N₁/N₂=I₂/I₁. η=P_out/(P_out+P_iron+P_copper). Max η when iron loss=copper loss (~50-75% load)
+- Motors: N_s=120f/P (sync speed). Slip s=(N_s-N)/N_s×100%. Star-delta: I_start=I_DOL/3. VFD: power∝speed³
+- Insulation testing: Megger 1000V DC for 440V circuits. Min 1MΩ new, 0.5MΩ in service. PI=R_10min/R_1min ≥2.0
+- Generators: E=4.44fNΦk_w. Parallel: match V, f, phase, close at 11 o'clock on synchroscope
+- Protection: preferential tripping (non-essential first). IT system (insulated neutral) — 1st earth fault = alarm only
+
 REFRIGERATION (Reed's Vol.3):
 - COP_R = (h₁-h₄)/(h₂-h₁). COP_HP = COP_R + 1
 - Refrigerants: R-134a GWP 1430; NH₃ (R717) GWP 0 toxic 25ppm; CO₂ (R744) GWP 1 transcritical

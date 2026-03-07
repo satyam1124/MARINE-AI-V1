@@ -308,12 +308,21 @@ document.addEventListener('DOMContentLoaded', function(){
   }, 800);
 });
 
-// Update quiz round info when topic changes
+// Update quiz round info when quiz panel becomes visible (efficient — no polling)
 document.addEventListener('DOMContentLoaded', function() {
-  // Use a MutationObserver or periodic check instead of fragile monkey-patching
-  setInterval(function() {
+  const quizPanel = document.getElementById('panel-quiz');
+  if (quizPanel) {
+    const observer = new MutationObserver(function() {
+      if (quizPanel.classList.contains('active') && document.getElementById('qv2RoundInfo')) {
+        updateQRoundInfo();
+      }
+    });
+    observer.observe(quizPanel, { attributes: true, attributeFilter: ['class'] });
+  }
+  // Also update once on load
+  setTimeout(function() {
     if (document.getElementById('qv2RoundInfo')) updateQRoundInfo();
-  }, 2000);
+  }, 1000);
 });
 
 console.log('%cMarineIQ — Formula Viz v3 + Quiz Engine v3 loaded', 'color:#4ade80;font-weight:bold');

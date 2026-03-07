@@ -1,37 +1,48 @@
-/* ── MarineIQ CSS Variables & Theme Tokens ── */
+/* ── MarineIQ CSS Variables & Theme Tokens ──
+   SINGLE SOURCE OF TRUTH for all theme variables.
+   Do NOT redeclare these in JavaScript files. */
 
-/* ── CSS VARIABLES ── */
 :root {
-  /* Core palette - deep ocean */
-  --bg:       #030b14;
-  --bg1:      #06111f;
-  --bg2:      #091929;
-  --bg3:      #0d2038;
-  --bg4:      #122844;
+  /* ── Deep Navy + Warm Gold — Merchant Navy authentic palette ── */
+  --bg:   #020810;
+  --bg1:  #050f1d;
+  --bg2:  #091629;
+  --bg3:  #0e2038;
+  --bg4:  #142944;
 
-  /* Borders */
-  --b0: #132333;
-  --b1: #1a3048;
-  --b2: #22405e;
+  /* Borders — subtle blue-steel */
+  --b0: #0f2235;
+  --b1: #1a3550;
+  --b2: #2a4d6e;
 
-  /* Typography */
-  --tx:  #cde1f5;
-  --tx2: #7aaccf;
-  --tx3: #3d6a8a;
+  /* Typography — warm paper white */
+  --tx:   #e8f4ff;
+  --tx2:  #8ab4d4;
+  --tx3:  #4a7a9b;
 
-  /* Rank colours — authentic merchant navy palette */
-  --cadet:  #22c55e;   /* engine cadet — green (trainee) */
-  --c4:     #60a5fa;   /* MEO Class 4 — blue */
-  --c3:     #f59e0b;   /* MEO Class 3 — amber */
-  --c2:     #f97316;   /* MEO Class 2 — orange */
-  --c1:     #a78bfa;   /* MEO Class 1 / Chief — purple-gold */
+  /* Accent — maritime gold */
+  --ac:   #d4a017;
+  --acL:  #f0c040;
+  --acD:  #a07810;
 
-  /* Accent */
-  --ac:  #0ea5e9;
-  --acL: #38bdf8;
-  --acD: #0369a1;
+  /* Rank colors — IMO / Merchant Navy epaulette inspired */
+  --cadet: #34d399;   /* cadet — mint green */
+  --c4:    #60a5fa;   /* 4th eng — steel blue */
+  --c3:    #fb923c;   /* 3rd eng — copper */
+  --c2:    #f472b6;   /* 2nd eng — rose gold */
+  --c1:    #c084fc;   /* chief — admiral purple */
+  --btech: #38bdf8;   /* b.tech — sky blue */
 
-  /* Sidebar width */
-  --sb: 290px;
-  --top: 54px;
+  /* Sidebar */
+  --sb: 280px;
+  --top: 56px;
+}
+
+/* ── Light Mode Variables ── */
+body.light-mode {
+  --bg:  #f5f8ff; --bg1: #ffffff; --bg2: #f0f4ff; --bg3: #e8eeff; --bg4: #dde4ef;
+  --b0:  #d0ddf0; --b1:  #b8cce0; --b2:  #9ab4cc;
+  --tx:  #0d1e35; --tx2: #2d5070; --tx3: #5a7a95;
+  --ac:  #b8860b; --acL: #d4a017; --acD: #8b6400;
+  --cadet: #16a34a; --c4: #2563eb; --c3: #d97706; --c2: #db2777; --c1: #7c3aed;
 }
