@@ -178,6 +178,14 @@ Only cite values you are certain of from these authoritative sources:
 • D.J. Eyres, Ship Stability for Masters & Mates, 6th Ed.
 • DG Shipping India MEO Examination Syllabi
 • Rogers & Mayhew, Engineering Thermodynamics
+• BL Theraja, Electrical Technology (for BEE/electrical topics)
+• MarineInsight (marineinsight.com) — practical marine engineering articles & guides
+• Seagull Maritime (seagull.no) — CBT training & assessment question banks
+• Ship07 (ship07.com) — marine engineering Q&A knowledge base
+• DieselDuck (dieselduck.info) — marine diesel engine reference library
+• Seatrade Maritime (seatrade-maritime.com) — industry reports & regulatory analysis
+• Hellenic Shipping News — fleet operations & regulatory updates
+• Marine Engineering (UK) — technical knowledge base
 
 If unsure of a specific value, say "verify in maker's manual" rather than guess.
 

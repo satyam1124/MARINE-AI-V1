@@ -12,6 +12,12 @@ function selectTopic(topicId, title, desc, icon, sectionName) {
   // Show topic zone
   showTopicZone();
 
+  // ── Clear any stale chapter/subtopic UI from previous topic ──
+  const tz = document.getElementById('topicZone');
+  if (tz) {
+    tz.querySelectorAll('.stopic-grid-wrap,.subj-header,.chapter-crumb,.chapter-content-header,.chapter-grid,.chapter-index-label,#stopic-banner,.tz-intro-card').forEach(el => el.remove());
+  }
+
   // Reset to first MM tab
   switchPanel('diagrams', document.querySelector('.mm-tab'));
 

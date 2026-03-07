@@ -28,7 +28,19 @@ RULES:
 - Every question must have exactly 4 options (A, B, C, D).
 - "ans" is the 0-based index (0=A, 1=B, 2=C, 3=D) of the CORRECT answer.
 - "exp" is a 1-2 sentence explanation of WHY that answer is correct, citing source if possible.
-- Questions must be factually accurate — source from Reed's Marine Engineering Series, Pounder's, IMO, MARPOL, STCW, MAN B&W manuals.
+- Questions must be factually accurate — source from these authoritative references:
+  • Reed's Marine Engineering Series Vol.1–12
+  • Pounder's Marine Diesel Engines & Gas Turbines
+  • MAN B&W S/ME-C Project Guides & Operation Manuals
+  • IMO MARPOL, SOLAS, STCW conventions
+  • MarineInsight (marineinsight.com) — practical marine engineering articles
+  • Seagull Maritime (seagull.no) — CBT training question banks
+  • Ship07 (ship07.com) — marine engineering Q&A database
+  • DieselDuck (dieselduck.info) — marine diesel reference library
+  • Seatrade Maritime (seatrade-maritime.com) — industry reports
+  • Hellenic Shipping News — fleet & regulatory updates
+  • Marine Engineering (UK) — technical knowledge base
+  • BL Theraja (Electrical Technology) for electrical topics
 - Do NOT repeat similar questions.
 - Vary question style: What/Why/How/Calculate/Identify fault/Which regulation.
 
@@ -163,16 +175,107 @@ function showQuizSetup() {
 }
 
 /* ══════════════════════════════════════════════════════════
-   5. QUIZ START — generate questions via AI
+   5. QUIZ START — generate questions via AI (or fallback to flashcards)
    ══════════════════════════════════════════════════════════ */
+
+/* ── Flashcard-based fallback quiz (works WITHOUT API key) ── */
+function buildFlashcardQuiz(topicId, count) {
+  const kb = (typeof TOPIC_KNOWLEDGE !== 'undefined' && TOPIC_KNOWLEDGE[topicId]) || {};
+  const flashcards = kb.flashcards || [];
+  const formulas   = kb.formulas   || [];
+
+  if (flashcards.length < 2 && formulas.length < 2) return null;
+
+  const questions = [];
+
+  /* Convert flashcards to MCQs */
+  const shuffledFC = flashcards.slice().sort(() => Math.random() - 0.5);
+  shuffledFC.slice(0, count).forEach(fc => {
+    /* Get 3 wrong answers from other flashcards in the same topic */
+    const wrongPool = flashcards.filter(f => f.a !== fc.a).map(f => f.a);
+    /* Add generic wrong answers if pool is too small */
+    const genericWrong = [
+      'This is not applicable in marine engineering',
+      'None of the above',
+      'Not defined in the STCW convention',
+      'This applies only to cargo ships above 500 GT',
+      'Refer to the maker\'s manual for specific values',
+      'This is governed by classification society rules only',
+    ];
+    while (wrongPool.length < 3) wrongPool.push(genericWrong[wrongPool.length % genericWrong.length]);
+
+    /* Shuffle and pick 3 wrong answers */
+    const wrongs = wrongPool.sort(() => Math.random() - 0.5).slice(0, 3);
+    const correctIdx = Math.floor(Math.random() * 4);
+    const opts = [...wrongs];
+    opts.splice(correctIdx, 0, fc.a);
+    const letters = ['A', 'B', 'C', 'D'];
+
+    questions.push({
+      q: fc.q,
+      opts: opts.map((o, i) => `${letters[i]}. ${o.length > 100 ? o.slice(0, 97) + '…' : o}`),
+      ans: correctIdx,
+      exp: `Correct: ${fc.a}`
+    });
+  });
+
+  /* Convert formulas to MCQs if we need more questions */
+  if (questions.length < count) {
+    const shuffledFml = formulas.slice().sort(() => Math.random() - 0.5);
+    shuffledFml.slice(0, count - questions.length).forEach(fml => {
+      const wrongEqs = formulas.filter(f => f.eq !== fml.eq).map(f => `${f.label}: ${f.eq}`);
+      const genericWrong = ['P = V × I × cosφ', 'η = 1 − T_L/T_H', 'Q = m × Cp × ΔT'];
+      while (wrongEqs.length < 3) wrongEqs.push(genericWrong[wrongEqs.length % genericWrong.length]);
+      const wrongs = wrongEqs.sort(() => Math.random() - 0.5).slice(0, 3);
+      const correctIdx = Math.floor(Math.random() * 4);
+      const correctText = `${fml.label}: ${fml.eq}`;
+      const opts = [...wrongs];
+      opts.splice(correctIdx, 0, correctText);
+      const letters = ['A', 'B', 'C', 'D'];
+
+      questions.push({
+        q: `Which formula correctly represents "${fml.label}"?${fml.note ? ' (' + fml.note + ')' : ''}`,
+        opts: opts.map((o, i) => `${letters[i]}. ${o.length > 100 ? o.slice(0, 97) + '…' : o}`),
+        ans: correctIdx,
+        exp: fml.note || `The formula is: ${fml.eq}`
+      });
+    });
+  }
+
+  return questions.length >= 2 ? questions.slice(0, count) : null;
+}
+
 async function quizStart() {
   if (QUIZ.generating) return;
-  if (!APP.apiKey) { openApiModal(); return; }
 
   const topicId    = APP.currentTopic;
   const topicTitle = document.querySelector('#topicZone .tz-header .tz-intro-title')?.textContent
                   || document.querySelector('.sb-topic.active')?.textContent?.trim()
                   || topicId || 'Marine Engineering';
+
+  /* ── Fallback: flashcard-based quiz when no API key ── */
+  if (!APP.apiKey) {
+    const fallback = buildFlashcardQuiz(topicId, QUIZ.count);
+    if (fallback) {
+      document.getElementById('qv2Setup').style.display    = 'none';
+      document.getElementById('qv2Loading').style.display  = 'none';
+      document.getElementById('qv2Question').style.display = 'none';
+      document.getElementById('qv2Results').style.display  = 'none';
+
+      QUIZ.data     = fallback;
+      QUIZ.index    = 0;
+      QUIZ.score    = 0;
+      QUIZ.total    = 0;
+      QUIZ.wrong    = [];
+      QUIZ.answered = false;
+      renderQuizQ();
+      return;
+    }
+    /* No flashcards available either — show API modal */
+    openApiModal();
+    return;
+  }
+
   const lvlLabel   = APP.currentLevel?.fullTitle || 'marine engineering';
 
   // Update note
