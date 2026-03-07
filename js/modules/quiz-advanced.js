@@ -150,7 +150,24 @@ OUTPUT RULES — Follow exactly or response will be rejected:
   const _orig = quizStart;
   quizStart = async function() {
     if (QUIZ.generating) return;
-    if (!APP.apiKey) { openApiModal(); return; }
+
+    /* ── Fallback: flashcard-based quiz when no API key ── */
+    if (!APP.apiKey) {
+      if (typeof buildFlashcardQuiz === 'function') {
+        const fallback = buildFlashcardQuiz(APP.currentTopic, QUIZ.count);
+        if (fallback) {
+          document.getElementById('qv2Setup').style.display    = 'none';
+          document.getElementById('qv2Loading').style.display  = 'none';
+          document.getElementById('qv2Question').style.display = 'none';
+          document.getElementById('qv2Results').style.display  = 'none';
+          QUIZ.data = fallback; QUIZ.index = 0; QUIZ.score = 0;
+          QUIZ.total = 0; QUIZ.wrong = []; QUIZ.answered = false;
+          renderQuizQ();
+          return;
+        }
+      }
+      openApiModal(); return;
+    }
 
     const topicId    = APP.currentTopic;
     const topicTitle = document.querySelector('.tz-intro-title')?.textContent?.trim()
