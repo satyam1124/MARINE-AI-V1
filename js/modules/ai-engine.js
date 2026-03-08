@@ -171,12 +171,14 @@ async function doAsk() {
   // Pre-fetch RAG context from uploaded documents (PDF-FIRST SEARCH)
   APP._ragContext = '';
   APP._ragFromPDF = false;
+  APP._ragSources = [];
   if (typeof buildRAGContext === 'function') {
     try {
       const ragCtx = await buildRAGContext(q);
-      if (ragCtx && ragCtx.length > 100) {
-        APP._ragContext = ragCtx;
+      if (ragCtx && ragCtx.text && ragCtx.text.length > 100) {
+        APP._ragContext = ragCtx.text;
         APP._ragFromPDF = true;
+        APP._ragSources = ragCtx.sources || [];
       }
     } catch (e) { console.warn('RAG context fetch failed:', e); }
   }
@@ -364,17 +366,33 @@ async function askLive(q, t0) {
   setAnswerBadges('LIVE WEB', 'abadge-live', ((Date.now()-t0)/1000).toFixed(1)+'s', APP.examMode);
 
   const srcBar = document.getElementById('ansSources');
+  let hasSources = false;
+  let srcHtml = '';
+
+  // 1. Render RAG PDF sources first
+  if (APP._ragFromPDF && APP._ragSources && APP._ragSources.length) {
+    hasSources = true;
+    APP._ragSources.forEach(doc => {
+      srcHtml += `<span class="src-chip" style="cursor:help" title="Extracted from your uploaded PDF">📄 ${esc(doc)}</span>`;
+    });
+  }
+
+  // 2. Render Web URLs
   if (urls.length) {
-    srcBar.style.display = 'block';
+    hasSources = true;
     const uniqueUrls = [...new Set(urls.map(u => u.domain))].slice(0, 5);
-    document.getElementById('srcChips').innerHTML = urls
+    srcHtml += urls
       .filter((u, i) => uniqueUrls.indexOf(u.domain) === i)
       .map(u => {
-        // Validate URL protocol to prevent javascript: injection
         try { const p = new URL(u.url).protocol; if (p !== 'https:' && p !== 'http:') return ''; } catch(_) { return ''; }
         return `<a class="src-chip" href="${esc(u.url)}" target="_blank" rel="noopener">🔗 ${esc(u.domain)}</a>`;
       })
       .join('');
+  }
+
+  if (hasSources) {
+    srcBar.style.display = 'block';
+    document.getElementById('srcChips').innerHTML = srcHtml;
   } else {
     srcBar.style.display = 'none';
   }

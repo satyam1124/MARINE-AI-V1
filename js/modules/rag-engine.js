@@ -358,7 +358,7 @@ async function buildRAGContext(query) {
 
   try {
     const results = await ragRetrieve(query, 8);
-    if (!results.length) return '';
+    if (!results.length) return null;
 
     let ctx = '\n\n════════════════════════════════════════\n';
     ctx += 'UPLOADED DOCUMENT REFERENCES (RAG retrieval)\n';
@@ -378,10 +378,13 @@ async function buildRAGContext(query) {
     });
 
     ctx += '--- End Document Passages ---\n';
-    return ctx;
+    
+    // Extract unique document names from results
+    const uniqueDocs = Array.from(new Set(results.map(r => r.chunk.docName)));
+    return { text: ctx, sources: uniqueDocs };
   } catch (e) {
     console.warn('RAG retrieval error:', e);
-    return '';
+    return null;
   }
 }
 
