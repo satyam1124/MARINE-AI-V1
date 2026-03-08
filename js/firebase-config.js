@@ -9,13 +9,14 @@ const FIREBASE_CONFIG = {
   apiKey:            "AIzaSyBXcFm2EXqPLgZSW7xf6XTiPB5HTx_oG8s",
   authDomain:        "mariniq-7b13e.firebaseapp.com",
   projectId:         "mariniq-7b13e",
+  storageBucket:     "mariniq-7b13e.firebasestorage.app",
   messagingSenderId: "790962259658",
   appId:             "1:790962259658:web:eed4a8a01db0512f129633",
   measurementId:     "G-6LX9S93JXV"
 };
 
 /* Admin email — this Google account gets admin privileges */
-const ADMIN_EMAIL = 'satyam1124tech@gmail.com'; // Change to your email
+const ADMIN_EMAIL = 'sg185806@gmail.com'; // Change to your email
 
 /* ══════════════════════════════════════════════════════════
    2. FIREBASE AVAILABILITY CHECK
