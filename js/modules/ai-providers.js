@@ -369,24 +369,6 @@ askStream = async function(q, mode, t0) {
     document.getElementById('ansQuery').textContent = q;
     setAnswerBadges(provider.label, 'abadge-bal', '', APP.examMode);
     
-    // RENDER RAG & BOOK BADGES
-    let badgeRow = document.getElementById('ansBadges');
-    if (badgeRow) {
-      if (APP._ragFromPDF && !badgeRow.querySelector('.pdf-source-badge')) {
-        let pdfBadge = document.createElement('span');
-        pdfBadge.className = 'badge pdf-source-badge';
-        pdfBadge.style.cssText = 'background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
-        pdfBadge.textContent = '📄 From Your PDF';
-        badgeRow.appendChild(pdfBadge);
-      } else if (APP._refBookSource && !badgeRow.querySelector('.book-source-badge')) {
-        let bookBadge = document.createElement('span');
-        bookBadge.className = 'badge book-source-badge';
-        bookBadge.style.cssText = 'background:rgba(59,130,246,0.12);color:#3b82f6;border:1px solid rgba(59,130,246,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
-        bookBadge.textContent = APP._refBookSource.mode === 'Book First' ? '📖 Book First' : '🤖 AI+Book';
-        badgeRow.appendChild(bookBadge);
-      }
-    }
-    
     // RENDER RAG / BOOK SOURCES AS CHIPS IN THE UI
     const srcBar = document.getElementById('ansSources');
     let hasSources = false;
@@ -405,10 +387,10 @@ askStream = async function(q, mode, t0) {
     }
 
     if (hasSources) {
-      srcBar.style.display = 'block';
+      srcBar.setAttribute('style', 'display: block !important;');
       document.getElementById('srcChips').innerHTML = html;
     } else {
-      srcBar.style.display = 'none';
+      srcBar.setAttribute('style', 'display: none !important;');
     }
 
     const deepBtn = document.getElementById('deepBtn');

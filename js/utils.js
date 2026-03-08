@@ -41,10 +41,21 @@ function hideEl(id)  { document.getElementById(id).classList.remove('show'); }
 
 function setAnswerBadges(modelLabel, modelCls, timeStr, examFlag) {
   const badges = document.getElementById('ansBadges');
-  badges.innerHTML = `
-    <span class="abadge ${modelCls}">${modelLabel}</span>
-    ${examFlag ? '<span class="abadge abadge-exam">📝 EXAM MODE</span>' : ''}
-    ${timeStr ? `<span class="abadge abadge-time">${timeStr}</span>` : ''}`;
+  if (!badges) return;
+
+  let html = `<span class="abadge ${modelCls}">${modelLabel}</span>`;
+  if (examFlag) html += `<span class="abadge abadge-exam">📝 EXAM MODE</span>`;
+  if (timeStr)  html += `<span class="abadge abadge-time"><i class="fas fa-bolt"></i> ${timeStr}</span>`;
+
+  // Draw Context Source Badges natively so they persist through updates
+  if (window.APP && APP._ragFromPDF) {
+    html += `<span class="badge pdf-source-badge" style="background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;margin-left:6px;">📄 From Your PDF</span>`;
+  } else if (window.APP && APP._refBookSource) {
+    let modeText = APP._refBookSource.mode === 'Book First' ? '📖 Book First' : '🤖 AI+Book';
+    html += `<span class="badge book-source-badge" style="background:rgba(59,130,246,0.12);color:#3b82f6;border:1px solid rgba(59,130,246,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;margin-left:6px;">${modeText}</span>`;
+  }
+
+  badges.innerHTML = html;
 }
 
 function esc(s = '') {

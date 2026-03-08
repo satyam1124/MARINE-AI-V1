@@ -266,24 +266,6 @@ async function askStream(q, mode, t0) {
   setAnswerBadges(MODELS[mode].label, MODELS[mode].cls,
     ((Date.now() - t0)/1000).toFixed(1) + 's', APP.examMode);
 
-  // Add PDF or Book source badge if answer was informed by context
-  var badgeRow = document.getElementById('ansBadges');
-  if (badgeRow) {
-    if (APP._ragFromPDF && !badgeRow.querySelector('.pdf-source-badge')) {
-      var pdfBadge = document.createElement('span');
-      pdfBadge.className = 'badge pdf-source-badge';
-      pdfBadge.style.cssText = 'background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
-      pdfBadge.textContent = '📄 From Your PDF';
-      badgeRow.appendChild(pdfBadge);
-    } else if (APP._refBookSource && !badgeRow.querySelector('.book-source-badge')) {
-      var bookBadge = document.createElement('span');
-      bookBadge.className = 'badge book-source-badge';
-      bookBadge.style.cssText = 'background:rgba(59,130,246,0.12);color:#3b82f6;border:1px solid rgba(59,130,246,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
-      bookBadge.textContent = APP._refBookSource.mode === 'Book First' ? '📖 Book First' : '🤖 AI+Book';
-      badgeRow.appendChild(bookBadge);
-    }
-  }
-
   document.getElementById('ansSources').style.display = 'none';
   document.getElementById('deepBtn').style.display = mode !== 'deep' ? 'inline-flex' : 'none';
   showEl('answerCard');
@@ -326,6 +308,30 @@ async function askStream(q, mode, t0) {
   setTimeout(function(){ renderKaTeX(body); }, 80);
   document.getElementById('ansBadges').querySelector('.abadge-time') &&
     (document.getElementById('ansBadges').querySelector('.abadge-time').textContent = ((Date.now()-t0)/1000).toFixed(1)+'s');
+
+  // Render sources at the end of stream
+  const srcBar = document.getElementById('ansSources');
+  let hasSources = false;
+  let srcHtml = '';
+
+  if (APP._ragFromPDF && APP._ragSources && APP._ragSources.length) {
+    hasSources = true;
+    APP._ragSources.forEach(doc => {
+      srcHtml += `<span class="src-chip" style="cursor:help" title="Extracted from your uploaded PDF">📄 ${esc(doc)}</span>`;
+    });
+  }
+
+  if (APP._refBookSource) {
+    hasSources = true;
+    srcHtml += `<span class="src-chip" style="cursor:help" title="Extracted from built-in Reference Library">📚 ${esc(APP._refBookSource.source)}</span>`;
+  }
+
+  if (hasSources) {
+    srcBar.setAttribute('style', 'display: block !important;');
+    document.getElementById('srcChips').innerHTML = srcHtml;
+  } else {
+    srcBar.setAttribute('style', 'display: none !important;');
+  }
 }
 
 /* ─────────── LIVE WEB SEARCH (SONNET + TOOL USE) ─────────── */
@@ -407,10 +413,10 @@ async function askLive(q, t0) {
   }
 
   if (hasSources) {
-    srcBar.style.display = 'block';
+    srcBar.setAttribute('style', 'display: block !important;');
     document.getElementById('srcChips').innerHTML = srcHtml;
   } else {
-    srcBar.style.display = 'none';
+    srcBar.setAttribute('style', 'display: none !important;');
   }
 
   document.getElementById('deepBtn').style.display = 'none';
