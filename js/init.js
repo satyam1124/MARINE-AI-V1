@@ -4,10 +4,7 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Show API modal ONLY if no key stored
-  if (!APP.apiKey) {
-    openApiModal();
-  }
+  // API modal is now triggered only on-demand by AI features
   buildRankGrid();
   if (typeof updateNotesPip === 'function') updateNotesPip();
   if (typeof renderNotesList === 'function') renderNotesList();
