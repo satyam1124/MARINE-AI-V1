@@ -175,6 +175,7 @@ async function doAsk() {
   APP._ragContext = '';
   APP._ragFromPDF = false;
   APP._ragSources = [];
+  APP._refBookSource = null;
   if (typeof buildRAGContext === 'function') {
     try {
       const ragCtx = await buildRAGContext(q);

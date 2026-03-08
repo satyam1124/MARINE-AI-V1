@@ -353,6 +353,11 @@ askStream = async function(q, mode, t0) {
     throw new Error('No API key set');
   }
 
+  // FORCE EVALUATE SYSTEM PROMPT METADATA FOR UI (BOOK SOURCES)
+  if (typeof buildSystemPrompt === 'function') {
+    buildSystemPrompt(mode, q);
+  }
+
   return new Promise((resolve, reject) => {
     const ansBody = document.getElementById('ansBody');
     let   full    = '';
