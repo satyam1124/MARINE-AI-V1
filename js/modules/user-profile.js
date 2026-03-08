@@ -147,7 +147,7 @@ function updateProfileUI() {
   var fbUser = (typeof fbGetUser === 'function') ? fbGetUser() : null;
   var profile = getUserProfile();
 
-  if (!fbUser && (!profile || profile.skipped)) return;
+  if (!fbUser && !profile) return;
 
   var topbar = document.querySelector('.topbar-actions');
   if (!topbar) return;
@@ -164,9 +164,14 @@ function updateProfileUI() {
     // Google profile photo
     badge.innerHTML = '<img src="' + fbUser.photoURL + '" width="28" height="28" style="border-radius:50%;" alt="" referrerpolicy="no-referrer" />';
     badge.title = fbUser.displayName + ' (' + fbUser.email + ')';
+  } else if (profile && profile.skipped) {
+    // Skipped profile badge (gray anonymous icon)
+    badge.style.cssText += 'background:var(--bg3);color:var(--tx3);font-size:0.8rem;';
+    badge.innerHTML = '👤';
+    badge.title = 'Student (Offline) — Click to Sign In';
   } else if (profile) {
     // Initials badge
-    var initials = profile.name.split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2);
+    var initials = (profile.name || 'Student').split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2);
     badge.style.cssText += 'background:linear-gradient(135deg,#d4a017,#b8860b);color:#0a0e17;font-size:0.55rem;font-weight:700;font-family:JetBrains Mono,monospace;';
     badge.textContent = initials;
     badge.title = profile.name + (profile.email ? ' (' + profile.email + ')' : '');
