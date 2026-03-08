@@ -159,83 +159,11 @@ function upgradeHomeScreen() {
     home.insertBefore(contDiv, hero);
   }
 
-  // Tab switcher
-  const tabsDiv = document.createElement('div');
-  tabsDiv.className = 'home-tabs';
-  tabsDiv.id        = 'homeTabs';
-  tabsDiv.innerHTML = `
-    <button class="home-tab active" onclick="switchHomeTab('career',this)">⚓ Career Ladder</button>
-    <button class="home-tab"        onclick="switchHomeTab('syllabus',this)">📅 Year Syllabus</button>`;
-  home.insertBefore(tabsDiv, home.querySelector('.rank-grid') || home.querySelector('.info-strip'));
-
-  // Year syllabus panel
-  const syllDiv = document.createElement('div');
-  syllDiv.id        = 'yearSyllabus';
-  syllDiv.style.display = 'none';
-  syllDiv.innerHTML  = buildYearSyllabus();
-  const infoStrip = home.querySelector('.info-strip');
-  if (infoStrip) infoStrip.after(syllDiv);
-  else home.appendChild(syllDiv);
-
   // Upgrade rank cards to show progress
   upgradeRankCards();
 }
 
-function switchHomeTab(tab, btn) {
-  document.querySelectorAll('.home-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const isCareer = tab === 'career';
-  const rankGrid = document.getElementById('rankGrid');
-  const infoStrip = document.querySelector('.info-strip');
-  const syllDiv  = document.getElementById('yearSyllabus');
-  if (rankGrid)  rankGrid.style.display  = isCareer ? '' : 'none';
-  if (infoStrip) infoStrip.style.display = isCareer ? '' : 'none';
-  if (syllDiv)   syllDiv.style.display   = isCareer ? 'none' : 'block';
-}
 
-function buildYearSyllabus() {
-  return `<div class="year-grid">${YEAR_SYLLABUS.map((y, i) => `
-  <div class="year-card" id="yearCard${i}">
-    <div class="year-header" onclick="toggleYearCard(${i})">
-      <div class="year-badge" style="color:${y.color};border-color:${y.color}44;background:${y.color}11">${y.icon} ${y.year}</div>
-      <div>
-        <div class="year-title">${y.label}</div>
-        <div class="year-sub">${y.duration}</div>
-      </div>
-      <div class="year-chevron">›</div>
-    </div>
-    <div class="year-body">
-      <div class="year-overview">${y.overview}</div>
-      <div class="year-meta">
-        <span class="year-meta-tag">📍 ${y.institution}</span>
-        ${y.examNote ? `<span class="year-meta-tag" style="border-color:rgba(245,158,11,0.3);color:#f59e0b">📝 ${y.examNote}</span>` : ''}
-      </div>
-      <div class="subject-list">
-        ${y.subjects.map(s => `
-        <div class="subject-row">
-          <div class="subject-code">${s.code}</div>
-          <div style="flex:1;min-width:0">
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-              <div class="subject-name">${s.name}</div>
-              ${s.exam ? '<span class="exam-tag">MMD EXAM</span>' : ''}
-            </div>
-            ${s.marks ? `<div style="font-size:0.65rem;color:#f59e0b;margin-bottom:3px">📋 ${s.marks}</div>` : ''}
-            <div class="subject-topics">
-              ${(s.topics || []).map(t => `<span class="subject-topic-tag">${t}</span>`).join('')}
-            </div>
-            <div class="subject-hours">${typeof s.hours === 'number' ? `⏱ ~${s.hours} study hours` : `📅 ${s.hours}`}</div>
-          </div>
-        </div>`).join('')}
-      </div>
-      <div class="year-milestone">🎯 <strong>Milestone:</strong> ${y.milestone}</div>
-    </div>
-  </div>`).join('')}</div>`;
-}
-
-function toggleYearCard(i) {
-  const card = document.getElementById(`yearCard${i}`);
-  if (card) card.classList.toggle('open');
-}
 
 /* Upgrade rank cards to show topic completion % */
 function upgradeRankCards() {
