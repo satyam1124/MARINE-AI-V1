@@ -253,7 +253,7 @@
   transition: opacity 0.2s;\
 }\
 .svg-lb-chrome {\
-  max-width: 960px; width: 100%; max-height: 100vh;\
+  width: 95vw; max-width: 1200px; height: 95vh;\
   display: flex; flex-direction: column;\
 }\
 .svg-lb-topbar {\
@@ -268,8 +268,10 @@
   font-family: "JetBrains Mono", monospace; font-size: 0.7rem;\
   color: #e8f4ff; font-weight: 600;\
   text-transform: uppercase; letter-spacing: 0.05em;\
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;\
+  max-width: 60vw;\
 }\
-.svg-lb-controls { display: flex; gap: 6px; }\
+.svg-lb-controls { display: flex; gap: 6px; flex-shrink: 0; }\
 .svg-lb-btn {\
   width: 34px; height: 34px; border-radius: 8px;\
   border: 1px solid rgba(45,90,143,0.3);\
@@ -281,19 +283,23 @@
 .svg-lb-btn:hover { border-color: var(--ac); color: var(--acL); }\
 .svg-lb-close:hover { border-color: #ef4444; color: #ef4444; }\
 .svg-lb-body {\
-  flex: 1; overflow: hidden;\
+  flex: 1; overflow: auto;\
   display: flex; align-items: center; justify-content: center;\
   touch-action: none;\
   -webkit-user-select: none; user-select: none;\
+  padding: 8px;\
 }\
 .svg-lb-content {\
   transition: transform 0.1s ease-out;\
   transform-origin: center center;\
+  width: 100%; height: 100%;\
+  display: flex; align-items: center; justify-content: center;\
 }\
 .svg-lb-content svg {\
-  width: 100% !important; height: auto !important;\
-  max-width: 900px; max-height: 80vh;\
+  width: 90vw !important; height: auto !important;\
+  max-width: 1100px; max-height: 85vh;\
   display: block !important;\
+  object-fit: contain;\
 }\
 .svg-lb-hint {\
   position: absolute; bottom: 24px; left: 50%;\
@@ -304,11 +310,23 @@
   font-size: 0.6rem; color: var(--tx3);\
   transition: opacity 0.3s; pointer-events: none;\
 }\
-/* ── Mobile-specific lightbox ── */\
+/* ── Mobile-specific lightbox — fill screen ── */\
 @media (max-width: 768px) {\
-  .svg-lb-content svg { max-height: 70vh; }\
+  .svg-lb-chrome { width: 100vw; height: 100vh; max-width: 100vw; }\
+  .svg-lb-content svg {\
+    width: 100vw !important; max-width: 100vw;\
+    max-height: 80vh;\
+  }\
   .svg-lb-topbar { padding: 8px 12px; }\
   .svg-lb-btn { width: 40px; height: 40px; min-height: 44px; min-width: 44px; }\
+  .svg-lb-title { font-size: 0.6rem; max-width: 50vw; }\
+  .svg-lb-body { padding: 4px; }\
+}\
+/* ── Landscape on mobile — maximize diagram ── */\
+@media (max-width: 900px) and (orientation: landscape) {\
+  .svg-lb-chrome { width: 100vw; height: 100vh; }\
+  .svg-lb-content svg { width: 95vw !important; max-height: 80vh; }\
+  .svg-lb-topbar { padding: 4px 12px; }\
 }\
 /* ── Diagram cards: tap hint on mobile ── */\
 @media (max-width: 768px) {\
@@ -333,18 +351,38 @@
     padding-bottom: 2px;\
   }\
   .tab-row::-webkit-scrollbar { display: none; }\
-  .tab-row .tab-btn {\
+  .tab-row .tab-btn, .mm-tab {\
     flex-shrink: 0 !important;\
     white-space: nowrap !important;\
     min-height: 44px !important;\
-    padding: 8px 14px !important;\
-    font-size: 0.72rem !important;\
+    padding: 8px 12px !important;\
+    font-size: 0.68rem !important;\
   }\
 }\
 /* ── Sticky tab bar on scroll ── */\
 .tab-row {\
   position: sticky; top: 0; z-index: 20;\
   background: var(--bg0);\
+}\
+/* ── Topic header fix: prevent one-word-per-line on mobile ── */\
+@media (max-width: 768px) {\
+  .tz-intro { padding: 12px !important; }\
+  .tz-intro-title {\
+    font-size: 1rem !important;\
+    word-break: keep-all !important;\
+    overflow-wrap: break-word !important;\
+    display: flex !important; flex-wrap: wrap !important;\
+    align-items: center !important; gap: 6px !important;\
+  }\
+  .tz-intro-desc {\
+    font-size: 0.72rem !important;\
+    line-height: 1.4 !important;\
+    word-break: normal !important;\
+    overflow-wrap: break-word !important;\
+  }\
+  /* Tags row compact */\
+  .topic-tags { flex-wrap: wrap !important; gap: 4px !important; }\
+  .topic-tags span { font-size: 0.6rem !important; padding: 3px 8px !important; }\
 }\
 /* ── Larger touch targets globally ── */\
 @media (max-width: 768px) {\
@@ -368,9 +406,29 @@
     gap: 8px !important;\
   }\
   .ai-diag-svg-wrap svg {\
-    max-height: 240px;\
+    max-height: 50vh;\
+    width: 100% !important;\
+  }\
+  .mmd-svg-wrap svg {\
+    max-height: 50vh;\
+    width: 100% !important;\
   }\
 }\
+/* ── Card grid responsive ── */\
+@media (max-width: 480px) {\
+  .rank-grid { grid-template-columns: 1fr !important; gap: 10px !important; }\
+  .stat-card { padding: 10px 8px !important; }\
+  .stat-num { font-size: 1.1rem !important; }\
+  .home-hero h1 { font-size: 1.2rem !important; }\
+}\
+/* ── Mermaid diagram mobile ── */\
+@media (max-width: 768px) {\
+  .mmd-result { margin: 8px 0 !important; }\
+  .mmd-svg-wrap { padding: 8px !important; overflow-x: auto; }\
+}\
+/* ── AI search generate button styling ── */\
+.gs-ai-gen { border: 1px solid rgba(212,160,23,0.2) !important; margin-top: 8px; }\
+.gs-ai-gen:hover { background: rgba(212,160,23,0.08) !important; }\
   ';
   document.head.appendChild(s);
 

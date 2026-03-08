@@ -27,23 +27,51 @@ function saveSuggestions(arr) {
       // Avoid duplicate
       if (sidebar.querySelector('#suggestTopicBtn')) return;
 
+      // Insert AFTER the sidebar header (first child / close button area)
+      // so it's always visible at the top without scrolling
       var wrap = document.createElement('div');
-      wrap.style.cssText = 'padding:12px 16px;border-top:1px solid var(--b0);';
+      wrap.id = 'suggestTopicWrap';
+      wrap.style.cssText = 'padding:8px 12px;border-bottom:1px solid var(--b0);position:sticky;top:0;z-index:10;background:var(--bg1);';
       wrap.innerHTML =
         '<button id="suggestTopicBtn" style="\
-          width:100%;padding:10px 14px;border-radius:10px;\
+          width:100%;padding:8px 12px;border-radius:8px;\
           border:1px solid rgba(212,160,23,0.3);\
           background:rgba(212,160,23,0.06);\
           color:#d4a017;cursor:pointer;\
-          font-family:JetBrains Mono,monospace;font-size:0.68rem;\
+          font-family:JetBrains Mono,monospace;font-size:0.62rem;\
           font-weight:600;letter-spacing:0.04em;\
-          display:flex;align-items:center;gap:8px;justify-content:center;\
+          display:flex;align-items:center;gap:6px;justify-content:center;\
           transition:all 0.12s;\
         ">💡 Suggest a Topic</button>';
 
       wrap.querySelector('#suggestTopicBtn').addEventListener('click', openSuggestModal);
-      sidebar.appendChild(wrap);
+
+      // Insert at very top of sidebar content (after header)
+      var sidebarHeader = sidebar.querySelector('.sidebar-header') || sidebar.firstElementChild;
+      if (sidebarHeader && sidebarHeader.nextSibling) {
+        sidebar.insertBefore(wrap, sidebarHeader.nextSibling);
+      } else {
+        sidebar.insertBefore(wrap, sidebar.firstChild);
+      }
     }, 500);
+
+    // Also add a "Suggest Topic" link on the home screen
+    setTimeout(function() {
+      var home = document.getElementById('homeScreen');
+      if (!home || home.querySelector('#homeSuggestBtn')) return;
+      var link = document.createElement('div');
+      link.id = 'homeSuggestBtn';
+      link.style.cssText = 'text-align:center;padding:8px 16px;';
+      link.innerHTML =
+        '<button onclick="openSuggestModal()" style="\
+          padding:8px 16px;border-radius:20px;\
+          border:1px solid rgba(212,160,23,0.25);\
+          background:transparent;color:#d4a017;cursor:pointer;\
+          font-family:JetBrains Mono,monospace;font-size:0.62rem;\
+          font-weight:600;display:inline-flex;align-items:center;gap:6px;\
+        ">💡 Can\'t find your topic? Suggest one</button>';
+      home.appendChild(link);
+    }, 800);
   });
 })();
 

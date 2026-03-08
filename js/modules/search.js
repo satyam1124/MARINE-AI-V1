@@ -50,7 +50,15 @@ function renderGSResults() {
       ).slice(0, 15);
 
   if (!matches.length) {
-    res.innerHTML = `<div class="gs-empty">No topics found for "<strong>${esc(q)}</strong>"</div>`;
+    res.innerHTML = `<div class="gs-empty">No topics found for "<strong>${esc(q)}</strong>"</div>
+      <div class="gs-result gs-ai-gen" onclick="generateSearchTopic('${esc(q).replace(/'/g,"\\'")}')">
+        <div class="gs-r-icon">⚡</div>
+        <div style="flex:1;min-width:0">
+          <div class="gs-r-title">Generate "${esc(q)}" with AI</div>
+          <div class="gs-r-sub">Auto-create formulas, flashcards & videos</div>
+        </div>
+        <div class="gs-r-badge" style="background:rgba(212,160,23,0.15);border:1px solid rgba(212,160,23,0.3);color:#d4a017">AI</div>
+      </div>`;
     return;
   }
 

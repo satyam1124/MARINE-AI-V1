@@ -317,7 +317,38 @@ function onManualGenerate(topicId, topicTitle, levelTitle, topicDesc) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   10. PATCH selectTopic — trigger generation for empty topics
+   10. SEARCH BAR → DYNAMIC GENERATION BRIDGE
+   ══════════════════════════════════════════════════════════ */
+window.generateSearchTopic = function(query) {
+  // Close search overlay
+  if (typeof closeGlobalSearch === 'function') closeGlobalSearch();
+
+  // Create a synthetic topic ID
+  var topicId = 'dyn_' + query.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/_+/g, '_').slice(0, 30);
+
+  // Navigate to an appropriate level if one isn't selected
+  var levelTitle = '';
+  if (APP.currentLevel) {
+    levelTitle = APP.currentLevel.fullTitle || APP.currentLevel.title || '';
+  } else {
+    // Default to MEO Class IV context
+    levelTitle = 'MEO Class IV';
+    if (typeof enterLevel === 'function') enterLevel('cl4');
+  }
+
+  // Show the topic view
+  if (typeof selectTopic === 'function') {
+    selectTopic(topicId, query, 'AI-generated study material for: ' + query, '⚡', 'AI Generated');
+  }
+
+  // Trigger generation (small delay to let UI render)
+  setTimeout(function() {
+    generateTopicContent(topicId, query, levelTitle, query);
+  }, 400);
+};
+
+/* ══════════════════════════════════════════════════════════
+   11. PATCH selectTopic — trigger generation for empty topics
    ══════════════════════════════════════════════════════════ */
 (function patchSelectTopicForDynamic() {
   var _orig = selectTopic;
