@@ -130,24 +130,35 @@ function submitSuggestion() {
   if (!topic) { status.textContent = '⚠ Please enter a topic name'; return; }
   if (topic.length < 3) { status.textContent = '⚠ Too short — be more specific'; return; }
 
-  var suggestions = getSuggestions();
+  var suggestion = {
+    topic: topic,
+    name: topic,
+    category: cat.value,
+    votes: 1,
+    ts: Date.now(),
+    date: new Date().toISOString().split('T')[0]
+  };
 
-  // Check for duplicate
-  var exists = suggestions.find(function(s) { return s.topic.toLowerCase() === topic.toLowerCase(); });
-  if (exists) {
-    exists.votes = (exists.votes || 1) + 1;
-    status.textContent = '👍 Upvoted! Now has ' + exists.votes + ' votes';
+  // Try Firebase first, fallback to localStorage
+  if (typeof fbAddSuggestion === 'function') {
+    fbAddSuggestion(suggestion);
+    status.textContent = '✅ Suggestion submitted! Everyone can see it now';
   } else {
-    suggestions.push({
-      topic: topic,
-      category: cat.value,
-      votes: 1,
-      date: new Date().toISOString().split('T')[0]
-    });
-    status.textContent = '✅ Suggestion added! Thank you';
+    var suggestions = getSuggestions();
+    var exists = suggestions.find(function(s) { return s.topic.toLowerCase() === topic.toLowerCase(); });
+    if (exists) {
+      exists.votes = (exists.votes || 1) + 1;
+      status.textContent = '👍 Upvoted! Now has ' + exists.votes + ' votes';
+    } else {
+      suggestions.push(suggestion);
+      status.textContent = '✅ Suggestion added! Thank you';
+    }
+    saveSuggestions(suggestions);
   }
 
-  saveSuggestions(suggestions);
+  // Track activity
+  if (typeof trackUserActivity === 'function') trackUserActivity('suggestion', topic);
+
   inp.value = '';
   renderSuggestionList();
 }

@@ -401,8 +401,15 @@
      JAVASCRIPT — load order matters (data before logic, logic before UI)
      ═══════════════════════════════════════════════════════════════════ -->
 
+<!-- 0. Firebase SDK (CDN — compat version for simple integration) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+
 <!-- 1. Core config (no deps) -->
 <script src="js/config.js"></script>
+<script src="js/firebase-config.js"></script>
 <script src="js/utils.js"></script>
 
 <!-- 2. Data layer (pure data, no logic) -->
@@ -425,6 +432,7 @@
 <script src="js/modules/ai-providers.js"></script>
 <script src="js/modules/ref-library.js"></script>
 <script src="js/modules/rag-engine.js"></script>
+<script src="js/modules/firebase-backend.js"></script>
 <script src="js/modules/pdf-parser.js"></script>
 <script src="js/modules/quiz-v2.js"></script>
 <script src="js/modules/quiz-advanced.js"></script>

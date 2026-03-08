@@ -44,11 +44,22 @@ Return ONLY the JSON object. First character must be { and last must be }`;
 /* ══════════════════════════════════════════════════════════
    3. CACHE OPERATIONS
    ══════════════════════════════════════════════════════════ */
-function getDynCache(topicId) {
+async function getDynCache(topicId) {
   try {
     var raw = localStorage.getItem(DYN_CACHE_PREFIX + topicId);
     if (raw) return JSON.parse(raw);
   } catch (e) {}
+  // Check Firebase shared cache
+  if (typeof fbGetCachedTopic === 'function') {
+    try {
+      var fbData = await fbGetCachedTopic(topicId);
+      if (fbData) {
+        // Save to localStorage for offline use
+        try { localStorage.setItem(DYN_CACHE_PREFIX + topicId, JSON.stringify(fbData)); } catch(e) {}
+        return fbData;
+      }
+    } catch(e) {}
+  }
   return null;
 }
 
@@ -57,6 +68,10 @@ function setDynCache(topicId, data) {
     data._ts = Date.now();
     localStorage.setItem(DYN_CACHE_PREFIX + topicId, JSON.stringify(data));
   } catch (e) {}
+  // Also save to Firebase shared cache
+  if (typeof fbSaveCachedTopic === 'function') {
+    fbSaveCachedTopic(topicId, data);
+  }
 }
 
 /* ══════════════════════════════════════════════════════════

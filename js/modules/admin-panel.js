@@ -1,11 +1,18 @@
-/* MarineIQ — Admin Dashboard: password-protected management panel
-   Deps: config.js, rag-engine.js, topic-suggestions.js, user-profile.js */
+/* MarineIQ — Admin Dashboard: Firebase role-based + password fallback
+   Deps: config.js, rag-engine.js, topic-suggestions.js, user-profile.js, firebase-backend.js */
 
 /* ══════════════════════════════════════════════════════════
    1. ADMIN CONFIG
    ══════════════════════════════════════════════════════════ */
-const ADMIN_PASS_HASH = 'satyam2001'; // simple password (change to hash later)
+const ADMIN_PASS_HASH = 'satyam2001'; // fallback password when Firebase not configured
 var _adminAuthed = false;
+
+function checkAdminAccess() {
+  // Firebase role-based check first
+  if (typeof fbIsAdmin === 'function' && fbIsAdmin()) return true;
+  // Fallback to password-based auth
+  return _adminAuthed;
+}
 
 /* ══════════════════════════════════════════════════════════
    2. SECRET CODE ACTIVATION — type "marine-admin"
@@ -19,7 +26,7 @@ var _adminAuthed = false;
     if (buf.length > 15) buf = buf.slice(-15);
     if (buf.includes('marine-admin')) {
       buf = '';
-      if (_adminAuthed) openAdminDashboard();
+      if (checkAdminAccess()) openAdminDashboard();
       else showAdminLogin();
     }
   });
@@ -37,7 +44,7 @@ var _adminAuthed = false;
       btn.textContent = 'MarineIQ Admin';
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        if (_adminAuthed) openAdminDashboard();
+        if (checkAdminAccess()) openAdminDashboard();
         else showAdminLogin();
       });
       sidebar.appendChild(btn);
@@ -49,18 +56,31 @@ var _adminAuthed = false;
    3. ADMIN LOGIN
    ══════════════════════════════════════════════════════════ */
 function showAdminLogin() {
+  // If Firebase admin — skip login entirely
+  if (typeof fbIsAdmin === 'function' && fbIsAdmin()) {
+    _adminAuthed = true;
+    openAdminDashboard();
+    return;
+  }
+
   var overlay = document.createElement('div');
   overlay.id = 'adminLoginModal';
   overlay.style.cssText = 'position:fixed;inset:0;z-index:900;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);';
+
+  var hasFirebase = typeof isFirebaseConfigured === 'function' && isFirebaseConfigured();
+
   overlay.innerHTML =
     '<div style="background:var(--bg1);border:1px solid rgba(239,68,68,0.3);border-radius:14px;padding:24px;max-width:320px;width:90%;">' +
       '<div style="text-align:center;margin-bottom:16px;">' +
         '<div style="font-size:1.5rem;">🔐</div>' +
         '<h3 style="font-family:JetBrains Mono,monospace;font-size:0.82rem;color:var(--tx);margin:6px 0;">Admin Dashboard</h3>' +
-        '<p style="font-size:0.62rem;color:var(--tx3);">Enter admin password to continue</p>' +
+        '<p style="font-size:0.62rem;color:var(--tx3);">Sign in with your admin Google account or enter password</p>' +
       '</div>' +
+      (hasFirebase ?
+        '<button id="adminGoogleBtn" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--b1);background:var(--bg2);color:var(--tx);font-size:0.72rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:12px;"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="16" height="16" alt="G" /> Sign in with Google (Admin)</button>' +
+        '<div style="text-align:center;font-size:0.55rem;color:var(--tx3);margin-bottom:10px;">— or use password —</div>' : '') +
       '<input id="adminPassInput" type="password" placeholder="Password" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--bg2);color:var(--tx);font-size:0.82rem;box-sizing:border-box;margin-bottom:10px;outline:none;" />' +
-      '<div id="adminPassErr" style="font-size:0.62rem;color:#ef4444;margin-bottom:8px;display:none;">Incorrect password</div>' +
+      '<div id="adminPassErr" style="font-size:0.62rem;color:#ef4444;margin-bottom:8px;display:none;"></div>' +
       '<div style="display:flex;gap:8px;">' +
         '<button id="adminPassCancel" style="flex:1;padding:10px;border-radius:8px;border:1px solid var(--b1);background:var(--bg2);color:var(--tx3);font-size:0.72rem;cursor:pointer;">Cancel</button>' +
         '<button id="adminPassSubmit" style="flex:1;padding:10px;border-radius:8px;border:none;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;font-size:0.72rem;font-weight:600;cursor:pointer;">Login</button>' +
@@ -70,6 +90,29 @@ function showAdminLogin() {
   document.body.appendChild(overlay);
   setTimeout(function() { document.getElementById('adminPassInput').focus(); }, 100);
 
+  // Google sign-in for admin
+  var gBtn = document.getElementById('adminGoogleBtn');
+  if (gBtn) {
+    gBtn.addEventListener('click', async function() {
+      gBtn.textContent = 'Signing in…';
+      try {
+        var user = await fbLogin();
+        if (user && fbIsAdmin()) {
+          _adminAuthed = true;
+          document.getElementById('adminLoginModal').remove();
+          openAdminDashboard();
+        } else {
+          document.getElementById('adminPassErr').textContent = 'This Google account is not admin. Use: ' + ADMIN_EMAIL;
+          document.getElementById('adminPassErr').style.display = 'block';
+          gBtn.textContent = 'Try again with Google';
+        }
+      } catch(e) {
+        gBtn.textContent = 'Sign-in failed';
+      }
+    });
+  }
+
+  // Password fallback
   document.getElementById('adminPassSubmit').addEventListener('click', function() {
     var pass = document.getElementById('adminPassInput').value;
     if (pass === ADMIN_PASS_HASH) {
@@ -77,6 +120,7 @@ function showAdminLogin() {
       document.getElementById('adminLoginModal').remove();
       openAdminDashboard();
     } else {
+      document.getElementById('adminPassErr').textContent = 'Incorrect password';
       document.getElementById('adminPassErr').style.display = 'block';
       document.getElementById('adminPassInput').value = '';
     }
@@ -126,6 +170,7 @@ function openAdminDashboard() {
       // Tabs
       '<div id="adminTabs" style="display:flex;border-bottom:1px solid var(--b0);overflow-x:auto;">' +
         '<button class="adm-tab active" onclick="switchAdminTab(\'stats\',this)">📊 Stats</button>' +
+        '<button class="adm-tab" onclick="switchAdminTab(\'users\',this)">👥 Users</button>' +
         '<button class="adm-tab" onclick="switchAdminTab(\'pdfs\',this)">📄 PDFs</button>' +
         '<button class="adm-tab" onclick="switchAdminTab(\'suggestions\',this)">💡 Suggestions</button>' +
         '<button class="adm-tab" onclick="switchAdminTab(\'cache\',this)">⚡ AI Cache</button>' +
@@ -134,6 +179,9 @@ function openAdminDashboard() {
       // Panels
       '<div id="admPanel_stats" class="adm-panel" style="padding:16px 20px;">' +
         buildAdminStats(suggestions, dynCacheCount, activity) +
+      '</div>' +
+      '<div id="admPanel_users" class="adm-panel" style="padding:16px 20px;display:none;">' +
+        '<div id="admUserList">Loading users…</div>' +
       '</div>' +
       '<div id="admPanel_pdfs" class="adm-panel" style="padding:16px 20px;display:none;">' +
         '<div id="admPdfList">Loading PDFs…</div>' +
@@ -149,8 +197,9 @@ function openAdminDashboard() {
   document.body.appendChild(overlay);
   overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
 
-  // Load PDFs asynchronously
+  // Load data asynchronously
   loadAdminPDFs();
+  loadAdminUsers();
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -248,6 +297,9 @@ async function loadAdminPDFs() {
 }
 
 window.adminApprovePDF = async function(docId) {
+  // Sync to Firebase
+  if (typeof fbApprovePdf === 'function') fbApprovePdf(docId);
+  // Update IndexedDB
   if (typeof RAG === 'undefined' || !RAG.db) return;
   try {
     var tx = RAG.db.transaction(RAG.META, 'readwrite');
@@ -395,4 +447,40 @@ window.adminDeleteCache = function(key) {
   document.head.appendChild(s);
 })();
 
-console.log('%cMarineIQ — Admin Panel: type "marine-admin" to access', 'color:#ef4444;font-weight:bold');
+/* ══════════════════════════════════════════════════════════
+   11. USERS MANAGEMENT (Firebase)
+   ══════════════════════════════════════════════════════════ */
+async function loadAdminUsers() {
+  var container = document.getElementById('admUserList');
+  if (!container) return;
+
+  if (typeof fbGetAllUsers !== 'function') {
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--tx3);font-size:0.72rem;"><div style="font-size:1.5rem;margin-bottom:8px;">👥</div>Firebase not configured — user tracking unavailable</div>';
+    return;
+  }
+
+  try {
+    var users = await fbGetAllUsers();
+    if (!users.length) {
+      container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--tx3);font-size:0.72rem;"><div style="font-size:1.5rem;margin-bottom:8px;">👥</div>No registered users yet</div>';
+      return;
+    }
+
+    container.innerHTML = '<div style="font-size:0.62rem;color:var(--tx3);margin-bottom:8px;">' + users.length + ' registered users</div>' +
+      users.map(function(u) {
+        var lastSeen = u.lastSeen ? new Date(u.lastSeen.seconds * 1000).toLocaleString() : 'Never';
+        return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--b0);">' +
+          (u.photoURL ? '<img src="' + u.photoURL + '" width="28" height="28" style="border-radius:50%;" referrerpolicy="no-referrer" />' : '<div style="width:28px;height:28px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:0.7rem;">👤</div>') +
+          '<div style="flex:1;">' +
+            '<div style="font-size:0.72rem;color:var(--tx);font-weight:600;">' + (u.name || 'Unknown') + (u.isAdmin ? ' <span style="color:#ef4444;font-size:0.5rem;">ADMIN</span>' : '') + '</div>' +
+            '<div style="font-size:0.55rem;color:var(--tx3);">' + (u.email || '') + ' · Last seen: ' + lastSeen + '</div>' +
+          '</div>' +
+          '<div style="font-size:0.55rem;color:var(--tx3);text-transform:uppercase;">' + (u.level || '?') + '</div>' +
+        '</div>';
+      }).join('');
+  } catch(e) {
+    container.innerHTML = '<div style="color:#ef4444;font-size:0.72rem;">Error: ' + e.message + '</div>';
+  }
+}
+
+console.log('%cMarineIQ — Admin Panel: role-based (Firebase) + password fallback', 'color:#ef4444;font-weight:bold');
