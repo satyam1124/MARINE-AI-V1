@@ -30,7 +30,7 @@ function selectTopic(topicId, title, desc, icon, sectionName) {
 
   // ── Hide empty tabs, auto-select first with content ──
   const tabContentMap = {
-    diagrams:   function() { const g = document.getElementById('diagGrid'); return g && (!!g.querySelector('.diag-card') || !!g.querySelector('.mmd-wrap') || !!g.querySelector('.ai-diag-btn-wrap')); },
+    diagrams:   function() { return true; }, // Always visible: AI Generate button + Mermaid flows are injected async
     videos:     function() { return (kb.videos || []).length > 0; },
     formulas:   function() { return (kb.formulas || []).length > 0; },
     flashcards: function() { return (kb.flashcards || []).length > 0; },
