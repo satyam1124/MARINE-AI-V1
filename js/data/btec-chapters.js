@@ -145,8 +145,8 @@ setChapters('bt_diesel1','🔧','Marine Diesel Engine I',
       { q:"What is a crosshead engine?", a:"Separate crankcase and scavenging space connected by a piston rod passing through a stuffing box. Prevents crankcase contamination with combustion gases. Found on all large 2-stroke marine engines (MAN B&W, Wärtsilä RT-flex)." },
     ],
     videos:[
-      { id:'7QUtjAP-FxA', title:'How Marine Diesel Engines Work (2-stroke)', ch:'Wartsila' },
-      { id:'ZBpMdx5DVXE', title:'4-stroke vs 2-stroke engine comparison',   ch:'The Engineering Mindset' },
+      { url:'https://www.youtube.com/results?search_query=How+Marine+Diesel+Engines+Work+2+stroke', title:'How Marine Diesel Engines Work (2-stroke)', ch:'Wartsila' },
+      { url:'https://www.youtube.com/results?search_query=4+stroke+vs+2+stroke+engine+comparison', title:'4-stroke vs 2-stroke engine comparison',   ch:'The Engineering Mindset' },
     ]
   },
 
@@ -165,7 +165,7 @@ setChapters('bt_diesel1','🔧','Marine Diesel Engine I',
       { q:"What materials are piston rings made from, and name 3 types?", a:"Grey cast iron, sometimes chrome-plated. Types: 1) Compression rings (seal combustion pressure), 2) Wiper/scraper rings (control oil film thickness), 3) Oil control rings (4-stroke only — return excess oil to sump)." },
     ],
     videos:[
-      { id:'bF2swQvSvTk', title:'Marine Diesel Engine Components Explained', ch:'MarineEngineering Pro' },
+      { url:'https://www.youtube.com/results?search_query=Marine+Diesel+Engine+Components+Explained', title:'Marine Diesel Engine Components Explained', ch:'MarineEngineering Pro' },
     ]
   },
 
@@ -184,7 +184,7 @@ setChapters('bt_diesel1','🔧','Marine Diesel Engine I',
       { q:"Describe the fuel injection pump (Bosch type) operation", a:"Plunger in barrel driven by camshaft. Helical groove on plunger controls delivery: rotating plunger changes start/end of delivery. Delivery valve prevents dribble. Fuel quantity controlled by rotating rack → helix position → effective stroke." },
     ],
     videos:[
-      { id:'3FiOqo3yxYk', title:'Marine Fuel Injection System Explained', ch:'Learn Engineering' },
+      { url:'https://www.youtube.com/results?search_query=Marine+Fuel+Injection+System+Explained', title:'Marine Fuel Injection System Explained', ch:'Learn Engineering' },
     ]
   },
 
@@ -202,7 +202,7 @@ setChapters('bt_diesel1','🔧','Marine Diesel Engine I',
       { q:"What is TBN (Total Base Number)?", a:"Measure of alkalinity reserve in oil (mg KOH/g oil). Fresh crankcase oil: TBN 5-20. Cylinder oil: TBN 70-100. TBN decreases as base depleted by acid. When TBN too low, acid corrosion occurs on liner surface. Monitored by oil lab analysis." },
     ],
     videos:[
-      { id:'hLjK23VqUyI', title:'Marine Engine Lubrication Explained', ch:'Dieselship' },
+      { url:'https://www.youtube.com/results?search_query=Marine+Engine+Lubrication+Explained', title:'Marine Engine Lubrication Explained', ch:'Dieselship' },
     ]
   },
 
@@ -219,7 +219,7 @@ setChapters('bt_diesel1','🔧','Marine Diesel Engine I',
       { q:"What additives are used in jacket cooling water?", a:"Corrosion inhibitors (nitrites, nitrates, molybdates) to prevent rust/pitting in cast iron/steel surfaces. Antifreeze (ethylene glycol) in cold climates. pH maintained 7-9. Regular sample analysis: pH, chlorides (contamination check), inhibitor concentration, hardness (scaling risk)." },
     ],
     videos:[
-      { id:'Z5nHvHCTN_c', title:'Marine Engine Cooling System', ch:'Dieselship' },
+      { url:'https://www.youtube.com/results?search_query=Marine+Engine+Cooling+System', title:'Marine Engine Cooling System', ch:'Dieselship' },
     ]
   },
 
@@ -238,7 +238,7 @@ setChapters('bt_diesel1','🔧','Marine Diesel Engine I',
       { q:"How is an indicator diagram taken and what does it show?", a:"Mechanical indicator or electronic pressure transducer records cylinder pressure vs crank angle. P-V diagram: area = work done per cycle → calculate IMEP and IHP. Shows combustion quality, injection timing, valve/port timing. Comparing diagrams across cylinders reveals uneven loading." },
     ],
     videos:[
-      { id:'4pEHgHCFnpE', title:'Indicator Diagrams and Diesel Combustion', ch:'MarineEngineering Pro' },
+      { url:'https://www.youtube.com/results?search_query=Indicator+Diagrams+and+Diesel+Combustion', title:'Indicator Diagrams and Diesel Combustion', ch:'MarineEngineering Pro' },
     ]
   },
 

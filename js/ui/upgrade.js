@@ -223,8 +223,9 @@ const DIFF_ICON  = { Easy:'🟢', Medium:'🟡', Hard:'🔴' };
   border-bottom: 1px solid var(--b0);
 }
 .gs-input {
-  flex: 1; background: none; border: none; outline: none;
-  font-size: 1rem; color: var(--tx); font-family: 'DM Sans', sans-serif;
+  flex: 1; background: transparent; border: none; outline: none;
+  font-size: 1rem; color: var(--tx) !important; font-family: 'DM Sans', sans-serif;
+  opacity: 1; -webkit-text-fill-color: var(--tx); -webkit-appearance: none; border-radius: 0;
 }
 .gs-input::placeholder { color: var(--tx3); }
 .gs-results { max-height: 380px; overflow-y: auto; }

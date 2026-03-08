@@ -82,10 +82,9 @@ body.light-mode .chapter-card:hover { box-shadow:0 4px 16px rgba(13,30,53,.1)!im
 body.light-mode .subj-header   { background:linear-gradient(135deg,rgba(176,125,10,.07),rgba(176,125,10,.02))!important; }
 
 @media(max-width:600px){
-  .chapter-grid { grid-template-columns:1fr 1fr; gap:8px; }
+  .chapter-grid { grid-template-columns:1fr; gap:10px; }
   .subj-header  { flex-wrap:wrap; }
 }
-@media(max-width:380px){ .chapter-grid { grid-template-columns:1fr; } }
 `;
 const styleEl = document.createElement('style'); styleEl.textContent = CSS;
 document.head.appendChild(styleEl);
