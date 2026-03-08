@@ -39,10 +39,10 @@ function refBookSearch(query, bookId, topN) {
 /* ─── Build book-first system context ─── */
 function buildRefBookContext(query, isBookFirst) {
   const bookId = APP.activeRefBook;
-  if (!bookId) return '';
+  if (!bookId) return null;
   const book = REF_BOOKS[bookId];
   const hits = refBookSearch(query, bookId, 4);
-  if (!hits.length) return '';
+  if (!hits.length) return null;
 
   let ctx = '\n\n';
   if (isBookFirst) {
@@ -66,7 +66,11 @@ function buildRefBookContext(query, isBookFirst) {
   });
 
   ctx += '\n--- End Reference Passages ---\n';
-  return ctx;
+  
+  const hitPages = hits.map(h => h.pages).join(', ');
+  const sourceLabel = book.shortName + ' (pp.' + hitPages + ')';
+  
+  return { text: ctx, source: sourceLabel, mode: isBookFirst ? 'Book First' : 'AI + Book' };
 }
 
 /* ─── Diagram detection: check if query is asking for a diagram ─── */

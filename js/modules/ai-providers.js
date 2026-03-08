@@ -364,26 +364,43 @@ askStream = async function(q, mode, t0) {
     document.getElementById('ansQuery').textContent = q;
     setAnswerBadges(provider.label, 'abadge-bal', '', APP.examMode);
     
-    // RENDER RAG BADGE
-    if (APP._ragFromPDF) {
-      let badgeRow = document.getElementById('ansBadges');
-      if (badgeRow && !badgeRow.querySelector('.pdf-source-badge')) {
+    // RENDER RAG & BOOK BADGES
+    let badgeRow = document.getElementById('ansBadges');
+    if (badgeRow) {
+      if (APP._ragFromPDF && !badgeRow.querySelector('.pdf-source-badge')) {
         let pdfBadge = document.createElement('span');
         pdfBadge.className = 'badge pdf-source-badge';
         pdfBadge.style.cssText = 'background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
         pdfBadge.textContent = '📄 From Your PDF';
         badgeRow.appendChild(pdfBadge);
+      } else if (APP._refBookSource && !badgeRow.querySelector('.book-source-badge')) {
+        let bookBadge = document.createElement('span');
+        bookBadge.className = 'badge book-source-badge';
+        bookBadge.style.cssText = 'background:rgba(59,130,246,0.12);color:#3b82f6;border:1px solid rgba(59,130,246,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
+        bookBadge.textContent = APP._refBookSource.mode === 'Book First' ? '📖 Book First' : '🤖 AI+Book';
+        badgeRow.appendChild(bookBadge);
       }
     }
     
-    // RENDER RAG SOURCES AS CHIPS IN THE UI
+    // RENDER RAG / BOOK SOURCES AS CHIPS IN THE UI
     const srcBar = document.getElementById('ansSources');
+    let hasSources = false;
+    let html = '';
+    
     if (APP._ragFromPDF && APP._ragSources && APP._ragSources.length) {
-      srcBar.style.display = 'block';
-      let html = '';
+      hasSources = true;
       APP._ragSources.forEach(doc => {
         html += `<span class="src-chip" style="cursor:help" title="Extracted from your uploaded PDF">📄 ${esc(doc)}</span>`;
       });
+    }
+    
+    if (APP._refBookSource) {
+      hasSources = true;
+      html += `<span class="src-chip" style="cursor:help" title="Extracted from built-in Reference Library">📚 ${esc(APP._refBookSource.source)}</span>`;
+    }
+
+    if (hasSources) {
+      srcBar.style.display = 'block';
       document.getElementById('srcChips').innerHTML = html;
     } else {
       srcBar.style.display = 'none';

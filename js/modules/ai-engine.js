@@ -5,7 +5,10 @@
 function buildSystemPrompt(mode, query) {
   const isBookFirst = APP.refMode === 'bookfirst' && !!APP.activeRefBook;
   const diagInfo = query ? detectDiagramRequest(query) : null;
-  const refCtx = query ? buildRefBookContext(query, isBookFirst) : '';
+  const refCtxObj = query ? buildRefBookContext(query, isBookFirst) : null;
+  const refCtx = refCtxObj ? refCtxObj.text : '';
+  APP._refBookSource = refCtxObj; // Store metadata for UI rendering
+  
   const diagCtx = diagInfo ? buildDiagramContext(diagInfo, query||'') : '';
   const miCtx = buildMarineInsightContext();
   const today = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
@@ -262,15 +265,21 @@ async function askStream(q, mode, t0) {
   setAnswerBadges(MODELS[mode].label, MODELS[mode].cls,
     ((Date.now() - t0)/1000).toFixed(1) + 's', APP.examMode);
 
-  // Add PDF source badge if answer was informed by uploaded PDFs
-  if (APP._ragFromPDF) {
-    var badgeRow = document.getElementById('ansBadges');
-    if (badgeRow && !badgeRow.querySelector('.pdf-source-badge')) {
+  // Add PDF or Book source badge if answer was informed by context
+  var badgeRow = document.getElementById('ansBadges');
+  if (badgeRow) {
+    if (APP._ragFromPDF && !badgeRow.querySelector('.pdf-source-badge')) {
       var pdfBadge = document.createElement('span');
       pdfBadge.className = 'badge pdf-source-badge';
       pdfBadge.style.cssText = 'background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
       pdfBadge.textContent = '📄 From Your PDF';
       badgeRow.appendChild(pdfBadge);
+    } else if (APP._refBookSource && !badgeRow.querySelector('.book-source-badge')) {
+      var bookBadge = document.createElement('span');
+      bookBadge.className = 'badge book-source-badge';
+      bookBadge.style.cssText = 'background:rgba(59,130,246,0.12);color:#3b82f6;border:1px solid rgba(59,130,246,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
+      bookBadge.textContent = APP._refBookSource.mode === 'Book First' ? '📖 Book First' : '🤖 AI+Book';
+      badgeRow.appendChild(bookBadge);
     }
   }
 
@@ -375,6 +384,12 @@ async function askLive(q, t0) {
     APP._ragSources.forEach(doc => {
       srcHtml += `<span class="src-chip" style="cursor:help" title="Extracted from your uploaded PDF">📄 ${esc(doc)}</span>`;
     });
+  }
+
+  // 1.5 Render Built-in Book sources
+  if (APP._refBookSource) {
+    hasSources = true;
+    srcHtml += `<span class="src-chip" style="cursor:help" title="Extracted from built-in Reference Library">📚 ${esc(APP._refBookSource.source)}</span>`;
   }
 
   // 2. Render Web URLs
