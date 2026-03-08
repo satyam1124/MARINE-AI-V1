@@ -30,6 +30,34 @@
     }
   </script>
 
+  <!-- Mermaid.js for interactive system flow diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"
+          onerror="window.mermaid=null;console.log('Mermaid.js unavailable')"></script>
+  <script>
+    if (typeof mermaid !== 'undefined') {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'dark',
+        themeVariables: {
+          darkMode: true,
+          background: '#0a0e17',
+          primaryColor: '#1e3a5f',
+          primaryTextColor: '#e8f4ff',
+          primaryBorderColor: '#2d5a8f',
+          lineColor: '#60a5fa',
+          secondaryColor: '#0d2038',
+          tertiaryColor: '#091629',
+          noteBkgColor: '#0d2038',
+          noteTextColor: '#d4a017',
+          fontFamily: 'JetBrains Mono, monospace',
+          fontSize: '13px'
+        },
+        flowchart: { curve: 'basis', padding: 12 },
+        securityLevel: 'loose'
+      });
+    }
+  </script>
+
   <!-- ═══════════════════════════════════════════════════════════
        CSS — split by concern, easy to edit
        ═══════════════════════════════════════════════════════════ -->
@@ -414,6 +442,8 @@
 <script src="js/ui/upgrade.js"></script>     <!-- must load before topic-zone.js (defines TOPIC_META) -->
 <script src="js/ui/topic-zone.js"></script>
 <script src="js/ui/ai-diagrams.js"></script>
+<script src="js/modules/mermaid-diagrams.js"></script>
+<script src="js/ui/svg-viewer.js"></script>
 <script src="js/ui/video-zoom.js"></script>
 <script src="js/ui/subtopic.js"></script>
 <script src="js/ui/api-button.js"></script>
