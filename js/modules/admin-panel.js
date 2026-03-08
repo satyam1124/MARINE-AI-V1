@@ -11,6 +11,7 @@ var _adminAuthed = false;
    2. SECRET CODE ACTIVATION — type "marine-admin"
    ══════════════════════════════════════════════════════════ */
 (function initAdminTrigger() {
+  // Keyboard listener (legacy/power user)
   var buf = '';
   document.addEventListener('keydown', function(e) {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -18,12 +19,29 @@ var _adminAuthed = false;
     if (buf.length > 15) buf = buf.slice(-15);
     if (buf.includes('marine-admin')) {
       buf = '';
-      if (_adminAuthed) {
-        openAdminDashboard();
-      } else {
-        showAdminLogin();
-      }
+      if (_adminAuthed) openAdminDashboard();
+      else showAdminLogin();
     }
+  });
+
+  // Visual button in sidebar (for mobile / easier access)
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      var sidebar = document.getElementById('sidebar');
+      if (!sidebar || sidebar.querySelector('#adminSidebarBtn')) return;
+      
+      var btn = document.createElement('a');
+      btn.id = 'adminSidebarBtn';
+      btn.href = '#';
+      btn.style.cssText = 'display:block;text-align:center;padding:12px;color:var(--tx3);font-size:0.55rem;font-family:JetBrains Mono,monospace;text-decoration:none;opacity:0.6;margin-top:auto;border-top:1px solid var(--b0);';
+      btn.textContent = 'MarineIQ Admin';
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (_adminAuthed) openAdminDashboard();
+        else showAdminLogin();
+      });
+      sidebar.appendChild(btn);
+    }, 1000);
   });
 })();
 
