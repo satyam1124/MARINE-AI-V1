@@ -42,7 +42,14 @@ function buildRefBookContext(query, isBookFirst) {
   if (!bookId) return null;
   const book = REF_BOOKS[bookId];
   const hits = refBookSearch(query, bookId, 4);
-  if (!hits.length) return null;
+  if (!hits.length) {
+    let emptyCtx = '\n\n════════════════════════════════════════\n';
+    emptyCtx += 'PRIMARY REFERENCE: ' + book.name + '\n';
+    emptyCtx += 'INSTRUCTION: The user wants an answer from this book, but no relevant passages were found in the index.\n';
+    emptyCtx += '1. Start your answer by saying "I searched *' + book.shortName + '* but this topic is not covered in the indexed passages."\n';
+    emptyCtx += '2. Then, provide the answer using your general marine engineering knowledge.\n';
+    return { text: emptyCtx, source: book.shortName + ' (No matches found)', mode: isBookFirst ? 'Book First' : 'AI + Book' };
+  }
 
   let ctx = '\n\n';
   if (isBookFirst) {
