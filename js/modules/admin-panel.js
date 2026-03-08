@@ -4,7 +4,7 @@
 /* ══════════════════════════════════════════════════════════
    1. ADMIN CONFIG
    ══════════════════════════════════════════════════════════ */
-const ADMIN_PASS_HASH = 'marineiq2026'; // simple password (change to hash later)
+const ADMIN_PASS_HASH = 'satyam2001'; // simple password (change to hash later)
 var _adminAuthed = false;
 
 /* ══════════════════════════════════════════════════════════
