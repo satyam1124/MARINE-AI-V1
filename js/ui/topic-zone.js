@@ -392,8 +392,10 @@ renderQuizQ = function() {
   .model-pill   { flex-shrink: 0 !important; padding: 7px 11px !important; }
   .mp-name      { font-size: 0.62rem !important; }
   .mp-sub       { display: none !important; }
-  .search-wrap  { border-radius: 12px !important; }
-  .search-input { font-size: 0.88rem !important; padding: 14px 105px 14px 42px !important; }
+  .search-wrap  { border-radius: 12px !important; flex: 1 1 100% !important; min-width: 0 !important; }
+  .search-input { font-size: 0.88rem !important; padding: 14px 16px 14px 42px !important;
+                   -webkit-text-fill-color: var(--tx) !important; opacity: 1 !important; }
+  .search-row   { flex-wrap: wrap !important; gap: 6px !important; }
   .ask-btn      { padding: 9px 14px !important; font-size: 0.72rem !important; }
 
   /* Answer card */

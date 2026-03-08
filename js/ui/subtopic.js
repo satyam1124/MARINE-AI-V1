@@ -537,8 +537,12 @@ function generateCustomDiagram(){
   /* Main panels mobile padding fix */
   .level-page, .home-screen { padding: 16px 14px 100px !important; }
   .tz-header { padding: 14px 14px 10px !important; }
-  .mm-tabs { padding: 3px !important; margin: 0 10px !important; }
+  .mm-tabs { padding: 3px !important; margin: 0 !important; }
   .mm-panel { padding: 12px 10px !important; }
+
+  /* Search row — wrap buttons below the search input on narrow */
+  .search-row { flex-wrap: wrap !important; gap: 6px !important; }
+  .search-wrap { flex: 1 1 100% !important; min-width: 0 !important; }
 
   /* Quiz options more readable on mobile */
   .qv2-opt { padding: 12px 14px !important; font-size: .83rem !important; min-height: 52px !important; }
