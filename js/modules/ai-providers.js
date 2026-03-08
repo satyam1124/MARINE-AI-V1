@@ -363,7 +363,32 @@ askStream = async function(q, mode, t0) {
     hideEl('thinkingEl');
     document.getElementById('ansQuery').textContent = q;
     setAnswerBadges(provider.label, 'abadge-bal', '', APP.examMode);
-    document.getElementById('ansSources').style.display = 'none';
+    
+    // RENDER RAG BADGE
+    if (APP._ragFromPDF) {
+      let badgeRow = document.getElementById('ansBadges');
+      if (badgeRow && !badgeRow.querySelector('.pdf-source-badge')) {
+        let pdfBadge = document.createElement('span');
+        pdfBadge.className = 'badge pdf-source-badge';
+        pdfBadge.style.cssText = 'background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
+        pdfBadge.textContent = '📄 From Your PDF';
+        badgeRow.appendChild(pdfBadge);
+      }
+    }
+    
+    // RENDER RAG SOURCES AS CHIPS IN THE UI
+    const srcBar = document.getElementById('ansSources');
+    if (APP._ragFromPDF && APP._ragSources && APP._ragSources.length) {
+      srcBar.style.display = 'block';
+      let html = '';
+      APP._ragSources.forEach(doc => {
+        html += `<span class="src-chip" style="cursor:help" title="Extracted from your uploaded PDF">📄 ${esc(doc)}</span>`;
+      });
+      document.getElementById('srcChips').innerHTML = html;
+    } else {
+      srcBar.style.display = 'none';
+    }
+
     const deepBtn = document.getElementById('deepBtn');
     if (deepBtn) deepBtn.style.display = mode !== 'deep' ? 'inline-flex' : 'none';
     showEl('answerCard');
