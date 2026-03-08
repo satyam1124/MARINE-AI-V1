@@ -132,6 +132,7 @@ function showWelcomeModal() {
   document.getElementById('wpSkip').addEventListener('click', function() {
     saveUserProfile({ name: 'Student', level: 'cl4', createdAt: Date.now(), id: 'u_' + Date.now().toString(36), skipped: true });
     closeWelcomeModal();
+    updateProfileUI(); // Ensure the gray badge appears immediately
   });
 }
 
