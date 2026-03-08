@@ -30,12 +30,13 @@ OUTPUT FORMAT — Return ONLY valid JSON, no explanation, no markdown fences:
 }
 
 REQUIREMENTS:
-- Generate exactly 3-5 formulas with real engineering values and textbook sources (Reed's, Pounder's, MAN B&W, IMO)
-- Generate exactly 3-5 flashcards with exam-level Q&A. Answers must be detailed (150-300 words each) citing specific standards, regulations, or textbooks
-- Generate exactly 2-3 video search suggestions relevant to the topic
+- Generate exactly 4-6 formulas with real engineering values and textbook sources (Reed's, Pounder's, MAN B&W, IMO)
+- Generate exactly 5-8 flashcards with MMD oral exam-level Q&A. Answers must be detailed (150-300 words each) citing specific standards, regulations, or textbooks. Write answers as if a Chief Engineer is explaining to a cadet.
+- Generate exactly 3-4 video search suggestions relevant to the topic
 - Use actual marine engineering values, pressures, temperatures, dimensions
 - Reference real standards: SOLAS, MARPOL, STCW, IMO resolutions, class society rules
 - All equations should use standard engineering notation
+- Flashcard questions should cover: theory, working principle, safety, maintenance, troubleshooting, and regulations
 
 Return ONLY the JSON object. First character must be { and last must be }`;
 }
@@ -168,7 +169,31 @@ function applyGeneratedContent(topicId, data) {
     }
     tab.style.display = '';
   });
+
+  // Add regenerate button
+  var fGrid = document.getElementById('formulaGrid');
+  if (fGrid && !fGrid.querySelector('.dyn-regen-btn')) {
+    var regenWrap = document.createElement('div');
+    regenWrap.style.cssText = 'grid-column:1/-1;text-align:center;padding:8px 0;';
+    regenWrap.innerHTML = '<button class="dyn-regen-btn" onclick="regenTopicContent(\'' + topicId.replace(/'/g, "\\'") + '\')" style="' +
+      'padding:6px 14px;border-radius:8px;border:1px solid rgba(212,160,23,0.25);' +
+      'background:transparent;color:#d4a017;cursor:pointer;font-size:0.6rem;' +
+      'font-family:JetBrains Mono,monospace;">🔄 Regenerate with AI</button>';
+    fGrid.appendChild(regenWrap);
+  }
 }
+
+// Regenerate function — clears cache and re-runs
+window.regenTopicContent = function(topicId) {
+  // Clear cache
+  try { localStorage.removeItem(DYN_CACHE_PREFIX + topicId); } catch(e) {}
+  delete DYN_GENERATION_LOCK[topicId];
+  // Find topic info from the current view
+  var title = document.querySelector('.tz-intro-title')?.textContent || topicId;
+  var levelTitle = APP.currentLevel ? (APP.currentLevel.fullTitle || APP.currentLevel.title || '') : '';
+  var desc = document.querySelector('.tz-intro-desc')?.textContent || '';
+  generateTopicContent(topicId, title, levelTitle, desc);
+};
 
 /* ══════════════════════════════════════════════════════════
    7. AI GENERATION — calls Groq/Gemini

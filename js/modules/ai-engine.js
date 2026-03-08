@@ -168,14 +168,21 @@ async function doAsk() {
   APP.lastQuery = q;
   const mode = APP.currentModel;
 
-  // Pre-fetch RAG context from uploaded documents
+  // Pre-fetch RAG context from uploaded documents (PDF-FIRST SEARCH)
   APP._ragContext = '';
+  APP._ragFromPDF = false;
   if (typeof buildRAGContext === 'function') {
     try {
       const ragCtx = await buildRAGContext(q);
-      APP._ragContext = ragCtx;
+      if (ragCtx && ragCtx.length > 100) {
+        APP._ragContext = ragCtx;
+        APP._ragFromPDF = true;
+      }
     } catch (e) { console.warn('RAG context fetch failed:', e); }
   }
+
+  // Track activity
+  if (typeof trackUserActivity === 'function') trackUserActivity('ai_query', q.slice(0, 80));
 
   hideEl('answerCard');
   hideEl('errorEl');
@@ -183,8 +190,8 @@ async function doAsk() {
   document.getElementById('askBtn').disabled = true;
   document.getElementById('askBtn').textContent = 'THINKING…';
 
-  document.getElementById('thinkStage').textContent  = mode === 'live' ? 'Searching web…' :
-    APP._ragContext ? 'Found relevant passages — generating answer…' :
+  document.getElementById('thinkStage').textContent = APP._ragFromPDF ? '📄 Searching your uploaded PDFs first…' :
+    mode === 'live' ? 'Searching web…' :
     'Consulting marine engineering knowledge base…';
   document.getElementById('thinkDetail').textContent = mode === 'deep' ? 'Deep research mode — may take 8–15 seconds' : '';
 
@@ -252,6 +259,19 @@ async function askStream(q, mode, t0) {
   document.getElementById('ansQuery').textContent = q;
   setAnswerBadges(MODELS[mode].label, MODELS[mode].cls,
     ((Date.now() - t0)/1000).toFixed(1) + 's', APP.examMode);
+
+  // Add PDF source badge if answer was informed by uploaded PDFs
+  if (APP._ragFromPDF) {
+    var badgeRow = document.getElementById('ansBadges');
+    if (badgeRow && !badgeRow.querySelector('.pdf-source-badge')) {
+      var pdfBadge = document.createElement('span');
+      pdfBadge.className = 'badge pdf-source-badge';
+      pdfBadge.style.cssText = 'background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.3);padding:2px 8px;border-radius:6px;font-size:0.58rem;font-weight:600;';
+      pdfBadge.textContent = '📄 From Your PDF';
+      badgeRow.appendChild(pdfBadge);
+    }
+  }
+
   document.getElementById('ansSources').style.display = 'none';
   document.getElementById('deepBtn').style.display = mode !== 'deep' ? 'inline-flex' : 'none';
   showEl('answerCard');

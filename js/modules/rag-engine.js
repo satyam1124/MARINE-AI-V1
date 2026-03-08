@@ -243,9 +243,13 @@ async function ragIngestDocument(docId, docName, fullText, onProgress) {
   await ragReq(meta.put({
     id:         docId,
     name:       docName,
+    chunks:     chunks.length,
     chunkCount: chunks.length,
     method:     method,
     textLen:    fullText.length,
+    status:     'pending',       // pending until admin approves
+    uploadedBy: (typeof getUserProfile === 'function' && getUserProfile()) ? getUserProfile().name : 'Unknown',
+    ingestedAt: Date.now(),
     createdAt:  Date.now()
   }));
 
