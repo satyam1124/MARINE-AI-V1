@@ -324,8 +324,8 @@ async function launchSearchQuiz(topic, difficulty){
   // Patch loadVideos to add YouTube search fallback
   const _origLV = loadVideos;
   loadVideos = function(videos){
-    // Filter to valid 11-char IDs
-    const valid = (videos||[]).filter(v => v.id && v.id.length === 11 && /^[A-Za-z0-9_-]+$/.test(v.id));
+    // Keep videos with valid 11-char IDs OR with a direct url property
+    const valid = (videos||[]).filter(v => (v.id && v.id.length === 11 && /^[A-Za-z0-9_-]+$/.test(v.id)) || v.url);
     _origLV(valid);
     // Add "Search YouTube" fallback link
     const grid = document.getElementById('videoGrid');

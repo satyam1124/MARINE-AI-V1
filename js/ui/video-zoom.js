@@ -200,6 +200,30 @@ loadVideos = function(videos) {
   }
 
   grid.innerHTML = videos.map((v, i) => {
+    // Handle url-based entries (YouTube search fallbacks)
+    if (v.url && !v.id) {
+      return `
+      <div class="yt-card-v2" data-url="${v.url}">
+        <div class="yt-thumb-v2" onclick="window.open('${v.url}','_blank')">
+          <div class="yt-thumb-fallback" style="display:flex;background:linear-gradient(135deg,#15030a,#220408);width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:6px;">
+            <span style="font-size:2rem;">🎬</span>
+            <span style="font-size:0.68rem;color:var(--tx3);text-align:center;padding:0 8px;">${esc(v.title.slice(0,50))}</span>
+          </div>
+          <div class="yt-play-btn">▶</div>
+          <div class="yt-duration-badge">YouTube</div>
+        </div>
+        <div class="yt-info-v2">
+          <div class="yt-title-v2">${esc(v.title)}</div>
+          <div class="yt-channel-v2">📺 ${esc(v.ch)}</div>
+          <div class="yt-actions">
+            <a class="yt-act-btn yt-act-open" href="${v.url}" target="_blank" rel="noopener noreferrer">
+              ↗ YouTube
+            </a>
+          </div>
+        </div>
+      </div>`;
+    }
+
     const ytUrl   = `https://www.youtube.com/watch?v=${v.id}`;
     const embedUrl = `https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`;
     // Try multiple thumbnail qualities
