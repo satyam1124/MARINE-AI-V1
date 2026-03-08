@@ -35,50 +35,37 @@ function showWelcomeModal() {
   var hasFirebase = typeof isFirebaseConfigured === 'function' && isFirebaseConfigured();
 
   overlay.innerHTML =
-    '<div style="background:#0b1120;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px 36px;width:380px;box-shadow:0 24px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);font-family:\'Inter\',-apple-system,BlinkMacSystemFont,sans-serif;">' +
-      
-      // Header
-      '<div style="text-align:center;margin-bottom:28px;">' +
-        '<div style="width:48px;height:48px;background:linear-gradient(135deg,#d4a017,#b88b12);border-radius:12px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 8px 16px rgba(212,160,23,0.2);">⚓</div>' +
-        '<h2 style="font-size:1.4rem;font-weight:700;color:#f8fafc;margin:0 0 6px;letter-spacing:-0.02em;">Welcome back</h2>' +
-        '<p style="font-size:0.85rem;color:#94a3b8;margin:0;">Sign in to sync your progress automatically</p>' +
+    '<div style="background:var(--bg1);border:1px solid var(--b1);border-radius:14px;padding:24px;max-width:380px;width:90%;box-shadow:0 16px 48px rgba(0,0,0,0.5);">' +
+      '<div style="text-align:center;margin-bottom:16px;">' +
+        '<div style="font-size:2rem;">⚓</div>' +
+        '<h2 style="font-family:JetBrains Mono,monospace;font-size:1rem;color:var(--tx);margin:8px 0 4px;">Welcome to Marine IQ</h2>' +
+        '<p style="font-size:0.72rem;color:var(--tx3);line-height:1.4;">India\'s smartest marine engineering study platform.<br>Sign in to sync your progress across devices.</p>' +
       '</div>' +
 
       // Google Sign-In button (only if Firebase configured)
       (hasFirebase ?
       '<button id="wpGoogleBtn" style="\
-        width:100%;height:44px;border-radius:8px;\
-        border:1px solid #334155;background:#1e293b;\
-        color:#f8fafc;font-size:0.9rem;font-weight:500;cursor:pointer;\
-        display:flex;align-items:center;justify-content:center;gap:10px;\
-        transition:all 0.2s ease;\
-      " onmouseover="this.style.background=\'#334155\'" onmouseout="this.style.background=\'#1e293b\'">\
-        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20" alt="G" />\
-        Continue with Google\
-      </button>' +
-      
-      // OR Divider
-      '<div style="display:flex;align-items:center;margin:24px 0;">' +
-        '<div style="flex:1;height:1px;background:#334155;"></div>' +
-        '<div style="padding:0 12px;color:#64748b;font-size:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;">Or</div>' +
-        '<div style="flex:1;height:1px;background:#334155;"></div>' +
-      '</div>' : '') +
+        width:100%;padding:12px;border-radius:10px;\
+        border:1px solid var(--b1);background:var(--bg2);\
+        color:var(--tx);font-size:0.78rem;cursor:pointer;\
+        display:flex;align-items:center;justify-content:center;gap:8px;\
+        font-family:JetBrains Mono,monospace;font-weight:600;\
+        margin-bottom:12px;transition:all 0.12s;\
+      "><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" height="18" alt="G" /> Sign in with Google</button>' +
+      '<div style="text-align:center;font-size:0.6rem;color:var(--tx3);margin-bottom:12px;">— or continue without an account —</div>' : '') +
 
-      // Manual Entry Form
-      '<div style="display:flex;flex-direction:column;gap:14px;">' +
+      '<div style="display:flex;flex-direction:column;gap:10px;">' +
         '<div>' +
-          '<label style="font-size:0.75rem;color:#cbd5e1;font-weight:500;display:block;margin-bottom:6px;">Full Name</label>' +
-          '<input id="wpName" type="text" placeholder="John Doe" style="width:100%;height:42px;padding:0 14px;border-radius:8px;border:1px solid #334155;background:#0f172a;color:#f8fafc;font-size:0.9rem;box-sizing:border-box;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor=\'#3b82f6\'" onblur="this.style.borderColor=\'#334155\'" />' +
+          '<label style="font-family:JetBrains Mono,monospace;font-size:0.58rem;color:var(--tx3);letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:4px;">Your Name *</label>' +
+          '<input id="wpName" type="text" placeholder="e.g. Satyam" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--bg2);color:var(--tx);font-size:0.82rem;box-sizing:border-box;outline:none;" />' +
         '</div>' +
-        
         '<div>' +
-          '<label style="font-size:0.75rem;color:#cbd5e1;font-weight:500;display:block;margin-bottom:6px;">Email address</label>' +
-          '<input id="wpEmail" type="email" placeholder="john@example.com" style="width:100%;height:42px;padding:0 14px;border-radius:8px;border:1px solid #334155;background:#0f172a;color:#f8fafc;font-size:0.9rem;box-sizing:border-box;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor=\'#3b82f6\'" onblur="this.style.borderColor=\'#334155\'" />' +
+          '<label style="font-family:JetBrains Mono,monospace;font-size:0.58rem;color:var(--tx3);letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:4px;">Email (optional)</label>' +
+          '<input id="wpEmail" type="email" placeholder="your@email.com" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--bg2);color:var(--tx);font-size:0.82rem;box-sizing:border-box;outline:none;" />' +
         '</div>' +
-        
         '<div>' +
-          '<label style="font-size:0.75rem;color:#cbd5e1;font-weight:500;display:block;margin-bottom:6px;">Current Level</label>' +
-          '<select id="wpLevel" style="width:100%;height:42px;padding:0 14px;border-radius:8px;border:1px solid #334155;background:#0f172a;color:#cbd5e1;font-size:0.9rem;box-sizing:border-box;outline:none;appearance:none;transition:border 0.2s;" onfocus="this.style.borderColor=\'#3b82f6\'" onblur="this.style.borderColor=\'#334155\'">' +
+          '<label style="font-family:JetBrains Mono,monospace;font-size:0.58rem;color:var(--tx3);letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:4px;">Current Level</label>' +
+          '<select id="wpLevel" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--bg2);color:var(--tx);font-size:0.82rem;box-sizing:border-box;">' +
             '<option value="btech" selected>B.Tech Marine Engineering</option>' +
             '<option value="pre-sea">Pre-Sea Training (DNS/GME)</option>' +
             '<option value="cl4">MEO Class IV</option>' +
@@ -87,19 +74,8 @@ function showWelcomeModal() {
             '<option value="other">Other / Self-Study</option>' +
           '</select>' +
         '</div>' +
-      '</div>' +
-      
-      // Submit Button
-      '<button id="wpSubmit" style="\
-        width:100%;height:44px;border-radius:8px;margin-top:24px;\
-        border:none;background:#2563eb;color:#ffffff;\
-        font-size:0.95rem;font-weight:600;cursor:pointer;\
-        transition:all 0.2s ease;\
-      " onmouseover="this.style.background=\'#1d4ed8\'" onmouseout="this.style.background=\'#2563eb\'">Continue</button>' +
-
-      // Skip Link
-      '<div style="text-align:center;margin-top:20px;">' +
-        '<button id="wpSkip" style="background:none;border:none;color:#94a3b8;font-size:0.8rem;cursor:pointer;text-decoration:none;" onmouseover="this.style.color=\'#cbd5e1\';this.style.textDecoration=\'underline\'" onmouseout="this.style.color=\'#94a3b8\';this.style.textDecoration=\'none\'">Skip for now</button>' +
+        '<button id="wpSubmit" style="padding:12px;border-radius:10px;border:none;background:linear-gradient(135deg,#d4a017,#b8860b);color:#0a0e17;font-family:JetBrains Mono,monospace;font-size:0.78rem;font-weight:700;cursor:pointer;margin-top:4px;transition:all 0.12s;">Start Learning →</button>' +
+        '<button id="wpSkip" style="padding:8px;border:none;background:transparent;color:var(--tx3);font-size:0.65rem;cursor:pointer;">Skip for now</button>' +
       '</div>' +
     '</div>';
 
