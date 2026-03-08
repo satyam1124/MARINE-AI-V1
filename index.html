@@ -338,18 +338,32 @@
   </main>
 </div>
 
-<!-- API KEY MODAL -->
+<!-- API KEY MODAL — Enhanced with feature availability info -->
 <div class="overlay" id="apiOverlay">
-  <div class="modal-box">
-    <div class="modal-title">⚙ Anthropic API Key</div>
-    <p class="modal-desc">
-      Enter your Anthropic API key once — it's stored securely in your browser and never requested again.
-      Get your key at <strong>console.anthropic.com</strong>
+  <div class="modal-box" style="max-width:440px">
+    <div class="modal-title">⚙ API Key Setup</div>
+    <p class="modal-desc" style="margin-bottom:12px">
+      MarineIQ uses Anthropic's Claude API for AI-powered answers, quiz generation, and intelligent tutoring.
     </p>
-    <label class="modal-label">API Key</label>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;font-size:0.72rem;">
+      <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:8px 10px;">
+        <div style="color:#34d399;font-weight:700;margin-bottom:4px;">✓ Works without key</div>
+        <div style="color:var(--tx2);line-height:1.5;">Diagrams · Videos · Formulas · Flashcards · Flashcard Quiz · PDF Upload · Notes · Progress</div>
+      </div>
+      <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);border-radius:8px;padding:8px 10px;">
+        <div style="color:#fbbf24;font-weight:700;margin-bottom:4px;">🔑 Requires API key</div>
+        <div style="color:var(--tx2);line-height:1.5;">AI Q&A · AI Quiz Generation · Live Web Search · Deep Analysis · Exam Mode AI</div>
+      </div>
+    </div>
+
+    <label class="modal-label">Anthropic API Key</label>
     <input class="modal-input" type="password" id="apiKeyInput" placeholder="sk-ant-api03-…"/>
-    <div class="modal-actions">
-      <button class="modal-cancel" onclick="closeApiModal()">Cancel</button>
+    <div style="font-size:0.68rem;color:var(--tx3);margin-top:4px;">
+      Get your key free at <a href="https://console.anthropic.com" target="_blank" rel="noopener" style="color:var(--ac)">console.anthropic.com</a> · stored in your browser only
+    </div>
+    <div class="modal-actions" style="margin-top:14px;">
+      <button class="modal-cancel" onclick="closeApiModal()">Continue Without Key →</button>
       <button class="modal-save" onclick="saveApiKey()">Save & Start Learning</button>
     </div>
   </div>

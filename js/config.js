@@ -29,6 +29,7 @@ const APP = {
   lastTopic:    localStorage.getItem('miq_lasttopic') || null,
   lastLevel:    localStorage.getItem('miq_lastlevel') || null,
   quizWrong:    [],
+  chatHistory:  [],  // last N Q&A pairs for conversation memory
 };
 
 const MODELS = {

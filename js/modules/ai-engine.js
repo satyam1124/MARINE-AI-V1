@@ -235,7 +235,10 @@ async function askStream(q, mode, t0) {
       max_tokens: maxTokens,
       stream: true,
       system: buildSystemPrompt(mode, q),
-      messages: [{ role: 'user', content: q }]
+      messages: [
+        ...APP.chatHistory.slice(-6),  // last 3 Q&A pairs
+        { role: 'user', content: q }
+      ]
     })
   });
 
@@ -284,6 +287,10 @@ async function askStream(q, mode, t0) {
 
   body.innerHTML = renderAnswerBody(full);
   APP.lastAnswer = full;
+  // Save to conversation history (keep last 3 pairs = 6 messages)
+  APP.chatHistory.push({ role: 'user', content: q });
+  APP.chatHistory.push({ role: 'assistant', content: full });
+  if (APP.chatHistory.length > 6) APP.chatHistory = APP.chatHistory.slice(-6);
   setTimeout(function(){ renderKaTeX(body); }, 80);
   document.getElementById('ansBadges').querySelector('.abadge-time') &&
     (document.getElementById('ansBadges').querySelector('.abadge-time').textContent = ((Date.now()-t0)/1000).toFixed(1)+'s');
@@ -304,7 +311,10 @@ async function askLive(q, t0) {
       max_tokens: 1400,
       system: buildSystemPrompt('live'),
       tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-      messages: [{ role: 'user', content: q }]
+      messages: [
+        ...APP.chatHistory.slice(-6),
+        { role: 'user', content: q }
+      ]
     })
   });
 
@@ -352,6 +362,10 @@ async function askLive(q, t0) {
   document.getElementById('deepBtn').style.display = 'none';
   document.getElementById('ansBody').innerHTML = renderAnswerBody(answer);
   APP.lastAnswer = answer;
+  // Save to conversation history
+  APP.chatHistory.push({ role: 'user', content: q });
+  APP.chatHistory.push({ role: 'assistant', content: answer });
+  if (APP.chatHistory.length > 6) APP.chatHistory = APP.chatHistory.slice(-6);
   showEl('answerCard');
 }
 

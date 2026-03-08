@@ -201,9 +201,17 @@ function saveEmbedKey() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   7. INIT on load
+   7. INIT on load — wait for RAG DB to be ready before badge update
    ═══════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
   initPdfDragDrop();
-  updatePdfBadge();
+  // RAG DB may not be ready yet — wait for it, then update badge
+  function tryUpdateBadge(retries) {
+    if (typeof RAG !== 'undefined' && RAG.ready) {
+      updatePdfBadge();
+    } else if (retries > 0) {
+      setTimeout(function() { tryUpdateBadge(retries - 1); }, 300);
+    }
+  }
+  tryUpdateBadge(10); // try for up to 3 seconds
 });

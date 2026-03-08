@@ -156,6 +156,83 @@ loadFormulas = function(formulas) {
   fv3Render(formulas, document.getElementById('fv3Grid'));
 };
 
+/* Convert engineering equation text to KaTeX-safe LaTeX string */
+function fv3ToLatex(eq) {
+  let s = eq;
+  // Replace common engineering notation with LaTeX equivalents
+  s = s.replace(/×/g, '\\times ');
+  s = s.replace(/÷/g, '\\div ');
+  s = s.replace(/±/g, '\\pm ');
+  s = s.replace(/≈/g, '\\approx ');
+  s = s.replace(/≥/g, '\\geq ');
+  s = s.replace(/≤/g, '\\leq ');
+  s = s.replace(/→/g, '\\rightarrow ');
+  s = s.replace(/∝/g, '\\propto ');
+  s = s.replace(/√/g, '\\sqrt');
+  // Greek letters
+  s = s.replace(/η/g, '\\eta ');
+  s = s.replace(/ρ/g, '\\rho ');
+  s = s.replace(/α/g, '\\alpha ');
+  s = s.replace(/β/g, '\\beta ');
+  s = s.replace(/γ/g, '\\gamma ');
+  s = s.replace(/λ/g, '\\lambda ');
+  s = s.replace(/ω/g, '\\omega ');
+  s = s.replace(/Δ/g, '\\Delta ');
+  s = s.replace(/μ/g, '\\mu ');
+  s = s.replace(/σ/g, '\\sigma ');
+  s = s.replace(/π/g, '\\pi ');
+  s = s.replace(/Ω/g, '\\Omega ');
+  s = s.replace(/Σ/g, '\\Sigma ');
+  s = s.replace(/φ/g, '\\varphi ');
+  s = s.replace(/ε/g, '\\varepsilon ');
+  // Subscripts: convert X_abc or X₀₁₂ to X_{abc}
+  s = s.replace(/([A-Za-z])_([A-Za-z0-9]+)/g, '$1_{$2}');
+  s = s.replace(/([A-Za-z])₀/g, '$1_{0}');
+  s = s.replace(/([A-Za-z])₁/g, '$1_{1}');
+  s = s.replace(/([A-Za-z])₂/g, '$1_{2}');
+  s = s.replace(/([A-Za-z])₃/g, '$1_{3}');
+  s = s.replace(/([A-Za-z])₄/g, '$1_{4}');
+  s = s.replace(/([A-Za-z])ₛ/g, '$1_{s}');
+  s = s.replace(/([A-Za-z])ₜ/g, '$1_{t}');
+  // Superscripts: x² → x^{2}, xⁿ → x^{n}
+  s = s.replace(/²/g, '^{2}');
+  s = s.replace(/³/g, '^{3}');
+  s = s.replace(/ⁿ/g, '^{n}');
+  // Fractions like a/b (simple cases)
+  s = s.replace(/\((([^()]+))\)\s*\/\s*\((([^()]+))\)/g, '\\frac{$1}{$2}');
+  return s;
+}
+
+/* Try KaTeX render on formula equation boxes after DOM insert */
+function fv3ApplyKaTeX(container) {
+  if (typeof katex === 'undefined') return;
+  const eqs = (container || document).querySelectorAll('.fv3-eq[data-raw-eq]');
+  eqs.forEach(function(el) {
+    const raw = el.getAttribute('data-raw-eq');
+    if (!raw) return;
+    // Heuristic: only render as KaTeX if the equation looks like actual math
+    // Must contain = sign (equations) or at least 2 math operators
+    // Skip if it's primarily natural language (>50% words of 4+ chars)
+    var hasEquals = /=/.test(raw);
+    var mathOps = (raw.match(/[×÷∝≈≥≤±²³ⁿ₀₁₂₃]/g) || []).length;
+    var isMathy = hasEquals || mathOps >= 2;
+    var words = raw.split(/\s+/);
+    var longWords = words.filter(function(w) { return /^[a-z]{4,}$/i.test(w); }).length;
+    var wordRatio = words.length > 0 ? longWords / words.length : 0;
+    if (!isMathy || wordRatio > 0.5) return; // skip natural language
+    try {
+      var latex = fv3ToLatex(raw);
+      var rendered = katex.renderToString(latex, { throwOnError: false, displayMode: false });
+      // Create KaTeX overlay, keep color-coded as default fallback
+      var katexDiv = document.createElement('div');
+      katexDiv.className = 'fv3-katex-eq';
+      katexDiv.innerHTML = rendered;
+      el.appendChild(katexDiv);
+      el.classList.add('fv3-has-katex');
+    } catch (e) { /* keep color-coded fallback */ }
+  });
+}
+
 function fv3Render(fmls, container) {
   if (!container) return;
   container.innerHTML = fmls.map((f, i) => {
@@ -170,6 +247,8 @@ function fv3Render(fmls, container) {
       .replace(/\b[A-Z_]{1,5}=[^,\n]+,?/g,'').replace(/,\s*$/, '').trim();
     const hasVars = vars.length > 0;
     const showNote = !hasVars && noteClean.length > 4;
+    // Escape the raw equation for data attribute
+    const rawEqAttr = escMath(f.eq);
 
     return `
 <div class="fv3-card" id="${id}" style="--cat:${cat.c}">
@@ -186,7 +265,9 @@ function fv3Render(fmls, container) {
 
     <div class="fv3-label">${escMath(f.label)}</div>
 
-    <div class="fv3-eq">${eqH}</div>
+    <div class="fv3-eq" data-raw-eq="${rawEqAttr}">
+      <div class="fv3-eq-color">${eqH}</div>
+    </div>
 
     ${hasVars ? `
     <div class="fv3-vars" id="${id}_v">
@@ -206,6 +287,9 @@ function fv3Render(fmls, container) {
   </div>
 </div>`;
   }).join('');
+
+  // Apply KaTeX rendering after DOM insertion
+  setTimeout(function() { fv3ApplyKaTeX(container); }, 50);
 }
 
 function fv3Filter() {
@@ -294,9 +378,15 @@ function fv3Copy(btn, eq) {
   background:var(--bg2); border:1px solid var(--b0); border-radius:8px;
   padding:11px 13px; font-family:'JetBrains Mono',monospace;
   font-size:.9rem; line-height:1.7; word-break:break-word;
-  color:var(--tx);
+  color:var(--tx); position:relative; overflow:hidden;
 }
-/* Equation color tokens */
+/* KaTeX overlay rendering */
+.fv3-eq.fv3-has-katex .fv3-eq-color { opacity:0; position:absolute; }
+.fv3-katex-eq {
+  font-size:1.1rem; line-height:1.8; padding:2px 0;
+}
+.fv3-katex-eq .katex { color:var(--tx); font-size:1.05em; }
+/* Equation color tokens (fallback when KaTeX unavailable) */
 .fceq-lhs { color:#67e8f9; font-weight:700; }   /* result symbol — teal */
 .fceq-v   { color:#93c5fd; font-weight:600; }   /* variable — blue */
 .fceq-gr  { color:#fb923c; font-weight:700; }   /* greek — orange */

@@ -4,6 +4,9 @@
 function selectTopic(topicId, title, desc, icon, sectionName) {
   APP.currentTopic = topicId;
 
+  // Clear AI conversation history when switching topics
+  APP.chatHistory = [];
+
   // Update sidebar active state
   document.querySelectorAll('.sb-topic').forEach(b => b.classList.remove('active'));
   const btn = document.getElementById('sbt_' + topicId);
@@ -18,15 +21,30 @@ function selectTopic(topicId, title, desc, icon, sectionName) {
     tz.querySelectorAll('.stopic-grid-wrap,.subj-header,.chapter-crumb,.chapter-content-header,.chapter-grid,.chapter-index-label,#stopic-banner,.tz-intro-card').forEach(el => el.remove());
   }
 
-  // Reset to first MM tab
-  switchPanel('diagrams', document.querySelector('.mm-tab'));
-
   // Load multimodal content
   const kb = TOPIC_KNOWLEDGE[topicId] || {};
   loadDiagrams(topicId);
   loadVideos(kb.videos || []);
   loadFormulas(kb.formulas || []);
   loadFlashcards(kb.flashcards || []);
+
+  // ── Hide empty tabs, auto-select first with content ──
+  const tabContentMap = {
+    diagrams:   function() { const g = document.getElementById('diagGrid'); return g && g.children.length > 0 && !g.querySelector('.diag-card') === false; },
+    videos:     function() { return (kb.videos || []).length > 0; },
+    formulas:   function() { return (kb.formulas || []).length > 0; },
+    flashcards: function() { return (kb.flashcards || []).length > 0; },
+  };
+  let firstVisible = null;
+  document.querySelectorAll('.mm-tab').forEach(function(tab) {
+    const panelId = tab.getAttribute('data-panel');
+    if (!panelId || panelId === 'quiz') return; // quiz always visible
+    const hasContent = tabContentMap[panelId] ? tabContentMap[panelId]() : true;
+    tab.style.display = hasContent ? '' : 'none';
+    if (hasContent && !firstVisible) firstVisible = panelId;
+  });
+  // Auto-select first visible tab
+  switchPanel(firstVisible || 'diagrams', document.querySelector('.mm-tab[data-panel="' + (firstVisible || 'diagrams') + '"]'));
 
   // Breadcrumb
   setBreadcrumb([
