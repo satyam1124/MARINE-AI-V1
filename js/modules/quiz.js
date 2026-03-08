@@ -81,6 +81,8 @@ function updateQuizScore() {
 
 function openQuiz() {
   switchPanel('quiz', null);
-  if (APP.currentTopic) showTopicZone();
+  showTopicZone();
+  const tz = document.getElementById('topicZone');
+  if (tz) tz.scrollIntoView({ behavior: 'smooth' });
 }
 

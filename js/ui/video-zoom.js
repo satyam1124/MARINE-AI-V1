@@ -71,6 +71,17 @@
     ce_casualty:    [],
     ce_psc:         [],
     ce_oral_prep:   [],
+    // BTech
+    bt_diesel1:     ['two_stroke_engine', 'indicator_diagram'],
+    bt_thermo1:     ['indicator_diagram'],
+    bt_fluid1:      ['pump_curve'],
+    bt_elec2:       [],
+    bt_naval1:      ['gz_curve'],
+    bt_naval2:      ['gz_curve'],
+    bt_control:     ['pump_curve'],
+    bt_strength:    [],
+    bt_mep:         [],
+    bt_env:         [],
   };
 
   Object.assign(TOPIC_DIAGRAMS, extra);

@@ -593,7 +593,7 @@ setChapters('bt_thermo1','🔥','Engineering Thermodynamics I',
     flashcards:[
       { q:"Describe what happens to temperature and pressure in an isentropic (adiabatic) compression", a:"Isentropic: no heat exchange, reversible. Both temperature AND pressure increase. T₂/T₁ = (P₂/P₁)^((γ-1)/γ). For air compressed from 1 to 10 bar: T₂/T₁ = 10^0.286 = 1.93. So from 300K → 579K (306°C). This is why compressors get hot and intercooling is needed for multi-stage compression." },
     ],
-    videos:[{ id:'_1d8Ggu_sDw', title:'Ideal Gas Thermodynamic Processes', ch:'The Efficient Engineer' }]
+    videos:[{ url:'https://www.youtube.com/results?search_query=Ideal+Gas+Thermodynamic+Processes+The+Efficient+Engineer', title:'Ideal Gas Thermodynamic Processes', ch:'The Efficient Engineer' }]
   },
 ]);
 
