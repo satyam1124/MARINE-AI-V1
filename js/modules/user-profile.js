@@ -67,7 +67,7 @@ function showWelcomeModal() {
           '<label style="font-family:JetBrains Mono,monospace;font-size:0.58rem;color:var(--tx3);letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:4px;">Current Level</label>' +
           '<select id="wpLevel" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--bg2);color:var(--tx);font-size:0.82rem;box-sizing:border-box;">' +
             '<option value="btech" selected>B.Tech Marine Engineering</option>' +
-            '<option value="pre-sea">Pre-Sea Training (DNS/GME)</option>' +
+            '<option value="pre-sea">Pre-Sea Training (GME)</option>' +
             '<option value="cl4">MEO Class IV</option>' +
             '<option value="cl2">MEO Class II</option>' +
             '<option value="cl1">MEO Class I</option>' +
