@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MarineIQ — Topic Generator (Dev)</title>
+<style>
+  :root { --bg:#020810; --bg1:#091629; --bg2:#0d2038; --tx:#e8f4ff; --tx2:#8ba3c2; --tx3:#4a6580; --ac:#2d5a8f; --gold:#d4a017; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--tx); font-family:'JetBrains Mono','Fira Code',monospace; padding:24px; min-height:100vh; }
+  h1 { font-size:1.1rem; color:var(--gold); margin-bottom:4px; }
+  .subtitle { font-size:0.65rem; color:var(--tx3); margin-bottom:24px; letter-spacing:0.08em; text-transform:uppercase; }
+  .form-group { margin-bottom:16px; }
+  label { display:block; font-size:0.62rem; color:var(--tx3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px; }
+  input, select, textarea { width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--ac); background:var(--bg1); color:var(--tx); font-family:inherit; font-size:0.82rem; }
+  input:focus, select:focus, textarea:focus { border-color:var(--gold); outline:none; }
+  textarea { min-height:60px; resize:vertical; }
+  .btn-row { display:flex; gap:8px; margin-bottom:16px; }
+  .btn { padding:12px 20px; border-radius:10px; border:none; cursor:pointer; font-family:inherit; font-size:0.72rem; font-weight:700; letter-spacing:0.04em; transition:all 0.12s; }
+  .btn:hover { transform:translateY(-1px); }
+  .btn-primary { background:linear-gradient(135deg,var(--gold),#a07810); color:#020810; }
+  .btn-secondary { background:var(--bg2); border:1px solid var(--ac); color:var(--tx2); }
+  .btn-copy { background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); color:#22c55e; }
+  .status { font-size:0.72rem; color:var(--tx2); margin:12px 0; min-height:20px; }
+  .output-wrap { margin-top:16px; }
+  .output-label { font-size:0.6rem; color:var(--tx3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; }
+  #output { width:100%; min-height:300px; max-height:60vh; padding:12px; border-radius:10px; border:1px solid var(--ac); background:var(--bg1); color:#a5d6ff; font-family:inherit; font-size:0.7rem; resize:vertical; white-space:pre-wrap; }
+  .preview { margin-top:16px; padding:16px; border-radius:12px; border:1px solid var(--ac); background:var(--bg2); }
+  .preview h3 { font-size:0.72rem; color:var(--gold); margin-bottom:10px; }
+  .preview-formula { background:var(--bg1); padding:8px 12px; border-radius:6px; margin-bottom:6px; font-size:0.72rem; border-left:3px solid var(--gold); }
+  .preview-formula .eq { color:#7dd3fc; }
+  .preview-fc { background:var(--bg1); padding:8px 12px; border-radius:6px; margin-bottom:6px; font-size:0.68rem; }
+  .preview-fc .q { color:var(--gold); font-weight:600; }
+  .key-info { font-size:0.6rem; color:var(--tx3); margin-top:6px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:600px) { .grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<h1>⚓ MarineIQ Topic Generator</h1>
+<p class="subtitle">Dev Utility — Generate TOPIC_KNOWLEDGE entries using AI</p>
+
+<div class="grid">
+  <div class="form-group">
+    <label>API Key (Groq or Gemini)</label>
+    <input type="password" id="apiKey" placeholder="gsk_... or AIza..." />
+    <div class="key-info">Stored in memory only — never sent anywhere except the AI API</div>
+  </div>
+  <div class="form-group">
+    <label>Provider</label>
+    <select id="provider">
+      <option value="groq">Groq (llama-3.3-70b — fastest)</option>
+      <option value="gemini">Gemini 1.5 Flash</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Topic Name</label>
+  <input type="text" id="topicName" placeholder="e.g. Stern Tube Seal, Exhaust Gas Economiser, Main Engine Turbocharger..." />
+</div>
+
+<div class="grid">
+  <div class="form-group">
+    <label>Career Level</label>
+    <select id="level">
+      <option value="MEO Class IV">MEO Class IV (OICEW)</option>
+      <option value="MEO Class III">MEO Class III (Second Engineer)</option>
+      <option value="MEO Class II">MEO Class II (Chief Engineer)</option>
+      <option value="BTech Marine">BTech Marine Engineering</option>
+      <option value="Basic Safety">Basic Safety Training</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Topic ID (for code)</label>
+    <input type="text" id="topicId" placeholder="auto-generated from name" />
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Additional Context (optional)</label>
+  <textarea id="context" placeholder="e.g. Focus on maintenance procedures, include IMO regulations..."></textarea>
+</div>
+
+<div class="btn-row">
+  <button class="btn btn-primary" onclick="generate()">⚡ Generate Entry</button>
+  <button class="btn btn-copy" onclick="copyOutput()">📋 Copy to Clipboard</button>
+  <button class="btn btn-secondary" onclick="clearAll()">🗑 Clear</button>
+</div>
+
+<div class="status" id="status"></div>
+
+<div class="output-wrap">
+  <div class="output-label">
+    <span>Generated JavaScript Output</span>
+    <span id="charCount"></span>
+  </div>
+  <textarea id="output" readonly placeholder="Generated code will appear here..."></textarea>
+</div>
+
+<div class="preview" id="preview" style="display:none">
+  <h3>Preview</h3>
+  <div id="previewContent"></div>
+</div>
+
+<script>
+// Auto-generate topic ID from name
+document.getElementById('topicName').addEventListener('input', function() {
+  var name = this.value.trim();
+  var id = name.toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, '_')
+    .slice(0, 30);
+  document.getElementById('topicId').value = id;
+});
+
+// Try to load API key from localStorage (same as main app)
+try {
+  var stored = JSON.parse(localStorage.getItem('miq_cfg') || '{}');
+  if (stored.groqKey) document.getElementById('apiKey').value = stored.groqKey;
+  else if (stored.geminiKey) document.getElementById('apiKey').value = stored.geminiKey;
+} catch(e) {}
+
+async function generate() {
+  var apiKey = document.getElementById('apiKey').value.trim();
+  var provider = document.getElementById('provider').value;
+  var topicName = document.getElementById('topicName').value.trim();
+  var topicId = document.getElementById('topicId').value.trim();
+  var level = document.getElementById('level').value;
+  var context = document.getElementById('context').value.trim();
+  var status = document.getElementById('status');
+
+  if (!apiKey) { status.textContent = '⚠ Please enter an API key'; return; }
+  if (!topicName) { status.textContent = '⚠ Please enter a topic name'; return; }
+
+  status.textContent = '⏳ Generating content with ' + provider + '...';
+
+  var prompt = 'You are a marine engineering education content generator.\n' +
+    'Generate study material for: "' + topicName + '" at "' + level + '" level.\n' +
+    (context ? 'Additional context: ' + context + '\n' : '') +
+    '\nReturn ONLY valid JSON:\n' +
+    '{\n' +
+    '  "formulas": [{ "label": "Name", "eq": "equation", "note": "Source and context" }],\n' +
+    '  "flashcards": [{ "q": "Exam question", "a": "Detailed answer 150-300 words with sources" }],\n' +
+    '  "videos": [{ "id": "youtubeId", "title": "Video title", "ch": "Channel" }]\n' +
+    '}\n\n' +
+    'REQUIREMENTS:\n' +
+    '- 4-6 formulas with real values, sources (Reed\'s, Pounder\'s, MAN B&W, IMO)\n' +
+    '- 4-6 flashcards with exam-level answers citing standards\n' +
+    '- 3-4 real YouTube video suggestions (use real video IDs if you know them, otherwise use placeholder "SEARCH")\n' +
+    '- Use actual marine engineering values\n\nReturn ONLY JSON.';
+
+  try {
+    var text = '';
+    if (provider === 'groq') {
+      var res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
+        body: JSON.stringify({
+          model: 'llama-3.3-70b-versatile',
+          messages: [{ role: 'user', content: prompt }],
+          max_tokens: 4000, temperature: 0.3
+        })
+      });
+      if (!res.ok) throw new Error('Groq error: ' + res.status);
+      var j = await res.json();
+      text = j.choices?.[0]?.message?.content || '';
+    } else {
+      var url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + apiKey;
+      var res2 = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: prompt }] }],
+          generationConfig: { maxOutputTokens: 4000, temperature: 0.3 }
+        })
+      });
+      if (!res2.ok) throw new Error('Gemini error: ' + res2.status);
+      var j2 = await res2.json();
+      text = j2.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    }
+
+    // Parse JSON
+    text = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+    var start = text.indexOf('{');
+    var end = text.lastIndexOf('}');
+    if (start === -1 || end === -1) throw new Error('No JSON found in response');
+
+    var jsonStr = text.slice(start, end + 1);
+    var data;
+    try { data = JSON.parse(jsonStr); }
+    catch(e) {
+      jsonStr = jsonStr.replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
+      data = JSON.parse(jsonStr);
+    }
+
+    // Format as JS code
+    var code = '  /* ── ' + topicName.toUpperCase() + ' ── */\n';
+    code += '  ' + topicId + ': {\n';
+    code += '    formulas: [\n';
+    (data.formulas || []).forEach(function(f) {
+      code += "      { label: " + JSON.stringify(f.label) + ", eq: " + JSON.stringify(f.eq) + ", note: " + JSON.stringify(f.note) + " },\n";
+    });
+    code += '    ],\n';
+    code += '    videos: [\n';
+    (data.videos || []).forEach(function(v) {
+      code += "      { id: " + JSON.stringify(v.id || 'SEARCH') + ", title: " + JSON.stringify(v.title) + ", ch: " + JSON.stringify(v.ch) + " },\n";
+    });
+    code += '    ],\n';
+    code += '    flashcards: [\n';
+    (data.flashcards || []).forEach(function(fc) {
+      code += "      { q: " + JSON.stringify(fc.q) + ", a: " + JSON.stringify(fc.a) + " },\n";
+    });
+    code += '    ]\n';
+    code += '  },';
+
+    document.getElementById('output').value = code;
+    document.getElementById('charCount').textContent = code.length + ' chars';
+    status.textContent = '✅ Generated! Copy the output and paste into topic-knowledge.js or topic-knowledge-patches.js';
+
+    // Show preview
+    renderPreview(data);
+
+  } catch(e) {
+    status.textContent = '❌ Error: ' + e.message;
+  }
+}
+
+function renderPreview(data) {
+  var el = document.getElementById('preview');
+  var content = document.getElementById('previewContent');
+  el.style.display = 'block';
+
+  var html = '<h3 style="margin-bottom:8px;">📐 Formulas (' + (data.formulas||[]).length + ')</h3>';
+  (data.formulas || []).forEach(function(f) {
+    html += '<div class="preview-formula"><strong>' + f.label + '</strong><br><span class="eq">' + f.eq + '</span><br><em style="color:var(--tx3);font-size:0.6rem;">' + (f.note||'') + '</em></div>';
+  });
+
+  html += '<h3 style="margin:12px 0 8px;">🃏 Flashcards (' + (data.flashcards||[]).length + ')</h3>';
+  (data.flashcards || []).forEach(function(fc) {
+    html += '<div class="preview-fc"><span class="q">Q: ' + fc.q + '</span><br><span style="color:var(--tx2);">' + (fc.a||'').slice(0, 200) + '...</span></div>';
+  });
+
+  content.innerHTML = html;
+}
+
+function copyOutput() {
+  var output = document.getElementById('output');
+  if (!output.value) { document.getElementById('status').textContent = '⚠ Nothing to copy'; return; }
+  navigator.clipboard.writeText(output.value).then(function() {
+    document.getElementById('status').textContent = '📋 Copied to clipboard!';
+  });
+}
+
+function clearAll() {
+  document.getElementById('topicName').value = '';
+  document.getElementById('topicId').value = '';
+  document.getElementById('context').value = '';
+  document.getElementById('output').value = '';
+  document.getElementById('status').textContent = '';
+  document.getElementById('preview').style.display = 'none';
+  document.getElementById('charCount').textContent = '';
+}
+</script>
+</body>
+</html>
