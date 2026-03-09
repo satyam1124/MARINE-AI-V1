@@ -1,0 +1,21 @@
+{
+  "name": "marine-iq-v1",
+  "version": "1.0.0",
+  "description": "**Merchant Navy Engineering Academy** — AI-powered study platform for MEO Class 1–4 and BTech Marine Engineering.",
+  "main": "test_ui_chips.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satyam1124/MARINE-AI-V1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/satyam1124/MARINE-AI-V1/issues"
+  },
+  "homepage": "https://github.com/satyam1124/MARINE-AI-V1#readme"
+}
