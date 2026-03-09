@@ -102,13 +102,11 @@ function getProvider() {
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ── GOOGLE GEMINI ── */
-async function callGemini(q, mode, onChunk, onDone, onError) {
+async function callGemini(q, mode, systemPrompt, onChunk, onDone, onError) {
   const provider = AI_PROVIDERS.gemini;
   const model    = provider.models[mode] || provider.models.bal;
   const maxOut   = { fast: 800, bal: 1600, deep: 3500, live: 1600 }[mode] || 1600;
   const url      = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse&key=${APP.apiKey}`;
-
-  const systemPrompt = buildSystemPrompt(mode, q);
   const body = {
     contents: [{ role: 'user', parts: [{ text: systemPrompt + '\n\n---\n\n' + q }] }],
     generationConfig: {
@@ -165,12 +163,10 @@ async function callGemini(q, mode, onChunk, onDone, onError) {
 }
 
 /* ── GROQ (OpenAI-compatible) ── */
-async function callGroq(q, mode, onChunk, onDone, onError) {
+async function callGroq(q, mode, systemPrompt, onChunk, onDone, onError) {
   const provider = AI_PROVIDERS.groq;
   const model    = provider.models[mode] || provider.models.bal;
   const maxOut   = { fast: 800, bal: 1600, deep: 3500, live: 1600 }[mode] || 1600;
-
-  const systemPrompt = buildSystemPrompt(mode, q);
   const body = {
     model,
     max_tokens: maxOut,
@@ -232,12 +228,10 @@ async function callGroq(q, mode, onChunk, onDone, onError) {
 }
 
 /* ── OPENROUTER ── */
-async function callOpenRouter(q, mode, onChunk, onDone, onError) {
+async function callOpenRouter(q, mode, systemPrompt, onChunk, onDone, onError) {
   const provider = AI_PROVIDERS.openrouter;
   const model    = provider.models[mode] || provider.models.bal;
   const maxOut   = { fast: 600, bal: 1400, deep: 2500, live: 1400 }[mode] || 1400;
-
-  const systemPrompt = buildSystemPrompt(mode, q);
   const body = {
     model,
     max_tokens: maxOut,
@@ -365,10 +359,9 @@ askStream = async function(q, mode, t0) {
     throw new Error('No API key set');
   }
 
-  // FORCE EVALUATE SYSTEM PROMPT METADATA FOR UI (BOOK SOURCES)
-  if (typeof buildSystemPrompt === 'function') {
-    buildSystemPrompt(mode, q);
-  }
+  // FORCE EVALUATE SYSTEM PROMPT ONCE
+  // This generates the context, and importantly, sets APP._refBookSource BEFORE we read it below.
+  const finalSysPrompt = typeof buildSystemPrompt === 'function' ? buildSystemPrompt(mode, q) : '';
 
   return new Promise((resolve, reject) => {
     const ansBody = document.getElementById('ansBody');
@@ -399,16 +392,20 @@ askStream = async function(q, mode, t0) {
     }
 
     if (hasSources) {
-      srcBar.setAttribute('style', 'display: block !important;');
-      document.getElementById('srcChips').innerHTML = html;
+      srcBar.innerHTML = html;
+      srcBar.style.display = 'block';
+      srcBar.style.setProperty('display', 'block', 'important');
     } else {
-      srcBar.setAttribute('style', 'display: none !important;');
+      srcBar.style.display = 'none';
     }
 
     const deepBtn = document.getElementById('deepBtn');
     if (deepBtn) deepBtn.style.display = mode !== 'deep' ? 'inline-flex' : 'none';
+    
     showEl('answerCard');
     ansBody.innerHTML = '<span class="stream-cursor">▌</span>';
+
+    const tStart = Date.now();
 
     function onChunk(text) {
       full += text;
@@ -436,10 +433,9 @@ askStream = async function(q, mode, t0) {
       reject(e);
     }
 
-    provider.call(q, mode, onChunk, onDone, onError);
+    provider.call(q, mode, finalSysPrompt, onChunk, onDone, onError);
   });
 };
-
 /* ── askLive: use provider's best model with web context note ── */
 askLive = async function(q, t0) {
   // For free providers, we add a web-search instruction to the prompt
