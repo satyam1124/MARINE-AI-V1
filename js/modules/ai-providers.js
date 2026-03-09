@@ -182,6 +182,8 @@ async function callGroq(q, mode, systemPrompt, onChunk, onDone, onError) {
     body.temperature = 0;
   }
 
+  console.log('--- GROQ PAYLOAD ---', JSON.stringify(body, null, 2));
+
   try {
     const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method:  'POST',
