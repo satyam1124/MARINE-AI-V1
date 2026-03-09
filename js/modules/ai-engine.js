@@ -20,7 +20,7 @@ function buildSystemPrompt(mode, query) {
   if (APP.currentTopic && typeof TOPIC_KNOWLEDGE !== 'undefined') {
     const kb = TOPIC_KNOWLEDGE[APP.currentTopic] || {};
     const fml = (kb.formulas || []).slice(0, 2).map(f => `${f.label}: ${f.eq}`).join('; ');
-    topicCtx = `\nCurrent topic being studied: "${APP.currentTopic}". Key topic formulas context: ${fml || 'None provided'}.`;
+    topicCtx = `\n[UI CONTEXT HINT] User is currently looking at the "${APP.currentTopic}" tab. (Formulas: ${fml || 'None'}). CRITICAL: If the user's question is unrelated to this topic context, IGNORE THIS HINT ENTIRELY. Do NOT forcefully relate unrelated subjects to it.`;
   }
 
   const examInstr = APP.examMode
