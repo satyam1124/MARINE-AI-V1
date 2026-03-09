@@ -16,6 +16,13 @@ function buildSystemPrompt(mode, query) {
     ? `The student is studying for: ${APP.currentLevel.fullTitle} (${APP.currentLevel.tags.join(', ')}).`
     : 'The student is exploring general marine engineering.';
 
+  let topicCtx = '';
+  if (APP.currentTopic && typeof TOPIC_KNOWLEDGE !== 'undefined') {
+    const kb = TOPIC_KNOWLEDGE[APP.currentTopic] || {};
+    const fml = (kb.formulas || []).slice(0, 2).map(f => `${f.label}: ${f.eq}`).join('; ');
+    topicCtx = `\nCurrent topic being studied: "${APP.currentTopic}". Key topic formulas context: ${fml || 'None provided'}.`;
+  }
+
   const examInstr = APP.examMode
     ? `\n\nEXAM MODE ACTIVE: Format every answer as follows:
 1. ONE-LINE definition/direct answer.
@@ -28,8 +35,7 @@ function buildSystemPrompt(mode, query) {
     fast: 'Answer concisely in 2–4 paragraphs. Bold key terms. State critical formulas. Do not pad.',
     bal:  'Give a thorough answer in 4–6 paragraphs. Bold headers for sections. State all relevant formulas with notation. Reference specific regulations by number. Flag anything uncertain.',
     deep: 'Give a comprehensive, textbook-quality answer. Use bold section headers. Cover: fundamentals → detailed explanation → worked examples → practical/exam relevance → common errors. Include all formulas fully derived. Reference Reed\'s, Pounder\'s, IMO, MAN B&W or relevant authority.',
-    live: 'You have live web search capability. Search for current information to supplement your base knowledge. Prioritise official sources: IMO, DG Shipping, classification society websites, STCW amendments. Synthesise search results with your engineering knowledge.',
-    live: 'You have live web search capability. Search for current information to supplement your base knowledge. Prioritise official sources: IMO, DG Shipping, classification society websites, STCW amendments. Synthesise search results with your engineering knowledge.',
+    live: 'You have live web search capability. Search for current information to supplement your base knowledge. Prioritise official sources: IMO, DG Shipping, classification society websites, STCW amendments. Synthesise search results with your engineering knowledge.'
   }[mode] || '';
 
 
@@ -53,7 +59,7 @@ ${APP._ragContext || ''}`;
   // STANDARD MARINE IQ GENERATIVE MODE (Fallback)
   // ─────────────────────────────────────────────────────────
   return `You are MarineIQ — the most accurate and comprehensive marine engineering AI study assistant for Merchant Navy engineers.
-Today: ${today}. ${levelCtx}
+Today: ${today}. ${levelCtx} ${topicCtx}
 
 KNOWLEDGE ACCURACY MANDATE:
 All engineering data, regulations, specifications and formulas must be accurate and traceable to authoritative sources:
