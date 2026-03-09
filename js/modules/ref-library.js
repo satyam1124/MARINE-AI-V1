@@ -61,12 +61,17 @@ function buildRefBookContext(query, isBookFirst) {
   const book = REF_BOOKS[bookId];
   const hits = refBookSearch(query, bookId, 4);
   if (!hits.length) {
-    let emptyCtx = '\n\n════════════════════════════════════════\n';
-    emptyCtx += 'PRIMARY REFERENCE: ' + book.name + '\n';
-    emptyCtx += 'CRITICAL INSTRUCTION: The user asked a question, but NO relevant passages exist in the selected book.\n';
-    emptyCtx += 'You are strictly forbidden from using your general knowledge to answer this.\n';
-    emptyCtx += 'You MUST reply ONLY with: "I searched *' + book.shortName + '* but this topic is not covered in the indexed passages."\n';
-    return { text: emptyCtx, source: book.shortName + ' (No matches found)', mode: isBookFirst ? 'Book First' : 'AI + Book' };
+    if (isBookFirst) {
+      // Book First mode: strictly refuse if topic not found
+      let emptyCtx = '\n\n════════════════════════════════════════\n';
+      emptyCtx += 'PRIMARY REFERENCE: ' + book.name + '\n';
+      emptyCtx += 'CRITICAL INSTRUCTION: The user asked a question, but NO relevant passages exist in the selected book.\n';
+      emptyCtx += 'You are strictly forbidden from using your general knowledge to answer this.\n';
+      emptyCtx += 'You MUST reply ONLY with: "I searched *' + book.shortName + '* but this topic is not covered in the indexed passages."\n';
+      return { text: emptyCtx, source: book.shortName + ' (No matches found)', mode: 'Book First' };
+    }
+    // AI + Book mode: no matches found, return null so AI answers freely
+    return null;
   }
 
   let ctx = '\n\n';
@@ -81,7 +86,10 @@ function buildRefBookContext(query, isBookFirst) {
     ctx += '3. If the answer cannot be found in the exact text provided below, you MUST reply verbatim: "I cannot find the exact answer to this in the selected book."\n';
     ctx += '4. Quote the text directly where possible.\n';
   } else {
-    ctx += '--- Reference: ' + book.name + ' ---\n';
+    ctx += '--- Supplementary Reference: ' + book.name + ' ---\n';
+    ctx += 'INSTRUCTION: Use the following book passages as supplementary reference to enhance your answer.\n';
+    ctx += 'You should ALSO use your own marine engineering knowledge to provide a complete answer.\n';
+    ctx += 'Cite the book when quoting directly from it.\n';
   }
 
   hits.forEach(function(s) {

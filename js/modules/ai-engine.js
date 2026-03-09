@@ -42,11 +42,11 @@ function buildSystemPrompt(mode, query) {
 
   // ─────────────────────────────────────────────────────────
   // STRICT GROUNDING MODE (ZERO HALLUCINATION)
-  // If we are searching a specific book or PDF, WE MUST STRIP
-  // OUT ALL EXTERNAL KNOWLEDGE to prevent the AI from hallucinating 
-  // answers when the book returns zero hits.
+  // Only for Book First mode or PDF RAG — strips external knowledge.
+  // AI+Book mode falls through to the standard prompt with book
+  // passages appended as supplementary context.
   // ─────────────────────────────────────────────────────────
-  if (APP._refBookSource || APP._ragFromPDF) {
+  if ((isBookFirst && APP._refBookSource) || APP._ragFromPDF) {
     return `You are MarineIQ's Data Extraction Engine.
 Your ONLY purpose is to extract answers from the attached reference documents.
 Today: ${today}.
@@ -174,7 +174,7 @@ RESPOND WITH:
 - Never invent specifications or regulation numbers
 
 ${examInstr}
-${depthInstr}${diagCtx}${miCtx}
+${depthInstr}${diagCtx}${miCtx}${refCtx}
 STRUCTURED ANSWER FORMAT:
 Organise your answer with clear sections using **bold headers**.
 For technical questions, use this structure when appropriate:
