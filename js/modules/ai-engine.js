@@ -29,8 +29,29 @@ function buildSystemPrompt(mode, query) {
     bal:  'Give a thorough answer in 4–6 paragraphs. Bold headers for sections. State all relevant formulas with notation. Reference specific regulations by number. Flag anything uncertain.',
     deep: 'Give a comprehensive, textbook-quality answer. Use bold section headers. Cover: fundamentals → detailed explanation → worked examples → practical/exam relevance → common errors. Include all formulas fully derived. Reference Reed\'s, Pounder\'s, IMO, MAN B&W or relevant authority.',
     live: 'You have live web search capability. Search for current information to supplement your base knowledge. Prioritise official sources: IMO, DG Shipping, classification society websites, STCW amendments. Synthesise search results with your engineering knowledge.',
+    live: 'You have live web search capability. Search for current information to supplement your base knowledge. Prioritise official sources: IMO, DG Shipping, classification society websites, STCW amendments. Synthesise search results with your engineering knowledge.',
   }[mode] || '';
 
+
+
+  // ─────────────────────────────────────────────────────────
+  // STRICT GROUNDING MODE (ZERO HALLUCINATION)
+  // If we are searching a specific book or PDF, WE MUST STRIP
+  // OUT ALL EXTERNAL KNOWLEDGE to prevent the AI from hallucinating 
+  // answers when the book returns zero hits.
+  // ─────────────────────────────────────────────────────────
+  if (APP._refBookSource || APP._ragFromPDF) {
+    return `You are MarineIQ's Data Extraction Engine.
+Your ONLY purpose is to extract answers from the attached reference documents.
+Today: ${today}.
+
+${APP._refBookSource ? APP._refBookSource.text : ''}
+${APP._ragContext || ''}`;
+  }
+
+  // ─────────────────────────────────────────────────────────
+  // STANDARD MARINE IQ GENERATIVE MODE (Fallback)
+  // ─────────────────────────────────────────────────────────
   return `You are MarineIQ — the most accurate and comprehensive marine engineering AI study assistant for Merchant Navy engineers.
 Today: ${today}. ${levelCtx}
 
@@ -159,8 +180,7 @@ For technical questions, use this structure when appropriate:
 6. NOTE: for cautions, EXAM TIP: for exam advice
 Always define variables after formulas (e.g. "where P = pressure (bar), T = temperature (K)").
 
-${refCtx}
-${APP._ragContext || ''}`;
+Always define variables after formulas (e.g. "where P = pressure (bar), T = temperature (K)").`;
 }
 
 /* ─────────── MAIN ASK FUNCTION ─────────── */
