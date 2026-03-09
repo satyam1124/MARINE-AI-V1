@@ -28,8 +28,11 @@ function refBookSearch(query, bookId, topN) {
 
   const scored = book.sections.map(function(s) {
     const hay = (s.heading + ' ' + s.keywords.join(' ') + ' ' + s.text).toLowerCase();
+    const headingLower = s.heading.toLowerCase();
     let score = 0;
     qWords.forEach(function(w) {
+      // Heading match bonus — if the query word appears in the section title, it's highly relevant
+      if (headingLower.includes(w)) score += 10;
       if (hay.includes(w)) {
         const kw_bonus = s.keywords.includes(w) ? 5 : 1;
         score += (hay.split(w).length - 1) * kw_bonus;
@@ -38,16 +41,16 @@ function refBookSearch(query, bookId, topN) {
     return Object.assign({}, s, { _score: score });
   });
 
-  // Calculate the "perfect score" (if every word matched exactly once) to set a dynamic baseline
+  // Dynamic baseline: number of query keywords
   const baseline = qWords.length;
   
   return scored
     .sort(function(a, b) { return b._score - a._score; })
     .slice(0, topN)
     .filter(function(s) { 
-      // STRICT FILTER: The score must be high enough to prove this isn't a random 1-word match.
-      // E.g. purely generic queries sharing 1 word won't hit a score of 8
-      return s._score >= Math.max(8, baseline * 2); 
+      // Lowered threshold to allow valid single-keyword marine topics to match,
+      // while still filtering out truly irrelevant queries (score of 0-2)
+      return s._score >= Math.max(3, baseline); 
     });
 }
 

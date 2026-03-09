@@ -9,12 +9,6 @@ function buildSystemPrompt(mode, query) {
   const refCtx = refCtxObj ? refCtxObj.text : '';
   APP._refBookSource = refCtxObj; // Store metadata for UI rendering
   
-  console.log('--- SYSTEM PROMPT BUILDER ---');
-  console.log('APP.activeRefBook:', APP.activeRefBook);
-  console.log('APP.refMode:', APP.refMode);
-  console.log('isBookFirst:', isBookFirst);
-  console.log('APP._refBookSource obj present:', !!APP._refBookSource);
-  
   const diagCtx = diagInfo ? buildDiagramContext(diagInfo, query||'') : '';
   const miCtx = buildMarineInsightContext();
   const today = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
