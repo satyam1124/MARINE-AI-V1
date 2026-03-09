@@ -17,23 +17,38 @@ function refBookSearch(query, bookId, topN) {
   topN = topN || 4;
   const book = REF_BOOKS[bookId];
   if (!book) return [];
-  const qWords = query.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w => w.length > 2);
+
+  const stopWords = ['the','and','are','for','not','but','has','was','what','how','why','when','where','who','which','this','that','these','those','then','than','can','could','would','should', 'is', 'a', 'an', 'in', 'on', 'at', 'to', 'of', 'by', 'as'];
+  const qWords = query.toLowerCase()
+    .replace(/[^a-z0-9\s]/g,' ')
+    .split(/\s+/)
+    .filter(w => w.length > 2 && !stopWords.includes(w));
+    
   if (!qWords.length) return book.sections.slice(0, topN);
 
   const scored = book.sections.map(function(s) {
     const hay = (s.heading + ' ' + s.keywords.join(' ') + ' ' + s.text).toLowerCase();
     let score = 0;
     qWords.forEach(function(w) {
-      const kw_bonus = s.keywords.includes(w) ? 3 : 1;
-      score += (hay.split(w).length - 1) * kw_bonus;
+      if (hay.includes(w)) {
+        const kw_bonus = s.keywords.includes(w) ? 5 : 1;
+        score += (hay.split(w).length - 1) * kw_bonus;
+      }
     });
     return Object.assign({}, s, { _score: score });
   });
 
+  // Calculate the "perfect score" (if every word matched exactly once) to set a dynamic baseline
+  const baseline = qWords.length;
+  
   return scored
     .sort(function(a, b) { return b._score - a._score; })
     .slice(0, topN)
-    .filter(function(s) { return s._score > 0; });
+    .filter(function(s) { 
+      // STRICT FILTER: The score must be high enough to prove this isn't a random 1-word match.
+      // E.g. purely generic queries sharing 1 word won't hit a score of 8
+      return s._score >= Math.max(8, baseline * 2); 
+    });
 }
 
 /* ─── Build book-first system context ─── */
