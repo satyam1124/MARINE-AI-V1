@@ -117,6 +117,10 @@ async function callGemini(q, mode, onChunk, onDone, onError) {
     }
   };
 
+  if (APP._ragFromPDF || APP._refBookSource) {
+    body.generationConfig.temperature = 0;
+  }
+
   try {
     const res = await fetch(url, {
       method:  'POST',
@@ -177,6 +181,10 @@ async function callGroq(q, mode, onChunk, onDone, onError) {
       { role: 'user',   content: q }
     ]
   };
+
+  if (APP._ragFromPDF || APP._refBookSource) {
+    body.temperature = 0;
+  }
 
   try {
     const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -239,6 +247,10 @@ async function callOpenRouter(q, mode, onChunk, onDone, onError) {
       { role: 'user',   content: q }
     ]
   };
+
+  if (APP._ragFromPDF || APP._refBookSource) {
+    body.temperature = 0;
+  }
 
   try {
     const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {

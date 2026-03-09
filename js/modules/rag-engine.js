@@ -365,12 +365,11 @@ async function buildRAGContext(query) {
     ctx += '════════════════════════════════════════\n';
     ctx += 'CRITICAL INSTRUCTION: The following passages were retrieved from the user\'s uploaded study materials (PDFs).\n';
     ctx += 'These documents are the student\'s primary textbooks — treat them as AUTHORITATIVE sources.\n';
-    ctx += '1. If a passage directly answers the question, use it as your PRIMARY answer source — quote verbatim when appropriate.\n';
-    ctx += '2. Reproduce ALL formulas, equations, and numerical values EXACTLY as they appear in the passages.\n';
-    ctx += '3. Cite the document name and passage number for every fact used.\n';
-    ctx += '4. If passages conflict with your training data, PREFER the passage content and note the discrepancy.\n';
-    ctx += '5. For calculation questions, use constants and methods from the passages first.\n';
-    ctx += '6. After using passage content, supplement with your broader marine engineering knowledge if needed.\n\n';
+    ctx += '1. You are a strict data extraction system.\n';
+    ctx += '2. You MUST answer the user\'s question USING ONLY the provided excerpts from these documents.\n';
+    ctx += '3. DO NOT use any outside marine engineering knowledge. DO NOT infer or guess.\n';
+    ctx += '4. If the answer cannot be found in the exact text provided below, you MUST reply verbatim: "I cannot find the exact answer to this in the uploaded documents."\n';
+    ctx += '5. Quote the text and reproduce formulas exactly where possible.\n\n';
 
     results.forEach(function(r, i) {
       ctx += '[Passage ' + (i + 1) + ' from "' + r.chunk.docName + '"]\n';

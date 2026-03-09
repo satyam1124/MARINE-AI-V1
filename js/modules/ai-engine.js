@@ -234,26 +234,33 @@ function clearTimer() {
 async function askStream(q, mode, t0) {
   const maxTokens = { fast: 700, bal: 1400, deep: 3000 }[mode] || 1400;
 
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': APP.apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
-      'accept': 'text/event-stream'
-    },
-    body: JSON.stringify({
+    const payload = {
       model: MODELS[mode].id,
       max_tokens: maxTokens,
       stream: true,
       system: buildSystemPrompt(mode, q),
       messages: [
-        ...APP.chatHistory.slice(-6),  // last 3 Q&A pairs
+        ...APP.chatHistory.slice(-6),
         { role: 'user', content: q }
       ]
-    })
-  });
+    };
+
+    // Ironclad constraint: force zero hallucination when citing specific texts
+    if (APP._ragFromPDF || APP._refBookSource) {
+      payload.temperature = 0;
+    }
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': APP.apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+        'accept': 'text/event-stream'
+      },
+      body: JSON.stringify(payload)
+    });
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
@@ -336,6 +343,21 @@ async function askStream(q, mode, t0) {
 
 /* ─────────── LIVE WEB SEARCH (SONNET + TOOL USE) ─────────── */
 async function askLive(q, t0) {
+  const payload = {
+    model: MODELS.live.id,
+    max_tokens: 1400,
+    system: buildSystemPrompt('live'),
+    tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+    messages: [
+      ...APP.chatHistory.slice(-6),
+      { role: 'user', content: q }
+    ]
+  };
+
+  if (APP._ragFromPDF || APP._refBookSource) {
+    payload.temperature = 0;
+  }
+
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -344,16 +366,7 @@ async function askLive(q, t0) {
       'anthropic-version': '2023-06-01',
       'anthropic-dangerous-direct-browser-access': 'true'
     },
-    body: JSON.stringify({
-      model: MODELS.live.id,
-      max_tokens: 1400,
-      system: buildSystemPrompt('live'),
-      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-      messages: [
-        ...APP.chatHistory.slice(-6),
-        { role: 'user', content: q }
-      ]
-    })
+    body: JSON.stringify(payload)
   });
 
   if (!res.ok) {

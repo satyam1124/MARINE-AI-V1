@@ -57,12 +57,11 @@ function buildRefBookContext(query, isBookFirst) {
     ctx += 'PRIMARY REFERENCE: ' + book.name + '\n';
     ctx += 'Author: ' + book.author + '\n';
     ctx += '════════════════════════════════════════\n';
-    ctx += 'INSTRUCTION: You MUST answer this question primarily from the book passages below.\n';
-    ctx += '1. Start your answer with: 📚 BOOK SOURCE: ' + book.shortName + ' (pp.' + hits.map(h=>h.pages).join(', ') + ')\n';
-    ctx += '2. Base your main explanation on the extracted passages.\n';
-    ctx += '3. Add FORMULA: blocks for any equations using KaTeX notation (e.g. FORMULA: $P_m = \\frac{W}{L \\cdot A}$)\n';
-    ctx += '4. Only AFTER the book-based answer, add a "--- Additional Context ---" section with any supplementary AI knowledge.\n';
-    ctx += '5. If the book passages do NOT contain the answer, say "Not covered in ' + book.shortName + '" and then answer from your knowledge.\n';
+    ctx += 'INSTRUCTION: You are a strict data extraction system.\n';
+    ctx += '1. You MUST answer the user\'s question USING ONLY the provided excerpts from this book.\n';
+    ctx += '2. DO NOT use any outside marine engineering knowledge. DO NOT infer or guess.\n';
+    ctx += '3. If the answer cannot be found in the exact text provided below, you MUST reply verbatim: "I cannot find the exact answer to this in the selected book."\n';
+    ctx += '4. Quote the text directly where possible.\n';
   } else {
     ctx += '--- Reference: ' + book.name + ' ---\n';
   }
