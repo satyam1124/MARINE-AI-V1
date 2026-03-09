@@ -60,9 +60,9 @@ function buildRefBookContext(query, isBookFirst) {
   if (!hits.length) {
     let emptyCtx = '\n\n════════════════════════════════════════\n';
     emptyCtx += 'PRIMARY REFERENCE: ' + book.name + '\n';
-    emptyCtx += 'INSTRUCTION: The user wants an answer from this book, but no relevant passages were found in the index.\n';
-    emptyCtx += '1. Start your answer by saying "I searched *' + book.shortName + '* but this topic is not covered in the indexed passages."\n';
-    emptyCtx += '2. Then, provide the answer using your general marine engineering knowledge.\n';
+    emptyCtx += 'CRITICAL INSTRUCTION: The user asked a question, but NO relevant passages exist in the selected book.\n';
+    emptyCtx += 'You are strictly forbidden from using your general knowledge to answer this.\n';
+    emptyCtx += 'You MUST reply ONLY with: "I searched *' + book.shortName + '* but this topic is not covered in the indexed passages."\n';
     return { text: emptyCtx, source: book.shortName + ' (No matches found)', mode: isBookFirst ? 'Book First' : 'AI + Book' };
   }
 

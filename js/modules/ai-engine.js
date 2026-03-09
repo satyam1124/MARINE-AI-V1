@@ -147,8 +147,7 @@ RESPOND WITH:
 - Never invent specifications or regulation numbers
 
 ${examInstr}
-${depthInstr}${refCtx}${diagCtx}${miCtx}
-
+${depthInstr}${diagCtx}${miCtx}
 STRUCTURED ANSWER FORMAT:
 Organise your answer with clear sections using **bold headers**.
 For technical questions, use this structure when appropriate:
@@ -159,6 +158,8 @@ For technical questions, use this structure when appropriate:
 5. **Key Points to Remember** — bullet list of exam-critical facts
 6. NOTE: for cautions, EXAM TIP: for exam advice
 Always define variables after formulas (e.g. "where P = pressure (bar), T = temperature (K)").
+
+${refCtx}
 ${APP._ragContext || ''}`;
 }
 
