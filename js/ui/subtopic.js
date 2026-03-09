@@ -148,8 +148,8 @@ function loadSubtopicContent(parentId, subtopicId, title, desc){
    ══════════════════════════════════════════════════════════ */
 (function improveDeepResearch(){
   const _origBSP = buildSystemPrompt;
-  buildSystemPrompt = function(mode){
-    const base = _origBSP(mode);
+  buildSystemPrompt = function(mode, query){
+    const base = _origBSP(mode, query);
     if(mode !== 'deep') return base;
     // Replace the deep instruction with genuinely comprehensive one
     return base.replace(
