@@ -7,7 +7,7 @@ const INTERVIEW_COMPANIES = {
 
   anglo: {
     id: 'anglo', name: 'Anglo Eastern Ship Management', shortName: 'Anglo Eastern',
-    icon: '<img src="https://logo.clearbit.com/angloeastern.com" class="company-logo-img" onerror="this.onerror=null; this.src=\'https://icon.horse/icon/angloeastern.com\'">', color: '#1e40af', hq: 'Hong Kong', fleetSize: '600+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=angloeastern.com&sz=128" class="company-logo-img" alt="angloeastern">', color: '#1e40af', hq: 'Hong Kong', fleetSize: '600+ vessels',
     vesselTypes: ['Bulk Carriers', 'Tankers', 'Container Ships', 'Gas Carriers', 'Offshore'],
     difficulty: 8, website: 'https://www.angloeastern.com',
     companyKnowledge: {
@@ -51,7 +51,7 @@ const INTERVIEW_COMPANIES = {
 
   msc: {
     id: 'msc', name: 'MSC Ship Management', shortName: 'MSC',
-    icon: '<img src="https://logo.clearbit.com/msc.com" class="company-logo-img" onerror="this.onerror=null; this.src=\'https://icon.horse/icon/msc.com\'">', color: '#ca8a04', hq: 'Geneva, Switzerland', fleetSize: '800+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=msc.com&sz=128" class="company-logo-img" alt="msc">', color: '#ca8a04', hq: 'Geneva, Switzerland', fleetSize: '800+ vessels',
     vesselTypes: ['Container Ships', 'Cruise Ships', 'Tankers', 'Bulk Carriers'],
     difficulty: 7, website: 'https://www.msc.com',
     companyKnowledge: {
@@ -91,7 +91,7 @@ const INTERVIEW_COMPANIES = {
 
   maersk: {
     id: 'maersk', name: 'A.P. Moller-Maersk', shortName: 'Maersk',
-    icon: '<img src="https://logo.clearbit.com/maersk.com" class="company-logo-img" onerror="this.onerror=null; this.src=\'https://icon.horse/icon/maersk.com\'">', color: '#0ea5e9', hq: 'Copenhagen, Denmark', fleetSize: '700+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=maersk.com&sz=128" class="company-logo-img" alt="maersk">', color: '#0ea5e9', hq: 'Copenhagen, Denmark', fleetSize: '700+ vessels',
     vesselTypes: ['Container Ships', 'Tankers', 'Supply Vessels', 'Tugboats'],
     difficulty: 9, website: 'https://www.maersk.com',
     companyKnowledge: {
@@ -126,7 +126,7 @@ const INTERVIEW_COMPANIES = {
 
   bsm: {
     id: 'bsm', name: 'Bernhard Schulte Shipmanagement', shortName: 'BSM',
-    icon: '<img src="https://logo.clearbit.com/bs-shipmanagement.com" class="company-logo-img" onerror="this.onerror=null; this.src=\'https://icon.horse/icon/bs-shipmanagement.com\'">', color: '#16a34a', hq: 'Hamburg / Singapore', fleetSize: '600+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=bs-shipmanagement.com&sz=128" class="company-logo-img" alt="bs-shipmanagement">', color: '#16a34a', hq: 'Hamburg / Singapore', fleetSize: '600+ vessels',
     vesselTypes: ['Container Ships', 'Bulk Carriers', 'Tankers', 'LNG Carriers', 'Cruise Ships'],
     difficulty: 6, website: 'https://www.bs-shipmanagement.com',
     companyKnowledge: {
@@ -163,7 +163,7 @@ const INTERVIEW_COMPANIES = {
 
   synergy: {
     id: 'synergy', name: 'Synergy Marine Group', shortName: 'Synergy',
-    icon: '<img src="https://logo.clearbit.com/synergymarinegroup.com" class="company-logo-img" onerror="this.onerror=null; this.src=\'https://icon.horse/icon/synergymarinegroup.com\'">', color: '#dc2626', hq: 'Singapore', fleetSize: '400+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=synergymarinegroup.com&sz=128" class="company-logo-img" alt="synergymarinegroup">', color: '#dc2626', hq: 'Singapore', fleetSize: '400+ vessels',
     vesselTypes: ['Bulk Carriers', 'Tankers', 'Container Ships', 'Gas Carriers'],
     difficulty: 7, website: 'https://www.synergymarinegroup.com',
     companyKnowledge: {
@@ -203,7 +203,7 @@ const INTERVIEW_COMPANIES = {
 
   vships: {
     id: 'vships', name: 'V.Ships / V.Group', shortName: 'V.Ships',
-    icon: '<img src="https://logo.clearbit.com/vgrouplimited.com" class="company-logo-img" onerror="this.onerror=null; this.src=\'https://icon.horse/icon/vgrouplimited.com\'">', color: '#7c3aed', hq: 'Monaco', fleetSize: '1000+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=vgrouplimited.com&sz=128" class="company-logo-img" alt="vgrouplimited">', color: '#7c3aed', hq: 'Monaco', fleetSize: '1000+ vessels',
     vesselTypes: ['Tankers', 'Bulk Carriers', 'Container Ships', 'Offshore', 'Cruise'],
     difficulty: 7, website: 'https://www.vgrouplimited.com',
     companyKnowledge: {
@@ -241,7 +241,7 @@ const INTERVIEW_COMPANIES = {
 
   thome: {
     id: 'thome', name: 'Thome Fleet Management', shortName: 'Thome',
-    icon: '<img src="https://logo.clearbit.com/osmthome.com" class="company-logo-img" onerror="this.onerror=null; this.src=\'https://icon.horse/icon/osmthome.com\'">', color: '#92400e', hq: 'Singapore', fleetSize: '300+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=osmthome.com&sz=128" class="company-logo-img" alt="osmthome">', color: '#92400e', hq: 'Singapore', fleetSize: '300+ vessels',
     vesselTypes: ['Tankers', 'Bulk Carriers', 'Container Ships', 'Gas Carriers'],
     difficulty: 6, website: 'https://www.thome.com.sg',
     companyKnowledge: {
@@ -277,7 +277,7 @@ const INTERVIEW_COMPANIES = {
 
   wallem: {
     id: 'wallem', name: 'Wallem Group', shortName: 'Wallem',
-    icon: '<img src="https://logo.clearbit.com/wallem.com" class="company-logo-img" onerror="this.onerror=null; this.src=\'https://icon.horse/icon/wallem.com\'">', color: '#475569', hq: 'Hong Kong', fleetSize: '200+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=wallem.com&sz=128" class="company-logo-img" alt="wallem">', color: '#475569', hq: 'Hong Kong', fleetSize: '200+ vessels',
     vesselTypes: ['Tankers', 'Bulk Carriers', 'Container Ships', 'Gas Carriers'],
     difficulty: 8, website: 'https://www.wallem.com',
     companyKnowledge: {

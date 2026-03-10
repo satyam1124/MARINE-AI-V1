@@ -124,14 +124,16 @@
   margin-bottom: 1rem;
 }
 .company-card-icon {
-  font-size: 2rem;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(56,189,248,0.1);
-  border-radius: 12px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.08);
+  overflow: hidden;
 }
 .company-card-name {
   font-size: 1.05rem;
@@ -143,10 +145,11 @@
   color: var(--tx3, #94a3b8);
 }
 .company-logo-img {
-  width: 100%;
-  height: 100%;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 4px;
+  display: block;
 }
 .company-card-meta {
   display: flex;
