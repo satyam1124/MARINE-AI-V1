@@ -7,7 +7,7 @@
 
   shell: {
     id: 'shell', name: 'Shell International Shipping Services', shortName: 'Shell SISS',
-    icon: '<img src="assets/logos/shell.png" class="company-logo-img">', color: '#f59e0b', hq: 'London / The Hague', fleetSize: '2000+ daily vessels',
+    icon: '<img src="https://logo.clearbit.com/shell.com" class="company-logo-img" onerror="this.onerror=null; this.src='https://icon.horse/icon/shell.com'">', color: '#f59e0b', hq: 'London / The Hague', fleetSize: '2000+ daily vessels',
     vesselTypes: ['LNG Carriers', 'Oil Tankers', 'Chemical Tankers', 'FPSOs', 'FSRUs'],
     difficulty: 9, website: 'https://www.shell.com/business-customers/shipping',
     companyKnowledge: {
@@ -44,7 +44,7 @@
 
   torm: {
     id: 'torm', name: 'TORM A/S', shortName: 'Torm',
-    icon: '<img src="assets/logos/torm.png" class="company-logo-img">', color: '#0369a1', hq: 'Copenhagen, Denmark', fleetSize: '90+ product tankers',
+    icon: '<img src="https://logo.clearbit.com/torm.com" class="company-logo-img" onerror="this.onerror=null; this.src='https://icon.horse/icon/torm.com'">', color: '#0369a1', hq: 'Copenhagen, Denmark', fleetSize: '90+ product tankers',
     vesselTypes: ['Product Tankers (LR2, LR1, MR)'],
     difficulty: 6, website: 'https://www.torm.com',
     companyKnowledge: {
@@ -80,7 +80,7 @@
 
   scorpio: {
     id: 'scorpio', name: 'Scorpio Group', shortName: 'Scorpio',
-    icon: '<img src="assets/logos/scorpio.png" class="company-logo-img">', color: '#b91c1c', hq: 'Monaco', fleetSize: '90+ tankers',
+    icon: '<img src="https://logo.clearbit.com/scorpiogroup.net" class="company-logo-img" onerror="this.onerror=null; this.src='https://icon.horse/icon/scorpiogroup.net'">', color: '#b91c1c', hq: 'Monaco', fleetSize: '90+ tankers',
     vesselTypes: ['Product Tankers (LR2, MR, Handymax)'],
     difficulty: 7, website: 'https://www.scorpiogroup.net',
     companyKnowledge: {
@@ -114,7 +114,7 @@
 
   kline: {
     id: 'kline', name: 'Kawasaki Kisen Kaisha', shortName: 'K-Line',
-    icon: '<img src="assets/logos/kline.png" class="company-logo-img">', color: '#dc2626', hq: 'Tokyo, Japan', fleetSize: '448 vessels',
+    icon: '<img src="https://logo.clearbit.com/kline.co.jp" class="company-logo-img" onerror="this.onerror=null; this.src='https://icon.horse/icon/kline.co.jp'">', color: '#dc2626', hq: 'Tokyo, Japan', fleetSize: '448 vessels',
     vesselTypes: ['Car Carriers', 'Bulk Carriers', 'LNG Carriers', 'Tankers'],
     difficulty: 7, website: 'https://www.kline.co.jp',
     companyKnowledge: {
@@ -149,7 +149,7 @@
 
   nyk: {
     id: 'nyk', name: 'Nippon Yusen Kabushiki Kaisha', shortName: 'NYK Line',
-    icon: '<img src="assets/logos/nyk.png" class="company-logo-img">', color: '#1d4ed8', hq: 'Tokyo, Japan', fleetSize: '800+ vessels',
+    icon: '<img src="https://logo.clearbit.com/nyk.com" class="company-logo-img" onerror="this.onerror=null; this.src='https://icon.horse/icon/nyk.com'">', color: '#1d4ed8', hq: 'Tokyo, Japan', fleetSize: '800+ vessels',
     vesselTypes: ['Car Carriers (RORO)', 'LNG Carriers', 'Bulk Carriers', 'Tankers', 'Container Ships', 'Cruise'],
     difficulty: 8, website: 'https://www.nyk.com',
     companyKnowledge: {
@@ -185,7 +185,7 @@
 
   mol: {
     id: 'mol', name: 'Mitsui O.S.K. Lines', shortName: 'MOL',
-    icon: '<img src="assets/logos/mol.png" class="company-logo-img">', color: '#ea580c', hq: 'Tokyo, Japan', fleetSize: '800+ vessels',
+    icon: '<img src="https://logo.clearbit.com/mol.co.jp" class="company-logo-img" onerror="this.onerror=null; this.src='https://icon.horse/icon/mol.co.jp'">', color: '#ea580c', hq: 'Tokyo, Japan', fleetSize: '800+ vessels',
     vesselTypes: ['Dry Bulk', 'LNG Carriers', 'Car Carriers', 'Tankers', 'Container Ships', 'Cruise', 'FPSOs'],
     difficulty: 8, website: 'https://www.mol.co.jp',
     companyKnowledge: {
@@ -221,7 +221,7 @@
 
   andromeda: {
     id: 'andromeda', name: 'International Andromeda Shipping', shortName: 'Andromeda',
-    icon: '<img src="assets/logos/andromeda.png" class="company-logo-img">', color: '#6366f1', hq: 'Monaco / Mumbai', fleetSize: '30+ tankers & FSOs',
+    icon: '<img src="https://logo.clearbit.com/andromeda-shipping.com" class="company-logo-img" onerror="this.onerror=null; this.src='https://icon.horse/icon/andromeda-shipping.com'">', color: '#6366f1', hq: 'Monaco / Mumbai', fleetSize: '30+ tankers & FSOs',
     vesselTypes: ['Product Tankers', 'MR Tankers', 'LR2 Tankers', 'LPG Carriers', 'FSOs'],
     difficulty: 8, website: 'https://www.andromeda-shipping.com',
     companyKnowledge: {
@@ -256,7 +256,7 @@
 
   eastaway: {
     id: 'eastaway', name: 'Eastaway Ship Management', shortName: 'Eastaway',
-    icon: '<img src="assets/logos/eastaway.png" class="company-logo-img">', color: '#059669', hq: 'Singapore / Mumbai', fleetSize: '50+ container ships',
+    icon: '<img src="https://logo.clearbit.com/eastaway.com" class="company-logo-img" onerror="this.onerror=null; this.src='https://icon.horse/icon/eastaway.com'">', color: '#059669', hq: 'Singapore / Mumbai', fleetSize: '50+ container ships',
     vesselTypes: ['Container Ships (700 TEU to 7000 TEU)'],
     difficulty: 6, website: 'https://www.eastaway.com',
     companyKnowledge: {
