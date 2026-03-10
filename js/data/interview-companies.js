@@ -7,7 +7,7 @@ const INTERVIEW_COMPANIES = {
 
   anglo: {
     id: 'anglo', name: 'Anglo Eastern Ship Management', shortName: 'Anglo Eastern',
-    icon: '<img src="https://upload.wikimedia.org/wikipedia/en/8/87/Anglo-Eastern_Univan_Group_logo.svg" class="company-logo-img" style="background:white;padding:4px;border-radius:8px;object-fit:contain" alt="anglo-eastern">', color: '#10b981', hq: 'Hong Kong', fleetSize: '700+ vessels, 4.4M TEU capacity',
+    icon: '<img src="css/img/anglo-logo.png" class="company-logo-img" style="background:white;padding:4px;border-radius:8px;object-fit:contain" alt="anglo-eastern">', color: '#10b981', hq: 'Hong Kong', fleetSize: '700+ vessels, 4.4M TEU capacity',
     vesselTypes: ['Bulk Carriers', 'Tankers', 'Container Ships', 'Gas Carriers', 'Offshore'],
     difficulty: 8, website: 'https://www.angloeastern.com',
     companyKnowledge: {
