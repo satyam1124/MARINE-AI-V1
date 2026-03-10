@@ -142,6 +142,12 @@
   font-size: 0.75rem;
   color: var(--tx3, #94a3b8);
 }
+.company-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
 .company-card-meta {
   display: flex;
   gap: 0.8rem;
@@ -867,16 +873,52 @@
 /* ─── Mobile Responsive ─── */
 @media (max-width: 768px) {
   .interview-page { padding: 1rem; }
-  .company-grid { grid-template-columns: 1fr; }
-  .interview-modes { flex-direction: column; align-items: center; }
-  .interview-mode-card { width: 100%; max-width: 300px; }
-  .cbt-topbar { flex-wrap: wrap; gap: 0.5rem; }
+  .company-grid { 
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); 
+    gap: 1rem;
+  }
+  .interview-modes { flex-direction: column; align-items: stretch; gap: 0.8rem; }
+  .interview-mode-card { width: 100%; max-width: 100%; padding: 1.2rem; display: flex; align-items: center; text-align: left; gap: 1rem; }
+  .interview-mode-card .mode-icon { margin-bottom: 0; font-size: 2rem; }
+  
+  .company-detail-banner { padding: 1.5rem; text-align: center; }
+  .company-detail-banner > div { flex-direction: column; text-align: center; }
+  .selection-timeline { flex-direction: column; gap: 1rem; }
+  .timeline-step::after { display: none; }
+  .timeline-step { min-width: 100%; }
+  
+  .cbt-topbar { flex-wrap: wrap; gap: 0.5rem; justify-content: center; text-align: center; }
   .cbt-question-card { padding: 1.2rem; }
+  .cbt-options { gap: 0.6rem; }
+  .cbt-option { padding: 0.8rem 1rem; }
+  .cbt-nav-buttons { flex-direction: column; align-items: stretch; }
+  .cbt-nav-btn { width: 100%; }
+  
+  .results-cards { grid-template-columns: 1fr 1fr; }
+  .category-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .category-name { width: 100%; }
+  .category-bar-wrap { width: 100%; }
+  .category-score { text-align: left; width: 100%; margin-top: 0.2rem; }
+  
+  .company-actions { flex-direction: column; }
+  .company-action-btn { width: 100%; justify-content: center; }
+  
+  /* Make the 2-column info grids stack */
+  div[style*="display:grid;grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .interview-header h2 { font-size: 1.5rem; }
+  .company-card-header { align-items: flex-start; }
+  .company-card-icon { width: 40px; height: 40px; }
+  .company-card-name { font-size: 0.95rem; }
+  .company-card { padding: 1.2rem; }
+  .results-status { font-size: 2.5rem; }
+  .results-score { font-size: 2rem; }
+  .results-cards { grid-template-columns: 1fr; }
   .cbt-question-text { font-size: 1rem; }
-  .timeline-step { flex: 1 1 100%; }
-  .results-cards { grid-template-columns: repeat(2, 1fr); }
   .category-name { width: 100px; font-size: 0.75rem; }
   .interview-msg { max-width: 90%; }
-  .selection-timeline { flex-direction: column; }
-  .timeline-step::after { content: '↓'; right: auto; left: 15px; bottom: -8px; top: auto; }
 }
