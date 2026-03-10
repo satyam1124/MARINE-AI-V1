@@ -16,7 +16,20 @@
       keyFacts: ['World\'s largest charterer of oil tonnage','~25% of global LNG carriers linked to Shell','2000+ vessels associated with Shell operations daily','Built the Vulcanus — world\'s first diesel-powered ocean ship (1910)','Manages the Suiso Frontier — world\'s first liquefied hydrogen carrier','Shell Maritime Technologies is a dedicated R&D center','Over $1 billion annual R&D spend'],
       innovation: 'Pioneered the world\'s first ocean-going diesel ship (Vulcanus, 1910). Built Agnita — world\'s first purpose-built LPG carrier (1930). Manages Suiso Frontier — first liquefied hydrogen carrier. Developed JAWS (Just Add Water System) for draft/trim optimization — 50% CO2 reduction vs 2008 steam turbines. Dual-fuel X-DF engines on new LNG carriers.',
       sustainability: 'Net-zero by 2050. New LNG carriers are 35% more efficient than EEDI requirements. Air lubrication systems on vessels. Collaborating with MSC and MOL for zero-emission fuels. Shell Marine Sensor Service (SMSS) for real-time equipment monitoring.',
-      impressInterviewer: ['Know about the Vulcanus — world\'s first diesel ocean vessel','Mention JAWS system for draft optimization','Reference their massive LNG fleet (25% of global)','Discuss the Suiso Frontier hydrogen carrier project','Know they are the world\'s largest oil tonnage charterer']
+      impressInterviewer: ['Know about the Vulcanus — world\'s first diesel ocean vessel','Mention JAWS system for draft optimization','Reference their massive LNG fleet (25% of global)','Discuss the Suiso Frontier hydrogen carrier project','Know they are the world\'s largest oil tonnage charterer'],
+      officialLinks: { main: 'https://www.shell.com', shipping: 'https://www.shell.com/business-customers/shipping', careers: 'https://www.shell.com/careers' },
+      subsidiaries: [
+        { name: 'Shell International Shipping Services (SISS)', location: 'London, UK', role: 'Core shipping management — LNG, crude oil, chemical tankers' },
+        { name: 'Shell Maritime Technologies', location: 'The Hague, Netherlands', role: 'Dedicated maritime R&D centre — $1B+ annual R&D' },
+        { name: 'Shell Cadetship Programme', location: 'UK', role: 'Nautical Sciences + Marine Engineering Foundation Degrees (fully sponsored)' }
+      ],
+      namedVessels: [
+        { name: 'Murex', type: 'Oil tanker', highlight: 'First oil tanker to transit the Suez Canal for bulk oil transport (1892)' },
+        { name: 'Vulcanus', type: 'Diesel-powered ship', highlight: 'World\'s first ocean-going diesel-powered vessel (1910)' },
+        { name: 'Suiso Frontier', type: 'Liquefied hydrogen carrier', highlight: 'World\'s first liquefied hydrogen carrier — technically managed by Shell' },
+        { name: 'Agnita', type: 'LPG carrier', highlight: 'World\'s first purpose-built LPG carrier (1930)' },
+        { name: 'Orion Hugo', type: 'LNG carrier', highlight: 'Latest addition to 24-sister LNG fleet rejuvenation program (Aug 2025)' }
+      ]
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply through Shell careers — select Shipping/Maritime' },
@@ -53,7 +66,13 @@
       keyFacts: ['Founded 1889 — over 135 years of maritime history','3rd largest product tanker operator globally','~90 owned/operated vessels (LR2, LR1, MR classes)','Listed on Nasdaq Copenhagen and NASDAQ New York','First Danish shipping company to sign UN Global Compact','Specializes in refined oil products: gasoline, jet fuel, naphtha, diesel'],
       innovation: '"One Torm" integrated business model for operational efficiency. Ownership stake in ME Production (green marine equipment). Advanced hull designs for reduced fuel consumption. Member of Mærsk Mc-Kinney Møller Center for Zero Carbon Shipping.',
       sustainability: '40% carbon intensity reduction target by 2025 (achieved 39.6% by 2023). Zero CO2 fleet emissions by 2050. Wastewater treatment on older vessels. SASB and TCFD sustainability reporting.',
-      impressInterviewer: ['Know they are the 3rd largest product tanker operator','Mention their 135+ year heritage since 1889','Reference the "One Torm" integrated business model','Discuss their near-achievement of 40% carbon reduction target']
+      impressInterviewer: ['Know they are the 3rd largest product tanker operator','Mention their 135+ year heritage since 1889','Reference the One Torm integrated business model','Discuss their near-achievement of 40% carbon reduction target'],
+      officialLinks: { main: 'https://www.torm.com', careers: 'https://www.torm.com/careers' },
+      subsidiaries: [
+        { name: 'TORM A/S', location: 'Copenhagen, Denmark', role: 'Headquarters — product tanker operations' },
+        { name: 'ME Production A/S', location: 'Denmark', role: 'Marine Engineering — green marine equipment development' },
+        { name: 'TORM Foundation', location: 'Denmark', role: 'Supports maritime education in India and Philippines' }
+      ]
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply via Torm careers page' },
@@ -80,7 +99,7 @@
 
   scorpio: {
     id: 'scorpio', name: 'Scorpio Group', shortName: 'Scorpio',
-    icon: '<img src="https://www.google.com/s2/favicons?domain=scorpiogroup.net&sz=128" class="company-logo-img" alt="scorpiogroup">', color: '#b91c1c', hq: 'Monaco', fleetSize: '90+ tankers',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=scorpiomarine.co.in&sz=128" class="company-logo-img" alt="scorpiogroup">', color: '#b91c1c', hq: 'Monaco', fleetSize: '90+ tankers',
     vesselTypes: ['Product Tankers (LR2, MR, Handymax)'],
     difficulty: 7, website: 'https://www.scorpiogroup.net',
     companyKnowledge: {
@@ -89,7 +108,14 @@
       keyFacts: ['70+ years of combined industry experience','Founder Glauco Lolli-Ghetti was a double-hull pioneer (27 years before regulation)','~90 product tankers — one of the youngest fleets (avg age ~10 years)','Listed on NYSE (Scorpio Tankers: STNG)','Founding member of IMPA Maritime Environmental Footprint Initiative','Fleet 100% equipped with ballast water management systems','Near-100% reduction in single-use plastics on vessels (2023)'],
       innovation: 'FOWE™ fuel-saving devices installed fleet-wide. Nearly 90% fleet equipped with exhaust gas scrubbers. High-frequency real-time data collection for performance optimization. Pioneered the shift from dry bulk to offshore wind (Scorpio Bulkers → wind turbine installation).',
       sustainability: '40% carbon intensity reduction by 2030 target (30% achieved). 100% ballast water management systems. Near-zero single-use plastics. Proactive hull and engine maintenance for fuel efficiency. Support for Mercy Ships humanitarian initiative.',
-      impressInterviewer: ['Mention founder\'s double-hull innovation 27 years before regulation','Know about FOWE™ fuel-saving technology','Reference their Mercy Ships humanitarian support','Discuss the Scorpio Bulkers to offshore wind pivot']
+      impressInterviewer: ['Mention founder\'s double-hull innovation 27 years before regulation','Know about FOWE™ fuel-saving technology','Reference their Mercy Ships humanitarian support','Discuss the Scorpio Bulkers to offshore wind pivot'],
+      officialLinks: { main: 'https://www.scorpiogroup.net', india: 'https://www.scorpiomarine.co.in', tankers: 'https://www.scorpiotankers.com' },
+      subsidiaries: [
+        { name: 'Scorpio Group', location: 'Monaco (HQ)', role: 'Parent holding company — shipping and offshore' },
+        { name: 'Scorpio Tankers Inc. (NYSE: STNG)', location: 'Monaco', role: 'Publicly traded product tanker company' },
+        { name: 'Scorpio Marine Management (India) Pvt Ltd', location: 'Mumbai, India', role: 'Technical, crewing, and operational services (est. 2009)', website: 'https://www.scorpiomarine.co.in' },
+        { name: 'Scorpio Ship Management SAM', location: 'Monaco', role: 'Global ship management since 1971' }
+      ]
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply via Scorpio Group website' },
@@ -114,7 +140,7 @@
 
   kline: {
     id: 'kline', name: 'Kawasaki Kisen Kaisha', shortName: 'K-Line',
-    icon: '<img src="https://www.google.com/s2/favicons?domain=kline.co.jp&sz=128" class="company-logo-img" alt="kline">', color: '#dc2626', hq: 'Tokyo, Japan', fleetSize: '448 vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=kline.co.in&sz=128" class="company-logo-img" alt="kline">', color: '#dc2626', hq: 'Tokyo, Japan', fleetSize: '448 vessels',
     vesselTypes: ['Car Carriers', 'Bulk Carriers', 'LNG Carriers', 'Tankers'],
     difficulty: 7, website: 'https://www.kline.co.jp',
     companyKnowledge: {
@@ -123,7 +149,19 @@
       keyFacts: ['Deployed Japan\'s first Pure Car Carrier (TOYOTA MARU No.10) in 1970','~448 vessels as of March 2025','Operates 50 LNG carriers','One of the "Big 3" Japanese shipping companies','Co-founder of ONE (Ocean Network Express) for container shipping','First Japanese company to establish intermodal Double-Stack Train transport (1986)','Transports 3+ million vehicles annually'],
       innovation: 'Japan\'s first PCC (1970). First Japanese Double-Stack Train intermodal transport (1986). Exploring Seawing automated kite systems for wind propulsion. LNG-fueled car carriers (Oceanus Highway, Tethys Highway). AI/IoT for vessel operations. Liquefied CO2 carrier design. CO2 capture demonstration plants.',
       sustainability: 'Environmental Vision 2050: net-zero GHG by 2050. "DRIVE GREEN NETWORK" environmental management system. Marine biofuel trials on bulk carriers. Getting to Zero Coalition member. Beach cleanups and plastic cap collection programs.',
-      impressInterviewer: ['Know they are one of Japan\'s Big 3 shipping companies','Mention the first Pure Car Carrier (1970)','Reference ONE — the container shipping joint venture','Discuss Seawing kite technology and CO2 carrier concepts','Know the Environmental Vision 2050']
+      impressInterviewer: ['Know they are one of Japan\'s Big 3 shipping companies','Mention the first Pure Car Carrier (1970)','Reference ONE — the container shipping joint venture','Discuss Seawing kite technology and CO2 carrier concepts','Know the Environmental Vision 2050'],
+      officialLinks: { main: 'https://www.kline.co.jp', india: 'https://www.kline.co.in', one: 'https://www.one-line.com' },
+      subsidiaries: [
+        { name: 'K Line Ship Management (Singapore)', location: 'Singapore', role: 'Ship management operations for Asia region' },
+        { name: 'K Line (India) Pvt Ltd', location: 'India', role: 'Indian operations and crew management', website: 'https://www.kline.co.in' },
+        { name: 'Ocean Network Express (ONE)', location: 'Singapore', role: 'Container shipping JV with MOL and NYK (est. 2017)', website: 'https://www.one-line.com' },
+        { name: 'International Transportation Service', location: 'Long Beach, USA', role: 'Container terminal company (est. 1971)' }
+      ],
+      namedVessels: [
+        { name: 'Toyota Maru No. 10', type: 'Pure Car Carrier', highlight: 'Japan\'s first pure car carrier (1970)' },
+        { name: 'Oceanus Highway', type: 'LNG-fueled car carrier', highlight: 'Next-generation LNG-powered vehicle carrier' },
+        { name: 'Tethys Highway', type: 'LNG-fueled car carrier', highlight: 'LNG dual-fuel car carrier for green transport' }
+      ]
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply via K-Line global careers' },
@@ -158,7 +196,21 @@
       keyFacts: ['Founded 1885 — nearly 140 years of maritime history','World\'s largest RORO/car carrier operator (100+ PCCs/PCTCs)','800+ vessels in fleet','91 LNG carriers (expanding to 130 by 2028)','16% of global car transportation fleet capacity','Co-founder of ONE — world\'s 6th largest container line','Launched world\'s first LNG-fueled car carriers'],
       innovation: 'World\'s first LNG-fueled car carriers. DFFAS autonomous ship project. IoT/big data for remote monitoring and predictive maintenance. Ammonia-fuel ready LNG vessel designs. Digital twin technology for fleet management.',
       sustainability: '"Sail GREEN" project for vehicle logistics emissions. Net-zero GHG by 2050. LNG as bridge fuel strategy. Exploring methanol, biofuels, ammonia. Green ship recycling. Marine biodiversity conservation.',
-      impressInterviewer: ['Know they are the world\'s #1 RORO operator','Mention DFFAS autonomous ship project','Reference their massive LNG carrier expansion plans','Discuss Sail GREEN sustainability project']
+      impressInterviewer: ['Know they are the world\'s #1 RORO operator','Mention DFFAS autonomous ship project','Reference their massive LNG carrier expansion plans','Discuss Sail GREEN sustainability project'],
+      officialLinks: { main: 'https://www.nyk.com/english/', shipmanagement: 'https://www.nyksm.com.sg', careers: 'https://www.nyk.com/english/csr/' },
+      subsidiaries: [
+        { name: 'NYK Shipmanagement (NYKSM)', location: 'Singapore', role: 'In-house ship management — 125+ vessels technical management, 200+ crewing (est. 2001)', website: 'https://www.nyksm.com.sg' },
+        { name: 'NYK-Fil Ship Management (NFSM)', location: 'Philippines', role: 'Filipino crew management operations' },
+        { name: 'NYK Europe Ltd', location: 'London, UK', role: 'European logistics and shipping operations', website: 'https://www.nykeurope.com' },
+        { name: 'Ocean Network Express (ONE)', location: 'Singapore', role: 'Container shipping JV with MOL and K-Line (est. 2017)', website: 'https://www.one-line.com' },
+        { name: 'NYK Cruises / Asuka Cruise', location: 'Japan', role: 'Luxury cruise operations — Asuka II' }
+      ],
+      namedVessels: [
+        { name: 'Sakigake', type: 'Ammonia-fueled tugboat', highlight: 'World\'s first commercial ammonia-fueled tugboat (completed Aug 2024)' },
+        { name: 'Hakone Maru', type: 'Container ship', highlight: 'Japan\'s first full container vessel (1968)' },
+        { name: 'Asuka II', type: 'Cruise ship', highlight: 'Japan\'s largest luxury cruise ship' },
+        { name: 'Auriga Leader', type: 'Solar-powered car carrier', highlight: 'World\'s first partially solar-powered cargo ship (2008)' }
+      ]
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply via NYK careers' },
@@ -194,7 +246,21 @@
       keyFacts: ['Founded 1884 — over 140 years old','World\'s largest dry bulker fleet','105 LNG carriers (aiming for 150 by 2030)','~110 car carriers (branded as ACE)','31% stake in ONE (container shipping JV)','Operates cruise ships and domestic ferries','Handles 8 million barrels crude oil daily'],
       innovation: 'Wind Challenger Project — rigid sails for wind-assisted propulsion. FOCUS system for fleet data analysis. AI-powered EV fire detection on car carriers. Doppler LiDAR for real-time wind measurement. Sustainable seafarer wellness programs.',
       sustainability: 'MOL Group Environmental Vision 2.2: net-zero by 2050. 45% GHG reduction per unit by 2035. Clean fuels: LNG, methanol, ammonia. Wind Challenger sails. FSRU and LNG social infrastructure development.',
-      impressInterviewer: ['Know they have the world\'s largest dry bulker fleet','Mention the Wind Challenger rigid sail project','Reference FOCUS fleet analytics system','Discuss their 31% stake in ONE','Know Environmental Vision 2.2']
+      impressInterviewer: ['Know they have the world\'s largest dry bulker fleet','Mention the Wind Challenger rigid sail project','Reference FOCUS fleet analytics system','Discuss their 31% stake in ONE','Know Environmental Vision 2.2'],
+      officialLinks: { main: 'https://www.mol.co.jp/en/', careers: 'https://www.mol.co.jp/en/career/', windchallenger: 'https://www.mol.co.jp/en/sustainability/environment/technology/windchallenger/' },
+      subsidiaries: [
+        { name: 'MOL Ship Management (Singapore)', location: 'Singapore', role: 'Technical ship management for Asia' },
+        { name: 'MOL Drybulk Ltd', location: 'Tokyo', role: 'World\'s largest dry bulk fleet operations' },
+        { name: 'MOL LNG Transport', location: 'Tokyo', role: '105 LNG carriers, targeting 150 by 2030' },
+        { name: 'MOL ACE (Auto Carrier Express)', location: 'Tokyo', role: '110 car carriers — vehicle transport division' },
+        { name: 'Ocean Network Express (ONE)', location: 'Singapore', role: 'Container JV — MOL holds 31% stake', website: 'https://www.one-line.com' },
+        { name: 'MOL Sunflower Ltd', location: 'Japan', role: 'Domestic ferry operations' }
+      ],
+      namedVessels: [
+        { name: 'Shofu Maru', type: 'Bulk carrier with Wind Challenger', highlight: 'First vessel equipped with Wind Challenger rigid sail system (2022)' },
+        { name: 'Oppama Maru', type: 'Car carrier', highlight: 'Japan\'s first specialized car carrier (1965)' },
+        { name: 'Wind Challenger LNG Carrier', type: 'LNG carrier', highlight: 'World\'s first LNG carrier with Wind Challenger sails (delivery 2026, agreement with Chevron)' }
+      ]
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply via MOL careers' },
@@ -230,7 +296,12 @@
       keyFacts: ['Founded 1992 — 30+ years in tanker operations','Fleet of 30+ tankers and FSOs (37,000 to 160,000 DWT)','HQ in Monaco, major crewing office in Mumbai','Specializes in oil/chemical tanker management','Interview difficulty rated 8/10 by candidates','Zero-incident target for oil spillage','New vessels being built regularly (2024 newbuilds)'],
       innovation: 'Modern fleet with vessels averaging under 10 years old. Advanced cargo management systems for chemical/oil products. FSO conversion and operation expertise. Digital vessel monitoring and performance tracking.',
       sustainability: 'Zero spillage policy. Modern young fleet with efficient engines. Ballast water treatment compliance. Energy-efficient hull designs on newbuilds.',
-      impressInterviewer: ['Know their Monaco HQ + Mumbai operations model','Mention their FSO expertise','Reference the zero-incident/zero-spillage policy','Discuss their fleet expansion with newbuilds']
+      impressInterviewer: ['Know their Monaco HQ + Mumbai operations model','Mention their FSO expertise','Reference the zero-incident/zero-spillage policy','Discuss their fleet expansion with newbuilds'],
+      officialLinks: { main: 'https://www.andromeda-shipping.com', fleet: 'https://www.andromeda-shipping.com/our-ships/', careers: 'https://www.andromeda-shipping.com/careers/' },
+      subsidiaries: [
+        { name: 'International Andromeda Shipping SAM', location: 'Le Gildo Pastor Center, 7 Rue du Gabian, 98000 Monaco', role: 'Headquarters — commercial, technical, operational management' },
+        { name: 'Andromeda Shipping (India) Pvt Ltd', location: '501 The Eagle\'s Flight, 263 Suren Road, Andheri East, Mumbai 400 093', role: 'Indian operations — crew management and quality control' }
+      ]
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply via Andromeda portal or Mumbai office' },
@@ -265,7 +336,19 @@
       keyFacts: ['Specializes exclusively in container ships','50+ container ships (700 to 7000 TEU range)','Singapore HQ with Mumbai India operations','Young fleet — 46% of vessels are under 5 years old','Growing fleet with new builds under construction','Environmental compliance through Eastaway India partnership'],
       innovation: 'Modern fleet with latest engine technologies. Digital fleet monitoring. Energy-efficient container vessel designs. Standardized maintenance protocols across diverse TEU range.',
       sustainability: 'Young fleet with modern engines (lower emissions). Environmental compliance partnerships. Energy-efficient operations. Container optimization for fuel savings.',
-      impressInterviewer: ['Know they specialize ONLY in container ships','Mention their young fleet age profile','Reference the Singapore-Mumbai operational model','Discuss container ship-specific challenges (parametric rolling, lashing)']
+      impressInterviewer: ['Know they specialize ONLY in container ships','Mention their young fleet age profile','Reference the Singapore-Mumbai operational model','Discuss container ship-specific challenges (parametric rolling, lashing)'],
+      officialLinks: { main: 'https://eastaway.com', india: 'https://www.eastawayindia.com' },
+      subsidiaries: [
+        { name: 'Eastaway Ship Management Pte Ltd', location: '11 Duxton Hill, Singapore', role: 'Headquarters — ship ownership and technical management (est. 2020)' },
+        { name: 'X-Press Feeders Group', location: 'Singapore', role: 'Parent group — world\'s largest independent container feeder operator' },
+        { name: 'Eastaway India', location: 'Mumbai, India', role: 'Crew management and Indian operations', website: 'https://www.eastawayindia.com' },
+        { name: 'Eastaway Ship Management (UK)', location: 'Southampton, UK', role: 'European management office' }
+      ],
+      namedVessels: [
+        { name: 'Baltic Fulmar', type: '1,638 TEU container ship', highlight: 'Part of Baltic series feeder fleet' },
+        { name: 'Baltic Petrel', type: '1,638 TEU container ship', highlight: 'Part of Baltic series feeder fleet' },
+        { name: 'Methanol Dual-Fuel Newbuilds', type: '1,250 TEU container ships', highlight: '6 methanol dual-fuel vessels on order — pioneering green feeder shipping' }
+      ]
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply via Eastaway portal or Mumbai office' },

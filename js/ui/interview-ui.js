@@ -171,6 +171,20 @@ function showCompanyDetail(companyId) {
   html += '<div class="company-detail-sub">📍 ' + c.hq + ' | 🚢 ' + c.fleetSize + ' | 🌐 ' + c.vesselTypes.join(', ') + '</div>';
   if (ck.motto) html += '<div style="color:var(--tx3);font-size:0.85rem;margin-top:0.3rem;font-style:italic">"' + ck.motto + '"</div>';
   html += '</div></div>';
+  // Official Website Link
+  if (c.website) {
+    html += '<div style="margin-top:0.8rem;display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">';
+    html += '<a href="' + c.website + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 1rem;background:' + c.color + ';color:#fff;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:opacity 0.2s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">🌐 Official Website ↗</a>';
+    if (ck.officialLinks) {
+      var linkKeys = Object.keys(ck.officialLinks);
+      linkKeys.forEach(function(lk) {
+        if (lk !== 'main') {
+          html += '<a href="' + ck.officialLinks[lk] + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.3rem;padding:0.35rem 0.8rem;background:var(--bg3);color:var(--tx2);border:1px solid var(--br);border-radius:8px;font-size:0.78rem;text-decoration:none;transition:background 0.2s" onmouseover="this.style.background=\'var(--bg4)\'" onmouseout="this.style.background=\'var(--bg3)\'">' + lk.charAt(0).toUpperCase() + lk.slice(1) + ' ↗</a>';
+        }
+      });
+    }
+    html += '</div>';
+  }
   if (ck.founded) html += '<div style="color:var(--tx2);font-size:0.9rem;margin-bottom:0.5rem;">🏛 Founded: ' + ck.founded + ' — ' + (new Date().getFullYear() - ck.founded) + '+ years of maritime heritage</div>';
   
   // History
@@ -186,6 +200,23 @@ function showCompanyDetail(companyId) {
     ck.keyFacts.forEach(function(f) { html += '<li>' + f + '</li>'; });
     html += '</ul>';
   }
+  
+  // Subsidiaries & Branches
+  if (ck.subsidiaries && ck.subsidiaries.length) {
+    html += '<h3 style="color:var(--tx1);font-size:1rem;margin:1rem 0 0.5rem">🏢 Offices, Branches & Subsidiaries</h3>';
+    html += '<div style="display:grid;gap:0.6rem;margin-bottom:1rem">';
+    ck.subsidiaries.forEach(function(sub) {
+      html += '<div style="background:var(--bg3);border-radius:10px;padding:0.8rem 1rem;border-left:3px solid ' + c.color + '">';
+      html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.3rem">';
+      html += '<div style="font-weight:600;color:var(--tx1);font-size:0.88rem">' + sub.name + '</div>';
+      if (sub.website) html += '<a href="' + sub.website + '" target="_blank" rel="noopener" style="font-size:0.75rem;color:' + c.color + ';text-decoration:none">Visit ↗</a>';
+      html += '</div>';
+      html += '<div style="color:var(--tx3);font-size:0.78rem;margin-top:0.15rem">📍 ' + sub.location + '</div>';
+      html += '<div style="color:var(--tx2);font-size:0.82rem;margin-top:0.3rem">' + sub.role + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
   html += '</div>';
   
   // Innovation & Sustainability (side by side)
@@ -199,6 +230,20 @@ function showCompanyDetail(companyId) {
       html += '<div class="result-card" style="text-align:left;padding:1rem"><div style="font-weight:700;color:var(--tx1);margin-bottom:0.5rem">🌱 Sustainability</div>';
       html += '<div style="color:var(--tx2);font-size:0.85rem;line-height:1.6">' + ck.sustainability + '</div></div>';
     }
+    html += '</div>';
+  }
+  
+  // Named Notable Vessels
+  if (ck.namedVessels && ck.namedVessels.length) {
+    html += '<h3 style="color:var(--tx1);font-size:1rem;margin-bottom:0.8rem">🚢 Notable Vessels</h3>';
+    html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.8rem;margin-bottom:1.5rem">';
+    ck.namedVessels.forEach(function(v) {
+      html += '<div class="result-card" style="text-align:left;padding:0.8rem 1rem;border-top:3px solid ' + c.color + '">';
+      html += '<div style="font-weight:700;color:var(--tx1);font-size:0.9rem">' + v.name + '</div>';
+      html += '<div style="color:var(--tx3);font-size:0.78rem;margin:0.2rem 0">' + v.type + '</div>';
+      html += '<div style="color:var(--tx2);font-size:0.82rem;line-height:1.5">' + v.highlight + '</div>';
+      html += '</div>';
+    });
     html += '</div>';
   }
   
