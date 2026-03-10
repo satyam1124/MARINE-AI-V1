@@ -157,6 +157,7 @@ function showCompanyExplorer(mode) {
 function showCompanyDetail(companyId) {
   var c = INTERVIEW_COMPANIES[companyId];
   if (!c) return;
+  var ck = c.companyKnowledge || {};
   
   var container = document.getElementById('interviewContent');
   var html = '<button class="interview-back-btn" onclick="showInterviewHome()">← Back to Interview Prep</button>';
@@ -168,11 +169,51 @@ function showCompanyDetail(companyId) {
   html += '<div>';
   html += '<div class="company-detail-title">' + c.name + '</div>';
   html += '<div class="company-detail-sub">📍 ' + c.hq + ' | 🚢 ' + c.fleetSize + ' | 🌐 ' + c.vesselTypes.join(', ') + '</div>';
+  if (ck.motto) html += '<div style="color:var(--tx3);font-size:0.85rem;margin-top:0.3rem;font-style:italic">"' + ck.motto + '"</div>';
   html += '</div></div>';
-  html += '<p style="color:var(--tx2);font-size:0.9rem;margin-bottom:1rem;">' + c.reputation + '</p>';
+  if (ck.founded) html += '<div style="color:var(--tx2);font-size:0.9rem;margin-bottom:0.5rem;">🏛 Founded: ' + ck.founded + ' — ' + (new Date().getFullYear() - ck.founded) + '+ years of maritime heritage</div>';
+  
+  // History
+  if (ck.history) {
+    html += '<h3 style="color:var(--tx1);font-size:1rem;margin:1rem 0 0.5rem">📖 Company History</h3>';
+    html += '<p style="color:var(--tx2);font-size:0.9rem;line-height:1.6">' + ck.history + '</p>';
+  }
+  
+  // Key Facts
+  if (ck.keyFacts && ck.keyFacts.length) {
+    html += '<h3 style="color:var(--tx1);font-size:1rem;margin:1rem 0 0.5rem">⭐ Key Facts to Know</h3>';
+    html += '<ul style="color:var(--tx2);font-size:0.9rem;padding-left:1.2rem;line-height:1.8">';
+    ck.keyFacts.forEach(function(f) { html += '<li>' + f + '</li>'; });
+    html += '</ul>';
+  }
+  html += '</div>';
+  
+  // Innovation & Sustainability (side by side)
+  if (ck.innovation || ck.sustainability) {
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">';
+    if (ck.innovation) {
+      html += '<div class="result-card" style="text-align:left;padding:1rem"><div style="font-weight:700;color:var(--tx1);margin-bottom:0.5rem">🔧 Innovation & Contribution</div>';
+      html += '<div style="color:var(--tx2);font-size:0.85rem;line-height:1.6">' + ck.innovation + '</div></div>';
+    }
+    if (ck.sustainability) {
+      html += '<div class="result-card" style="text-align:left;padding:1rem"><div style="font-weight:700;color:var(--tx1);margin-bottom:0.5rem">🌱 Sustainability</div>';
+      html += '<div style="color:var(--tx2);font-size:0.85rem;line-height:1.6">' + ck.sustainability + '</div></div>';
+    }
+    html += '</div>';
+  }
+  
+  // Impress the Interviewer
+  if (ck.impressInterviewer && ck.impressInterviewer.length) {
+    html += '<h3 style="color:var(--tx1);font-size:1rem;margin-bottom:0.8rem">🎯 How to Impress the Interviewer</h3>';
+    html += '<div class="tips-grid">';
+    ck.impressInterviewer.forEach(function(tip) {
+      html += '<div class="tip-card"><div class="tip-card-icon">🎯</div><div class="tip-card-text">' + tip + '</div></div>';
+    });
+    html += '</div>';
+  }
   
   // Selection Process Timeline
-  html += '<h3 style="color:var(--tx1);font-size:1rem;margin-bottom:0.8rem;">📋 Selection Process</h3>';
+  html += '<h3 style="color:var(--tx1);font-size:1rem;margin:1.5rem 0 0.8rem">📋 Selection Process</h3>';
   html += '<div class="selection-timeline">';
   c.selectionProcess.forEach(function(step, i) {
     html += '<div class="timeline-step">';
@@ -183,36 +224,20 @@ function showCompanyDetail(companyId) {
     html += '</div></div>';
   });
   html += '</div>';
-  html += '</div>';
   
   // CBT Format Card
   html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">';
-  html += '<div class="result-card">';
-  html += '<div class="result-card-value">' + c.cbtFormat.duration + ' min</div>';
-  html += '<div class="result-card-label">Exam Duration</div>';
-  html += '</div>';
-  html += '<div class="result-card">';
-  html += '<div class="result-card-value">' + c.cbtFormat.totalQuestions + '</div>';
-  html += '<div class="result-card-label">Total Questions</div>';
-  html += '</div>';
-  html += '<div class="result-card">';
-  html += '<div class="result-card-value">' + c.cbtFormat.passingScore + '%</div>';
-  html += '<div class="result-card-label">Passing Score</div>';
-  html += '</div>';
-  html += '<div class="result-card">';
-  html += '<div class="result-card-value">' + (c.cbtFormat.negativeMarking ? '-' + (c.cbtFormat.negativeMarkValue || 0.25) : 'No') + '</div>';
-  html += '<div class="result-card-label">Negative Marking</div>';
-  html += '</div>';
+  html += '<div class="result-card"><div class="result-card-value">' + c.cbtFormat.duration + ' min</div><div class="result-card-label">Exam Duration</div></div>';
+  html += '<div class="result-card"><div class="result-card-value">' + c.cbtFormat.totalQuestions + '</div><div class="result-card-label">Total Questions</div></div>';
+  html += '<div class="result-card"><div class="result-card-value">' + c.cbtFormat.passingScore + '%</div><div class="result-card-label">Passing Score</div></div>';
+  html += '<div class="result-card"><div class="result-card-value">' + (c.cbtFormat.negativeMarking ? '-' + (c.cbtFormat.negativeMarkValue || 0.25) : 'No') + '</div><div class="result-card-label">Negative Marking</div></div>';
   html += '</div>';
   
   // Interview Tips
   html += '<h3 style="color:var(--tx1);font-size:1rem;margin-bottom:0.8rem;">💡 Interview Tips</h3>';
   html += '<div class="tips-grid">';
   c.interviewStyle.tips.forEach(function(tip) {
-    html += '<div class="tip-card">';
-    html += '<div class="tip-card-icon">💡</div>';
-    html += '<div class="tip-card-text">' + tip + '</div>';
-    html += '</div>';
+    html += '<div class="tip-card"><div class="tip-card-icon">💡</div><div class="tip-card-text">' + tip + '</div></div>';
   });
   html += '</div>';
   
