@@ -7,16 +7,16 @@ const INTERVIEW_COMPANIES = {
 
   anglo: {
     id: 'anglo', name: 'Anglo Eastern Ship Management', shortName: 'Anglo Eastern',
-    icon: '<img src="https://www.google.com/s2/favicons?domain=angloeastern.com&sz=128" class="company-logo-img" alt="angloeastern">', color: '#1e40af', hq: 'Hong Kong', fleetSize: '600+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=angloeastern.com&sz=128" class="company-logo-img" alt="angloeastern">', color: '#1e40af', hq: 'Hong Kong', fleetSize: '740 vessels, 4.4M TEU capacity',
     vesselTypes: ['Bulk Carriers', 'Tankers', 'Container Ships', 'Gas Carriers', 'Offshore'],
     difficulty: 8, website: 'https://www.angloeastern.com',
     companyKnowledge: {
-      founded: 1974, motto: 'Safe, Efficient and Reliable Ship Management',
-      history: 'Founded in 1974 in Hong Kong. Grew from a small ship management firm to one of the world\'s largest independent ship managers. Now manages 600+ vessels across all major vessel types. Has its own Maritime Academy (AEMA) in Mumbai and Karjat.',
-      keyFacts: ['One of the top 3 largest independent ship managers globally','Operates Anglo Eastern Maritime Academy (AEMA) — one of the best training facilities in India','Manages vessels for 100+ shipowners worldwide','Strong focus on digitalization with in-house Fleet Management System','ISO 9001, ISO 14001, ISO 45001 certified'],
-      innovation: 'Pioneered digital fleet management systems. Uses AI-based predictive maintenance across fleet. Developed proprietary e-learning platform for crew training. Early adopter of remote engine performance monitoring.',
-      sustainability: 'Committed to IMO 2050 decarbonization targets. Implementing energy-efficient hull coatings, LED lighting upgrades, and waste heat recovery systems. Active fleet optimization program reducing fuel consumption.',
-      impressInterviewer: ['Mention AEMA and their comprehensive training programs','Know that they are one of the largest independent (non-state) ship managers','Discuss their digital fleet management initiatives','Reference their safety record and zero-incident goals']
+      founded: 1974, motto: 'Shaping a Better Maritime Future',
+      history: 'Incorporated in Hong Kong in August 1974. Grew through key mergers — Denholm Ship Management (2001) and Univan Ship Management (2015) — to become one of the world\'s top 3 independent ship managers with 700+ vessels. Acquired SeaQuest Marine (2022) for newbuilding capabilities and CMI Leisure for cruise management. Acquired Euronav Ship Management Hellas (2024) expanding into Greece. Owns Anglo-Eastern Maritime Academy (AEMA) in Karjat, India (founded 2009) and Anglo-Eastern Maritime Training Centre (AEMTC) in Mumbai (founded 2000). Operates the Fleet Performance Centre (AEFPC) for data-driven safety and performance. First ammonia-fuelled ship training completed. First LNG dual-fuel bulk carrier under management (MV Ubuntu Empathy, 190K dwt, 35% lower carbon). 150+ Starlink installations deployed across fleet.',
+      keyFacts: ['One of the top 3 largest independent ship managers globally — 700+ vessels','Owns AEMA (Karjat) for pre-sea training + AEMTC (Mumbai) for post-sea courses','Values: Having the courage to do what is right, Progressively setting the standard, Nurturing our people and communities','my.angloeastern client portal provides real-time fleet transparency to shipowners','Fleet Performance Centre (AEFPC) uses data analytics for safety and efficiency','Acquired Euronav Ship Management Hellas (2024) — expanding into Greece','Deployed 150+ Starlink installations for crew connectivity','First vessel fully manned by AEMA officers (Jul 2024)'],
+      innovation: 'Pioneered dual-fuel LNG vessel management (first LNG bulk carrier MV Ubuntu Empathy with 35% reduced carbon). Preparing for first ammonia-fuelled ship management. my.angloeastern client portal for real-time fleet transparency. Fleet Performance Centre (AEFPC) leverages big data for safety and performance optimization. Deployed Starlink connectivity across 150+ vessels. Sea Sourcing procurement JV with Seaspan for vendor negotiation scale.',
+      sustainability: 'Published ESG Report 2024: Shaping a Sustainable Maritime Future. Joined Maritime Just Transition Task Force (established at COP26) for equitable green transition. Managing dual-fuel LNG vessels with 35% lower carbon footprint. Preparing for ammonia-fuelled ship operations. Active decarbonization strategy through SAPS (carbon regulation into commercial advantage).',
+      impressInterviewer: ['Know their 3 core values: Courage to do what is right, Progressively setting the standard, Nurturing people and communities','Mention MV Ubuntu Empathy — first LNG dual-fuel bulk carrier (190K dwt, 35% less carbon)','Reference AEMA (Karjat) and AEMTC (Mumbai) as world-class training centres','Discuss the my.angloeastern client portal and Fleet Performance Centre','Mention the 2024 Euronav acquisition expanding into Greece','Know that Peter Cremers led the 1998 management buyout and Bjorn Hojgaard is CEO']
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Submit via Anglo Eastern careers portal' },
@@ -95,9 +95,9 @@ const INTERVIEW_COMPANIES = {
     vesselTypes: ['Container Ships', 'Tankers', 'Supply Vessels', 'Tugboats'],
     difficulty: 9, website: 'https://www.maersk.com',
     companyKnowledge: {
-      founded: 1904, motto: 'Constant Care — take care of today, actively prepare for tomorrow',
-      history: 'Founded in 1904 by A.P. Møller and his father in Svendborg, Denmark. The seven-pointed star logo represents navigation by the stars. Was the world\'s #1 container line from 1996-2022. Acquired Hamburg Süd in 2017. Now transforming into an integrated logistics company.',
-      keyFacts: ['Founded 1904 — over 120 years of maritime heritage','The white star on blue background is one of the most recognized maritime logos','5 core values: Constant Care, Humbleness, Uprightness, Our Employees, Our Name','Transforming from a shipping company to end-to-end logistics integrator','Ordered world\'s first methanol-powered container ships (2021)'],
+      founded: 1904, motto: 'Constant Care — take care of today, actively prepare for tomorrow. Mission: Improving Life for All by Integrating the World',
+      history: 'Founded in 1928 by A.P. Møller in Svendborg, Denmark (A.P. Møller founded the company, though the Maersk name dates to 1904 with his father). Started with just 6 ships. By WWII had 46 vessels, reduced to 7 after the war, rebuilt to pre-war size by 1953. First container ship in 1973. Became world\'s #1 container line in 1993 — held until MSC surpassed in Jan 2022. Now #2 with 740 vessels and 4.4M TEU capacity. Acquired Hamburg Süd (2017). Ordered world\'s first methanol-powered container ships (2021). Formed Gemini Cooperation with Hapag-Lloyd (Feb 2025) — 340 ships, 3.7M TEU. Investing $10-11B in fleet renewal 2024-2025. 25% of fleet will be dual-fuel by 2030.',
+      keyFacts: ['5 core values: Constant Care, Humbleness, Uprightness, Our Employees, Our Name','Vision: Global Integrator — seamless end-to-end logistics','World\'s 2nd largest container line — 740 vessels, 4.4M TEU (Feb 2025)','Gemini Cooperation with Hapag-Lloyd (Feb 2025) — 340 ships, 3.7M TEU combined','First company to order methanol-powered container ships (2021)','Carbon intensity reduced 45% since 2007 — net-zero target 2040 (10 years before IMO)','$10-11B fleet renewal investment 2024-2025, 25% dual-fuel by 2030','The white seven-pointed star logo represents navigation by the stars'],
       innovation: 'World\'s first company to order methanol-powered container vessels. Investing in green methanol production. Developing carbon capture technology. Using AI for predictive analytics in supply chains. Pioneer in remote container management (RCM).',
       sustainability: 'Industry\'s most ambitious target: net-zero by 2040 (10 years before IMO). Already operating methanol-powered vessels. Invested in green e-methanol production facilities. Carbon intensity reduced 45% since 2007.',
       impressInterviewer: ['Know their 5 core values by heart — especially Constant Care','Mention the methanol-powered container ship order (world first)','Reference their transformation from shipping to integrated logistics','Discuss the 7-pointed star logo history and its meaning']
@@ -126,16 +126,16 @@ const INTERVIEW_COMPANIES = {
 
   bsm: {
     id: 'bsm', name: 'Bernhard Schulte Shipmanagement', shortName: 'BSM',
-    icon: '<img src="https://www.google.com/s2/favicons?domain=bs-shipmanagement.com&sz=128" class="company-logo-img" alt="bs-shipmanagement">', color: '#16a34a', hq: 'Hamburg / Singapore', fleetSize: '600+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=bs-shipmanagement.com&sz=128" class="company-logo-img" alt="bs-shipmanagement">', color: '#16a34a', hq: 'Hamburg / Singapore', fleetSize: '670+ vessels',
     vesselTypes: ['Container Ships', 'Bulk Carriers', 'Tankers', 'LNG Carriers', 'Cruise Ships'],
     difficulty: 6, website: 'https://www.bs-shipmanagement.com',
     companyKnowledge: {
-      founded: 1883, motto: 'Excellence in Ship Management',
-      history: 'Part of the Schulte Group, founded in 1883 by Bernhard Schulte in Papenburg, Germany. Over 140 years of maritime heritage. One of the top 3 third-party ship managers globally. The Schulte family remains deeply involved in the business.',
-      keyFacts: ['Over 140 years of maritime tradition (since 1883)','Top 3 global third-party ship managers','Part of the Schulte Group which also includes Hanseatic Tankers and MPC Capital','Fast career progression — known for quick crew rotation','Operates BSM Maritime Academy in the Philippines'],
-      innovation: 'Developed MariApps — in-house fleet management technology. Uses digital monitoring for real-time vessel performance. Invested in autonomous shipping research. Early implementer of ECDIS across fleet.',
-      sustainability: 'Fleet optimization for fuel efficiency. SOx scrubber installations across fleet. Ballast water management system compliance ahead of schedule. Shore power connectivity on container vessels.',
-      impressInterviewer: ['Know the Schulte Group history since 1883','Mention MariApps — their proprietary digital platform','Reference their fast crew rotation and career progression','Discuss their diverse fleet including LNG and cruise ships']
+      founded: 1883, motto: 'Leading Maritime Solutions',
+      history: 'Part of the Schulte Group, a family-owned business founded in 1883 in Papenburg, Germany — over 140 years and 5 generations of the Schulte family. BSM was formed in 2008 by merging four companies: Hanseatic Shipping (1972, Limassol), Dorchester Atlantic Marine (1978), Eurasia Group (1981), and Vorsetzen (1999). The Schulte Group owns 90 vessels and manages 670+. Fleet includes 170+ bulk carriers, 130+ containers, 100+ gas carriers (over half LNG). Delivered the world\'s largest LNG bunker supply vessel MV Kairos in 2018.',
+      keyFacts: ['140+ years, 5 generations of Schulte family leadership','Values: Independence, Fairness, Entrepreneurship, Responsibility, Employees','Family culture — fostering just culture where blame is not assigned','670+ vessels managed: 170+ bulkers, 130+ containers, 100+ gas carriers','Delivered world\'s largest LNG bunker vessel MV Kairos (2018)','30 LNG dual-fuel ships managed, with more in pipeline','Operates BSM Maritime Academy in the Philippines'],
+      innovation: 'Developed MariApps — proprietary digital fleet management platform. Real-time vessel performance monitoring. Leading in LNG carrier management (50+ LNG carriers). Owns and operates world\'s largest LNG bunker vessel MV Kairos. Early implementer of ECDIS. Digital innovation through the Schulte Group\'s tech investments.',
+      sustainability: 'Commitment to responsible growth and positive environmental impact. Integrated sustainable practices and digital innovation. LNG as transition fuel — managing 30 dual-fuel ships plus 2 LNG bunker vessels. Long-term perspective for sustainable continuation of the company. Health, safety, diversity, equity, inclusion, and human rights prioritized.',
+      impressInterviewer: ['Know the 5 values: Independence, Fairness, Entrepreneurship, Responsibility, Employees','Mention 140+ years across 5 generations of the Schulte family','Reference MV Kairos — world\'s largest LNG bunker vessel they delivered','Know BSM formed from 4 merged companies (Hanseatic, Dorchester, Eurasia, Vorsetzen)','Discuss their LNG expertise — 50+ LNG carriers managed','Mention the just culture approach — no blame culture']
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Submit via BSM portal' },
@@ -163,16 +163,16 @@ const INTERVIEW_COMPANIES = {
 
   synergy: {
     id: 'synergy', name: 'Synergy Marine Group', shortName: 'Synergy',
-    icon: '<img src="https://www.google.com/s2/favicons?domain=synergymarinegroup.com&sz=128" class="company-logo-img" alt="synergymarinegroup">', color: '#dc2626', hq: 'Singapore', fleetSize: '400+ vessels',
-    vesselTypes: ['Bulk Carriers', 'Tankers', 'Container Ships', 'Gas Carriers'],
+    icon: '<img src="https://www.google.com/s2/favicons?domain=synergymarinegroup.com&sz=128" class="company-logo-img" alt="synergymarinegroup">', color: '#dc2626', hq: 'Singapore', fleetSize: '700+ vessels',
+    vesselTypes: ['Tankers (329)', 'Bulk Carriers (290)', 'Container Vessels (43)', 'LPG Carriers (46)', 'Offshore Vessels (35)', 'LNG Carriers (6)'],
     difficulty: 7, website: 'https://www.synergymarinegroup.com',
     companyKnowledge: {
-      founded: 2006, motto: 'Setting a New Standard in Ship Management',
-      history: 'Founded in 2006 in Singapore by Captain Rajesh Unni. One of the fastest-growing ship managers in the world. Grew from 0 to 400+ vessels in under 20 years. Operates Synergy Maritime Training Institute.',
-      keyFacts: ['One of the fastest-growing ship managers ever','Founded by Captain Rajesh Unni — a marine industry visionary','Operates its own training institute — Synergy Maritime Training Institute','Strong Indian presence with Mumbai office for crewing','Known for competitive CET exam with negative marking'],
-      innovation: 'SynergyOne digital platform for fleet management. AI-based energy optimization. Drone inspections for tank surveys. Digital twin technology for engine rooms.',
-      sustainability: 'Fleet carbon intensity benchmarking. Energy-efficient vessel operations. Methanol and LNG fuel research. Active participation in Singapore Maritime Green Initiative.',
-      impressInterviewer: ['Know founder Captain Rajesh Unni','Mention their rapid growth story (0 to 400+ in ~18 years)','Reference SynergyOne digital platform','Discuss their training institute and knowledge-sharing culture']
+      founded: 2006, motto: 'Delivering the Future of Ship Management — Responsibly, Digitally, Globally',
+      history: 'Founded in 2006 in Singapore by Captain Rajesh Unni and Capt. Sanjay Iqbal. Grew from 0 to 700+ vessels in under 20 years — making it the fastest-growing ship manager ever. Now manages 750+ vessels with 29,000+ seafarers across 31 offices in 15 countries. A trusted lifecycle custodian of maritime assets, combining engineering excellence with operational discipline. Services include Ship Management, Offshore Services, Dual-Fuel Vessel Management, Newbuilding Supervision, and Crew Management.',
+      keyFacts: ['Fastest-growing ship manager: 0 to 750+ vessels in ~19 years','29,000+ seafarers employed across 31 offices in 15 countries','Fleet breakdown: 329 Tankers, 290 Bulk Carriers, 43 Containers, 46 LPG, 35 Offshore, 6 LNG','Dual-Fuel vessel management specialist — manages LPG and LNG dual-fuel ships','Manages Jana Marine jack-up barges (offshore expansion)','Strong EU ETS compliance expertise — from compliance to confidence'],
+      innovation: 'SynergyOne digital platform for fleet management and real-time monitoring. Leading in Dual-Fuel vessel management (LPG/LNG). Offshore expansion with jack-up barge management (Jana Marine). EU ETS compliance solutions and carbon credit management. Advanced crew training with Synergy Maritime Training Institute.',
+      sustainability: 'EU ETS proactive compliance (2025: From Compliance to Confidence). Dual-fuel vessel management for reduced emissions. Energy-efficient operations across 750+ vessels. Active participation in Singapore Maritime Green Initiative. Carbon intensity benchmarking across entire managed fleet.',
+      impressInterviewer: ['Know founder Captain Rajesh Unni and the remarkable growth story (0 to 750+ in ~19 years)','Quote the motto: Delivering the Future of Ship Management — Responsibly, Digitally, Globally','Mention 29,000+ seafarers across 31 offices in 15 countries','Reference Dual-Fuel vessel management as a speciality','Discuss EU ETS compliance expertise','Know the exact fleet breakdown: 329 Tankers, 290 Bulkers, 43 Containers, 46 LPG, 35 Offshore, 6 LNG']
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply via Synergy portal' },
@@ -203,16 +203,16 @@ const INTERVIEW_COMPANIES = {
 
   vships: {
     id: 'vships', name: 'V.Ships / V.Group', shortName: 'V.Ships',
-    icon: '<img src="https://www.google.com/s2/favicons?domain=vgrouplimited.com&sz=128" class="company-logo-img" alt="vgrouplimited">', color: '#7c3aed', hq: 'Monaco', fleetSize: '1000+ vessels',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=vgrouplimited.com&sz=128" class="company-logo-img" alt="vgrouplimited">', color: '#7c3aed', hq: 'Monaco', fleetSize: '3,500+ vessels serviced',
     vesselTypes: ['Tankers', 'Bulk Carriers', 'Container Ships', 'Offshore', 'Cruise'],
     difficulty: 7, website: 'https://www.vgrouplimited.com',
     companyKnowledge: {
-      founded: 1984, motto: 'Mastering the Maritime Challenges of Tomorrow',
-      history: 'Founded in 1984 in Monaco. Grew to become the world\'s largest independent ship manager by fleet size (1000+ vessels). Rebranded as V.Group in 2017. Provides full range of maritime services including ship management, marine services, and shore-based solutions.',
-      keyFacts: ['World\'s largest independent ship manager by fleet count (1000+)','Headquartered in Monaco — global tax-efficient maritime hub','Strong emphasis on English proficiency — Marlins test is mandatory','ASK Technical Test requires 80% — high technical bar','Employs 45,000+ seafarers and 3,000+ shore staff'],
-      innovation: 'Developed V.Insights data analytics platform. Uses IoT sensors for real-time machinery monitoring. Cloud-based fleet performance management. Pioneered standardized technical management across diverse fleet types.',
-      sustainability: 'EU MRV and IMO DCS compliance. Energy efficiency programs across fleet. Ballast water management ahead of schedule. Carbon footprint reduction through voyage optimization.',
-      impressInterviewer: ['Know they are the largest independent ship manager','Mention V.Group rebrand and full-service maritime approach','Reference V.Insights analytics platform','Highlight willingness to pass Marlins English test']
+      founded: 1984, motto: 'We Care, We Challenge, We Collaborate, We are Consistent, We Commit',
+      history: 'Founded in 1984 in Monaco with just 35 vessels. Celebrated 40th anniversary in October 2024 — now the world\'s largest ship management group servicing 3,500+ vessels with 44,000+ seafarers. Registered in Monaco, HQ in London, main ship management team in Glasgow with 18 offices worldwide. V.Ships Leisure manages 100+ cruise ships, ferries, and superyachts. Ownership changed in 2024 — acquired by STAR Capital consortium from Advent International. Acquired Belships\' fleet (34 modern bulkers) in 2023.',
+      keyFacts: ['World\'s largest ship management group — 3,500+ vessels serviced','44,000+ seafarers employed globally across 18 offices','Values: Care, Challenge, Collaborate, Consistent, Commit','V.Ships Leisure manages 100+ cruise/ferry/yacht vessels separately','ShipSure 2.0 — cutting-edge marine digital platform for real-time fleet insights','Member of Maritime Anti-Corruption Network (MACN)','Innovation Centre in Mumbai for crew management technology','Fleet Cell of the Future prototype — remote monitoring and data analytics'],
+      innovation: 'ShipSure 2.0 — cutting-edge marine digital platform for real-time, data-driven fleet operations. Fleet Cell of the Future — prototype using remote monitoring, data analytics, advanced communication. Innovation Centre in Mumbai for crew management tech. Participating in Maersk Mc-Kinney Møller Center for Zero Carbon Shipping. Exploring fuel cell technologies for deep-sea shipping (hybrid fuel cells + ICE). V.Ships Leisure pioneering dual-fuel cruise vessel technology. Port arrival optimization research (potential 25% emission reduction).',
+      sustainability: 'Committed to decarbonizing deep-sea shipping. Reducing GHG through energy management. Minimizing waste, eliminating single-use plastics. Environmentally sound ship recycling. ESG Disclosure 2024 published. Port arrival optimization could reduce emissions by 25%. V.Ships Leisure supporting natural wind power for Orient Express sailing yachts.',
+      impressInterviewer: ['Know the 5 values: Care, Challenge, Collaborate, Consistent, Commit','Mention they are world\'s largest — 3,500+ vessels, 44,000+ seafarers','Reference ShipSure 2.0 digital platform and Fleet Cell of the Future','Know about the V.Ships Leisure division — 100+ cruise/ferry/yacht vessels','Discuss their MACN membership and anti-corruption commitment','Mention 40th anniversary (2024) and STAR Capital ownership change']
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Apply via V.Group portal' },
@@ -240,17 +240,17 @@ const INTERVIEW_COMPANIES = {
   },
 
   thome: {
-    id: 'thome', name: 'Thome Fleet Management', shortName: 'Thome',
-    icon: '<img src="https://www.google.com/s2/favicons?domain=osmthome.com&sz=128" class="company-logo-img" alt="osmthome">', color: '#92400e', hq: 'Singapore', fleetSize: '300+ vessels',
+    id: 'thome', name: 'OSM Thome', shortName: 'OSM Thome',
+    icon: '<img src="https://www.google.com/s2/favicons?domain=osmthome.com&sz=128" class="company-logo-img" alt="osmthome">', color: '#92400e', hq: 'Singapore', fleetSize: '1,000 vessels',
     vesselTypes: ['Tankers', 'Bulk Carriers', 'Container Ships', 'Gas Carriers'],
-    difficulty: 6, website: 'https://www.thome.com.sg',
+    difficulty: 6, website: 'https://osmthome.com',
     companyKnowledge: {
-      founded: 1963, motto: 'Trusted Maritime Partner',
-      history: 'Founded in 1963 in Norway by the Thome family. Relocated HQ to Singapore in 1988. Merged with OSM Maritime Group in 2022 to form OSM Thome — one of the largest ship managers globally. Known for short waiting periods and good salaries.',
-      keyFacts: ['Over 60 years of maritime heritage (since 1963)','Merged with OSM Maritime in 2022 to form OSM Thome','One of the world\'s largest crew providers','Known for short waiting periods for experienced crew','Offices in Mumbai and Delhi for Indian crew operations'],
-      innovation: 'Digital technical management systems. Predictive maintenance using BigData. Fleet performance monitoring dashboards. Remote survey capabilities.',
-      sustainability: 'Fleet carbon footprint monitoring. Energy-efficient vessel operations. Ballast water treatment systems. Compliance with all IMO 2020 sulphur regulations.',
-      impressInterviewer: ['Know the OSM Thome merger story','Mention their Norwegian roots and Singapore HQ','Reference their reputation for short waiting periods','Discuss their crew-centric approach and welfare focus']
+      founded: 1963, motto: 'It\'s All About People',
+      history: 'Formed in 2023 through the merger of OSM Maritime Group (founded 1989 in Arendal, Norway by Bjørn Tore Larsen as Oriental Ship Management) and Thome Group (founded 1963 in Singapore). Merger approved May 2023, creating one of the world\'s largest ship managers. Manages ~1,000 ships total: 450 under full technical management, 550 under crew management. Fleet includes tankers, bulkers, containers, car carriers, cruise ships, and offshore. Acquired Klaveness Ship Management (Oct 2024, effective Jan 2025). Headquarters in Norway and Singapore.',
+      keyFacts: ['4 Core Values: Safety, Transparency, Relationships, Innovation','Credo: It\'s All About People — emphasizing crew welfare','Combined heritage: OSM from Norway (1989) + Thome from Singapore (1963)','1,000 ships: 450 technical management + 550 crew management','Acquired Klaveness Ship Management (October 2024)','Diverse fleet: tankers, bulkers, containers, car carriers, cruise, offshore','EVIGO initiative — retrofitting vessels and piloting alternative fuels','Tech-forward leadership in digitalization and cyber security'],
+      innovation: 'EVIGO initiative — vessel retrofitting and alternative fuel piloting for decarbonization. Advanced digitalization and cyber security focus. Tech-forward leadership combining Norwegian engineering with Singaporean operations excellence. Collaborative innovation approach to set new industry standards. Green shipping technology exploration.',
+      sustainability: 'EVIGO program for decarbonization through retrofitting and alternative fuels. Zero-incident ambition driven by Safety as a core value. Transparency and accountability in all operations. Committed to sustainable, value-driven progress in maritime. Green shipping research and collaborative industry initiatives.',
+      impressInterviewer: ['Know the 4 values: Safety, Transparency, Relationships, Innovation','Quote the credo: It\'s All About People','Know the merger story: OSM (Norway, 1989) + Thome (Singapore, 1963) merged in 2023','Mention the Klaveness Ship Management acquisition (Oct 2024)','Reference the EVIGO decarbonization initiative','Discuss their dual HQ model: Norwegian engineering + Singapore operations']
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Submit via Thome portal' },
@@ -281,12 +281,12 @@ const INTERVIEW_COMPANIES = {
     vesselTypes: ['Tankers', 'Bulk Carriers', 'Container Ships', 'Gas Carriers'],
     difficulty: 8, website: 'https://www.wallem.com',
     companyKnowledge: {
-      founded: 1903, motto: 'Reliable Maritime Solutions Since 1903',
-      history: 'Founded in 1903 by G.H. Wallem in Bergen, Norway. One of the oldest ship management companies in the world. Moved to Hong Kong in the 1960s. Now owned by Japan\'s MOL Group. Known for premium employer status and comprehensive interview process.',
-      keyFacts: ['Over 120 years of maritime heritage (since 1903)','Now owned by MOL (Mitsui O.S.K. Lines)','Known for very thorough interview process (difficulty 8/10)','Provides US visa support for crew on US-trading vessels','ISF Mumbai administers their written CBT test'],
-      innovation: 'Integrated digital fleet management. AI-based maintenance scheduling. Remote engine diagnostics. ECDIS proficiency training programs.',
-      sustainability: 'Fleet energy performance monitoring. Hull and propeller performance optimization. SEEMP compliance. Sulphur cap compliance across fleet.',
-      impressInterviewer: ['Know their 120+ year history from Norway to Hong Kong','Mention MOL Group ownership','Reference their US visa support policies','Discuss their reputation as premium employer with high standards']
+      founded: 1903, motto: 'Dedicated, Trusted Global Maritime Partner',
+      history: 'Founded in Shanghai in 1903 — 123 years of maritime heritage. By 1908, became the world\'s first third-party ship manager, overseeing sisterships in the Chinese coastal coal trade. Expanded to Hong Kong, Japan, India, Singapore, Vietnam. In 2015, became the sole foreign company to fully own a Manning Agency in China, enabling direct recruitment of Chinese seafarers. Currently owned by the Wallem family — Tom Steckmest (founder\'s great-grandson) and Nigel Hill. Fleet experience spans tankers, bulk carriers, vehicle carriers, cruise ships, naval vessels, container ships, and heavy lift. Partnered with BYD for first fully-chartered PCTC vessel MV BYD Explorer No. 1 (2024).',
+      keyFacts: ['World\'s first third-party ship manager (1908) — 123 years of heritage','Wallem family-owned: Tom Steckmest (great-grandson of founder) and Nigel Hill','Sole foreign shipping company to fully own a Manning Agency in China (2015)','Mission: Dedicated, trusted global maritime partner for safe, smart, sustainable operations','Partnered with BYD for MV BYD Explorer No. 1 — car carrier for Chinese automaker','Services: ship management, crew management, ship agency, commercial, vessel IT, lifeboat safety','Committed to just culture process prioritizing safety and compliance'],
+      innovation: 'Pioneered third-party ship management concept (1908 — world first). Vessel IT services as dedicated vertical. Lifeboat safety and compliance services. First foreign company to establish full Manning Agency in China. Partnership with Chinese automaker BYD for PCTC vessel management (MV BYD Explorer No. 1).',
+      sustainability: 'Committed to minimizing environmental impact of operations. Helping clients reduce their environmental footprint. Well-being, dignity, and human values of employees prioritized. Safe, smart, and sustainable operations as core mission. Supporting the green transition in maritime transport.',
+      impressInterviewer: ['Know they are the world\'s FIRST third-party ship manager (1908)','Correct misconception: Wallem family-owned, NOT MOL-owned','Mention 123 years of heritage — founded in Shanghai, now HQ Hong Kong','Reference MV BYD Explorer No. 1 — BYD partnership','Know they are the sole foreign company with a full Manning Agency in China','Discuss their comprehensive services including unique lifeboat safety vertical']
     },
     selectionProcess: [
       { stage: 'Online Application', desc: 'Submit via Wallem careers' },
