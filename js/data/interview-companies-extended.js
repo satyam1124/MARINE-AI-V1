@@ -237,7 +237,7 @@
 
   mol: {
     id: 'mol', name: 'Mitsui O.S.K. Lines', shortName: 'MOL',
-    icon: '<img src="https://www.google.com/s2/favicons?domain=mol.co.jp&sz=128" class="company-logo-img" alt="mol">', color: '#ea580c', hq: 'Tokyo, Japan', fleetSize: '800+ vessels',
+    icon: '<img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mitsui_O.S.K._Lines_logo.svg" class="company-logo-img" style="background:white;padding:4px;border-radius:8px;object-fit:contain" alt="mol">', color: '#ea580c', hq: 'Tokyo, Japan', fleetSize: '800+ vessels',
     vesselTypes: ['Dry Bulk', 'LNG Carriers', 'Car Carriers', 'Tankers', 'Container Ships', 'Cruise', 'FPSOs'],
     difficulty: 8, website: 'https://www.mol.co.jp',
     companyKnowledge: {
