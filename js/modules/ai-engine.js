@@ -46,7 +46,7 @@ function buildSystemPrompt(mode, query) {
   // AI+Book mode falls through to the standard prompt with book
   // passages appended as supplementary context.
   // ─────────────────────────────────────────────────────────
-  if ((isBookFirst && APP._refBookSource) || APP._ragFromPDF) {
+  if ((isBookFirst && (APP._refBookSource || (APP._swarmSources && APP._swarmSources.length))) || APP._ragFromPDF) {
     return `You are MarineIQ's Data Extraction Engine.
 Your ONLY purpose is to extract answers from the attached reference documents.
 Today: ${today}.
@@ -189,6 +189,116 @@ Always define variables after formulas (e.g. "where P = pressure (bar), T = temp
 Always define variables after formulas (e.g. "where P = pressure (bar), T = temperature (K)").`;
 }
 
+/* ─────────── SWARM RAG MULTI-AGENT ARCHITECTURE ─────────── */
+
+/**
+ * 1. Retriever Agent (TF-IDF keyword matcher tuned for local dicts)
+ * Works synchronously on a single book's sections.
+ */
+function retrieverAgent(bookKey, bookObj, words, df, N) {
+  if (!bookObj || !bookObj.sections) return [];
+  
+  const results = bookObj.sections.map(sec => {
+    let score = 0;
+    const hay = (sec.text + ' ' + sec.heading + ' ' + (sec.keywords||[]).join(' ')).toLowerCase();
+    
+    words.forEach(w => {
+      const tf = (hay.split(w).length - 1);
+      if (tf > 0) {
+        const idf = Math.log(N / (1 + (df[w] || 0)));
+        score += tf * Math.max(idf, 0.5);
+      }
+    });
+
+    if (words.length >= 2) {
+      const phrase2 = words.slice(0, 3).join(' ');
+      if (hay.indexOf(phrase2) !== -1) score *= 2.0;
+    }
+
+    // Boost if the book is actively selected in the UI
+    if (APP.activeRefBook === bookKey) score *= 1.5;
+
+    return { 
+      score, 
+      chunk: sec.text, 
+      source: `${bookObj.shortName}, ${sec.heading} (pg ${sec.pages})`
+    };
+  });
+  
+  return results.filter(r => r.score > 0);
+}
+
+/**
+ * 2. Synthesizer Agent
+ * Aggregates all results, deduplicates, and picks the absolute best 5-6 chunks.
+ */
+function synthesizerAgent(allResults) {
+  // Flatten array of arrays
+  const flat = [].concat(...allResults);
+  // Sort by score descending
+  flat.sort((a, b) => b.score - a.score);
+  
+  // Take top 6 results that have meaningful scores
+  return flat.slice(0, 6).filter(r => r.score > 0.5);
+}
+
+/**
+ * 3. Coordinator Swarm
+ * Dispatches a Retriever Agent to every available book concurrently.
+ */
+async function swarmRetrieve(query) {
+  if (typeof REF_BOOKS === 'undefined') return null;
+
+  const qLower = query.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
+  const words = qLower.split(/\s+/).filter(w => w.length > 2);
+  if (!words.length) return null;
+
+  // Build rudimentary global DF (Document Frequency)
+  const df = {};
+  words.forEach(w => df[w] = 0);
+  let totalSections = 0;
+
+  Object.values(REF_BOOKS).forEach(book => {
+    if (!book.sections) return;
+    totalSections += book.sections.length;
+    book.sections.forEach(sec => {
+      const hay = (sec.text + ' ' + sec.heading).toLowerCase();
+      words.forEach(w => { if (hay.indexOf(w) !== -1) df[w]++; });
+    });
+  });
+
+  // Spawn agents concurrently
+  const agentPromises = Object.keys(REF_BOOKS).map(key => {
+    return new Promise(resolve => {
+      // Small timeout to allow UI thread to breath if needed, though TF-IDF is fast
+      setTimeout(() => {
+        resolve(retrieverAgent(key, REF_BOOKS[key], words, df, totalSections));
+      }, 0);
+    });
+  });
+
+  const agentResults = await Promise.all(agentPromises);
+  const bestChunks = synthesizerAgent(agentResults);
+
+  if (!bestChunks.length) return null;
+
+  let ctx = '\n\n════════════════════════════════════════\n';
+  ctx += 'KNOWLEDGE BASE REFERENCES (Swarm Retrieval)\n';
+  ctx += '════════════════════════════════════════\n';
+  ctx += 'Use the following factual excerpts to answer the question.\n\n';
+
+  const sources = new Set();
+  bestChunks.forEach((r, i) => {
+    ctx += `[Passage ${i + 1} from "${r.source}"]\n${r.chunk}\n\n`;
+    sources.add(r.source.split(',')[0]); // e.g. "McGeorge"
+  });
+  
+  return { 
+    text: ctx, 
+    sources: Array.from(sources)
+  };
+}
+
 /* ─────────── MAIN ASK FUNCTION ─────────── */
 async function doAsk() {
   const q = document.getElementById('searchInput').value.trim();
@@ -197,22 +307,6 @@ async function doAsk() {
 
   APP.lastQuery = q;
   const mode = APP.currentModel;
-
-  // Pre-fetch RAG context from uploaded documents (PDF-FIRST SEARCH)
-  APP._ragContext = '';
-  APP._ragFromPDF = false;
-  APP._ragSources = [];
-  APP._refBookSource = null;
-  if (typeof buildRAGContext === 'function') {
-    try {
-      const ragCtx = await buildRAGContext(q);
-      if (ragCtx && ragCtx.text && ragCtx.text.length > 100) {
-        APP._ragContext = ragCtx.text;
-        APP._ragFromPDF = true;
-        APP._ragSources = ragCtx.sources || [];
-      }
-    } catch (e) { console.warn('RAG context fetch failed:', e); }
-  }
 
   // Track activity
   if (typeof trackUserActivity === 'function') trackUserActivity('ai_query', q.slice(0, 80));
@@ -223,7 +317,37 @@ async function doAsk() {
   document.getElementById('askBtn').disabled = true;
   document.getElementById('askBtn').textContent = 'THINKING…';
 
-  document.getElementById('thinkStage').textContent = APP._ragFromPDF ? '📄 Searching your uploaded PDFs first…' :
+  // 1. Pre-fetch User PDF RAG context
+  APP._ragContext = '';
+  APP._ragFromPDF = false;
+  APP._ragSources = [];
+  
+  if (typeof buildRAGContext === 'function') {
+    try {
+      const ragCtx = await buildRAGContext(q);
+      if (ragCtx && ragCtx.text && ragCtx.text.length > 100) {
+        APP._ragContext = ragCtx.text;
+        APP._ragFromPDF = true;
+        APP._ragSources = ragCtx.sources || [];
+      }
+    } catch (e) { console.warn('PDF RAG fetch failed:', e); }
+  }
+
+  // 2. Pre-fetch Knowledge Base Swarm context (built-in books)
+  APP._refBookSource = null;
+  APP._swarmSources = [];
+  if (!APP._ragFromPDF) {
+    try {
+      document.getElementById('thinkStage').textContent = 'Swarm searching reference library…';
+      const swarmCtx = await swarmRetrieve(q);
+      if (swarmCtx) {
+        APP._ragContext = swarmCtx.text; // Inject via the same pipeline
+        APP._swarmSources = swarmCtx.sources;
+      }
+    } catch (e) { console.warn('Swarm fetch failed:', e); }
+  }
+
+  document.getElementById('thinkStage').textContent = APP._ragFromPDF ? '📄 Formatting PDF knowledge…' :
     mode === 'live' ? 'Searching web…' :
     'Consulting marine engineering knowledge base…';
   document.getElementById('thinkDetail').textContent = mode === 'deep' ? 'Deep research mode — may take 8–15 seconds' : '';
@@ -273,7 +397,7 @@ async function askStream(q, mode, t0) {
     };
 
     // Ironclad constraint: force zero hallucination when citing specific texts
-    if (APP._ragFromPDF || APP._refBookSource) {
+    if (APP._ragFromPDF || APP._refBookSource || (APP._swarmSources && APP._swarmSources.length)) {
       payload.temperature = 0;
     }
 
@@ -359,6 +483,12 @@ async function askStream(q, mode, t0) {
     hasSources = true;
     srcHtml += `<span class="src-chip" style="cursor:help" title="Extracted from built-in Reference Library">📚 ${esc(APP._refBookSource.source)}</span>`;
   }
+  if (APP._swarmSources && APP._swarmSources.length) {
+    hasSources = true;
+    APP._swarmSources.forEach(src => {
+      srcHtml += `<span class="src-chip" style="cursor:help" title="Extracted from Swarm Knowledge Base">📚 ${esc(src)}</span>`;
+    });
+  }
 
   if (hasSources) {
     srcBar.setAttribute('style', 'display: block !important;');
@@ -381,7 +511,7 @@ async function askLive(q, t0) {
     ]
   };
 
-  if (APP._ragFromPDF || APP._refBookSource) {
+  if (APP._ragFromPDF || APP._refBookSource || (APP._swarmSources && APP._swarmSources.length)) {
     payload.temperature = 0;
   }
 
@@ -437,6 +567,12 @@ async function askLive(q, t0) {
   if (APP._refBookSource) {
     hasSources = true;
     srcHtml += `<span class="src-chip" style="cursor:help" title="Extracted from built-in Reference Library">📚 ${esc(APP._refBookSource.source)}</span>`;
+  }
+  if (APP._swarmSources && APP._swarmSources.length) {
+    hasSources = true;
+    APP._swarmSources.forEach(src => {
+      srcHtml += `<span class="src-chip" style="cursor:help" title="Extracted from Swarm Knowledge Base">📚 ${esc(src)}</span>`;
+    });
   }
 
   // 2. Render Web URLs

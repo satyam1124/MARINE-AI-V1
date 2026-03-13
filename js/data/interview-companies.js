@@ -60,7 +60,48 @@ const INTERVIEW_COMPANIES = {
       { q: 'Explain Newton\'s three laws with examples.', type: 'technical', topic: 'Physics' },
       { q: 'How does a fresh water generator work?', type: 'technical', topic: 'Aux Machinery' },
       { q: 'Why do you want to join the Merchant Navy?', type: 'personal', topic: 'Motivation' }
-    ]
+    ],
+    campusRecruitmentSeason: 'Jul–Sep (3rd/4th year cadets)',
+    yearByYearGuide: {
+      year1: {
+        focus: 'Build Strong Foundations',
+        subjects: ['Physics (Kinematics, Newton\'s Laws, Friction, Work-Energy-Power)', 'Chemistry (Boyle\'s Law, Charles\' Law, basics of corrosion)', 'Mathematics (Trigonometry, Quadratic Equations, Mensuration)', 'English Grammar & Vocabulary', 'Workshop Basics & Safety Awareness'],
+        tips: ['Revise Class 11–12 PCM thoroughly — Anglo Eastern tests 12th-level physics heavily', 'Start reading maritime GK: world ports, oceans, major canals (Suez, Panama)', 'Improve English comprehension — 2–3 passages are asked in CBT', 'Learn about AEMA (Karjat) and AEMTC (Mumbai) to understand Anglo Eastern\'s training ecosystem']
+      },
+      year2: {
+        focus: 'Core Engineering Subjects',
+        subjects: ['Applied Thermodynamics (Laws, Carnot cycle, Rankine cycle)', 'Fluid Mechanics (Bernoulli\'s theorem, viscosity, flow types)', 'Strength of Materials (stress, strain, Young\'s modulus)', 'Basic Electrical Engineering (Ohm\'s law, AC/DC circuits, transformers)', 'Engineering Drawing & Spatial Relations'],
+        tips: ['Anglo Eastern\'s CBT has 15 spatial relation questions — practice daily', 'Master mechanical aptitude problems (gears, pulleys, levers)', 'Start attempting mock CBTs with 120-min time limit', 'Learn about Anglo Eastern\'s 3 core values and company history for interview prep']
+      },
+      year3: {
+        focus: 'Marine-Specific Preparation',
+        subjects: ['Marine Diesel Engines (2-stroke vs 4-stroke, valve timing diagrams)', 'Auxiliary Machinery (purifiers, compressors, FW generators, boilers)', 'Refrigeration (VCRS cycle, refrigerants R-134a, R-404a)', 'Ship Construction & Naval Architecture basics', 'MARPOL (all 6 annexes), SOLAS, ISM Code'],
+        tips: ['This is campus placement season (Jul–Sep) — be fully prepared', 'Practice the full CBT format: 100 Qs, 120 min, -0.33 negative marking', 'Prepare for the 240-question psychometric test (60 min) — answer fast, don\'t overthink', 'Draw neat diagrams from memory: valve timing, VCRS cycle, purifier, FW generator']
+      },
+      year4: {
+        focus: 'Interview & Advanced Readiness',
+        subjects: ['Marine Electrical Systems (alternator paralleling, emergency generator)', 'Marine Engineering Practice (MEP — overhauling, maintenance procedures)', 'Watchkeeping procedures & Engine Room Resource Management', 'Company-specific deep-dive: Anglo Eastern fleet, innovations, dual-fuel vessels'],
+        tips: ['Practice mock interviews focusing on cross-questioning technique', 'Know MV Ubuntu Empathy (first LNG dual-fuel bulk carrier)', 'Prepare situational answers: "What would you do if..." scenarios', 'Review your psychometric results and work on any flagged areas']
+      }
+    },
+    psychometricDetails: {
+      testName: 'ISF Psychometric Assessment',
+      duration: 60,
+      totalQuestions: 240,
+      format: 'Personality-based behavioral statements — agree/disagree spectrum',
+      traits: ['Multi-tasking ability', 'Leadership potential', 'Emotional resilience', 'Adaptability to sea life', 'Stress tolerance', 'Team orientation'],
+      tips: ['Answer ALL 240 questions within 60 minutes — ~15 seconds per question', 'Don\'t overthink — go with your first instinct', 'There are no "right" or "wrong" answers — it measures personality fit', 'Be consistent in your answers — contradictory responses are flagged', 'Practice by taking timed personality tests online before the actual test']
+    },
+    cbtDetails: {
+      sampleTopics: ['VCRS Cycle', 'Valve Timing Diagrams', 'Pump Classification', 'Newton\'s Laws', 'Trigonometry', 'Comprehension Passages', 'Spatial Relations (3D visualization)', 'Mechanical Aptitude (gears, pulleys)'],
+      yearWiseTopics: {
+        year1: ['Basic Physics (kinematics, forces, work-energy)', 'Basic Chemistry (gas laws, corrosion)', 'Mathematics (trigonometry, mensuration, quadratics)', 'English (grammar, vocabulary, comprehension)'],
+        year2: ['Applied Thermodynamics', 'Fluid Mechanics', 'Strength of Materials', 'Spatial Relations & Mechanical Aptitude', 'Basic Electrical Circuits'],
+        year3: ['Marine Diesel Engines', 'Auxiliary Machinery', 'Refrigeration & Air Conditioning', 'Ship Construction', 'MARPOL & SOLAS regulations'],
+        year4: ['Marine Electrical Systems', 'MEP (Marine Engineering Practice)', 'Advanced Auxiliary Systems', 'Engine Room Safety & Watchkeeping']
+      },
+      commonMistakes: ['Rushing through spatial relation questions without careful visualization', 'Ignoring the -0.33 negative marking — don\'t guess blindly', 'Spending too long on comprehension passages (aim for 2 min per passage)', 'Not practicing timed mock tests under exam conditions']
+    }
   },
 
   msc: {
@@ -105,7 +146,48 @@ const INTERVIEW_COMPANIES = {
       { q: 'What is a mooring winch? Types?', type: 'technical', topic: 'Deck Machinery' },
       { q: 'Fire extinguisher types on a ship?', type: 'technical', topic: 'Fire Safety' },
       { q: 'Why MSC? What do you know about this company?', type: 'personal', topic: 'Company Knowledge' }
-    ]
+    ],
+    campusRecruitmentSeason: 'Year-round (IMU-CET based)',
+    yearByYearGuide: {
+      year1: {
+        focus: 'Foundation & IMU-CET Preparation',
+        subjects: ['Physics (Mechanics, Thermodynamics basics)', 'Chemistry (basics, corrosion)', 'Mathematics (Algebra, Calculus basics)', 'English Grammar & Vocabulary', 'General Maritime Awareness'],
+        tips: ['Focus on IMU-CET preparation — MSC requires a valid IMU-CET rank', 'Start learning about MSC — world\'s #1 container line since 2022', 'Practice online MCQ-based tests to get comfortable with computer-based exams', 'Read about container shipping basics: TEU, port operations, trade routes']
+      },
+      year2: {
+        focus: 'Engineering Core + Maritime Basics',
+        subjects: ['Marine Machinery fundamentals', 'Basic Navigation concepts', 'Safety & Regulations (SOLAS overview)', 'Electrical & Electronics basics', 'English & Aptitude'],
+        tips: ['MSC CBT has 80 questions across 4 sections — practice balanced preparation', 'Start learning MARPOL annexes and SOLAS chapters', 'Alternator working and paralleling conditions are frequently asked', 'Practice centrifugal purifier questions — gravity disc selection is a favorite topic']
+      },
+      year3: {
+        focus: 'Technical Deep-Dive',
+        subjects: ['Marine Machinery (purifiers, compressors, boilers)', 'Safety & Regulations (MARPOL all 6 annexes, SOLAS)', 'Navigation Basics (buoyage, lights, shapes)', 'Fire safety equipment and procedures', 'Lifeboat equipment and launching procedures'],
+        tips: ['MSC uses AI-proctored online exams — camera must be on, practice under webcam conditions', 'Know all 6 MARPOL annexes with discharge limits', 'Practice fire extinguisher types and color coding thoroughly', 'Mooring winch types and deck machinery are commonly tested']
+      },
+      year4: {
+        focus: 'Interview & Company-Specific Mastery',
+        subjects: ['Advanced Marine Systems', 'Container ship specific operations', 'Company knowledge: MSC fleet, LNG vessels, MSC Cruises', 'Situational judgment and behavioral scenarios'],
+        tips: ['Know Captain Gianluigi Aponte (founder) and that MSC is family-owned', 'Reference MSC Irina (24,346 TEU) and MSC World Europa (first LNG cruise)', 'Prepare for situational questions: "What would you do if..." scenarios', 'Know that MSC surpassed Maersk as #1 container line in January 2022']
+      }
+    },
+    psychometricDetails: {
+      testName: 'MSC Online Personality Assessment',
+      duration: 45,
+      totalQuestions: 120,
+      format: 'AI-proctored personality and situational judgment',
+      traits: ['Responsibility', 'Adaptability', 'Safety consciousness', 'Teamwork', 'Decision-making under pressure'],
+      tips: ['Ensure webcam and microphone are working before starting', 'Answer each question honestly — AI monitors for consistency', 'Don\'t look away from screen — AI tracks eye movements', 'Complete within time — unanswered questions count against you', 'Practice in a quiet, well-lit room with stable internet']
+    },
+    cbtDetails: {
+      sampleTopics: ['Alternator Paralleling', 'Purifier Gravity Disc', 'MARPOL Annexes', 'Lifeboat Launching', 'Mooring Winch Types', 'Fire Extinguishers', 'Container Ship Operations'],
+      yearWiseTopics: {
+        year1: ['Basic Physics & Chemistry', 'Mathematics', 'English Grammar', 'General Knowledge'],
+        year2: ['Marine Machinery basics', 'Basic Navigation', 'Safety fundamentals', 'English & Aptitude'],
+        year3: ['Marine Machinery (purifiers, compressors)', 'MARPOL (6 annexes)', 'SOLAS', 'Fire Safety', 'LSA'],
+        year4: ['Advanced Marine Systems', 'Container Operations', 'MEP', 'Company-Specific Knowledge']
+      },
+      commonMistakes: ['Not preparing for AI-proctored environment (webcam issues)', 'Ignoring Navigation Basics section — 15 questions, 20% weight', 'Over-focusing on technical at expense of English & Aptitude (25% weight)', 'Not knowing MSC company history for interview round']
+    }
   },
 
   maersk: {
@@ -146,7 +228,48 @@ const INTERVIEW_COMPANIES = {
       { q: 'What are Maersk\'s core values? How do they align with yours?', type: 'personal', topic: 'Company Knowledge' },
       { q: 'How would you handle a senior colleague making an unsafe decision?', type: 'situational', topic: 'Safety Culture' },
       { q: 'What motivates you to work at sea for extended periods?', type: 'personal', topic: 'Motivation' }
-    ]
+    ],
+    campusRecruitmentSeason: 'Year-round (AMET University partnership)',
+    yearByYearGuide: {
+      year1: {
+        focus: 'Speed & Accuracy Training',
+        subjects: ['Numerical Reasoning (mental math, percentages, ratios)', 'Verbal Reasoning (synonyms, antonyms, sentence logic)', 'Abstract Reasoning (pattern recognition, shape sequences)', 'English Fluency', 'General Awareness'],
+        tips: ['Maersk PLI test gives only 12 minutes for 50 questions - start speed training NOW', 'Practice timed mental math daily - no calculator allowed', 'Learn Maersk 5 core values: Constant Care, Humbleness, Uprightness, Our Employees, Our Name', 'Start building your STAR-method answer bank (Situation, Task, Action, Result)']
+      },
+      year2: {
+        focus: 'Advanced Aptitude + Leadership',
+        subjects: ['Advanced Numerical Reasoning (data interpretation, charts)', 'Situational Judgment Tests (SJT)', 'Abstract Reasoning (complex patterns)', 'Leadership & Teamwork scenarios', 'English Communication skills'],
+        tips: ['Practice PLI mock tests: 50 Qs in 12 min means about 14 seconds per question', 'Build leadership examples from college - clubs, events, projects', 'Maersk values STAR format - prepare 5-6 strong behavioral examples', 'Study Maersk transformation: from shipping to integrated logistics']
+      },
+      year3: {
+        focus: 'Assessment Center Preparation',
+        subjects: ['Group Discussion techniques', 'Presentation skills', 'Case study analysis', 'Behavioral interview preparation', 'Marine engineering fundamentals for technical round'],
+        tips: ['Maersk uses Assessment Centers - practice group exercises and presentations', 'The PLI is taken twice: once online, then on-site verification', 'Know the methanol-powered container ship initiative (Laura Maersk)', 'Practice elevator pitch: 60-second self-introduction']
+      },
+      year4: {
+        focus: 'Values Alignment & Final Readiness',
+        subjects: ['Maersk company deep-dive (Gemini Cooperation, net-zero 2040)', 'Advanced behavioral scenarios', 'Marine Engineering Practice', 'Integrity & values alignment exercises'],
+        tips: ['Reference the 7-pointed star logo and its meaning (navigation by stars)', 'Know about Gemini Cooperation with Hapag-Lloyd (Feb 2025)', 'Maersk achieved 45% female cadet intake in India (2024) - diversity matters to them', 'Prepare for "Why Maersk?" question with genuine, value-aligned answers']
+      }
+    },
+    psychometricDetails: {
+      testName: 'Predictive Index (PI) + PLI Assessment',
+      duration: 12,
+      totalQuestions: 50,
+      format: 'Timed cognitive ability test - speed critical',
+      traits: ['Cognitive agility', 'Numerical reasoning', 'Verbal reasoning', 'Abstract reasoning', 'Learning speed'],
+      tips: ['Only 12 minutes for 50 questions - about 14 seconds each', 'No calculator allowed - practice mental math', 'Do not spend more than 20 seconds on any question - skip and return', 'The test is taken TWICE (online + on-site verification) for cheat detection', 'Practice with free PLI simulators online - speed is everything']
+    },
+    cbtDetails: {
+      sampleTopics: ['Number Series', 'Percentage & Ratio', 'Vocabulary', 'Pattern Recognition', 'Data Interpretation', 'Sentence Completion', 'Spatial Reasoning'],
+      yearWiseTopics: {
+        year1: ['Mental Math (addition, subtraction, multiplication)', 'Basic Vocabulary', 'Simple Pattern Recognition', 'Number Series'],
+        year2: ['Data Interpretation (charts, graphs)', 'Advanced Vocabulary', 'Complex Patterns', 'Situational Judgment basics'],
+        year3: ['Full PLI Practice (50 Qs, 12 min)', 'SJT Scenarios', 'Group Discussion prep', 'Presentation skills'],
+        year4: ['PLI Speed Optimization', 'Behavioral Interview Mastery', 'Assessment Center Readiness', 'Values Alignment']
+      },
+      commonMistakes: ['Spending too long on one question - you only have 14 seconds each', 'Not practicing under timed conditions', 'Forgetting that PLI is taken twice - on-site verification catches cheaters', 'Neglecting behavioral preparation for the Assessment Center']
+    }
   },
 
   bsm: {
@@ -193,7 +316,16 @@ const INTERVIEW_COMPANIES = {
       { q: 'Working principle of a turbocharger.', type: 'technical', topic: 'Turbochargers' },
       { q: 'Function of oily water separator? Discharge limit?', type: 'technical', topic: 'MARPOL' },
       { q: 'Why do you want to join the Merchant Navy?', type: 'personal', topic: 'Motivation' }
-    ]
+    ],
+    campusRecruitmentSeason: 'Apr-Jun (BSM Smart Academy)',
+    yearByYearGuide: {
+      year1: { focus: 'BSM Smart Academy Entry', subjects: ['Basic Engineering Knowledge', 'English Language (grammar, comprehension)', 'Reasoning & Aptitude', 'General Maritime Awareness', 'Personality Development'], tips: ['BSM Smart Academy inducts cadets after 1st year - apply early', 'Focus on English proficiency - 25% weight in BSM CBT', 'Start learning BSM 5 values: Independence, Fairness, Entrepreneurship, Responsibility, Employees', 'Know about the Schulte Group and 140+ years of heritage'] },
+      year2: { focus: 'Technical Foundation Building', subjects: ['Auxiliary Machinery (boilers, compressors, purifiers)', 'IC Engines (2-stroke & 4-stroke)', 'Basic Electrical Machines', 'Lubrication systems', 'Turbocharger working principles'], tips: ['BSM interviews focus heavily on auxiliary machinery - start early', 'Practice drawing boiler water circuits and compressor diagrams', 'BSM has just culture - no blame philosophy, understand what this means', 'Know MV Kairos (world largest LNG bunker vessel)'] },
+      year3: { focus: 'Technical Mastery for Campus Drive', subjects: ['Advanced Auxiliary Systems (turning gear, safety interlocks)', 'Boiler water testing parameters', 'Main Engine systems', 'Ship safety equipment', 'LNG carrier operations basics'], tips: ['BSM CBT: 60 questions, 60 min, no negative marking - manage time well', 'Turning gear purpose and safety interlocks are BSM favorites', 'Boiler water test (pH, chloride, phosphate, alkalinity) is frequently asked', 'Practice rapid-fire cross-questions - BSM interviewers drill deep'] },
+      year4: { focus: 'Interview Readiness & LNG Knowledge', subjects: ['LNG carrier cargo systems', 'BSM fleet and vessel types', 'MariApps digital platform', 'Safety management systems', 'Situational problem-solving'], tips: ['Reference MariApps as BSM proprietary digital fleet management platform', 'Know the 4 merged companies: Hanseatic, Dorchester, Eurasia, Vorsetzen', 'BSM manages 50+ LNG carriers - know LNG basics well', 'Prepare for cross-questioning: they will challenge your initial answer'] }
+    },
+    psychometricDetails: { testName: 'BSM Psychometric & Aptitude Assessment', duration: 30, totalQuestions: 80, format: 'Personality and situational judgment combined', traits: ['Adaptability', 'Emotional strength', 'Frustration tolerance', 'Aggression control', 'Psychological resilience'], tips: ['DG Shipping mandates psychometric testing - BSM takes it seriously', 'Answer consistently - contradictions are flagged', 'Show adaptability to sea life situations', 'Demonstrate calm decision-making under pressure', 'Practice situational judgment tests online'] },
+    cbtDetails: { sampleTopics: ['2-Stage Air Compressor', 'Boiler Water Test', 'Turning Gear & Interlocks', 'Turbocharger Principle', 'Oily Water Separator', 'Purifier Operations'], yearWiseTopics: { year1: ['English Language', 'Basic Reasoning & Aptitude', 'General Science', 'General Maritime Awareness'], year2: ['Auxiliary Machinery basics', 'IC Engine fundamentals', 'Basic Electrical', 'Lubrication systems'], year3: ['Advanced Aux Machinery (compressors, purifiers, boilers)', 'Main Engine systems', 'Safety regulations', 'OWS & MARPOL'], year4: ['LNG carrier systems', 'MEP procedures', 'Company-specific knowledge', 'Situational scenarios'] }, commonMistakes: ['Not preparing for cross-questions during interview', 'Ignoring boiler water testing parameters', 'Not knowing what turning gear safety interlocks are', 'Underestimating English section (15 Qs, 25% weight)'] }
   },
 
   synergy: {
@@ -239,7 +371,16 @@ const INTERVIEW_COMPANIES = {
       { q: 'Cooling water treatment chemicals? Why?', type: 'technical', topic: 'Water Treatment' },
       { q: 'Turbocharger components and working?', type: 'technical', topic: 'Turbochargers' },
       { q: 'What do you know about Synergy Marine?', type: 'personal', topic: 'Company Knowledge' }
-    ]
+    ],
+    campusRecruitmentSeason: 'Oct-Dec (Synergy CET Exam)',
+    yearByYearGuide: {
+      year1: { focus: 'Strong PCM Foundation', subjects: ['Physics (Mechanics, Heat, Optics, Electricity)', 'Chemistry (Gas Laws, Periodic Table, Chemical Bonding)', 'Mathematics (Trigonometry, Calculus, Algebra)', 'English Grammar & Vocabulary', 'Basic Reasoning & Aptitude'], tips: ['Synergy CET has 200 MCQs - NEGATIVE MARKING -0.25 per wrong answer', 'Physics has 50 questions (25% weight) - highest section', 'Start solving previous year IMU-CET papers for practice', 'Revise Class 11-12 PCM thoroughly'] },
+      year2: { focus: 'Deep Science + Maritime Awareness', subjects: ['Advanced Physics (thermodynamics, fluid mechanics, waves)', 'Applied Chemistry (corrosion, water treatment)', 'Mathematics (integration, differential equations)', 'Aptitude & Reasoning (data interpretation, logical sequences)', 'Basic Marine Engineering'], tips: ['Synergy CET is 3 hours for 200 questions - 54 seconds per question', 'Master Archimedes principle, Pascal law, Bernoulli principle', 'English section has 40 questions (20% weight)', 'Learn about Synergy growth: 0 to 750+ vessels in 19 years'] },
+      year3: { focus: 'Exam-Ready Technical Knowledge', subjects: ['Marine Engines & auxiliary systems', 'Thermodynamics (deep)', 'Cooling water treatment chemicals', 'Turbocharger components and working', 'MARPOL, SOLAS, ISM Code'], tips: ['Campus placement season is Oct-Dec - register early', 'Synergy interview is HEAVILY technical - thermodynamics focus', 'Know cooling water treatment chemicals and purposes', 'Practice the full 200-question mock test under 3-hour pressure'] },
+      year4: { focus: 'Company-Specific & Interview Mastery', subjects: ['Dual-fuel vessel management (LPG/LNG)', 'EU ETS compliance knowledge', 'SynergyOne digital platform', 'Practical marine engineering scenarios'], tips: ['Quote Captain Rajesh Unni as founder', 'Know exact fleet breakdown: 329 Tankers, 290 Bulkers, 43 Containers, 46 LPG, 35 Offshore, 6 LNG', 'Reference EU ETS compliance expertise', 'Prepare for practical troubleshooting questions'] }
+    },
+    psychometricDetails: { testName: 'Synergy Post-CBT Psychometric Assessment', duration: 45, totalQuestions: 100, format: 'Personality inventory + situational judgment', traits: ['Leadership potential', 'Adaptability to sea life', 'Stress management', 'Team collaboration', 'Safety mindset'], tips: ['This follows the 3-hour CBT - be mentally prepared', 'Answer honestly - measures personality fit for sea life', 'No negative marking in psychometric - answer everything', 'Show willingness to adapt to long sea voyages', 'Demonstrate calm decision-making in safety scenarios'] },
+    cbtDetails: { sampleTopics: ['Archimedes Principle', 'Pascal Law', 'Bernoulli Principle', 'Cooling Water Treatment', 'Turbocharger Components', 'Trigonometry', 'Data Interpretation'], yearWiseTopics: { year1: ['Physics (50 Qs)', 'Chemistry (30 Qs)', 'Mathematics (40 Qs)', 'English (40 Qs)', 'Aptitude (40 Qs)'], year2: ['Advanced Physics', 'Applied Chemistry', 'Advanced Math', 'Logical Reasoning', 'Marine awareness'], year3: ['Marine Engineering topics', 'Thermodynamics', 'Auxiliary systems', 'Safety regulations', 'Full mock CET'], year4: ['Company knowledge', 'Practical scenarios', 'Dual-fuel vessels', 'Environmental regulations'] }, commonMistakes: ['Guessing blindly with -0.25 negative marking', 'Poor time management: 200 Qs in 180 min', 'Neglecting Chemistry (30 Qs) - easiest to score', 'Not registering for Synergy CET in time'] }
   },
 
   vships: {
@@ -283,7 +424,16 @@ const INTERVIEW_COMPANIES = {
       { q: 'What is ISPS Code? 3 security levels?', type: 'technical', topic: 'Security' },
       { q: 'Enclosed space entry procedures?', type: 'technical', topic: 'Safety' },
       { q: 'How do you maintain English proficiency?', type: 'personal', topic: 'Communication' }
-    ]
+    ],
+    campusRecruitmentSeason: 'Year-round (TMI/AMET partnership)',
+    yearByYearGuide: {
+      year1: { focus: 'English Excellence + Aptitude', subjects: ['English Grammar & Vocabulary (CRITICAL)', 'Numerical Aptitude', 'Series Completion & Pattern Recognition', 'Picture Reasoning', 'General Maritime Knowledge'], tips: ['V.Ships places HIGHEST priority on English - start improving NOW', 'APRO test: 50 questions in 12 minutes - practice speed', 'Marlins English test is pass/fail - work on spoken English daily', 'Know the 5 values: Care, Challenge, Collaborate, Consistent, Commit'] },
+      year2: { focus: 'Ship Knowledge + Sea Routes', subjects: ['Major Sea Routes (Asia-Europe, Trans-Pacific, Trans-Atlantic)', 'ISM Code (12 elements)', 'ISPS Code (3 security levels)', 'World Geography & Trading Areas', 'English Communication (written + spoken)'], tips: ['V.Ships interviews focus on sea routes and ship knowledge', 'Memorize the 12 elements of ISM Code', 'Know the 3 security levels of ISPS Code', 'Practice Marlins-style English tests online'] },
+      year3: { focus: 'Multi-Test Preparation', subjects: ['APRO Test (50 Qs, 12 min)', 'Marlins Test of English (written)', 'Marlins Test of Spoken English (TOSE)', 'Enclosed space entry procedures', 'Ship safety regulations'], tips: ['You must clear APRO + Marlins + Interview + ASK test - prepare for ALL', 'APRO cut-off is usually 35/50 - practice timed tests', 'Marlins TOSE is conducted by authorized assessors - improve spoken English', 'Enclosed space entry is a frequently asked safety question'] },
+      year4: { focus: 'ASK Test & Interview Mastery', subjects: ['ASK Technical Test (64 Qs, 80% pass required)', 'Advanced maritime regulations', 'ShipSure 2.0 digital platform knowledge', 'Company deep-dive: 3500+ vessels, 44000+ seafarers'], tips: ['ASK Test needs 80% - this is the hardest threshold among all companies', 'Know about ShipSure 2.0 and Fleet Cell of the Future', 'Reference that V.Ships is the largest ship management group', 'Mention their 40th anniversary (2024) and MACN membership'] }
+    },
+    psychometricDetails: { testName: 'APRO Ability + PI/PLI Assessment', duration: 12, totalQuestions: 50, format: 'Timed aptitude and reasoning test', traits: ['Cognitive speed', 'Aptitude for learning', 'English proficiency', 'Reasoning ability', 'Decision-making speed'], tips: ['50 questions in 12 minutes - speed is invisible and contributes to score', 'Cut-off is typically 35 correct answers', 'Quicker attempts earn higher points', 'No negative marking - answer everything', 'Practice with timed aptitude test apps'] },
+    cbtDetails: { sampleTopics: ['Sea Routes (Asia-Europe)', 'ISM Code Elements', 'ISPS Code Levels', 'Enclosed Space Entry', 'Fire Safety', 'Ship Construction Basics'], yearWiseTopics: { year1: ['Aptitude', 'English', 'Series Completion', 'Picture Reasoning'], year2: ['Sea Routes', 'ISM/ISPS Code', 'World Geography', 'Ship Knowledge basics'], year3: ['APRO+Marlins Practice', 'Safety Regulations', 'Enclosed Space Entry', 'TOSE Prep'], year4: ['ASK Test (64 Qs, 80%)', 'Advanced Regulations', 'ShipSure 2.0', 'Company Knowledge'] }, commonMistakes: ['Neglecting English preparation - single biggest reason for rejection', 'Not reaching 80% on ASK Test - study thoroughly', 'Poor Marlins TOSE performance due to lack of spoken English practice', 'Not knowing major sea routes and trading areas'] }
   },
 
   thome: {
@@ -326,7 +476,16 @@ const INTERVIEW_COMPANIES = {
       { q: 'Draw and explain FW generator diagram.', type: 'technical', topic: 'FWG' },
       { q: 'How does turbocharger improve efficiency?', type: 'technical', topic: 'Turbochargers' },
       { q: 'What do you know about Thome/OSM Thome?', type: 'personal', topic: 'Company Knowledge' }
-    ]
+    ],
+    campusRecruitmentSeason: 'Year-round (Norway & Singapore)',
+    yearByYearGuide: {
+      year1: { focus: 'Engineering Fundamentals', subjects: ['Engineering Knowledge basics', 'English Language (grammar, vocabulary)', 'Aptitude & Reasoning', 'General Maritime Awareness', 'Workshop Safety'], tips: ['OSM Thome has moderate difficulty CBT - focus on balanced preparation', 'Know the 4 values: Safety, Transparency, Relationships, Innovation', 'Learn about the OSM+Thome merger (2023)', 'Credo: It Is All About People - remember this for interviews'] },
+      year2: { focus: 'Core Marine Engineering', subjects: ['2-stroke vs 4-stroke engines (differences)', 'Pump types and applications', 'FW Generator principles', 'Turbocharger working', 'Basic ship systems'], tips: ['2-stroke vs 4-stroke comparison is their most popular question', 'Practice drawing FW generator diagrams from memory', 'Know pump types: centrifugal, PD, gear, vane', 'Good communication skills are highly valued at OSM Thome'] },
+      year3: { focus: 'Technical Depth + Company Prep', subjects: ['Advanced marine systems', 'Safety management', 'Environmental regulations', 'Ship maintenance procedures', 'EVIGO initiative knowledge'], tips: ['OSM Thome CBT: 50 questions, 60 min, no negative marking', 'Psychometric test follows - be prepared for personality assessment', 'Know the EVIGO decarbonization initiative', 'Understand the dual-HQ model: Norwegian engineering + Singapore operations'] },
+      year4: { focus: 'Merger Knowledge & Final Prep', subjects: ['OSM Maritime (Norway, 1989) + Thome (Singapore, 1963) merger story', 'Klaveness Ship Management acquisition (Oct 2024)', 'Fleet diversity: tankers, bulkers, containers, car carriers, cruise, offshore', 'Alternative fuels and green shipping'], tips: ['Know both heritage stories: OSM from Norway, Thome from Singapore', 'Mention Klaveness acquisition for showing current awareness', 'Reference 1000 ships managed: 450 technical + 550 crew', 'Demonstrate alignment with their people-first culture'] }
+    },
+    psychometricDetails: { testName: 'OSM Thome Personality Assessment', duration: 30, totalQuestions: 60, format: 'Personality inventory and behavioral tendency assessment', traits: ['Safety consciousness', 'People orientation', 'Innovation mindset', 'Relationship building', 'Transparency'], tips: ['Reflects their 4 values: Safety, Transparency, Relationships, Innovation', 'Answer with people-first mindset - their credo is It Is All About People', 'Show balance between safety and innovation', 'No right or wrong answers - be authentic', 'Prepare by reflecting on your values and how they match'] },
+    cbtDetails: { sampleTopics: ['2-stroke vs 4-stroke Engines', 'Pump Types', 'FW Generator', 'Turbocharger', 'Ship Safety Systems', 'Environmental Regulations'], yearWiseTopics: { year1: ['Engineering Knowledge basics', 'English Language', 'Aptitude', 'General Awareness'], year2: ['Marine diesel engines', 'Pump classification', 'FW generators', 'Turbochargers'], year3: ['Advanced marine systems', 'Safety management', 'Environmental regulations', 'EVIGO initiative'], year4: ['Company history & merger', 'Alternative fuels', 'Fleet management', 'Practical scenarios'] }, commonMistakes: ['Not knowing the OSM-Thome merger story', 'Ignoring communication skills - they value it highly', 'Not preparing for psychometric after CBT', 'Forgetting the 4 core values'] }
   },
 
   wallem: {
@@ -375,6 +534,15 @@ const INTERVIEW_COMPANIES = {
       { q: 'Ship\'s double bottom construction?', type: 'technical', topic: 'Ship Construction' },
       { q: 'What is ECDIS? Advantages over paper charts?', type: 'technical', topic: 'Navigation' },
       { q: 'What do you know about Wallem Group?', type: 'personal', topic: 'Company Knowledge' }
-    ]
+    ],
+    campusRecruitmentSeason: 'Jul-Sep (ISF Mumbai testing)',
+    yearByYearGuide: {
+      year1: { focus: 'Strong Foundation + EQ Development', subjects: ['Physics (Mechanics, Electricity, Optics)', 'Mathematics (Algebra, Geometry, Mensuration)', 'English Language (grammar, comprehension)', 'Logical Reasoning', 'Emotional Quotient awareness'], tips: ['Wallem CBT includes Emotional Quotient section - unique among all companies', 'Focus on 10th standard Physics and Math - heavily tested', 'Start improving English - excellent command is expected', 'Learn about Wallem: world first third-party ship manager (1908)'] },
+      year2: { focus: 'Technical + Safety Knowledge', subjects: ['Fire safety equipment and procedures', 'LSA (Life Saving Appliances) regulations', 'Ship construction basics', 'ECDIS fundamentals', 'World Geography and Shipping'], tips: ['Fire extinguisher types and color coding is a Wallem favorite', 'Know SOLAS requirements for lifeboat equipment', 'Start learning ECDIS basics - Wallem tests navigation knowledge', 'Study major world shipping routes and ports'] },
+      year3: { focus: 'Comprehensive Interview Prep', subjects: ['Advanced fire safety', 'Ship stability and construction', 'Navigation equipment (ECDIS, radar, AIS)', 'Maritime regulations (SOLAS, MARPOL)', 'Current events in maritime industry'], tips: ['Wallem interview rated 8/10 difficulty - prepare thoroughly', 'ISF Written Test at ISF Mumbai - register via wallemtest@isfgroup.in', 'Eyesight test at MMD Mumbai is mandatory - get eyes checked early', 'Rs 1000 fee for ISF written test + Rs 30000 for medical'] },
+      year4: { focus: 'Advanced Mastery + BYD Knowledge', subjects: ['Advanced ship systems', 'Wallem company deep-dive: 123 years heritage', 'MV BYD Explorer No. 1 (BYD partnership)', 'Wallem Manning Agency in China (sole foreign company)', 'Lifeboat safety and compliance services'], tips: ['Know they are NOT MOL-owned - Wallem family-owned (common misconception)', 'Reference MV BYD Explorer No. 1 - first BYD chartered PCTC vessel', 'Know about the sole foreign Manning Agency in China (2015)', 'Unique vertical: lifeboat safety and compliance services'] }
+    },
+    psychometricDetails: { testName: 'ISF Psychometric Assessment (Psychometrica Seafarer Assessment Battery)', duration: 45, totalQuestions: 80, format: 'Emotional resilience and personality suitability assessment', traits: ['Emotional resilience', 'Adaptability', 'Stress management', 'Leadership potential', 'Sea life suitability'], tips: ['Conducted by ISF Mumbai with Psychometrica tools', 'Evaluates emotional resilience specifically for sea life', 'Moderate to high aptitude level expected', 'Answer honestly - designed to assess genuine psychological profile', 'Fee is separate from written test - bear the cost yourself'] },
+    cbtDetails: { sampleTopics: ['Fire Extinguisher Types', 'SOLAS Lifeboat Requirements', 'Ship Double Bottom Construction', 'ECDIS vs Paper Charts', 'Logical Reasoning', 'Emotional Quotient'], yearWiseTopics: { year1: ['Physics (20 Qs, 25%)', 'Mathematics (20 Qs, 25%)', 'English (15 Qs, 18%)', 'Logical Reasoning (15 Qs, 18%)', 'EQ (10 Qs, 14%)'], year2: ['Fire Safety', 'LSA Regulations', 'Ship Construction', 'ECDIS basics', 'World Geography'], year3: ['Advanced ship systems', 'Navigation equipment', 'Maritime regulations', 'Current affairs', 'Full ISF mock test'], year4: ['Company deep-dive', 'BYD partnership', 'Advanced safety', 'Practical scenarios'] }, commonMistakes: ['Ignoring the EQ section - unique to Wallem, 10 Qs worth 14%', 'Not registering for ISF test in time - email wallemtest@isfgroup.in', 'Failing MMD eyesight test - get eyes checked months in advance', 'Thinking Wallem is MOL-owned - they are family-owned'] }
   }
 };

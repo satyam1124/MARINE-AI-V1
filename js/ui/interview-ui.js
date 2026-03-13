@@ -158,161 +158,305 @@ function showCompanyDetail(companyId) {
   var c = INTERVIEW_COMPANIES[companyId];
   if (!c) return;
   var ck = c.companyKnowledge || {};
+  var cadetYear = (typeof CadetProfile !== 'undefined' && CadetProfile.getYear()) || 2;
   
   var container = document.getElementById('interviewContent');
   var html = '<button class="interview-back-btn" onclick="showInterviewHome()">← Back to Interview Prep</button>';
   
-  // Banner
+  // ── Helper: Collapsible section wrapper ──
+  function collapsible(id, emoji, title, content, defaultOpen, badge) {
+    var openClass = defaultOpen ? ' open' : '';
+    var s = '<div class="collapsible-section">';
+    s += '<div class="collapsible-header' + openClass + '" onclick="toggleCollapsible(\'' + id + '\')">';
+    s += '<div class="collapsible-title">' + emoji + ' ' + title;
+    if (badge) s += ' <span class="collapsible-badge">' + badge + '</span>';
+    s += '</div>';
+    s += '<span class="collapsible-toggle">▼</span>';
+    s += '</div>';
+    s += '<div class="collapsible-body' + openClass + '" id="collapse-' + id + '">' + content + '</div>';
+    s += '</div>';
+    return s;
+  }
+  
+  // ══ BANNER (always open, not collapsible) ══
   html += '<div class="company-detail-banner" style="--company-color:' + c.color + '">';
   html += '<div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">';
   html += '<span style="font-size:2.5rem">' + c.icon + '</span>';
   html += '<div>';
   html += '<div class="company-detail-title">' + c.name + '</div>';
-  html += '<div class="company-detail-sub">📍 ' + c.hq + ' | 🚢 ' + c.fleetSize + ' | 🌐 ' + c.vesselTypes.join(', ') + '</div>';
+  html += '<div class="company-detail-sub">📍 ' + c.hq + ' | 🚢 ' + c.fleetSize + '</div>';
   if (ck.motto) html += '<div style="color:var(--tx3);font-size:0.85rem;margin-top:0.3rem;font-style:italic">"' + ck.motto + '"</div>';
   html += '</div></div>';
-  // Official Website Link
   if (c.website) {
     html += '<div style="margin-top:0.8rem;display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">';
-    html += '<a href="' + c.website + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 1rem;background:' + c.color + ';color:#fff;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:opacity 0.2s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">🌐 Official Website ↗</a>';
+    html += '<a href="' + c.website + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 1rem;background:' + c.color + ';color:#fff;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none">🌐 Official Website ↗</a>';
     if (ck.officialLinks) {
-      var linkKeys = Object.keys(ck.officialLinks);
-      linkKeys.forEach(function(lk) {
+      Object.keys(ck.officialLinks).forEach(function(lk) {
         if (lk !== 'main') {
-          html += '<a href="' + ck.officialLinks[lk] + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.3rem;padding:0.35rem 0.8rem;background:var(--bg3);color:var(--tx2);border:1px solid var(--br);border-radius:8px;font-size:0.78rem;text-decoration:none;transition:background 0.2s" onmouseover="this.style.background=\'var(--bg4)\'" onmouseout="this.style.background=\'var(--bg3)\'">' + lk.charAt(0).toUpperCase() + lk.slice(1) + ' ↗</a>';
+          html += '<a href="' + ck.officialLinks[lk] + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.3rem;padding:0.35rem 0.8rem;background:var(--bg3);color:var(--tx2);border:1px solid var(--br);border-radius:8px;font-size:0.78rem;text-decoration:none">' + lk.charAt(0).toUpperCase() + lk.slice(1) + ' ↗</a>';
         }
       });
     }
     html += '</div>';
   }
-  if (ck.founded) html += '<div style="color:var(--tx2);font-size:0.9rem;margin-bottom:0.5rem;">🏛 Founded: ' + ck.founded + ' — ' + (new Date().getFullYear() - ck.founded) + '+ years of maritime heritage</div>';
-  
-  // History
-  if (ck.history) {
-    html += '<h3 style="color:var(--tx1);font-size:1rem;margin:1rem 0 0.5rem">📖 Company History</h3>';
-    html += '<p style="color:var(--tx2);font-size:0.9rem;line-height:1.6">' + ck.history + '</p>';
-  }
-  
-  // Key Facts
-  if (ck.keyFacts && ck.keyFacts.length) {
-    html += '<h3 style="color:var(--tx1);font-size:1rem;margin:1rem 0 0.5rem">⭐ Key Facts to Know</h3>';
-    html += '<ul style="color:var(--tx2);font-size:0.9rem;padding-left:1.2rem;line-height:1.8">';
-    ck.keyFacts.forEach(function(f) { html += '<li>' + f + '</li>'; });
-    html += '</ul>';
-  }
-  
-  // Subsidiaries & Branches
-  if (ck.subsidiaries && ck.subsidiaries.length) {
-    html += '<h3 style="color:var(--tx1);font-size:1rem;margin:1rem 0 0.5rem">🏢 Offices, Branches & Subsidiaries</h3>';
-    html += '<div style="display:grid;gap:0.6rem;margin-bottom:1rem">';
-    ck.subsidiaries.forEach(function(sub) {
-      html += '<div style="background:var(--bg3);border-radius:10px;padding:0.8rem 1rem;border-left:3px solid ' + c.color + '">';
-      html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.3rem">';
-      html += '<div style="font-weight:600;color:var(--tx1);font-size:0.88rem">' + sub.name + '</div>';
-      if (sub.website) html += '<a href="' + sub.website + '" target="_blank" rel="noopener" style="font-size:0.75rem;color:' + c.color + ';text-decoration:none">Visit ↗</a>';
-      html += '</div>';
-      html += '<div style="color:var(--tx3);font-size:0.78rem;margin-top:0.15rem">📍 ' + sub.location + '</div>';
-      html += '<div style="color:var(--tx2);font-size:0.82rem;margin-top:0.3rem">' + sub.role + '</div>';
-      html += '</div>';
-    });
-    html += '</div>';
+  if (ck.founded) html += '<div style="color:var(--tx2);font-size:0.9rem;margin-top:0.5rem">🏛 Founded: ' + ck.founded + ' — ' + (new Date().getFullYear() - ck.founded) + '+ years of maritime heritage</div>';
+  // Campus Recruitment Season Badge (in banner)
+  if (c.campusRecruitmentSeason) {
+    html += '<div style="margin-top:0.8rem"><span style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;background:linear-gradient(135deg,' + c.color + '22,' + c.color + '11);border:1px solid ' + c.color + '44;border-radius:10px;font-size:0.85rem;color:' + c.color + ';font-weight:600">📅 Campus Season: ' + c.campusRecruitmentSeason + '</span></div>';
   }
   html += '</div>';
   
-  // Innovation & Sustainability (side by side)
-  if (ck.innovation || ck.sustainability) {
-    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">';
-    if (ck.innovation) {
-      html += '<div class="result-card" style="text-align:left;padding:1rem"><div style="font-weight:700;color:var(--tx1);margin-bottom:0.5rem">🔧 Innovation & Contribution</div>';
-      html += '<div style="color:var(--tx2);font-size:0.85rem;line-height:1.6">' + ck.innovation + '</div></div>';
-    }
-    if (ck.sustainability) {
-      html += '<div class="result-card" style="text-align:left;padding:1rem"><div style="font-weight:700;color:var(--tx1);margin-bottom:0.5rem">🌱 Sustainability</div>';
-      html += '<div style="color:var(--tx2);font-size:0.85rem;line-height:1.6">' + ck.sustainability + '</div></div>';
-    }
-    html += '</div>';
-  }
-  
-  // Named Notable Vessels
-  if (ck.namedVessels && ck.namedVessels.length) {
-    html += '<h3 style="color:var(--tx1);font-size:1rem;margin-bottom:0.8rem">🚢 Notable Vessels</h3>';
-    html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.8rem;margin-bottom:1.5rem">';
-    ck.namedVessels.forEach(function(v) {
-      html += '<div class="result-card" style="text-align:left;padding:0.8rem 1rem;border-top:3px solid ' + c.color + '">';
-      html += '<div style="font-weight:700;color:var(--tx1);font-size:0.9rem">' + v.name + '</div>';
-      html += '<div style="color:var(--tx3);font-size:0.78rem;margin:0.2rem 0">' + v.type + '</div>';
-      html += '<div style="color:var(--tx2);font-size:0.82rem;line-height:1.5">' + v.highlight + '</div>';
-      html += '</div>';
-    });
-    html += '</div>';
-  }
-  
-  // Impress the Interviewer
-  if (ck.impressInterviewer && ck.impressInterviewer.length) {
-    html += '<h3 style="color:var(--tx1);font-size:1rem;margin-bottom:0.8rem">🎯 How to Impress the Interviewer</h3>';
-    html += '<div class="tips-grid">';
-    ck.impressInterviewer.forEach(function(tip) {
-      html += '<div class="tip-card"><div class="tip-card-icon">🎯</div><div class="tip-card-text">' + tip + '</div></div>';
-    });
-    html += '</div>';
-  }
-  
-  // Selection Process Timeline
-  html += '<h3 style="color:var(--tx1);font-size:1rem;margin:1.5rem 0 0.8rem">📋 Selection Process</h3>';
-  html += '<div class="selection-timeline">';
-  c.selectionProcess.forEach(function(step, i) {
-    html += '<div class="timeline-step">';
-    html += '<div class="timeline-dot" style="background:' + c.color + '">' + (i + 1) + '</div>';
-    html += '<div class="timeline-info">';
-    html += '<div class="step-name">' + step.stage + '</div>';
-    html += '<div class="step-desc">' + step.desc + '</div>';
-    html += '</div></div>';
-  });
+  // ── Cadet Year Info Bar ──
+  html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:0.7rem 1rem;background:linear-gradient(135deg,rgba(56,189,248,0.08),rgba(129,140,248,0.08));border:1px solid rgba(56,189,248,0.2);border-radius:12px;margin-bottom:1rem">';
+  html += '<div style="display:flex;align-items:center;gap:0.5rem;font-size:0.88rem;color:var(--tx1)">🎓 Showing content for: <strong>Year ' + cadetYear + ' Cadet</strong></div>';
+  html += '<button onclick="CadetProfile.showYearSelector()" style="background:none;border:1px solid rgba(56,189,248,0.3);color:#38bdf8;padding:0.3rem 0.8rem;border-radius:8px;font-size:0.78rem;cursor:pointer">Change Year</button>';
   html += '</div>';
-  
-  // CBT Format Card
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">';
-  html += '<div class="result-card"><div class="result-card-value">' + c.cbtFormat.duration + ' min</div><div class="result-card-label">Exam Duration</div></div>';
-  html += '<div class="result-card"><div class="result-card-value">' + c.cbtFormat.totalQuestions + '</div><div class="result-card-label">Total Questions</div></div>';
-  html += '<div class="result-card"><div class="result-card-value">' + c.cbtFormat.passingScore + '%</div><div class="result-card-label">Passing Score</div></div>';
-  html += '<div class="result-card"><div class="result-card-value">' + (c.cbtFormat.negativeMarking ? '-' + (c.cbtFormat.negativeMarkValue || 0.25) : 'No') + '</div><div class="result-card-label">Negative Marking</div></div>';
-  html += '</div>';
-  
-  // Interview Tips
-  html += '<h3 style="color:var(--tx1);font-size:1rem;margin-bottom:0.8rem;">💡 Interview Tips</h3>';
-  html += '<div class="tips-grid">';
-  c.interviewStyle.tips.forEach(function(tip) {
-    html += '<div class="tip-card"><div class="tip-card-icon">💡</div><div class="tip-card-text">' + tip + '</div></div>';
-  });
-  html += '</div>';
-  
-  // Action Buttons
-  html += '<div class="company-actions">';
-  html += '<button class="company-action-btn primary" onclick="launchCBTExam(\'' + companyId + '\')">📝 Start CBT Exam</button>';
+
+  // ══ ACTION BUTTONS (always visible, prominent) ══  
+  html += '<div class="company-actions" style="margin-bottom:1.5rem">';
+  html += '<button class="company-action-btn primary" onclick="launchCBTExam(\'' + companyId + '\')">📝 Start CBT Exam (Year ' + cadetYear + ')</button>';
   html += '<button class="company-action-btn secondary" onclick="startAIInterview(\'' + companyId + '\')">🎤 Mock Interview</button>';
   html += '</div>';
+
+  // ══ SELECTION PROCESS (open) ══
+  var selHtml = '<div class="selection-timeline">';
+  c.selectionProcess.forEach(function(step, i) {
+    selHtml += '<div class="timeline-step"><div class="timeline-dot" style="background:' + c.color + '">' + (i + 1) + '</div>';
+    selHtml += '<div class="timeline-info"><div class="step-name">' + step.stage + '</div><div class="step-desc">' + step.desc + '</div></div></div>';
+  });
+  selHtml += '</div>';
+  html += collapsible('sel-' + companyId, '📋', 'Selection Process', selHtml, true, c.selectionProcess.length + ' steps');
+
+  // ══ CBT FORMAT (open) ══
+  var cbtHtml = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">';
+  cbtHtml += '<div class="result-card"><div class="result-card-value">' + c.cbtFormat.duration + ' min</div><div class="result-card-label">Duration</div></div>';
+  cbtHtml += '<div class="result-card"><div class="result-card-value">' + c.cbtFormat.totalQuestions + '</div><div class="result-card-label">Questions</div></div>';
+  cbtHtml += '<div class="result-card"><div class="result-card-value">' + c.cbtFormat.passingScore + '%</div><div class="result-card-label">Passing Score</div></div>';
+  cbtHtml += '<div class="result-card"><div class="result-card-value">' + (c.cbtFormat.negativeMarking ? '-' + (c.cbtFormat.negativeMarkValue || 0.25) : 'No') + '</div><div class="result-card-label">Negative Marking</div></div>';
+  cbtHtml += '</div>';
+  html += collapsible('cbt-' + companyId, '📝', 'CBT Exam Format', cbtHtml, true);
+
+  // ══ YEAR-BY-YEAR GUIDE (open, auto-select user's year) ══
+  if (c.yearByYearGuide) {
+    var ybHtml = '<div class="year-tabs" id="yearTabs">';
+    for (var yi = 1; yi <= 4; yi++) {
+      ybHtml += '<button class="year-tab' + (yi === cadetYear || (cadetYear >= 5 && yi === 4) ? ' active' : '') + '" onclick="switchYearTab(' + yi + ',\'' + companyId + '\')">';
+      ybHtml += 'Year ' + yi + (yi === cadetYear ? ' ★' : '') + '</button>';
+    }
+    ybHtml += '</div>';
+    var yg = c.yearByYearGuide;
+    ['year1','year2','year3','year4'].forEach(function(yr, idx) {
+      var y = yg[yr];
+      if (!y) return;
+      var activeYear = (cadetYear >= 5) ? 4 : cadetYear;
+      var isVisible = (idx + 1) === activeYear;
+      ybHtml += '<div class="year-content" id="yearContent' + (idx+1) + '" style="' + (!isVisible ? 'display:none' : '') + '">';
+      ybHtml += '<div style="background:var(--bg3);border-radius:12px;padding:1rem;border-left:4px solid ' + c.color + '">';
+      ybHtml += '<div style="font-weight:700;color:' + c.color + ';font-size:0.95rem;margin-bottom:0.6rem">🎯 Focus: ' + y.focus + '</div>';
+      ybHtml += '<div style="font-weight:600;color:var(--tx1);font-size:0.85rem;margin-bottom:0.4rem">📚 Subjects to Cover:</div>';
+      ybHtml += '<ul style="color:var(--tx2);font-size:0.83rem;padding-left:1.2rem;line-height:1.7;margin:0 0 0.8rem 0">';
+      y.subjects.forEach(function(s) { ybHtml += '<li>' + s + '</li>'; });
+      ybHtml += '</ul>';
+      ybHtml += '<div style="font-weight:600;color:var(--tx1);font-size:0.85rem;margin-bottom:0.4rem">💡 Tips:</div>';
+      ybHtml += '<div class="tips-grid" style="gap:0.5rem">';
+      y.tips.forEach(function(t) {
+        ybHtml += '<div class="tip-card" style="padding:0.6rem 0.8rem"><div class="tip-card-icon" style="font-size:0.8rem">💡</div><div class="tip-card-text" style="font-size:0.8rem">' + t + '</div></div>';
+      });
+      ybHtml += '</div></div></div>';
+    });
+    html += collapsible('yb-' + companyId, '📅', 'Year-by-Year Preparation Guide', ybHtml, true, 'Year ' + cadetYear);
+  }
+
+  // ══ CBT DEEP-DIVE (open) ══
+  if (c.cbtDetails) {
+    var cd = c.cbtDetails;
+    var cdHtml = '';
+    if (cd.sampleTopics && cd.sampleTopics.length) {
+      cdHtml += '<div style="font-weight:600;color:var(--tx1);font-size:0.85rem;margin-bottom:0.4rem">🔥 Hot Topics Frequently Asked:</div>';
+      cdHtml += '<div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem">';
+      cd.sampleTopics.forEach(function(t) {
+        cdHtml += '<span style="display:inline-block;padding:0.3rem 0.7rem;background:var(--bg4);color:var(--tx1);border-radius:20px;font-size:0.78rem;border:1px solid var(--br)">' + t + '</span>';
+      });
+      cdHtml += '</div>';
+    }
+    if (cd.yearWiseTopics) {
+      cdHtml += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem">';
+      var yearLabels = {year1:'Year 1',year2:'Year 2',year3:'Year 3',year4:'Year 4'};
+      var yearEmojis = {year1:'🟢',year2:'🔵',year3:'🟠',year4:'🔴'};
+      Object.keys(cd.yearWiseTopics).forEach(function(yr) {
+        var isUserYear = yr === ('year' + cadetYear);
+        cdHtml += '<div style="background:var(--bg2);border-radius:8px;padding:0.7rem;border-left:3px solid ' + (isUserYear ? '#38bdf8' : c.color) + (isUserYear ? ';box-shadow:0 0 8px rgba(56,189,248,0.2)' : '') + '">';
+        cdHtml += '<div style="font-weight:600;color:var(--tx1);font-size:0.82rem;margin-bottom:0.3rem">' + (yearEmojis[yr]||'') + ' ' + (yearLabels[yr]||yr) + (isUserYear ? ' ← You' : '') + '</div>';
+        cdHtml += '<ul style="color:var(--tx2);font-size:0.78rem;padding-left:1rem;margin:0;line-height:1.6">';
+        cd.yearWiseTopics[yr].forEach(function(t) { cdHtml += '<li>' + t + '</li>'; });
+        cdHtml += '</ul></div>';
+      });
+      cdHtml += '</div>';
+    }
+    if (cd.commonMistakes && cd.commonMistakes.length) {
+      cdHtml += '<div style="font-weight:600;color:var(--tx1);font-size:0.85rem;margin-bottom:0.4rem">⚠️ Common Mistakes to Avoid:</div>';
+      cdHtml += '<ul style="color:var(--tx2);font-size:0.83rem;padding-left:1.2rem;line-height:1.7;margin:0">';
+      cd.commonMistakes.forEach(function(m) { cdHtml += '<li style="margin-bottom:0.3rem">' + m + '</li>'; });
+      cdHtml += '</ul>';
+    }
+    html += collapsible('cbd-' + companyId, '📝', 'CBT Deep-Dive: Year-Wise Topics', cdHtml, true);
+  }
+
+  // ══ PSYCHOMETRIC DETAILS (collapsed) ══
+  if (c.psychometricDetails) {
+    var ps = c.psychometricDetails;
+    var psHtml = '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem;margin-bottom:1rem">';
+    psHtml += '<div class="result-card" style="text-align:center"><div class="result-card-value">' + ps.testName.split(' ')[0] + '</div><div class="result-card-label">' + ps.testName + '</div></div>';
+    psHtml += '<div class="result-card" style="text-align:center"><div class="result-card-value">' + ps.duration + ' min</div><div class="result-card-label">Duration</div></div>';
+    psHtml += '<div class="result-card" style="text-align:center"><div class="result-card-value">' + ps.totalQuestions + '</div><div class="result-card-label">Questions</div></div>';
+    psHtml += '</div>';
+    psHtml += '<div style="color:var(--tx2);font-size:0.85rem;margin-bottom:0.8rem"><strong>Format:</strong> ' + ps.format + '</div>';
+    psHtml += '<div style="font-weight:600;color:var(--tx1);font-size:0.85rem;margin-bottom:0.4rem">Traits Assessed:</div>';
+    psHtml += '<div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.8rem">';
+    ps.traits.forEach(function(tr) {
+      psHtml += '<span style="display:inline-block;padding:0.3rem 0.7rem;background:' + c.color + '18;color:' + c.color + ';border-radius:20px;font-size:0.78rem;font-weight:500">' + tr + '</span>';
+    });
+    psHtml += '</div>';
+    psHtml += '<div style="font-weight:600;color:var(--tx1);font-size:0.85rem;margin-bottom:0.4rem">Preparation Tips:</div>';
+    psHtml += '<div class="tips-grid" style="gap:0.5rem">';
+    ps.tips.forEach(function(t) {
+      psHtml += '<div class="tip-card" style="padding:0.5rem 0.7rem"><div class="tip-card-icon" style="font-size:0.8rem">🧠</div><div class="tip-card-text" style="font-size:0.8rem">' + t + '</div></div>';
+    });
+    psHtml += '</div>';
+    html += collapsible('psy-' + companyId, '🧠', 'Psychometric Test Details', psHtml, false, ps.duration + ' min');
+  }
+
+  // ══ INTERVIEW TIPS (open) ══
+  var tipHtml = '<div class="tips-grid">';
+  c.interviewStyle.tips.forEach(function(tip) {
+    tipHtml += '<div class="tip-card"><div class="tip-card-icon">💡</div><div class="tip-card-text">' + tip + '</div></div>';
+  });
+  tipHtml += '</div>';
+  html += collapsible('tips-' + companyId, '💡', 'Interview Tips', tipHtml, true);
+
+  // ══ IMPRESS INTERVIEWER (collapsed) ══
+  if (ck.impressInterviewer && ck.impressInterviewer.length) {
+    var impHtml = '<div class="tips-grid">';
+    ck.impressInterviewer.forEach(function(tip) {
+      impHtml += '<div class="tip-card"><div class="tip-card-icon">🎯</div><div class="tip-card-text">' + tip + '</div></div>';
+    });
+    impHtml += '</div>';
+    html += collapsible('imp-' + companyId, '🎯', 'How to Impress the Interviewer', impHtml, false, ck.impressInterviewer.length + ' tips');
+  }
   
-  // Past History
+  // ══ COMPANY HISTORY (collapsed) ══
+  if (ck.history) {
+    var histHtml = '<p style="color:var(--tx2);font-size:0.9rem;line-height:1.6">' + ck.history + '</p>';
+    html += collapsible('hist-' + companyId, '📖', 'Company History', histHtml, false);
+  }
+  
+  // ══ KEY FACTS (collapsed) ══
+  if (ck.keyFacts && ck.keyFacts.length) {
+    var kfHtml = '<ul style="color:var(--tx2);font-size:0.9rem;padding-left:1.2rem;line-height:1.8;margin:0">';
+    ck.keyFacts.forEach(function(f) { kfHtml += '<li>' + f + '</li>'; });
+    kfHtml += '</ul>';
+    html += collapsible('kf-' + companyId, '⭐', 'Key Facts to Know', kfHtml, false, ck.keyFacts.length + ' facts');
+  }
+  
+  // ══ INNOVATION & SUSTAINABILITY (collapsed) ══
+  if (ck.innovation || ck.sustainability) {
+    var isHtml = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">';
+    if (ck.innovation) {
+      isHtml += '<div class="result-card" style="text-align:left;padding:1rem"><div style="font-weight:700;color:var(--tx1);margin-bottom:0.5rem">🔧 Innovation</div>';
+      isHtml += '<div style="color:var(--tx2);font-size:0.85rem;line-height:1.6">' + ck.innovation + '</div></div>';
+    }
+    if (ck.sustainability) {
+      isHtml += '<div class="result-card" style="text-align:left;padding:1rem"><div style="font-weight:700;color:var(--tx1);margin-bottom:0.5rem">🌱 Sustainability</div>';
+      isHtml += '<div style="color:var(--tx2);font-size:0.85rem;line-height:1.6">' + ck.sustainability + '</div></div>';
+    }
+    isHtml += '</div>';
+    html += collapsible('is-' + companyId, '🔧', 'Innovation & Sustainability', isHtml, false);
+  }
+  
+  // ══ SUBSIDIARIES (collapsed) ══
+  if (ck.subsidiaries && ck.subsidiaries.length) {
+    var subHtml = '<div style="display:grid;gap:0.6rem">';
+    ck.subsidiaries.forEach(function(sub) {
+      subHtml += '<div style="background:var(--bg3);border-radius:10px;padding:0.8rem 1rem;border-left:3px solid ' + c.color + '">';
+      subHtml += '<div style="font-weight:600;color:var(--tx1);font-size:0.88rem">' + sub.name + '</div>';
+      subHtml += '<div style="color:var(--tx3);font-size:0.78rem;margin-top:0.15rem">📍 ' + sub.location + '</div>';
+      subHtml += '<div style="color:var(--tx2);font-size:0.82rem;margin-top:0.3rem">' + sub.role + '</div>';
+      subHtml += '</div>';
+    });
+    subHtml += '</div>';
+    html += collapsible('sub-' + companyId, '🏢', 'Offices & Subsidiaries', subHtml, false, ck.subsidiaries.length + ' locations');
+  }
+
+  // ══ NOTABLE VESSELS (collapsed) ══
+  if (ck.namedVessels && ck.namedVessels.length) {
+    var vesHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.8rem">';
+    ck.namedVessels.forEach(function(v) {
+      vesHtml += '<div class="result-card" style="text-align:left;padding:0.8rem 1rem;border-top:3px solid ' + c.color + '">';
+      vesHtml += '<div style="font-weight:700;color:var(--tx1);font-size:0.9rem">' + v.name + '</div>';
+      vesHtml += '<div style="color:var(--tx3);font-size:0.78rem;margin:0.2rem 0">' + v.type + '</div>';
+      vesHtml += '<div style="color:var(--tx2);font-size:0.82rem;line-height:1.5">' + v.highlight + '</div>';
+      vesHtml += '</div>';
+    });
+    vesHtml += '</div>';
+    html += collapsible('ves-' + companyId, '🚢', 'Notable Vessels', vesHtml, false, ck.namedVessels.length + ' vessels');
+  }
+  
+  // ══ PAST HISTORY (if exists) ══
   var hist = InterviewPrep.getCompanyHistory(companyId);
   if (hist.length) {
-    html += '<div style="margin-top:1.5rem"><h3 style="color:var(--tx1);font-size:1rem;margin-bottom:0.8rem;">📊 Your Past Attempts</h3>';
+    var pastHtml = '';
     hist.slice(-5).reverse().forEach(function(h) {
-      html += '<div class="history-card">';
-      html += '<div class="history-score-badge ' + (h.passed ? 'passed' : 'failed') + '">' + h.score + '%</div>';
-      html += '<div class="history-info">';
-      html += '<div class="history-company">' + (h.passed ? '✅ Passed' : '❌ Failed') + ' — ' + h.correct + '/' + h.total + '</div>';
-      html += '<div class="history-date">' + new Date(h.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) + '</div>';
-      html += '</div></div>';
+      pastHtml += '<div class="history-card">';
+      pastHtml += '<div class="history-score-badge ' + (h.passed ? 'passed' : 'failed') + '">' + h.score + '%</div>';
+      pastHtml += '<div class="history-info">';
+      pastHtml += '<div class="history-company">' + (h.passed ? '✅ Passed' : '❌ Failed') + ' — ' + h.correct + '/' + h.total + '</div>';
+      pastHtml += '<div class="history-date">' + new Date(h.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) + '</div>';
+      pastHtml += '</div></div>';
     });
-    html += '</div>';
+    html += collapsible('past-' + companyId, '📊', 'Your Past Attempts', pastHtml, true, hist.length + ' attempts');
   }
   
   container.innerHTML = html;
 }
 
 /* ═══════════════════════════════════════
+   COLLAPSIBLE TOGGLE
+   ═══════════════════════════════════════ */
+function toggleCollapsible(id) {
+  var body = document.getElementById('collapse-' + id);
+  if (!body) return;
+  var header = body.previousElementSibling;
+  var isOpen = body.classList.contains('open');
+  
+  if (isOpen) {
+    body.classList.remove('open');
+    if (header) header.classList.remove('open');
+  } else {
+    body.classList.add('open');
+    if (header) header.classList.add('open');
+  }
+}
+
+/* ═══════════════════════════════════════
    CBT EXAM
    ═══════════════════════════════════════ */
+// Year-by-Year tab switcher
+function switchYearTab(year, companyId) {
+  // Hide all year content panels
+  for (var i = 1; i <= 4; i++) {
+    var el = document.getElementById('yearContent' + i);
+    if (el) el.style.display = 'none';
+  }
+  // Show selected year
+  var sel = document.getElementById('yearContent' + year);
+  if (sel) sel.style.display = 'block';
+  // Update tab active states
+  var tabs = document.querySelectorAll('.year-tab');
+  tabs.forEach(function(tab, idx) {
+    tab.classList.toggle('active', idx === year - 1);
+  });
+}
+
 function launchCBTExam(companyId) {
   var examState = InterviewPrep.startCBTExam(companyId);
   if (!examState) return;
