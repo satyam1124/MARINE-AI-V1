@@ -638,19 +638,28 @@ setChapters('bt_naval1','⚓','Naval Architecture I',
 /* ─────────────────────────────────────────────────────────────────────────
    10. Ensure all Ganpat University topic IDs have at least an empty stub
    ───────────────────────────────────────────────────────────────────────── */
-['bt_maths1','bt_maths2','bt_maths3','bt_draw','bt_workshop1',
- 'bt_materials','bt_strength','bt_prog','bt_mechengg','bt_envsc','bt_commskills',
- 'bt_marine_intro','bt_sem3lab','bt_boilers','bt_thermo_app','bt_manuf',
- 'bt_kinematics','bt_electronics','bt_medraw','bt_aux2',
- 'bt_control','bt_propulsion','bt_pollution','bt_advelec','bt_shipops',
- 'bt_elective1','bt_project1','bt_ers','bt_competency','bt_elective2',
- 'bt_elective3','bt_grandviva','bt_elecpower','bt_safety','bt_machdesign',
- 'bt_naval2','bt_diesel2','bt_project'
+[// Sem 1
+ 'bt_maths1','bt_physics','bt_commskills','bt_draw','bt_workshop1','bt_civil',
+ // Sem 2
+ 'bt_maths2','bt_elec1','bt_prog','bt_mechengg','bt_mech','bt_cad','bt_workshop2','bt_seamanship',
+ // Sem 3
+ 'bt_shipconstruct','bt_thermo2','bt_metec1','bt_strength','bt_diesel1','bt_gp1',
+ // Sem 4
+ 'bt_metec2','bt_basicelec','bt_materials','bt_mathsmarine','bt_tom','bt_fluid1','bt_aux','bt_gp2',
+ // Sem 5
+ 'bt_firecontrol','bt_machdesign','bt_diesel2','bt_vibration','bt_naval1','bt_electronics','bt_gp3',
+ // Sem 6
+ 'bt_refrig','bt_aux2','bt_metec3','bt_boilers','bt_medraw','bt_imo',
+ // Sem 7
+ 'bt_shipyard','bt_ers',
+ // Sem 8
+ 'bt_shipsafety','bt_automation','bt_management','bt_machsysdesign','bt_project',
+ 'bt_shipopslog','bt_advelectronics','bt_altfuels'
 ].forEach(tid => {
   if(!TOPIC_KNOWLEDGE[tid]) TOPIC_KNOWLEDGE[tid] = { formulas:[], flashcards:[], videos:[] };
 });
 
-console.log('%c[v15] BTech Chapter System loaded — Ganpat University syllabus', 'color:#4ade80;font-weight:bold');
+console.log('%c[v16] BTech Chapter System loaded — Ganpat University official syllabus', 'color:#4ade80;font-weight:bold');
 
 /* ═══════════════════════════════════════════════════════════════════════════
    CHAPTER NAVIGATION — UI + SELECTTOPIC PATCH
@@ -2548,34 +2557,407 @@ setChapters('bt_competency','📋','Marine Engineering Competency & Oral Prepara
     desc:'COC application, sea service certificates, medical fitness, STCW endorsements, CDC, passport requirements' },
 ]);
 
-setChapters('bt_elective2','🔬','Elective – II',
-  'Vibration Analysis & Condition Monitoring or Gas Carriers & Tanker Operations','Sem 8',[
-  { id:'el2_vibration', icon:'📳', title:'Vibration Analysis & Condition Monitoring',
-    desc:'Vibration measurement, FFT analysis, frequency spectrum, bearing defect frequencies, balancing, alignment' },
-  { id:'el2_gas_carriers', icon:'🚢', title:'Gas Carriers & Tanker Operations',
-    desc:'LNG/LPG carrier types, cargo containment, reliquefaction, boil-off gas, cargo operations, IGC code' },
+// ═══════════════════════════════════════════════════════════════════
+//  NEW GANPAT UNIVERSITY OFFICIAL SUBJECTS — setChapters() calls
+// ═══════════════════════════════════════════════════════════════════
+
+/* ── Semester 1: Elements of Civil Engineering ── */
+setChapters('bt_civil','🏗️','Elements of Civil Engineering',
+  'Surveying, building materials, construction practices, water supply & sanitation','Sem 1',[
+  { id:'civil_survey', icon:'📐', title:'Surveying & Measurement',
+    desc:'Surveying instruments, leveling, contouring, chain surveying, plane table surveying, compass surveying' },
+  { id:'civil_materials', icon:'🧱', title:'Building Materials',
+    desc:'Cement (OPC, PPC), aggregates, concrete mix design, bricks, timber, steel, polymers, composite materials' },
+  { id:'civil_construction', icon:'🏗️', title:'Construction Practices',
+    desc:'Foundation types, masonry, RCC construction, formwork, curing, construction site management' },
+  { id:'civil_water', icon:'💧', title:'Water Supply & Sanitation',
+    desc:'Water treatment processes, distribution systems, sewage treatment, environmental engineering basics' },
+  { id:'civil_transport', icon:'🛣️', title:'Transportation Engineering',
+    desc:'Road geometry, pavement types, highway materials, traffic engineering basics, railway engineering intro' },
 ]);
 
-setChapters('bt_elective3','🌱','Elective – III',
-  'Renewable Energy & Green Shipping or Offshore Engineering Fundamentals','Sem 8',[
-  { id:'el3_renewable', icon:'🌱', title:'Renewable Energy & Green Shipping',
-    desc:'Wind-assisted propulsion, solar energy on ships, fuel cells, shore power, carbon capture, IMO 2030/2050 targets' },
-  { id:'el3_offshore', icon:'🏗️', title:'Offshore Engineering Fundamentals',
-    desc:'Offshore platform types, jack-up/semi-sub/FPSO, offshore safety, DP operations, subsea systems' },
+/* ── Semester 2: Computer Aided Drawing ── */
+setChapters('bt_cad','✏️','Computer Aided Drawing',
+  'AutoCAD fundamentals, 2D drafting, dimensioning, layers, 3D modeling introduction','Sem 2',[
+  { id:'cad_basics', icon:'🖥️', title:'AutoCAD Fundamentals',
+    desc:'Interface, coordinate systems, drawing setup, basic drawing commands (line, circle, arc, rectangle)' },
+  { id:'cad_2d', icon:'📐', title:'2D Drafting Commands',
+    desc:'Edit commands (trim, extend, offset, mirror, array), polylines, hatching, block creation' },
+  { id:'cad_dimension', icon:'📏', title:'Dimensioning & Annotation',
+    desc:'Linear, angular, radial dimensions, dimension styles, text styles, tolerances, GD&T basics' },
+  { id:'cad_3d', icon:'🔲', title:'Introduction to 3D Modeling',
+    desc:'3D wireframe, surface modeling, solid modeling basics, extrude, revolve, Boolean operations' },
 ]);
 
-setChapters('bt_grandviva','🎓','Comprehensive Viva / Grand Viva',
-  'Marine diesel engines, naval architecture, auxiliary machinery, marine electrical, safety, ship ops','Sem 8',[
-  { id:'gv_diesel', icon:'⚙️', title:'Marine Diesel Engines — Viva Review',
-    desc:'2-stroke & 4-stroke construction, fuel injection, combustion, turbocharging, governors, maintenance, troubleshooting' },
-  { id:'gv_naval', icon:'⚓', title:'Naval Architecture — Viva Review',
-    desc:'Stability, hydrostatics, GZ curves, trim, damage stability, ship construction, framing, dry docking' },
-  { id:'gv_aux', icon:'🔧', title:'Marine Auxiliary Machinery — Viva Review',
-    desc:'Pumps, compressors, purifiers, FWG, steering gear, heat exchangers, boilers, refrigeration — key questions' },
-  { id:'gv_electrical', icon:'⚡', title:'Marine Electrical — Viva Review',
-    desc:'Generators, motors, switchboard, protection, emergency power, HV systems, VFD, insulation testing' },
-  { id:'gv_safety', icon:'🛡️', title:'Safety & Environment — Viva Review',
-    desc:'SOLAS, MARPOL, ISM, ISPS, fire-fighting, LSA, emergency procedures, pollution prevention, MLC' },
-  { id:'gv_operations', icon:'📋', title:'Ship Operations — Viva Review',
-    desc:'Bunkering, cargo operations, PMS, dry dock, maritime law, commercial operations, watch-keeping' },
+/* ── Semester 2: Workshop Technology & Practice – II ── */
+setChapters('bt_workshop2','🔩','Workshop Technology & Practice – II',
+  'Advanced fitting, pipe fitting, welding practice, precision measurement','Sem 2',[
+  { id:'ws2_fitting', icon:'🔧', title:'Advanced Fitting Operations',
+    desc:'Precision fitting, assembly of components, use of jigs & fixtures, surface finishing techniques' },
+  { id:'ws2_pipe', icon:'🔩', title:'Pipe Fitting & Fabrication',
+    desc:'Marine pipe materials, flange types, gasket cutting, pipe bending, threading, pipe supports' },
+  { id:'ws2_weld', icon:'🔥', title:'Welding Practice (MMA, MIG, TIG)',
+    desc:'Arc welding parameters, MIG/MAG setup, TIG welding of stainless steel, weld defect identification' },
+  { id:'ws2_measure', icon:'📏', title:'Precision Measurement',
+    desc:'Micrometers, vernier calipers, dial indicators, bore gauges, surface roughness measurement' },
 ]);
+
+/* ── Semester 2: Seamanship & Survival at Sea ── */
+setChapters('bt_seamanship','⚓','Seamanship & Survival at Sea',
+  'Ship terminology, rope work, survival techniques, STCW basic safety','Sem 2',[
+  { id:'sea_terms', icon:'🚢', title:'Ship Terminology & Types',
+    desc:'Bow, stern, port, starboard, draft, displacement, tonnage, freeboard, types of merchant ships' },
+  { id:'sea_rope', icon:'🪢', title:'Rope Work & Splicing',
+    desc:'Types of ropes (natural, synthetic), knots (bowline, clove hitch, reef), splicing, wire rope handling' },
+  { id:'sea_anchor', icon:'⚓', title:'Anchoring & Mooring',
+    desc:'Anchor types, anchoring procedures, mooring lines, SWL, winch operation, emergency release' },
+  { id:'sea_survival', icon:'🛟', title:'Survival Techniques & LSA',
+    desc:'Lifeboats, life rafts, immersion suits, EPIRB, SART, pyrotechnics, survival at sea procedures' },
+  { id:'sea_stcw', icon:'📋', title:'STCW Basic Safety Training',
+    desc:'BST components: fire fighting, personal survival, first aid, personal safety & social responsibility' },
+]);
+
+/* ── Semester 3: Ship Structure & Construction ── */
+setChapters('bt_shipconstruct','🚢','Ship Structure & Construction',
+  'Ship structural members, framing systems, welded joints, bulkheads, surveys','Sem 3',[
+  { id:'sc_members', icon:'🔩', title:'Structural Members',
+    desc:'Keel (flat plate, duct), frames, beams, stringers, girders, brackets, stiffeners, shell plating' },
+  { id:'sc_framing', icon:'🏗️', title:'Framing Systems',
+    desc:'Transverse framing, longitudinal framing, combined framing — advantages, applications, comparison' },
+  { id:'sc_double', icon:'📦', title:'Double Bottom Construction',
+    desc:'Cellular double bottom, solid floor, tank top, margin plate, manholes, uses for fuel/ballast/FW' },
+  { id:'sc_bulkheads', icon:'🚪', title:'Bulkheads & Watertight Subdivision',
+    desc:'Watertight, non-watertight, collision bulkheads, testing, corrugated vs flat, openings' },
+  { id:'sc_welded', icon:'🔥', title:'Welded Joints & Connections',
+    desc:'Butt welds, fillet welds, lap welds, welding symbols, distortion control, weld testing' },
+  { id:'sc_fore_aft', icon:'🚢', title:'Fore & Aft End Construction',
+    desc:'Fore peak, chain locker, bulbous bow, stern frame, rudder arrangement, propeller shaft' },
+  { id:'sc_surveys', icon:'📋', title:'Ship Surveys & Classification',
+    desc:'Class surveys (annual, intermediate, special), statutory surveys, dry docking surveys' },
+]);
+
+/* ── Semester 3: Marine Electro Technology – I ── */
+setChapters('bt_metec1','⚡','Marine Electro Technology – I',
+  'DC machines — generators & motors, EMF equation, characteristics, speed control','Sem 3',[
+  { id:'met1_dc_gen', icon:'⚡', title:'DC Generators',
+    desc:'Construction, EMF equation, armature reaction, commutation, characteristics (shunt, series, compound)' },
+  { id:'met1_dc_motor', icon:'🔌', title:'DC Motors',
+    desc:'Back-EMF, torque equation, speed-torque characteristics, starters (3-point, 4-point), braking' },
+  { id:'met1_control', icon:'🎛️', title:'Speed Control of DC Motors',
+    desc:'Field control, armature resistance, Ward-Leonard system, applications in marine winches & cranes' },
+  { id:'met1_testing', icon:'📊', title:'Testing of DC Machines',
+    desc:'Swinburne test, brake test, regenerative test, efficiency calculation, losses in DC machines' },
+]);
+
+/* ── Semester 3: General Performance – I ── */
+setChapters('bt_gp1','📋','General Performance – I',
+  'Workshop practice, engine room familiarization, safety procedures','Sem 3',[
+  { id:'gp1_workshop', icon:'🔧', title:'Workshop Practice',
+    desc:'Use of hand tools, power tools, drilling, grinding, basic machining operations in marine context' },
+  { id:'gp1_er_famil', icon:'🚢', title:'Engine Room Familiarization',
+    desc:'Engine room layout, piping colour codes, machinery identification, safety equipment locations' },
+  { id:'gp1_safety', icon:'🛡️', title:'Safety Procedures',
+    desc:'PPE usage, permit-to-work, lock-out/tag-out, confined space entry, fire extinguisher operation' },
+]);
+
+/* ── Semester 4: Marine Electro Technology – II ── */
+setChapters('bt_metec2','⚡','Marine Electro Technology – II',
+  'Transformers, induction motors, synchronous machines, marine electrical systems','Sem 4',[
+  { id:'met2_transformer', icon:'🔌', title:'Transformers (Advanced)',
+    desc:'Three-phase transformers, vector groups (Dyn11), parallel operation, cooling methods, on-load tap changer' },
+  { id:'met2_induction', icon:'⚙️', title:'Three-Phase Induction Motors',
+    desc:'Construction (squirrel cage, wound rotor), rotating magnetic field, slip, torque-speed, starting methods' },
+  { id:'met2_sync', icon:'⚡', title:'Synchronous Machines',
+    desc:'Alternator construction, EMF equation, voltage regulation, synchronization, parallel operation' },
+  { id:'met2_marine', icon:'🚢', title:'Marine Electrical Systems',
+    desc:'Shipboard 440V/6.6kV distribution, main & emergency switchboard, shore connection, insulation monitoring' },
+]);
+
+/* ── Semester 4: Basic Electronics ── */
+setChapters('bt_basicelec','📡','Basic Electronics',
+  'Semiconductor devices, rectifiers, amplifiers, digital electronics, sensors','Sem 4',[
+  { id:'belec_semi', icon:'📡', title:'Semiconductor Devices',
+    desc:'Diodes (p-n junction, Zener), BJT, FET, MOSFET — characteristics, biasing, applications' },
+  { id:'belec_rect', icon:'⚡', title:'Rectifiers & Power Supplies',
+    desc:'Half-wave, full-wave, bridge rectifiers, filters, voltage regulators (78xx), SMPS basics' },
+  { id:'belec_amp', icon:'🔊', title:'Amplifiers',
+    desc:'CE, CB, CC configurations, frequency response, operational amplifiers, feedback circuits' },
+  { id:'belec_digital', icon:'💻', title:'Digital Electronics',
+    desc:'Number systems, logic gates, Boolean algebra, K-maps, flip-flops, counters, registers' },
+  { id:'belec_sensors', icon:'📡', title:'Sensors & Transducers',
+    desc:'Temperature (RTD, thermocouple), pressure, level, flow sensors, signal conditioning' },
+]);
+
+/* ── Semester 4: Mathematics for Marine Engineering ── */
+setChapters('bt_mathsmarine','📈','Mathematics for Marine Engineering',
+  'Numerical methods, interpolation, numerical ODE, probability, statistics','Sem 4',[
+  { id:'mm_numerical', icon:'🔢', title:'Numerical Methods',
+    desc:'Bisection, Newton-Raphson, Regula Falsi, secant method — convergence, error analysis' },
+  { id:'mm_interp', icon:'📈', title:'Interpolation',
+    desc:'Newton forward/backward, Lagrange, divided differences — application to engineering data' },
+  { id:'mm_integration', icon:'📊', title:'Numerical Integration & Differentiation',
+    desc:'Trapezoidal rule, Simpson 1/3 & 3/8, Gaussian quadrature, numerical differentiation formulae' },
+  { id:'mm_ode', icon:'📐', title:'Numerical Solution of ODE',
+    desc:'Euler method, modified Euler, Runge-Kutta (4th order), predictor-corrector methods' },
+  { id:'mm_prob', icon:'🎲', title:'Probability & Statistics',
+    desc:'Probability axioms, Bayes theorem, binomial/Poisson/normal distributions, regression, curve fitting' },
+]);
+
+/* ── Semester 4: Theory of Machines ── */
+setChapters('bt_tom','⚙️','Theory of Machines',
+  'Mechanisms, velocity/acceleration analysis, cams, gears, governors, balancing','Sem 4',[
+  { id:'tom_mech', icon:'🔗', title:'Mechanisms & Linkages',
+    desc:'Links, kinematic pairs, chains, inversions (slider crank, double slider), Gruebler criterion' },
+  { id:'tom_vel', icon:'📐', title:'Velocity & Acceleration Analysis',
+    desc:'Instantaneous center method, Kennedy theorem, Klein construction, graphical & analytical methods' },
+  { id:'tom_cams', icon:'🔄', title:'Cams & Followers',
+    desc:'Cam types, follower types, displacement diagrams, cam profile construction, jump phenomenon' },
+  { id:'tom_gears', icon:'⚙️', title:'Gears & Gear Trains',
+    desc:'Terminology, law of gearing, involute profile, interference, gear trains (simple, compound, epicyclic)' },
+  { id:'tom_gov', icon:'🎛️', title:'Governors & Flywheels',
+    desc:'Watt, Porter, Proell, Hartnell governors, stability, sensitivity, flywheel turning moment diagrams' },
+  { id:'tom_balance', icon:'⚖️', title:'Balancing',
+    desc:'Balancing of rotating masses (single & multiple planes), reciprocating masses, V-engines' },
+]);
+
+/* ── Semester 4: General Performance – II ── */
+setChapters('bt_gp2','📋','General Performance – II',
+  'Engine room watch-keeping practice, machinery operation, maintenance procedures','Sem 4',[
+  { id:'gp2_watch', icon:'👁️', title:'Watch-Keeping Practice',
+    desc:'Engine room rounds, parameter monitoring, log entries, handover procedures, standing orders' },
+  { id:'gp2_machinery', icon:'⚙️', title:'Machinery Operation Drills',
+    desc:'Main engine preparation, starting, maneuvering, stopping; auxiliary machinery operation' },
+  { id:'gp2_maint', icon:'🔧', title:'Maintenance Procedures',
+    desc:'Planned maintenance tasks, gasket replacement, valve overhaul, filter cleaning, pump maintenance' },
+]);
+
+/* ── Semester 5: Ship Fire Prevention & Control ── */
+setChapters('bt_firecontrol','🔥','Ship Fire Prevention & Control',
+  'Fire science, detection, fixed fire-fighting, portable equipment, structural fire protection','Sem 5',[
+  { id:'fc_science', icon:'🔥', title:'Fire Science & Classification',
+    desc:'Fire triangle, classes of fire (A, B, C, D, E), fire spread mechanisms, flash point, ignition temperature' },
+  { id:'fc_detect', icon:'📡', title:'Fire Detection Systems',
+    desc:'Smoke detectors (ionization, photoelectric), heat detectors, flame detectors, manual call points' },
+  { id:'fc_fixed', icon:'🧯', title:'Fixed Fire-Fighting Systems',
+    desc:'CO₂ flooding, foam (high/low expansion), water mist, dry chemical, sprinkler systems, drencher' },
+  { id:'fc_portable', icon:'🧯', title:'Portable Equipment',
+    desc:'DCP, CO₂, foam extinguishers, fire hose, nozzles, EEBD, fire blankets' },
+  { id:'fc_structural', icon:'🏗️', title:'Structural Fire Protection',
+    desc:'A, B, C class divisions, fire zones, means of escape, ventilation fire dampers' },
+  { id:'fc_lsa', icon:'🛟', title:'Life-Saving Appliances',
+    desc:'Lifeboats (enclosed, free-fall), life rafts, rescue boats, life jackets, immersion suits' },
+  { id:'fc_emergency', icon:'🚨', title:'Emergency Procedures',
+    desc:'Fire drills, abandon ship, man overboard, enclosed space entry, hot work permits, ISM code' },
+]);
+
+/* ── Semester 5: Dynamics of Vibration ── */
+setChapters('bt_vibration','📳','Dynamics of Vibration',
+  'Free, forced, damped vibrations, resonance, torsional vibration, measurement','Sem 5',[
+  { id:'vib_free', icon:'📳', title:'Free Vibration',
+    desc:'Natural frequency, single DOF systems, springs in series/parallel, equivalent stiffness' },
+  { id:'vib_damped', icon:'📉', title:'Damped Vibration',
+    desc:'Viscous, Coulomb, structural damping, logarithmic decrement, critical damping, damping ratio' },
+  { id:'vib_forced', icon:'📊', title:'Forced Vibration',
+    desc:'Harmonic excitation, magnification factor, resonance, vibration isolation, transmissibility' },
+  { id:'vib_torsional', icon:'🔄', title:'Torsional Vibration',
+    desc:'Torsional natural frequency, critical speed, barred speed range, torsional dampers, shaft vibration' },
+  { id:'vib_measure', icon:'📡', title:'Vibration Measurement & Analysis',
+    desc:'Accelerometers, velocity transducers, proximity probes, FFT, spectrum analysis, orbit plots' },
+]);
+
+/* ── Semester 5: General Performance – III ── */
+setChapters('bt_gp3','📋','General Performance – III',
+  'Advanced engine room operations, fault diagnosis, emergency drills','Sem 5',[
+  { id:'gp3_advanced', icon:'⚙️', title:'Advanced Engine Room Operations',
+    desc:'Complex machinery operations, load-dependent operations, fuel changeover, boiler operation' },
+  { id:'gp3_fault', icon:'🔍', title:'Fault Diagnosis Exercises',
+    desc:'Troubleshooting scenarios, indicator diagram interpretation, alarm response, systematic fault finding' },
+  { id:'gp3_emergency', icon:'🚨', title:'Emergency Drills',
+    desc:'Blackout recovery, fire response, flooding, steering failure, man overboard, grounding response' },
+]);
+
+/* ── Semester 6: Refrigeration & Air Conditioning ── */
+setChapters('bt_refrig','❄️','Refrigeration & Air Conditioning',
+  'Vapour compression cycle, refrigerants, marine provision & cargo refrigeration, HVAC','Sem 6',[
+  { id:'ref_vcr', icon:'❄️', title:'Vapour Compression Refrigeration',
+    desc:'P-h diagram, COP calculation, superheat/subcooling, multi-stage compression, cascade systems' },
+  { id:'ref_refrigerants', icon:'🧪', title:'Refrigerants',
+    desc:'Classification, R134a, R404a, R407c, NH₃ (R717), CO₂ (R744), ODP, GWP, environmental regulations' },
+  { id:'ref_compressor', icon:'⚙️', title:'Compressors',
+    desc:'Reciprocating, screw, scroll, centrifugal compressors — construction, operation, capacity control' },
+  { id:'ref_provision', icon:'🍖', title:'Provision Plant & Cargo Refrigeration',
+    desc:'Chill & freeze rooms, defrosting, reefer containers, controlled atmosphere, temperature monitoring' },
+  { id:'ref_hvac', icon:'🌬️', title:'Marine HVAC Systems',
+    desc:'Comfort requirements, AHU, duct design, chilled water systems, fan coil units, psychrometric chart' },
+  { id:'ref_trouble', icon:'🔧', title:'Troubleshooting',
+    desc:'Fault diagnosis, charging, leak detection, compressor failure, abnormal pressures/temperatures' },
+]);
+
+/* ── Semester 6: Marine Electro Technology – III ── */
+setChapters('bt_metec3','⚡','Marine Electro Technology – III',
+  'Ship electrical power plant, switchboard, generator paralleling, motor control, HV systems','Sem 6',[
+  { id:'met3_power', icon:'⚡', title:'Ship Electrical Power Plant',
+    desc:'Main & emergency generators, generator sizing, power management system, load analysis' },
+  { id:'met3_switchboard', icon:'🔌', title:'Switchboard & Distribution',
+    desc:'Main switchboard, emergency switchboard, bus-bar arrangements, section boards, protection schemes' },
+  { id:'met3_parallel', icon:'🔄', title:'Generator Paralleling',
+    desc:'Synchronizing conditions, synchroscope, auto-synchronizer, load sharing (kW & kVAR), droop' },
+  { id:'met3_motor', icon:'⚙️', title:'Motor Control',
+    desc:'DOL, star-delta, auto-transformer, soft starter, VFD (variable frequency drive), motor protection' },
+  { id:'met3_hv', icon:'⚡', title:'High Voltage Systems',
+    desc:'Need for HV (6.6 kV) on ships, safety precautions, HV switchgear, insulation testing, dead-front' },
+  { id:'met3_surveys', icon:'📋', title:'Electrical Surveys & Testing',
+    desc:'Insulation resistance (Megger), earth fault finding, continuity testing, thermographic survey' },
+]);
+
+/* ── Semester 6: IMO & Conventions ── */
+setChapters('bt_imo','🌍','IMO & Conventions',
+  'IMO structure, SOLAS, MARPOL, STCW, MLC, ISM, ISPS, BWM','Sem 6',[
+  { id:'imo_structure', icon:'🌐', title:'IMO Structure & Role',
+    desc:'IMO organization, committees (MSC, MEPC), adoption of conventions, flag state implementation' },
+  { id:'imo_solas', icon:'📜', title:'SOLAS Convention',
+    desc:'Chapters I–XIV overview, construction, fire protection, LSA, navigation, ISM, ISPS — key regulations' },
+  { id:'imo_marpol', icon:'🌊', title:'MARPOL 73/78 — All 6 Annexes',
+    desc:'Annex I (oil), II (NLS), III (harmful packages), IV (sewage), V (garbage), VI (air pollution)' },
+  { id:'imo_stcw', icon:'🎓', title:'STCW Convention',
+    desc:'Training standards, competence tables, sea service requirements, COC, watch-keeping standards' },
+  { id:'imo_mlc', icon:'👷', title:'MLC 2006 — Maritime Labour Convention',
+    desc:'Employment agreements, hours of work/rest, accommodation, medical care, social security' },
+  { id:'imo_ism', icon:'📋', title:'ISM Code',
+    desc:'Safety management system, DPA, DOC, SMC, non-conformity reporting, internal/external audit' },
+  { id:'imo_isps', icon:'🛡️', title:'ISPS Code',
+    desc:'Ship security plan, SSO, CSO, PFSO, security levels, SSAS, port facility security' },
+  { id:'imo_bwm', icon:'💧', title:'BWM Convention',
+    desc:'D-1 exchange, D-2 treatment standard, BWTS type approval, BWM certificate, record book' },
+]);
+
+/* ── Semester 7: Workshop/Ship In-Campus/Shipyard Training ── */
+setChapters('bt_shipyard','🔧','Workshop/Ship In-Campus/Shipyard Training',
+  'Shipyard familiarization, hull repair, pipe fitting, dry docking procedures','Sem 7',[
+  { id:'sy_famil', icon:'🏗️', title:'Shipyard Familiarization',
+    desc:'Shipyard layout, workshops, dry dock types (graving, floating), slipway, ship repair processes' },
+  { id:'sy_hull', icon:'🔩', title:'Hull Repair & Maintenance',
+    desc:'Steel renewal, plate cropping, welding procedures, blasting & painting, thickness survey' },
+  { id:'sy_pipe', icon:'🔧', title:'Pipe Fitting & Fabrication',
+    desc:'Marine pipe standards, flanging, bending, threading, valve overhaul, pressure testing' },
+  { id:'sy_alignment', icon:'📐', title:'Machinery Alignment',
+    desc:'Shaft alignment (laser, dial indicator), coupling alignment, bearing clearances, chocking' },
+  { id:'sy_drydock', icon:'🚢', title:'Dry Docking Procedures',
+    desc:'Preparation, critical stability, docking plan, inspections, propeller/rudder clearances, undocking' },
+]);
+
+/* ── Semester 8: Ship Safety & Environment Protection ── */
+setChapters('bt_shipsafety','🛡️','Ship Safety & Environment Protection',
+  'SOLAS, MARPOL compliance, pollution prevention, emission control, environmental auditing','Sem 8',[
+  { id:'ss_solas', icon:'📜', title:'SOLAS Safety Requirements',
+    desc:'Construction, fire safety, LSA, machinery & electrical, navigation, ISM code implementation' },
+  { id:'ss_marpol', icon:'🌊', title:'MARPOL Compliance',
+    desc:'Operational compliance with all 6 annexes, record books, certificates, IOPP, IAPP' },
+  { id:'ss_emission', icon:'💨', title:'Emission Control',
+    desc:'SOx regulations (0.5%/0.1% ECA), NOx Tier I/II/III, EEDI, EEXI, CII A–E, SEEMP Part III' },
+  { id:'ss_bwm', icon:'💧', title:'Ballast Water Management',
+    desc:'D-1 & D-2 standards, treatment methods (UV, electrochlorination), BWM certificate' },
+  { id:'ss_audit', icon:'📋', title:'Environmental Auditing',
+    desc:'Internal/external audits, environmental management systems, port state control, deficiency reports' },
+]);
+
+/* ── Semester 8: Marine Automation & Control ── */
+setChapters('bt_automation','🎛️','Marine Automation & Control',
+  'Control fundamentals, PID controllers, PLC & SCADA, UMS, alarm systems','Sem 8',[
+  { id:'ac_fund', icon:'📊', title:'Control System Fundamentals',
+    desc:'Open/closed loop, transfer functions, block diagram, signal flow graph, time response' },
+  { id:'ac_pid', icon:'🎛️', title:'PID Controllers',
+    desc:'P, PI, PD, PID actions, tuning methods (Ziegler-Nichols), anti-windup, practical implementation' },
+  { id:'ac_stability', icon:'📈', title:'Stability Analysis',
+    desc:'Routh-Hurwitz criterion, root locus, Bode plot, Nyquist criterion, gain & phase margins' },
+  { id:'ac_plc', icon:'💻', title:'PLC & SCADA',
+    desc:'PLC architecture, ladder logic programming, SCADA overview, HMI, marine applications' },
+  { id:'ac_ums', icon:'🚢', title:'UMS & Alarm Systems',
+    desc:'Unmanned Machinery Space concept, alarm & monitoring, AMS, engine room automation' },
+  { id:'ac_pneumatic', icon:'💨', title:'Pneumatic & Hydraulic Control',
+    desc:'Pneumatic controllers (flapper-nozzle), I/P & P/I converters, hydraulic servo systems' },
+]);
+
+/* ── Semester 8: Principle of Management ── */
+setChapters('bt_management','📊','Principle of Management',
+  'Management principles, HR, financial, quality, project management','Sem 8',[
+  { id:'mgmt_principles', icon:'📋', title:'Management Principles',
+    desc:'Planning, organizing, staffing, directing, controlling — classical & modern management theories' },
+  { id:'mgmt_hr', icon:'👥', title:'HR & Leadership',
+    desc:'Recruitment, training, motivation theories (Maslow, Herzberg), team building, conflict resolution' },
+  { id:'mgmt_finance', icon:'💰', title:'Financial Management',
+    desc:'Budgeting, cost control, financial statements, investment analysis, maritime economics' },
+  { id:'mgmt_quality', icon:'📊', title:'Quality Management',
+    desc:'TQM, ISO 9001, Six Sigma, quality control tools, continuous improvement, maritime quality standards' },
+  { id:'mgmt_project', icon:'📋', title:'Project Management',
+    desc:'Project lifecycle, scheduling (Gantt, PERT/CPM), resource allocation, risk management' },
+]);
+
+/* ── Semester 8: Marine Machinery System & Design ── */
+setChapters('bt_machsysdesign','⚙️','Marine Machinery System & Design',
+  'Propulsion system design, shafting, propeller theory, power plant selection','Sem 8',[
+  { id:'msd_propulsion', icon:'🚢', title:'Propulsion System Design',
+    desc:'Ship resistance (frictional, wave-making, air), power requirement, selection of propulsion system' },
+  { id:'msd_shafting', icon:'🔧', title:'Shafting & Transmission',
+    desc:'Intermediate shaft, thrust block (Michell), shaft alignment, vibration, whirling speed' },
+  { id:'msd_propeller', icon:'🌀', title:'Propeller Theory & Design',
+    desc:'Momentum theory, blade element theory, advance coefficient, cavitation, propeller materials' },
+  { id:'msd_gearbox', icon:'⚙️', title:'Reduction Gearbox',
+    desc:'Gear types, gear arrangements, tooth stresses, lubrication, gearbox maintenance' },
+  { id:'msd_machinery', icon:'🏗️', title:'Machinery Arrangement',
+    desc:'Engine room layout, machinery foundation, vibration isolation, noise control, accessibility' },
+]);
+
+/* ── Semester 8: Ship Operation & Logistics ── */
+setChapters('bt_shipopslog','📜','Ship Operation & Logistics',
+  'Maritime law, ISM/ISPS, cargo operations, bunkering, PMS, commercial operations','Sem 8',[
+  { id:'sol_law', icon:'⚖️', title:'Maritime Law',
+    desc:'UNCLOS, flag state, port state, coastal state, PSC inspections, P&I clubs, liability' },
+  { id:'sol_ism', icon:'📋', title:'ISM/ISPS Implementation',
+    desc:'SMS structure, DPA responsibilities, security plans, drills, audits, non-conformity management' },
+  { id:'sol_cargo', icon:'📦', title:'Cargo Operations',
+    desc:'Loading/discharging, cargo planning, stability during operations, loadicator, cargo documentation' },
+  { id:'sol_bunker', icon:'⛽', title:'Bunkering Operations',
+    desc:'Bunkering procedures, safety checklist, sampling, quantity measurement, SOPEP' },
+  { id:'sol_pms', icon:'🔧', title:'Planned Maintenance System',
+    desc:'Class requirements, running hour & condition-based maintenance, CMMS software, documentation' },
+  { id:'sol_commercial', icon:'📑', title:'Commercial Operations',
+    desc:'Charter parties (voyage, time, bareboat), bill of lading, freight, demurrage, laytime, off-hire' },
+]);
+
+/* ── Semester 8: Advanced Electronics & Communications ── */
+setChapters('bt_advelectronics','📡','Advanced Electronics & Communications',
+  'Power electronics, rectifiers/inverters, VFD, electric propulsion, GMDSS advanced','Sem 8',[
+  { id:'ae_power', icon:'⚡', title:'Power Electronics',
+    desc:'Thyristors (SCR), triacs, power MOSFETs, IGBTs, triggering circuits, commutation' },
+  { id:'ae_converters', icon:'🔌', title:'Rectifiers & Inverters',
+    desc:'Controlled rectifiers, voltage source & current source inverters, PWM techniques' },
+  { id:'ae_vfd', icon:'🎛️', title:'Variable Frequency Drives',
+    desc:'V/f control, vector control, sensorless control — applications for pumps, fans, thrusters' },
+  { id:'ae_propulsion', icon:'🚢', title:'Electric Propulsion Systems',
+    desc:'Diesel-electric architecture, podded propulsion (Azipod), shaft generators (PTO/PTI)' },
+  { id:'ae_dp', icon:'📡', title:'Dynamic Positioning',
+    desc:'DP classes (DP1, DP2, DP3), thrusters, sensors, power management, redundancy' },
+  { id:'ae_condmon', icon:'📊', title:'Condition Monitoring',
+    desc:'Vibration analysis, thermography, oil analysis, trending, predictive maintenance' },
+]);
+
+/* ── Semester 8: Latest Marine Engines & Alternative Fuels ── */
+setChapters('bt_altfuels','⛽','Latest Marine Engines & Alternative Fuels',
+  'Modern ME engines, LNG dual-fuel, methanol, ammonia, hydrogen, wind-assisted propulsion','Sem 8',[
+  { id:'af_modern', icon:'⚙️', title:'Modern Electronically Controlled Engines',
+    desc:'MAN B&W ME series, Wärtsilä X-series — electronic fuel injection, exhaust valve, cylinder lubrication' },
+  { id:'af_lng', icon:'⛽', title:'LNG as Marine Fuel',
+    desc:'Dual-fuel engines, gas supply systems, bunkering infrastructure, methane slip, IGF Code' },
+  { id:'af_methanol', icon:'🧪', title:'Methanol & Ammonia',
+    desc:'Green methanol production, ammonia as fuel, safety concerns, engine modifications, toxicity' },
+  { id:'af_hydrogen', icon:'💧', title:'Hydrogen & Fuel Cells',
+    desc:'PEM fuel cells, SOFC, hydrogen storage (compressed, liquefied), pilot projects' },
+  { id:'af_battery', icon:'🔋', title:'Battery & Hybrid Systems',
+    desc:'Li-ion batteries, battery management systems, hybrid vessels, all-electric ferries' },
+  { id:'af_wind', icon:'🌬️', title:'Wind-Assisted Propulsion',
+    desc:'Rotor sails (Flettner), rigid wing sails, kites, DynaRig — fuel savings, operational considerations' },
+  { id:'af_imo', icon:'🌍', title:'IMO Decarbonisation Strategy',
+    desc:'2030/2050 targets, EEXI, CII ratings, market-based measures, carbon pricing, shore power' },
+]);
+
