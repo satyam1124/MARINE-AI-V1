@@ -636,20 +636,21 @@ setChapters('bt_naval1','⚓','Naval Architecture I',
 ]);
 
 /* ─────────────────────────────────────────────────────────────────────────
-   10. Ensure all 48 topic IDs have at least an empty stub
+   10. Ensure all Ganpat University topic IDs have at least an empty stub
    ───────────────────────────────────────────────────────────────────────── */
-['bt_maths1','bt_maths2','bt_draw','bt_workshop1','bt_workshop2',
- 'bt_materials','bt_strength','bt_prog','bt_seaman','bt_sea_er','bt_sea_main',
- 'bt_sea_maint','bt_sea_safe','bt_sea_marpol','bt_sea_stp','bt_aux2',
- 'bt_control','bt_maint2','bt_propulsion','bt_hv','bt_mep','bt_env',
- 'bt_ndt','bt_naval2','bt_naval3','bt_casualty','bt_mgmt','bt_project',
- 'bt_altfuel2','bt_digitech','bt_drydock','bt_oral_prep','bt_elective',
- 'bt_elec3'
+['bt_maths1','bt_maths2','bt_maths3','bt_draw','bt_workshop1',
+ 'bt_materials','bt_strength','bt_prog','bt_mechengg','bt_envsc','bt_commskills',
+ 'bt_marine_intro','bt_sem3lab','bt_boilers','bt_thermo_app','bt_manuf',
+ 'bt_kinematics','bt_electronics','bt_medraw','bt_aux2',
+ 'bt_control','bt_propulsion','bt_pollution','bt_advelec','bt_shipops',
+ 'bt_elective1','bt_project1','bt_ers','bt_competency','bt_elective2',
+ 'bt_elective3','bt_grandviva','bt_elecpower','bt_safety','bt_machdesign',
+ 'bt_naval2','bt_diesel2','bt_project'
 ].forEach(tid => {
   if(!TOPIC_KNOWLEDGE[tid]) TOPIC_KNOWLEDGE[tid] = { formulas:[], flashcards:[], videos:[] };
 });
 
-console.log('%c[v14] BTech Chapter System loaded — 10 subjects with full chapters', 'color:#4ade80;font-weight:bold');
+console.log('%c[v15] BTech Chapter System loaded — Ganpat University syllabus', 'color:#4ade80;font-weight:bold');
 
 /* ═══════════════════════════════════════════════════════════════════════════
    CHAPTER NAVIGATION — UI + SELECTTOPIC PATCH
@@ -2169,4 +2170,412 @@ setChapters('bt_sea_maint','🔧','Ship Maintenance Planning',
       { q:'5-Why method purpose?', a:'Root cause analysis technique: repeatedly ask "why?" (typically 5 times) until the root cause of a defect/failure is identified.' },
     ]
   },
+]);
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NEW GANPAT UNIVERSITY SUBJECTS — Chapter data
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+setChapters('bt_mechengg','🔧','Basic Mechanical Engineering',
+  'Thermodynamic concepts, IC engines, boilers, power transmission, material science','Sem 1',[
+  { id:'me_thermo_concepts', icon:'🌡️', title:'Thermodynamic Concepts',
+    desc:'System, boundary, surroundings, properties, state, process, cycle, zeroth law, first law, work & heat',
+    formulas:[
+      { label:'First Law (Closed)', eq:'Q − W = ΔU', note:'Energy conservation for closed systems' },
+    ]
+  },
+  { id:'me_second_law', icon:'🔄', title:'Second Law & Entropy',
+    desc:'Kelvin-Planck & Clausius statements, reversibility, Carnot cycle, entropy, T-s diagrams' },
+  { id:'me_ic_engines', icon:'⚙️', title:'IC Engines',
+    desc:'Otto & diesel cycles, 2-stroke vs 4-stroke, valve timing, performance parameters, IC engine components' },
+  { id:'me_boilers', icon:'🔥', title:'Boilers & Steam Generators',
+    desc:'Fire-tube & water-tube boilers, boiler mountings & accessories, draught, boiler efficiency' },
+  { id:'me_power_trans', icon:'⚡', title:'Power Transmission Elements',
+    desc:'Belts, chains, gears, clutches, brakes, dynamometers — mechanical power transfer systems' },
+  { id:'me_materials', icon:'🔩', title:'Material Science Basics',
+    desc:'Mechanical properties, stress-strain, hardness, impact, fatigue, creep, material testing' },
+]);
+
+setChapters('bt_envsc','🌍','Environmental Science & Sustainability',
+  'Ecosystems, natural resources, biodiversity, pollution, marine environment','Sem 2',[
+  { id:'env_ecosystems', icon:'🌿', title:'Ecosystems & Ecology',
+    desc:'Types of ecosystems, food chains, energy flow, ecological pyramids, ecological succession' },
+  { id:'env_resources', icon:'🌊', title:'Natural Resources',
+    desc:'Renewable & non-renewable resources, water resources, mineral resources, forest resources' },
+  { id:'env_biodiversity', icon:'🐟', title:'Biodiversity & Conservation',
+    desc:'Levels of biodiversity, threats, conservation strategies, endangered species, marine biodiversity' },
+  { id:'env_pollution', icon:'🏭', title:'Environmental Pollution',
+    desc:'Air, water, soil, noise pollution — sources, effects, control measures, standards' },
+  { id:'env_social', icon:'👥', title:'Social Issues & Marine Environment',
+    desc:'Climate change, ozone depletion, acid rain, marine pollution, IMO environmental regulations' },
+]);
+
+setChapters('bt_commskills','📝','Communication Skills / Professional English',
+  'Technical writing, grammar, presentation skills, group discussion, interview preparation','Sem 2',[
+  { id:'comm_fundamentals', icon:'💬', title:'Fundamentals of Communication',
+    desc:'Communication process, types, barriers, effective communication, verbal & non-verbal' },
+  { id:'comm_writing', icon:'✍️', title:'Technical Writing',
+    desc:'Report writing, letter writing, email etiquette, minutes of meeting, log book entries' },
+  { id:'comm_grammar', icon:'📖', title:'Grammar & Vocabulary',
+    desc:'Sentence structure, tenses, voice, common errors, technical vocabulary, maritime terminology' },
+  { id:'comm_presentation', icon:'🎤', title:'Presentation & Public Speaking',
+    desc:'Preparing presentations, visual aids, body language, overcoming stage fright, audience engagement' },
+  { id:'comm_gd_interview', icon:'👔', title:'Group Discussion & Interview Skills',
+    desc:'GD techniques, JAM sessions, mock interviews, HR questions, resume writing, professional etiquette' },
+]);
+
+setChapters('bt_marine_intro','⚓','Introduction to Marine Engineering',
+  'History of shipping, ship terminology, marine engineering overview, classification societies, IMO','Sem 2',[
+  { id:'mi_history', icon:'🚢', title:'History of Shipping & Navigation',
+    desc:'Evolution of ships, sail to steam to diesel, major shipping routes, maritime milestones' },
+  { id:'mi_terminology', icon:'📖', title:'Ship Terminology & Types',
+    desc:'Hull, bow, stern, port, starboard, draft, freeboard, ship types — bulk carrier, tanker, container, LNG' },
+  { id:'mi_overview', icon:'⚙️', title:'Marine Engineering Systems Overview',
+    desc:'Main engine, auxiliary systems, electrical plant, deck machinery, steering gear — overview of shipboard engineering' },
+  { id:'mi_class', icon:'🏛️', title:'Classification Societies & Surveys',
+    desc:'IACS members (LR, DNV, ABS, BV, ClassNK), class surveys, statutory surveys, hull & machinery certificates' },
+  { id:'mi_imo', icon:'🌍', title:'IMO & Maritime Regulations',
+    desc:'IMO structure, SOLAS, MARPOL, STCW, MLC — international maritime regulatory framework' },
+  { id:'mi_career', icon:'🎯', title:'Career in Marine Engineering',
+    desc:'Ranks, promotions, COC exams, sea service requirements, shore-based careers, salary structure' },
+]);
+
+setChapters('bt_maths3','📈','Mathematics – III (Numerical Methods & Statistics)',
+  'Numerical solutions, interpolation, differentiation, integration, probability, statistics','Sem 3',[
+  { id:'m3_algebraic', icon:'🔢', title:'Numerical Solutions of Algebraic Equations',
+    desc:'Bisection method, Newton-Raphson, Regula-Falsi, secant method, convergence criteria' },
+  { id:'m3_interpolation', icon:'📊', title:'Interpolation',
+    desc:'Newton forward/backward, Lagrange, divided differences, spline interpolation' },
+  { id:'m3_numdiff', icon:'📈', title:'Numerical Differentiation & Integration',
+    desc:'Finite differences, trapezoidal rule, Simpson\'s 1/3 & 3/8 rules, Gaussian quadrature' },
+  { id:'m3_ode', icon:'🔁', title:'Numerical Solution of ODE',
+    desc:'Euler method, modified Euler, Runge-Kutta (RK4), predictor-corrector methods' },
+  { id:'m3_probability', icon:'🎲', title:'Probability & Distributions',
+    desc:'Probability axioms, Bayes theorem, binomial, Poisson, normal distribution, central limit theorem' },
+  { id:'m3_statistics', icon:'📉', title:'Statistics & Regression',
+    desc:'Mean, median, mode, variance, correlation, regression analysis, curve fitting, least squares' },
+]);
+
+setChapters('bt_sem3lab','🧪','Semester 3 Laboratory & Workshop',
+  'Thermodynamics lab, fluid mechanics lab, pipe fitting, valve assembly, marine fitting','Sem 3',[
+  { id:'lab3_thermo', icon:'🌡️', title:'Thermodynamics Lab Experiments',
+    desc:'Bomb calorimeter, boiler efficiency test, steam properties verification, heat transfer experiments' },
+  { id:'lab3_fluid', icon:'💧', title:'Fluid Mechanics Lab',
+    desc:'Bernoulli theorem verification, Reynolds number experiment, metacentric height, pipe friction' },
+  { id:'lab3_workshop', icon:'🔧', title:'Marine Workshop Practices',
+    desc:'Pipe fitting, valve assembly, gasket making, flange alignment, basic marine fitting operations' },
+]);
+
+setChapters('bt_boilers','🔥','Marine Boilers & Steam Engineering',
+  'Steam generation, fire-tube & water-tube boilers, mountings, water treatment, combustion, IGS','Sem 4',[
+  { id:'boil_steam_gen', icon:'💨', title:'Steam Generation Principles',
+    desc:'Properties of steam, steam formation, superheated steam, dryness fraction, steam tables, T-s & h-s diagrams' },
+  { id:'boil_firetube', icon:'🔥', title:'Fire-Tube Boilers',
+    desc:'Scotch marine boiler, economic boiler, Cochran boiler, Lancashire boiler — construction, working, advantages' },
+  { id:'boil_watertube', icon:'💧', title:'Water-Tube Boilers',
+    desc:'D-type, header type, Babcock-Wilcox — construction, working, comparison with fire-tube, marine applications' },
+  { id:'boil_mountings', icon:'🔧', title:'Boiler Mountings & Accessories',
+    desc:'Safety valve, pressure gauge, water level indicator, feed check valve, blow down, fusible plug, economiser, superheater, air preheater' },
+  { id:'boil_water_treat', icon:'🧪', title:'Boiler Water Treatment',
+    desc:'Internal & external treatment, pH control, TDS, phosphate dosing, hydrazine, condensate polishing' },
+  { id:'boil_combustion', icon:'🌡️', title:'Combustion & Fuel Systems',
+    desc:'Combustion theory, air-fuel ratio, excess air, oil burners, atomisation, flame detection, combustion control' },
+  { id:'boil_operation', icon:'⚙️', title:'Boiler Operation & Safety',
+    desc:'Start-up, shut-down, blow-down, gauge glass maintenance, safety valves, boiler emergency procedures' },
+  { id:'boil_maintenance', icon:'🔩', title:'Boiler Maintenance & Inspection',
+    desc:'Tube cleaning, refractory repair, stay bolt inspection, hydraulic test, class survey requirements' },
+  { id:'boil_igs', icon:'🛡️', title:'Inert Gas Systems (IGS)',
+    desc:'Flue gas system, nitrogen generators, IG distribution, scrubber, deck seal, pressure/vacuum breaker' },
+]);
+
+setChapters('bt_thermo_app','🌡️','Applied Thermodynamics (Power Engineering)',
+  'Steam nozzles, turbines, condensers, gas turbines, compressors, refrigeration, psychrometry','Sem 4',[
+  { id:'tapp_nozzles', icon:'💨', title:'Steam Nozzles',
+    desc:'Convergent & convergent-divergent nozzles, critical pressure ratio, nozzle efficiency, supersaturation' },
+  { id:'tapp_turbines', icon:'⚙️', title:'Steam Turbines',
+    desc:'Impulse & reaction turbines, velocity diagrams, De Laval, Parsons, compounding, governing, losses' },
+  { id:'tapp_condensers', icon:'❄️', title:'Condensers & Cooling',
+    desc:'Surface & jet condensers, condenser vacuum, cooling water systems, air ejectors, condensate extraction' },
+  { id:'tapp_gas_turbines', icon:'🔥', title:'Gas Turbines',
+    desc:'Open & closed cycles, Brayton cycle, regeneration, intercooling, reheat, marine gas turbine applications' },
+  { id:'tapp_compressors_recip', icon:'💨', title:'Reciprocating Air Compressors',
+    desc:'Single & multi-stage compression, volumetric efficiency, intercooling, indicator diagrams, clearance volume' },
+  { id:'tapp_compressors_rotary', icon:'🔄', title:'Rotary Compressors',
+    desc:'Centrifugal, axial, screw compressors, turbocharger compressor, surge, choking' },
+  { id:'tapp_refrig', icon:'❄️', title:'Refrigeration Cycles',
+    desc:'Vapour compression cycle, COP, refrigerants, components, marine provision & cargo refrigeration' },
+  { id:'tapp_psychrometry', icon:'🌡️', title:'Psychrometry & Air Conditioning',
+    desc:'Dry/wet bulb temperature, relative humidity, psychrometric chart, sensible & latent heat, HVAC on ships' },
+]);
+
+setChapters('bt_manuf','🔧','Manufacturing Processes & Marine Workshop Technology',
+  'Casting, welding, forming, machining, CNC, fitting & piping, marine machine tools','Sem 4',[
+  { id:'man_casting', icon:'🔥', title:'Casting Processes',
+    desc:'Sand casting, die casting, centrifugal casting, investment casting, defects & inspection, marine castings' },
+  { id:'man_welding', icon:'⚡', title:'Welding Technology',
+    desc:'MMA, MIG, TIG, submerged arc, gas welding, welding defects, weld testing, welding on ships, IMO requirements' },
+  { id:'man_forming', icon:'🔨', title:'Metal Forming Processes',
+    desc:'Rolling, forging, extrusion, drawing, sheet metal operations, press work — ship manufacturing applications' },
+  { id:'man_machining', icon:'⚙️', title:'Machining Processes',
+    desc:'Turning, drilling, milling, grinding, boring, broaching — cutting parameters, tool materials, cutting fluids' },
+  { id:'man_cnc', icon:'🖥️', title:'CNC Machining & Automation',
+    desc:'CNC principles, G-codes, M-codes, CNC lathe & mill, CAM software, workshop automation' },
+  { id:'man_piping', icon:'🔧', title:'Fitting & Piping on Ships',
+    desc:'Pipe materials, pipe joining, flange types, gaskets, valves, pipe fabrication, pressure testing, marine pipe systems' },
+]);
+
+setChapters('bt_kinematics','⚙️','Mechanics of Machines / Kinematics & Dynamics',
+  'Mechanisms, velocity & acceleration, cams, gears, governors, flywheel, balancing, vibrations','Sem 4',[
+  { id:'kin_mechanisms', icon:'🔗', title:'Mechanisms & Linkages',
+    desc:'Kinematic chains, four-bar mechanism, slider-crank, quick return, Grashof criterion, degree of freedom' },
+  { id:'kin_vel_acc', icon:'📊', title:'Velocity & Acceleration Analysis',
+    desc:'Graphical methods, velocity & acceleration diagrams, Coriolis acceleration, Kennedy theorem' },
+  { id:'kin_cams', icon:'📐', title:'Cams & Followers',
+    desc:'Cam types, follower types, cam profile construction, uniform velocity, SHM, uniform acceleration' },
+  { id:'kin_gears', icon:'⚙️', title:'Gears & Gear Trains',
+    desc:'Spur, helical, bevel gears, gear terminology, law of gearing, involute profile, epicyclic gear trains' },
+  { id:'kin_governors', icon:'🎛️', title:'Governors',
+    desc:'Watt, Porter, Proell, Hartnell governors, sensitiveness, stability, isochronism, hunting, marine engine governors' },
+  { id:'kin_flywheel', icon:'🔄', title:'Flywheel & Turning Moment',
+    desc:'Turning moment diagrams, fluctuation of energy, coefficient of fluctuation, flywheel design for engines' },
+  { id:'kin_balancing', icon:'⚖️', title:'Balancing of Rotating & Reciprocating Parts',
+    desc:'Static & dynamic balancing, balancing of single & multi-cylinder engines, secondary forces, crankshaft balancing' },
+  { id:'kin_vibrations', icon:'📳', title:'Vibrations',
+    desc:'Free, forced, damped vibrations, natural frequency, critical speed, vibration isolation, shipboard vibration analysis' },
+]);
+
+setChapters('bt_electronics','📡','Marine Electronics & Communication',
+  'Semiconductor devices, digital electronics, sensors, communication systems, GMDSS','Sem 5',[
+  { id:'elec_semiconductor', icon:'💡', title:'Semiconductor Devices',
+    desc:'Diodes, transistors, FET, MOSFET, thyristors — characteristics, applications in marine electronics' },
+  { id:'elec_rectifiers', icon:'⚡', title:'Rectifiers & Power Supplies',
+    desc:'Half-wave, full-wave, bridge rectifiers, filters, voltage regulators, switched-mode power supplies' },
+  { id:'elec_amplifiers', icon:'🔊', title:'Amplifiers & Op-Amps',
+    desc:'Transistor amplifiers, operational amplifier basics, comparator, integrator, differentiator circuits' },
+  { id:'elec_digital', icon:'🖥️', title:'Digital Electronics',
+    desc:'Logic gates, Boolean algebra, combinational circuits, flip-flops, counters, shift registers, A/D & D/A converters' },
+  { id:'elec_sensors', icon:'📡', title:'Sensors & Transducers',
+    desc:'Temperature, pressure, flow, level, speed sensors — RTD, thermocouple, LVDT, strain gauge, proximity sensors' },
+  { id:'elec_comms', icon:'📻', title:'Communication Systems & GMDSS',
+    desc:'AM, FM, digital modulation, VHF, MF/HF, INMARSAT, GMDSS equipment, SART, EPIRB, DSC, NAVTEX' },
+  { id:'elec_radar', icon:'📡', title:'Radar & ECDIS',
+    desc:'Radar principles, marine radar, ARPA, AIS, ECDIS, navigational aids — electronic navigation systems' },
+]);
+
+setChapters('bt_medraw','✏️','Marine Engineering Drawing',
+  'Drawing standards, engine components, valves, piping diagrams, boiler drawings, CAD','Sem 5',[
+  { id:'med_standards', icon:'📏', title:'Drawing Standards & Conventions',
+    desc:'BIS/ISO standards, line types, dimensioning, tolerances, surface finish symbols, marine drawing conventions' },
+  { id:'med_engine', icon:'⚙️', title:'Engine Component Drawing',
+    desc:'Piston, piston rod, crosshead, connecting rod, crankshaft, cylinder liner, cylinder head — detailed drawings' },
+  { id:'med_valves', icon:'🔧', title:'Valve Drawings',
+    desc:'Globe, gate, butterfly, ball, check, relief valves — sectional views, assembly drawings' },
+  { id:'med_piping', icon:'🔩', title:'Piping Diagrams & Schematics',
+    desc:'P&ID symbols, piping layouts, fuel oil system, cooling water system, bilge system — schematic drawing' },
+  { id:'med_boiler', icon:'🔥', title:'Boiler & Heat Exchanger Drawings',
+    desc:'Boiler section views, tube arrangement, safety valve, plate-type & shell-tube heat exchanger drawings' },
+  { id:'med_cad', icon:'🖥️', title:'CAD Introduction',
+    desc:'AutoCAD/SolidWorks basics, 2D drafting, 3D modelling introduction, marine engineering CAD applications' },
+]);
+
+setChapters('bt_elecpower','⚡','Marine Electrical Power Systems',
+  'Ship power plant, switchboard, generator paralleling, protection, emergency power, HV','Sem 6',[
+  { id:'ep_power_plant', icon:'🏭', title:'Ship Electrical Power Plant',
+    desc:'Generator selection, power balance, load analysis, prime mover types, voltage & frequency selection, ship service generators' },
+  { id:'ep_switchboard', icon:'🔌', title:'Switchboard & Distribution',
+    desc:'Main switchboard construction, bus bars, circuit breakers, ACB, MCCB, fuses, distribution panels, shore connection' },
+  { id:'ep_paralleling', icon:'🔄', title:'Generator Paralleling',
+    desc:'Conditions for paralleling, synchroscope, auto-synchroniser, load sharing, droop control, preferential tripping, blackout recovery' },
+  { id:'ep_protection', icon:'🛡️', title:'Protection Devices',
+    desc:'Overcurrent, earth fault (insulation monitoring), short circuit, reverse power, under-voltage protection, selectivity, discrimination' },
+  { id:'ep_motors', icon:'⚙️', title:'Motor Control & Starting',
+    desc:'DOL, star-delta, auto-transformer, soft starter, VFD drives, motor protection, motor maintenance on ships' },
+  { id:'ep_emergency', icon:'🆘', title:'Emergency Power Systems',
+    desc:'Emergency generator, emergency switchboard, UPS, batteries, SOLAS requirements, automatic start, testing' },
+  { id:'ep_lighting', icon:'💡', title:'Lighting & Battery Systems',
+    desc:'Lighting types (LED, fluorescent, navigation lights), emergency lighting, battery charging, battery maintenance' },
+  { id:'ep_hv', icon:'⚡', title:'High Voltage on Ships',
+    desc:'3.3kV / 6.6kV / 11kV systems, HV switchgear, HV safety, electric propulsion power, shore power at HV' },
+  { id:'ep_surveys', icon:'📋', title:'Electrical Surveys & Testing',
+    desc:'Insulation resistance testing, continuity, earth fault finding, megger, PAT testing, class electrical survey' },
+]);
+
+setChapters('bt_safety','🛡️','Marine Safety & Fire Engineering',
+  'SOLAS, fire science, detection, fire-fighting systems, LSA, emergency procedures, ISM','Sem 6',[
+  { id:'sf_solas', icon:'📜', title:'SOLAS Convention Overview',
+    desc:'SOLAS chapters, certificates, surveys, flag state & port state responsibilities, ISM integration' },
+  { id:'sf_fire_science', icon:'🔥', title:'Fire Science & Classification',
+    desc:'Fire triangle/tetrahedron, fire classes (A–F), heat transfer modes, fire behaviour, fire spread mechanisms' },
+  { id:'sf_detection', icon:'📡', title:'Fire Detection Systems',
+    desc:'Smoke detectors (ionisation, optical), heat detectors, flame detectors, fire alarm systems, zone monitoring' },
+  { id:'sf_fixed', icon:'⚙️', title:'Fixed Fire-Fighting Systems',
+    desc:'CO₂ system, water mist, foam systems (hi-expansion, lo-expansion), dry chemical, halon alternatives, sprinkler systems' },
+  { id:'sf_portable', icon:'🧯', title:'Portable Fire-Fighting Equipment',
+    desc:'Extinguisher types, fire hoses, nozzles, fire suits, SCBA, emergency escape breathing devices' },
+  { id:'sf_structural', icon:'🏗️', title:'Structural Fire Protection',
+    desc:'A-class, B-class divisions, fire zones, insulation, fire doors, fire dampers, smoke barriers, fire plans' },
+  { id:'sf_lsa', icon:'🛟', title:'Life-Saving Appliances',
+    desc:'Lifeboats, life rafts, rescue boats, life jackets, immersion suits, visual signals, SART, EPIRB, MOB systems' },
+  { id:'sf_emergency', icon:'🆘', title:'Emergency Procedures',
+    desc:'Fire drills, abandon ship, MOB, enclosed space entry, flooding, collision, grounding emergency response' },
+  { id:'sf_ism', icon:'📋', title:'ISM Code & Safety Management',
+    desc:'ISM 12 elements, DPA, safety management system, audits, DOC, SMC, non-conformity reporting, continuous improvement' },
+]);
+
+setChapters('bt_machdesign','🔩','Machine Design for Marine Application',
+  'Design of shafts, keys, bolts, welds, springs, bearings, gears for marine components','Sem 6',[
+  { id:'md_philosophy', icon:'📐', title:'Design Philosophy & Basics',
+    desc:'Factor of safety, design stresses, material selection, standard specifications, marine design considerations' },
+  { id:'md_shafts', icon:'⚙️', title:'Design of Shafts',
+    desc:'Torsion, bending, combined loading, ASME shaft design formula, keyways, propeller shaft, intermediate shaft' },
+  { id:'md_keys', icon:'🔑', title:'Design of Keys & Couplings',
+    desc:'Key types, key design, flange coupling, flexible coupling, marine propulsion couplings' },
+  { id:'md_bolts', icon:'🔩', title:'Design of Bolted Joints',
+    desc:'Bolt strength, pre-load, gasket joints, cylinder head bolting, flange bolting, torque specifications' },
+  { id:'md_welds', icon:'⚡', title:'Design of Welded Joints',
+    desc:'Weld types, weld strength calculations, fillet & butt weld design, welded structures for marine use' },
+  { id:'md_springs', icon:'🔄', title:'Spring Design',
+    desc:'Helical springs, leaf springs, spring rate, Wahl factor, spring material, vibration isolation springs' },
+  { id:'md_bearings', icon:'🔧', title:'Bearing Selection & Design',
+    desc:'Journal bearings, ball/roller bearings, load capacity, life calculation, stern tube bearings, thrust bearings' },
+  { id:'md_gears', icon:'⚙️', title:'Gear Design',
+    desc:'Spur gear design, helical gear strength, Lewis equation, Buckingham equation, marine reduction gears' },
+]);
+
+setChapters('bt_pollution','🌍','Marine Pollution Prevention & Environmental Management',
+  'MARPOL Annex I–VI, ballast water management, anti-fouling, ship recycling','Sem 7',[
+  { id:'poll_overview', icon:'📜', title:'MARPOL Convention Overview',
+    desc:'History, structure, 6 annexes, protocol, amendments, enforcement mechanisms, flag & port state role' },
+  { id:'poll_annex1', icon:'🛢️', title:'MARPOL Annex I — Oil Pollution',
+    desc:'OWS, oil content monitor, IOPP certificate, ORB, oil record keeping, special areas, SOPEP, crude oil washing' },
+  { id:'poll_annex2', icon:'🧪', title:'MARPOL Annex II — Noxious Liquid Substances',
+    desc:'NLS categories, P&A manual, pre-wash, cargo tank cleaning, discharge criteria, chemical tanker operations' },
+  { id:'poll_annex3_5', icon:'📦', title:'MARPOL Annex III, IV & V',
+    desc:'Harmful substances in packaged form, sewage treatment, garbage management, special areas, record keeping' },
+  { id:'poll_annex6', icon:'💨', title:'MARPOL Annex VI — Air Pollution',
+    desc:'SOx, NOx, ODS, VOC regulations, EEDI/EEXI/CII, SEEMP, tier requirements, compliance methods' },
+  { id:'poll_ballast', icon:'🌊', title:'Ballast Water Management',
+    desc:'BWM convention, D-1 & D-2 standards, BWTS types (UV, electrochlorination), testing, record keeping' },
+  { id:'poll_antifouling', icon:'🚢', title:'Anti-Fouling & Ship Recycling',
+    desc:'AFS convention, TBT ban, approved coatings, Hong Kong convention, ship recycling regulations, IHM' },
+]);
+
+setChapters('bt_advelec','⚡','Advanced Marine Electrical Systems',
+  'Power electronics, VFD, electric propulsion, shaft generators, dynamic positioning, condition monitoring','Sem 7',[
+  { id:'ael_power_elec', icon:'💡', title:'Power Electronics Fundamentals',
+    desc:'Thyristor, IGBT, MOSFET, switching characteristics, heat sinks, power electronic circuits' },
+  { id:'ael_rectifiers', icon:'🔌', title:'Rectifiers & Inverters',
+    desc:'Controlled rectifiers, PWM inverters, harmonic filtering, UPS systems, regenerative drives' },
+  { id:'ael_vfd', icon:'🎛️', title:'Variable Frequency Drives (VFD)',
+    desc:'VFD principles, V/f control, vector control, VFD for pumps/fans/compressors, energy savings, harmonics' },
+  { id:'ael_shaft', icon:'⚙️', title:'Shaft Generators & Motors',
+    desc:'Shaft generator systems, power take-off, power take-in, frequency converters, hybrid operation' },
+  { id:'ael_dp', icon:'📡', title:'Dynamic Positioning Systems',
+    desc:'DP class 1/2/3, thruster systems, position reference systems, DP control, failure mode analysis' },
+  { id:'ael_eprop', icon:'🚢', title:'Electric Propulsion Systems',
+    desc:'Diesel-electric, LNG-electric, Azipod, podded propulsion, hybrid propulsion, battery systems' },
+  { id:'ael_condition', icon:'📊', title:'Electrical Condition Monitoring',
+    desc:'Motor current analysis, partial discharge testing, thermal imaging, online insulation monitoring' },
+]);
+
+setChapters('bt_shipops','📜','Ship Operation & Management',
+  'Maritime law, ISM, ISPS, MLC, cargo ops, bunkering, PMS, commercial operations, dry dock','Sem 7',[
+  { id:'sop_law', icon:'⚖️', title:'Maritime Law Basics',
+    desc:'Admiralty law, flag state duties, port state control, maritime conventions, maritime claims, arrest of ships' },
+  { id:'sop_ism', icon:'📋', title:'ISM Code Implementation',
+    desc:'Safety management system, DPA role, internal audits, management reviews, non-conformity reporting' },
+  { id:'sop_isps', icon:'🛡️', title:'ISPS Code & Security',
+    desc:'Ship security assessment, SSP, SSAS, security levels, CSO/SSO roles, port facility security' },
+  { id:'sop_mlc', icon:'👷', title:'Maritime Labour Convention (MLC) 2006',
+    desc:'Seafarer rights, employment agreements, hours of rest, wages, accommodation, health & safety, complaints' },
+  { id:'sop_cargo', icon:'📦', title:'Cargo Operations',
+    desc:'Cargo types, loading/discharging, cargo securing manual, cargo documentation, dangerous goods (IMDG code)' },
+  { id:'sop_bunker', icon:'⛽', title:'Bunkering Operations',
+    desc:'Bunkering procedures, BDN, fuel sampling, quantity measurement, SOPEP, safety precautions, fuel changeover' },
+  { id:'sop_pms', icon:'🔧', title:'Planned Maintenance System',
+    desc:'PMS software (AMOS, MESPAS), class survey requirements, job planning, spare parts management, dry dock planning' },
+  { id:'sop_commercial', icon:'💰', title:'Maritime Commercial Operations',
+    desc:'Charter parties, freight rates, port charges, P&I clubs, H&M insurance, BIMCO clauses, lay time' },
+  { id:'sop_drydock', icon:'🏭', title:'Dry Dock Management',
+    desc:'Dry dock specification, repair list, class requirements, hull treatment, propeller inspection, sea trials' },
+]);
+
+setChapters('bt_elective1','🎓','Elective – I',
+  'CFD for Marine Applications or Marine Refrigeration & HVAC','Sem 7',[
+  { id:'el1_cfd_intro', icon:'💻', title:'CFD Introduction & Marine Applications',
+    desc:'CFD fundamentals, meshing, boundary conditions, turbulence models, flow around hull forms, propeller analysis' },
+  { id:'el1_refrig_hvac', icon:'❄️', title:'Marine Refrigeration & HVAC Systems',
+    desc:'Provision plant, cargo refrigeration, CO₂ & NH₃ systems, HVAC design, air handling units, duct systems' },
+]);
+
+setChapters('bt_project1','📋','Project – I / Seminar / Industrial Training',
+  'Seminar presentation, industrial training, project initiation','Sem 7',[
+  { id:'p1_seminar', icon:'🎤', title:'Seminar & Technical Presentation',
+    desc:'Topic selection, literature survey, presentation preparation, Q&A skills, technical report writing' },
+  { id:'p1_industrial', icon:'🏭', title:'Industrial Training',
+    desc:'Shipyard visit, shipping company visit, training diary, industrial exposure, practical observations' },
+  { id:'p1_project_init', icon:'📝', title:'Project Initiation',
+    desc:'Problem identification, literature review, methodology planning, project timeline, milestones' },
+]);
+
+setChapters('bt_ers','🚢','Marine Engine Room Simulator (ERS)',
+  'Plant familiarization, ME operation, auxiliary systems, generator ops, emergency scenarios','Sem 8',[
+  { id:'ers_familiarization', icon:'🖥️', title:'Plant Familiarization',
+    desc:'Simulator layout, system identification, parameter reading, alarm systems, control stations' },
+  { id:'ers_me_operation', icon:'⚙️', title:'Main Engine Operation',
+    desc:'Pre-start checks, starting, manoeuvring, UMS mode, fuel changeover, load variations, shut-down' },
+  { id:'ers_auxiliary', icon:'🔧', title:'Auxiliary Systems Operation',
+    desc:'Boiler operation, purifier operation, FWG operation, compressor operation, cooling systems management' },
+  { id:'ers_generator', icon:'⚡', title:'Generator Operations',
+    desc:'Generator start-up, paralleling, load sharing, preferential tripping, blackout recovery, shore connection' },
+  { id:'ers_emergency', icon:'🆘', title:'Emergency Scenarios',
+    desc:'Blackout, fire, flooding, ME failure, steering failure, OWS malfunction — emergency response procedures' },
+  { id:'ers_watchkeeping', icon:'📋', title:'Watch-Keeping Duties',
+    desc:'Rounds, parameter logging, handover, communication with bridge, alarm response, rest hour compliance' },
+]);
+
+setChapters('bt_competency','📋','Marine Engineering Competency & Oral Preparation',
+  'STCW competencies, MEO Class IV review, oral examination prep, practical assessments','Sem 8',[
+  { id:'comp_stcw', icon:'📜', title:'STCW Convention & Competencies',
+    desc:'STCW tables, competency standards, knowledge/understanding/proficiency requirements, certification' },
+  { id:'comp_meo4', icon:'📝', title:'MEO Class IV Syllabus Review',
+    desc:'EKG, EKM, Electrotechnology — complete syllabus review, important topics, exam pattern, marking scheme' },
+  { id:'comp_oral', icon:'🎤', title:'Oral Examination Preparation',
+    desc:'Common oral questions, examiner expectations, practical knowledge demonstration, confidence building' },
+  { id:'comp_practical', icon:'🔧', title:'Practical Assessments',
+    desc:'Workshop competencies, machinery identification, safety equipment demonstration, watchkeeping assessment' },
+  { id:'comp_docs', icon:'📋', title:'Documentation & Certification',
+    desc:'COC application, sea service certificates, medical fitness, STCW endorsements, CDC, passport requirements' },
+]);
+
+setChapters('bt_elective2','🔬','Elective – II',
+  'Vibration Analysis & Condition Monitoring or Gas Carriers & Tanker Operations','Sem 8',[
+  { id:'el2_vibration', icon:'📳', title:'Vibration Analysis & Condition Monitoring',
+    desc:'Vibration measurement, FFT analysis, frequency spectrum, bearing defect frequencies, balancing, alignment' },
+  { id:'el2_gas_carriers', icon:'🚢', title:'Gas Carriers & Tanker Operations',
+    desc:'LNG/LPG carrier types, cargo containment, reliquefaction, boil-off gas, cargo operations, IGC code' },
+]);
+
+setChapters('bt_elective3','🌱','Elective – III',
+  'Renewable Energy & Green Shipping or Offshore Engineering Fundamentals','Sem 8',[
+  { id:'el3_renewable', icon:'🌱', title:'Renewable Energy & Green Shipping',
+    desc:'Wind-assisted propulsion, solar energy on ships, fuel cells, shore power, carbon capture, IMO 2030/2050 targets' },
+  { id:'el3_offshore', icon:'🏗️', title:'Offshore Engineering Fundamentals',
+    desc:'Offshore platform types, jack-up/semi-sub/FPSO, offshore safety, DP operations, subsea systems' },
+]);
+
+setChapters('bt_grandviva','🎓','Comprehensive Viva / Grand Viva',
+  'Marine diesel engines, naval architecture, auxiliary machinery, marine electrical, safety, ship ops','Sem 8',[
+  { id:'gv_diesel', icon:'⚙️', title:'Marine Diesel Engines — Viva Review',
+    desc:'2-stroke & 4-stroke construction, fuel injection, combustion, turbocharging, governors, maintenance, troubleshooting' },
+  { id:'gv_naval', icon:'⚓', title:'Naval Architecture — Viva Review',
+    desc:'Stability, hydrostatics, GZ curves, trim, damage stability, ship construction, framing, dry docking' },
+  { id:'gv_aux', icon:'🔧', title:'Marine Auxiliary Machinery — Viva Review',
+    desc:'Pumps, compressors, purifiers, FWG, steering gear, heat exchangers, boilers, refrigeration — key questions' },
+  { id:'gv_electrical', icon:'⚡', title:'Marine Electrical — Viva Review',
+    desc:'Generators, motors, switchboard, protection, emergency power, HV systems, VFD, insulation testing' },
+  { id:'gv_safety', icon:'🛡️', title:'Safety & Environment — Viva Review',
+    desc:'SOLAS, MARPOL, ISM, ISPS, fire-fighting, LSA, emergency procedures, pollution prevention, MLC' },
+  { id:'gv_operations', icon:'📋', title:'Ship Operations — Viva Review',
+    desc:'Bunkering, cargo operations, PMS, dry dock, maritime law, commercial operations, watch-keeping' },
 ]);

@@ -458,6 +458,48 @@ function switchYearTab(year, companyId) {
 }
 
 function launchCBTExam(companyId) {
+  var c = INTERVIEW_COMPANIES[companyId];
+  if (!c) return;
+  var cadetYear = (typeof CadetProfile !== 'undefined' && CadetProfile.getYear()) || 2;
+  
+  // Year confirmation step
+  var yearDescriptions = {
+    1: 'Class 11 Maths, Physics, General Aptitude & English',
+    2: 'Class 12 PCM, Engineering Basics, Aptitude & English',
+    3: 'Marine Engine Fundamentals, Auxiliary Machinery, Safety Regs',
+    4: 'Advanced Marine Systems, Troubleshooting, MEP Procedures',
+    5: 'Situational Questions, Company-Specific, All Marine Topics'
+  };
+  var yearEmojis = { 1: '🟢', 2: '🔵', 3: '🟠', 4: '🔴', 5: '⚓' };
+  var yearLabels = { 1: '1st Year', 2: '2nd Year', 3: '3rd Year', 4: '4th Year', 5: 'Post-Training' };
+  
+  var container = document.getElementById('interviewContent');
+  var html = '<button class="interview-back-btn" onclick="showCompanyDetail(\'' + companyId + '\')">← Back to ' + c.shortName + '</button>';
+  html += '<div style="max-width:500px;margin:2rem auto;text-align:center">';
+  html += '<div style="font-size:3rem;margin-bottom:1rem">' + c.icon + '</div>';
+  html += '<h2 style="color:var(--tx1);font-size:1.3rem;margin-bottom:0.5rem">' + c.shortName + ' CBT Exam</h2>';
+  html += '<div style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 1rem;background:linear-gradient(135deg,rgba(56,189,248,0.12),rgba(129,140,248,0.12));border:1px solid rgba(56,189,248,0.3);border-radius:20px;font-size:0.88rem;color:#38bdf8;font-weight:600;margin-bottom:1.5rem">' + yearEmojis[cadetYear] + ' ' + yearLabels[cadetYear] + ' Level</div>';
+  
+  html += '<div style="background:var(--bg3,rgba(15,23,42,0.5));border:1px solid var(--br,rgba(148,163,184,0.1));border-radius:14px;padding:1.2rem;text-align:left;margin-bottom:1.5rem">';
+  html += '<div style="font-weight:600;color:var(--tx1);font-size:0.9rem;margin-bottom:0.5rem">📋 Exam Details</div>';
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:1rem">';
+  html += '<div style="color:var(--tx3);font-size:0.82rem">Duration: <strong style="color:var(--tx1)">' + c.cbtFormat.duration + ' min</strong></div>';
+  html += '<div style="color:var(--tx3);font-size:0.82rem">Questions: <strong style="color:var(--tx1)">' + c.cbtFormat.totalQuestions + '</strong></div>';
+  html += '<div style="color:var(--tx3);font-size:0.82rem">Passing: <strong style="color:var(--tx1)">' + c.cbtFormat.passingScore + '%</strong></div>';
+  html += '<div style="color:var(--tx3);font-size:0.82rem">Negative: <strong style="color:var(--tx1)">' + (c.cbtFormat.negativeMarking ? 'Yes (-' + (c.cbtFormat.negativeMarkValue || 0.25) + ')' : 'No') + '</strong></div>';
+  html += '</div>';
+  html += '<div style="font-weight:600;color:var(--tx1);font-size:0.9rem;margin-bottom:0.4rem">📚 Topics for Your Year</div>';
+  html += '<div style="color:var(--tx2);font-size:0.85rem;line-height:1.6">' + yearDescriptions[cadetYear] + '</div>';
+  html += '</div>';
+  
+  html += '<button class="company-action-btn primary" onclick="startCBTNow(\'' + companyId + '\')" style="width:100%;padding:0.9rem;font-size:1rem">🚀 Start Exam Now</button>';
+  html += '<button onclick="CadetProfile.showYearSelector()" style="background:none;border:none;color:var(--tx3);font-size:0.82rem;margin-top:0.8rem;cursor:pointer;text-decoration:underline">Wrong year? Change it here</button>';
+  html += '</div>';
+  
+  container.innerHTML = html;
+}
+
+function startCBTNow(companyId) {
   var examState = InterviewPrep.startCBTExam(companyId);
   if (!examState) return;
   renderCBTExam();
@@ -473,7 +515,8 @@ function renderCBTExam() {
   
   // Topbar
   html += '<div class="cbt-topbar">';
-  html += '<div class="cbt-exam-title">' + (c ? c.icon + ' ' + c.shortName + ' CBT' : '🔬 CES Practice') + '</div>';
+  var cadetYearLabel = (typeof CadetProfile !== 'undefined' && CadetProfile.getYear()) ? ' — Year ' + CadetProfile.getYear() : '';
+  html += '<div class="cbt-exam-title">' + (c ? c.icon + ' ' + c.shortName + ' CBT' + cadetYearLabel : '🔬 CES Practice') + '</div>';
   html += '<div id="cbtTimer" class="cbt-timer">--:--</div>';
   html += '<div class="cbt-progress-text">Q' + (s.currentIndex + 1) + ' of ' + s.questions.length + '</div>';
   html += '</div>';

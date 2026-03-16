@@ -91,33 +91,11 @@ function buildLevelBanner(lvl) {
 }
 
 function buildEligibilityBlock(lvl) {
-  return `
-  <div class="elig-block" id="eligBlock">
-    <div class="block-heading">ELIGIBILITY & REQUIREMENTS</div>
-    <div class="elig-grid">
-      ${lvl.eligibility.map(e => `
-      <div class="elig-item">
-        <span class="elig-icon">${e.icon}</span>
-        <div class="elig-text">${e.text}</div>
-      </div>`).join('')}
-    </div>
-  </div>`;
+  return '';
 }
 
 function buildExamPapers(lvl) {
-  if (!lvl.examPapers || !lvl.examPapers.length) return '';
-  return `
-  <div style="margin-bottom:20px">
-    <div class="block-heading">MMD EXAMINATION PAPERS</div>
-    <div class="exam-papers-grid">
-      ${lvl.examPapers.map(p => `
-      <div class="ep-card" onclick="selectExamPaper(this,'${esc(p.title)}')">
-        <div class="ep-label">${p.label}</div>
-        <div class="ep-title">${p.title}</div>
-        <div class="ep-sub">${p.sub || ''}</div>
-      </div>`).join('')}
-    </div>
-  </div>`;
+  return '';
 }
 
 function selectExamPaper(el, title) {

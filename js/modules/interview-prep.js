@@ -30,15 +30,53 @@ var InterviewPrep = (function() {
     return a;
   }
 
-  /* ─── Build CBT question set from company data + CES bank ─── */
+  /* ─── Build CBT question set — YEAR-AWARE ─── */
   function buildCBTQuestions(companyId, maxQuestions) {
     var company = INTERVIEW_COMPANIES[companyId];
     if (!company) return [];
     maxQuestions = maxQuestions || company.cbtFormat.totalQuestions || 50;
     
-    // Pull from CES bank, matching topics to company's CBT sections
-    var allQ = shuffle(CES_QUESTIONS.slice());
-    return allQ.slice(0, Math.min(maxQuestions, allQ.length));
+    var cadetYear = (typeof CadetProfile !== 'undefined' && CadetProfile.getYear()) || 3;
+    var yearQuestions = [];
+    var cesQuestions = [];
+    var blendRatio = { yearwise: 0.6, ces: 0.4 }; // default 60% year-specific, 40% CES marine
+
+    // Year-specific blending ratios
+    if (cadetYear <= 2) {
+      // Year 1-2: Heavy on PCM/Aptitude/English (Class 11/12), light marine
+      blendRatio = { yearwise: 0.7, ces: 0.3 };
+      yearQuestions = getCBTQuestionsUpToYear(cadetYear);
+      cesQuestions = CES_QUESTIONS.filter(function(q) { return q.difficulty === 'support'; });
+    } else if (cadetYear === 3) {
+      // Year 3: Mix of marine fundamentals + some CES
+      blendRatio = { yearwise: 0.5, ces: 0.5 };
+      yearQuestions = getCBTQuestionsByYear(3);
+      cesQuestions = CES_QUESTIONS.filter(function(q) {
+        return q.difficulty === 'support' || q.difficulty === 'operational';
+      });
+    } else if (cadetYear === 4) {
+      // Year 4: Advanced marine, more CES
+      blendRatio = { yearwise: 0.4, ces: 0.6 };
+      yearQuestions = getCBTQuestionsByYear(4).concat(getCBTQuestionsByYear(3));
+      cesQuestions = CES_QUESTIONS.slice();
+    } else {
+      // Post-training: Mostly CES/advanced + situational
+      blendRatio = { yearwise: 0.3, ces: 0.7 };
+      yearQuestions = getCBTQuestionsByYear(5).concat(getCBTQuestionsByYear(4));
+      cesQuestions = CES_QUESTIONS.slice();
+    }
+
+    // Shuffle both pools
+    yearQuestions = shuffle(yearQuestions);
+    cesQuestions = shuffle(cesQuestions);
+
+    // Calculate how many from each pool
+    var yearCount = Math.min(Math.round(maxQuestions * blendRatio.yearwise), yearQuestions.length);
+    var cesCount = Math.min(maxQuestions - yearCount, cesQuestions.length);
+
+    // Blend and shuffle final set
+    var finalQuestions = yearQuestions.slice(0, yearCount).concat(cesQuestions.slice(0, cesCount));
+    return shuffle(finalQuestions).slice(0, maxQuestions);
   }
 
   /* ─── Build CES question set by category ─── */
