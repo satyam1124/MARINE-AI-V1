@@ -5,11 +5,71 @@
 
 setChapters('bt_elec1','⚡','Basic Electrical Engineering',
   'Foundation electrical theory — DC, AC, machines, transformers, instruments — core for all marine electrical systems',
-  'Sem 1', [
+  'Sem 2', [
 
   { id:'bee_dc', icon:'🔌', title:'DC Circuits',
     tags:['Ohm\'s Law','KVL/KCL','Thevenin','Networks'],
+    difficulty:'Medium', time:25,
     desc:"Ohm's law, Kirchhoff's laws, series/parallel networks, Thevenin's and Norton's theorems, superposition principle",
+    summary:`
+      <h3>Fundamentals of DC Circuit Analysis</h3>
+      <p>A <strong>DC circuit</strong> carries current that flows in only one direction — from the higher potential terminal (positive) to the lower (negative) through the external circuit. All marine engineers must master DC circuit analysis because <strong>battery systems</strong>, <strong>emergency lighting</strong>, <strong>starter motors</strong>, and <strong>control circuits</strong> on board ships operate on DC.</p>
+
+      <p>The foundation of all circuit analysis is <strong>Ohm's Law</strong>: <code>V = I × R</code>, where V is the voltage (volts), I is the current (amperes), and R is the resistance (ohms). This deceptively simple equation governs everything from calculating fuse ratings for a 24V navigation light circuit to sizing conductors for a 110V DC emergency switchboard.</p>
+
+      <h3>Kirchhoff's Laws — The Two Pillars</h3>
+      <p><strong>Kirchhoff's Voltage Law (KVL)</strong> states that the algebraic sum of all voltages around any closed loop equals zero: <code>ΣV = 0</code>. This is based on the conservation of energy — the energy gained by charges (from EMF sources) must equal the energy lost (across resistors).</p>
+      <p><strong>Kirchhoff's Current Law (KCL)</strong> states that the sum of currents entering any junction equals the sum leaving: <code>ΣI_in = ΣI_out</code>. This is conservation of charge — no charge is created or destroyed at a junction.</p>
+
+      <div class="learn-callout example">
+        <span class="learn-callout-label">🚢 Real Example</span>
+        On a typical cargo vessel's 24V DC emergency system, a parallel circuit feeds navigation lights (port, starboard, masthead, stern). If the total current drawn is 8.5A and one 2A masthead light fails open-circuit, KCL tells us the remaining branches will still carry their individual currents unchanged (6.5A total), because <strong>voltage across parallel branches is the same</strong>.
+      </div>
+
+      <h3>Network Theorems</h3>
+      <p><strong>Thevenin's Theorem</strong> is the most powerful simplification tool: any linear two-terminal network can be replaced by a single voltage source V_th in series with a resistance R_th. To find V_th, measure the <strong>open-circuit voltage</strong> across the terminals. To find R_th, <strong>short all voltage sources</strong> (replace with short circuits) and <strong>open all current sources</strong>, then calculate the resistance seen from the terminals.</p>
+      <p><strong>Norton's Theorem</strong> is the dual: same network becomes a current source I_N in parallel with R_N. The relationship is <code>I_N = V_th / R_th</code> and <code>R_N = R_th</code>.</p>
+      <p>The <strong>Superposition Theorem</strong> applies to circuits with multiple sources: the response (current/voltage) due to multiple sources equals the sum of responses due to each source acting alone, with all other sources deactivated.</p>
+
+      <div class="learn-callout warning">
+        <span class="learn-callout-label">⚠️ Common Mistake</span>
+        When applying superposition, students often forget that <em>deactivating a voltage source means short-circuiting it</em> (replacing with a wire), while <em>deactivating a current source means open-circuiting it</em> (removing the branch). Getting this backwards leads to completely wrong results.
+      </div>
+
+      <h3>Series vs Parallel — Key Differences</h3>
+      <table class="learn-table">
+        <tr><th>Property</th><th>Series</th><th>Parallel</th></tr>
+        <tr><td>Current</td><td>Same through all (I₁ = I₂ = I₃)</td><td>Divides (I_total = I₁ + I₂ + I₃)</td></tr>
+        <tr><td>Voltage</td><td>Divides (V_total = V₁ + V₂ + V₃)</td><td>Same across all (V₁ = V₂ = V₃)</td></tr>
+        <tr><td>Resistance</td><td>R_T = R₁ + R₂ + R₃</td><td>1/R_T = 1/R₁ + 1/R₂ + 1/R₃</td></tr>
+        <tr><td>If one element fails open</td><td>Entire circuit stops</td><td>Other branches continue</td></tr>
+        <tr><td>Ship application</td><td>Christmas tree lights (old), battery banks</td><td>Lighting circuits, parallel generators</td></tr>
+      </table>
+
+      <h3>Power in DC Circuits</h3>
+      <p>Electrical power has three equivalent forms: <code>P = V × I = I²R = V²/R</code> (all in watts). The <code>I²R</code> form is crucial for calculating <strong>conductor heating losses</strong> — this is why marine cable sizing standards (IEC 60092) mandate minimum cross-sections: thinner cables mean higher resistance, more I²R heating, and fire risk.</p>
+
+      <div class="learn-callout oral">
+        <span class="learn-callout-label">📝 MMD Oral Question</span>
+        <strong>Q: A 220V DC motor draws 45A. The cable resistance from switchboard to motor is 0.15Ω total. Calculate the voltage at motor terminals and power lost in cables.</strong><br>
+        A: Voltage drop = I × R_cable = 45 × 0.15 = 6.75V. Motor terminal voltage = 220 − 6.75 = <strong>213.25V</strong>. Cable power loss = I²R = 45² × 0.15 = <strong>303.75W</strong>. This is why cable runs should be as short as possible.
+      </div>
+
+      <div class="learn-callout tip">
+        <span class="learn-callout-label">💡 Exam Tip</span>
+        For competitive exams and oral boards, always write all three forms of the power equation. Examiners often test whether you know when to use which form — use <strong>P = V × I</strong> when both V and I are known, <strong>P = I²R</strong> when current and resistance are known (cable loss calculations), and <strong>P = V²/R</strong> when voltage and resistance are known (heater ratings).
+      </div>
+    `,
+    keyPoints: [
+      { icon: '⚡', text: '<strong>Ohm\'s Law (V = IR)</strong> — The most fundamental electrical equation. Use it to find any one quantity when the other two are known. All marine electrical troubleshooting starts here.' },
+      { icon: '🔄', text: '<strong>KVL (ΣV = 0)</strong> — Sum of voltages around any closed loop is zero. Use for series circuits and mesh analysis. Based on conservation of energy.' },
+      { icon: '🔗', text: '<strong>KCL (ΣI_in = ΣI_out)</strong> — Current entering a node equals current leaving. Use for parallel circuits and nodal analysis. Based on conservation of charge.' },
+      { icon: '📐', text: '<strong>Series: R adds up, current is same.</strong> Parallel: 1/R adds up, voltage is same.</strong> Know this cold — it appears in every electrical exam paper.' },
+      { icon: '🔧', text: '<strong>Thevenin\'s Theorem</strong> simplifies any complex network into V_th + R_th. Find V_th = open circuit voltage, R_th = resistance with sources killed. Essential for load analysis.' },
+      { icon: '⚖️', text: '<strong>Superposition</strong> — Works only for linear circuits. Deactivate all sources except one, solve, repeat for each source, then algebraically sum all results.' },
+      { icon: '🔥', text: '<strong>I²R losses</strong> cause cable heating. Marine cable sizing (IEC 60092) is based on minimizing these losses. Doubling current = 4× heat. Critical safety concept.' },
+      { icon: '🚢', text: '<strong>Ship applications:</strong> 24V DC emergency systems, battery chargers, steering gear motor starters, solenoid valves, alarm circuits, UPS systems, control relays.' },
+    ],
     formulas:[
       { label:"Ohm's Law",           eq:"V = I × R   [V]",                          note:"V=voltage(V), I=current(A), R=resistance(Ω). Foundation of all circuit analysis." },
       { label:"Series Resistance",   eq:"R_total = R₁ + R₂ + … + Rₙ",             note:"Current same through all. Voltage divides proportionally to resistance." },
