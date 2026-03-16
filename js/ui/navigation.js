@@ -16,7 +16,7 @@ function buildRankGrid() {
         <div class="rc-tags">
           ${lvl.tags.map(t => `<span class="rc-tag" style="color:${lvl.rankColor};border-color:${lvl.rankColor}44;background:${lvl.rankColor}11">${t}</span>`).join('')}
         </div>
-        <div class="rc-eligibility">${lvl.eligibility[0].text}</div>
+        <div class="rc-eligibility">${lvl.eligibility && lvl.eligibility.length > 0 ? lvl.eligibility[0].text : ''}</div>
         <span class="rc-enter">ENTER →</span>
       </div>
       <div class="rank-node" style="${nodeStyle}">${lvl.icon}</div>
