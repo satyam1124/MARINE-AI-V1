@@ -184,13 +184,59 @@ setChapters('bt_elec1','⚡','Basic Electrical Engineering',
   },
 
   { id:'bee_capacitor_gp', icon:'🔋', title:'Capacitors',
-    desc:"Types of capacitor, capacitance of multiple parallel plate capacitor, energy stored, charging and discharging, time constant." },
+    desc:"Types of capacitor, capacitance of multiple parallel plate capacitor, energy stored, charging and discharging, time constant.",
+    formulas:[
+      { label:"Capacitance", eq:"C = ε₀εᵣA / d   [F]", note:"ε₀=8.854×10⁻¹² F/m, εᵣ=relative permittivity, A=plate area(m²), d=separation(m)." },
+      { label:"Energy Stored", eq:"E = ½CV²   [J]", note:"C=capacitance(F), V=voltage(V). Also E = Q²/(2C)." },
+      { label:"Series Capacitors", eq:"1/C_T = 1/C₁ + 1/C₂ + … + 1/Cₙ", note:"Opposite of resistors: capacitors in series add reciprocally." },
+      { label:"Parallel Capacitors", eq:"C_T = C₁ + C₂ + … + Cₙ", note:"Capacitors in parallel add directly." },
+      { label:"Time Constant (RC)", eq:"τ = R × C   [s]", note:"Time to charge to 63.2% of final voltage. 5τ ≈ fully charged (99.3%)." },
+    ],
+    flashcards:[
+      { q:"What is the time constant of an RC circuit?", a:"τ = R × C. After 1τ the capacitor charges to 63.2% of supply voltage. After 5τ it is 99.3% charged. Discharge follows the same exponential curve." },
+      { q:"How does a capacitor block DC but pass AC?", a:"Once fully charged, no more current flows (DC blocked). AC continuously changes polarity, so the capacitor charges and discharges every half-cycle, effectively 'passing' the current. Higher frequency → lower capacitive reactance Xc = 1/(2πfC)." },
+      { q:"Name 3 types of capacitors and their uses.", a:"1) Electrolytic: high capacitance, polarised — used in power supplies. 2) Ceramic: small, non-polarised — RF filtering. 3) Film (polyester/polypropylene): stable, used in power factor correction on ships." },
+    ]
+  },
   { id:'bee_magnetic_gp', icon:'🧲', title:'Magnetic Circuits',
-    desc:"Law of magnetic circuit, series & parallel magnetic circuits calculation, comparison of magnetic & electric circuit." },
+    desc:"Law of magnetic circuit, series & parallel magnetic circuits calculation, comparison of magnetic & electric circuit.",
+    formulas:[
+      { label:"Magnetomotive Force (MMF)", eq:"F = N × I   [A-turns]", note:"N=number of turns, I=current(A). Analogous to EMF in electric circuits." },
+      { label:"Magnetic Flux", eq:"Φ = F / R_m = NI / (l/μA)   [Wb]", note:"R_m=reluctance, l=path length(m), μ=permeability, A=cross-section area(m²)." },
+      { label:"Reluctance", eq:"R_m = l / (μ₀μᵣA)   [A-turns/Wb]", note:"Analogous to resistance. Air gaps have very high reluctance (μᵣ≈1)." },
+      { label:"Flux Density", eq:"B = Φ / A   [T]", note:"B=magnetic flux density(Tesla), Φ=flux(Wb), A=area(m²). Also B = μH." },
+    ],
+    flashcards:[
+      { q:"Compare magnetic and electric circuits.", a:"MMF (NI) ↔ EMF (V). Flux (Φ) ↔ Current (I). Reluctance (R_m) ↔ Resistance (R). Permeability (μ) ↔ Conductivity (σ). Main difference: flux 'leaks' in magnetic circuits, current doesn't in electric circuits." },
+      { q:"Why are air gaps minimised in magnetic circuits?", a:"Air has μᵣ ≈ 1 (iron has μᵣ ≈ 1000–5000), so even a small air gap introduces enormous reluctance. This reduces flux for a given MMF. In motors/generators, the air gap is kept as small as mechanically possible." },
+    ]
+  },
   { id:'bee_emi_gp', icon:'⚡', title:'Electromagnetic Induction',
-    desc:"Faraday’s Law, Lenz’s Law, self & mutual inductance, coupled circuits, rise and decay of current in inductive circuit." },
+    desc:"Faraday's Law, Lenz's Law, self & mutual inductance, coupled circuits, rise and decay of current in inductive circuit.",
+    formulas:[
+      { label:"Faraday's Law", eq:"e = -N × dΦ/dt   [V]", note:"Induced EMF equals negative rate of change of flux linkage. N=turns, Φ=flux(Wb)." },
+      { label:"Self Inductance", eq:"L = NΦ / I   [H]", note:"Also e = -L × di/dt. L=inductance(Henry). Energy stored: E = ½LI²." },
+      { label:"Mutual Inductance", eq:"M = k√(L₁L₂)   [H]", note:"k=coupling coefficient (0 to 1). k=1 for ideal transformer. M causes induced EMF in secondary." },
+      { label:"Inductive Time Constant", eq:"τ = L / R   [s]", note:"Time for current to reach 63.2% of final value. 5τ ≈ steady state." },
+    ],
+    flashcards:[
+      { q:"State Lenz's Law and its significance.", a:"The direction of induced EMF always opposes the change causing it. This is conservation of energy — if it aided, perpetual motion would be possible. In practice: closing a switch on an inductive circuit, back-EMF opposes current rise." },
+      { q:"What happens when an inductive circuit is suddenly broken?", a:"Current tries to stop instantly → di/dt is enormous → e = -L(di/dt) creates a very high voltage spike (can be thousands of volts). This causes arcing at switch contacts. Suppression diodes (flyback diodes) are used to protect circuits." },
+    ]
+  },
   { id:'bee_install_gp', icon:'🔌', title:'Electrical Installations',
-    desc:"LT switchgear: Switch fuse, MCB, ELCB, MCCB. Types of wires/cables, batteries. Power factor improvement calculations." }
+    desc:"LT switchgear: Switch fuse, MCB, ELCB, MCCB. Types of wires/cables, batteries. Power factor improvement calculations.",
+    formulas:[
+      { label:"Power Factor", eq:"PF = cos φ = P / S = kW / kVA", note:"P=active power(W), S=apparent power(VA). Ship target: PF > 0.8 lagging." },
+      { label:"Capacitor for PF Correction", eq:"Q_c = P(tan φ₁ − tan φ₂)   [kVAr]", note:"P=active power(kW), φ₁=original angle, φ₂=desired angle. C = Q_c/(2πfV²)." },
+      { label:"Battery Capacity", eq:"Ah = I × t   [Amp-hours]", note:"I=discharge current(A), t=time(hours). Emergency battery: sized for 18h (SOLAS)." },
+    ],
+    flashcards:[
+      { q:"Difference between MCB and MCCB?", a:"MCB (Miniature Circuit Breaker): up to 100A, fixed trip settings, used for branch circuits. MCCB (Moulded Case Circuit Breaker): up to 2500A, adjustable trip settings, used for main distribution. Both provide overload and short-circuit protection." },
+      { q:"What is an ELCB and why is it important on ships?", a:"Earth Leakage Circuit Breaker detects small leakage current to earth (typically 30mA). Trips circuit to prevent electrocution. Critical in accommodation spaces and galley areas where crew contact with water increases shock risk." },
+      { q:"Why is power factor correction important on ships?", a:"Low PF means generators must supply more current (kVA) for the same useful power (kW). This causes: overheating of cables and generators, voltage drops, increased fuel consumption. Capacitor banks are fitted to improve PF to 0.85–0.95." },
+    ]
+  }
 ]);
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -330,23 +376,106 @@ setChapters('bt_diesel1','🔧','Marine Diesel Engine I',
   },
 
   { id:'d1_intro_gp', icon:'📝', title:'Introduction & Characteristics of IC Engine',
-    desc:"Timing Diagrams. Comparative study of slow, medium, and high-speed engines. M.C.R & C.S.R ratings. Practical heat balance diagrams." },
+    desc:"Timing Diagrams. Comparative study of slow, medium, and high-speed engines. M.C.R & C.S.R ratings. Practical heat balance diagrams.",
+    formulas:[
+      { label:"MCR (Max Continuous Rating)", eq:"MCR = max power at rated rpm [kW]", note:"Engine's designed maximum output. CSR (Continuous Service Rating) is typically 85–90% of MCR for long life." },
+      { label:"Mean Effective Pressure", eq:"MEP = W_cycle / V_swept   [bar]", note:"Work per cycle divided by swept volume. Indicator of engine loading." },
+      { label:"Heat Balance", eq:"Q_fuel = W_shaft + Q_exhaust + Q_coolant + Q_radiation", note:"Typically: 46-50% shaft, 25-30% exhaust, 20-25% coolant, 2-3% radiation." },
+    ],
+    flashcards:[
+      { q:"Compare slow, medium, and high-speed engines.", a:"Slow: 80–120 rpm, 2-stroke, direct-coupled to propeller, burns HFO. Medium: 300–1000 rpm, 4-stroke, needs gearbox, burns HFO/MDO. High: >1000 rpm, 4-stroke, small craft, burns MDO/gas. Slow-speed most fuel efficient." },
+      { q:"What is the difference between MCR and CSR?", a:"MCR = Maximum Continuous Rating — engine's nameplate max power. CSR = Continuous Service Rating — typically 85-90% of MCR, the steady-state power for normal operation. Running at MCR continuously increases wear." },
+    ]
+  },
   { id:'d1_desc_gp', icon:'🔧', title:'General Description of I.C. Engines',
-    desc:"Constructional Details: fuel Injectors, Air Starting Valves, Relief Valves, hydraulic exhaust valves, air distributors, Jackets, Liners, Cylinder heads, Tie rods." },
+    desc:"Constructional Details: fuel Injectors, Air Starting Valves, Relief Valves, hydraulic exhaust valves, air distributors, Jackets, Liners, Cylinder heads, Tie rods.",
+    formulas:[
+      { label:"Liner Wear Rate", eq:"Wear rate ≈ 0.01–0.05 mm/1000 hrs", note:"Measured by micrometer. Replace liner when wear reaches manufacturer limit (typically 0.6–1.0% of bore diameter)." },
+      { label:"Tie Rod Tensioning", eq:"F = σ × A   [N]", note:"Tie rods hold engine structure together under combustion pressure. Hydraulically tightened to precise tension." },
+    ],
+    flashcards:[
+      { q:"What is the function of a cylinder relief valve?", a:"Opens if cylinder pressure exceeds safe limit (typically 10-15% above Pmax). Prevents catastrophic damage from liquid (hydraulic lock) or excessive combustion pressure in cylinder." },
+      { q:"Why are cylinder liners made of special materials?", a:"Must resist: wear from piston rings, corrosion from combustion acids (H₂SO₄), high temperature and pressure. Made from alloyed cast iron (Cr, Mo, V, Ni) with honed bore surface for oil retention." },
+    ]
+  },
   { id:'d1_scav_gp', icon:'🌬️', title:'Scavenging and Supercharging System',
-    desc:"Scavenging arrangements in 2-Stroke engines. Air charging and exhausting in 4-Stroke engines. Uni-flow, loop, cross loop, and reverse loop scavenging." },
+    desc:"Scavenging arrangements in 2-Stroke engines. Air charging and exhausting in 4-Stroke engines. Uni-flow, loop, cross loop, and reverse loop scavenging.",
+    formulas:[
+      { label:"Scavenge Efficiency", eq:"η_sc = mass of fresh charge retained / reference mass", note:"Uniflow (modern): 0.85–0.95. Loop scavenge: 0.70–0.80. Cross scavenge: 0.60–0.70." },
+      { label:"Delivery Ratio", eq:"DR = mass of air delivered / reference mass (V_swept × ρ_ambient)", note:"DR > 1.0 means more air delivered than swept volume. Typical: 1.4–1.6." },
+    ],
+    flashcards:[
+      { q:"Why is uniflow scavenging preferred in modern 2-stroke engines?", a:"Air enters from ports at bottom, exits through exhaust valve at top — smooth unidirectional flow. Best scavenge efficiency (85–95%), minimum mixing of fresh air with residual gas. All MAN B&W and Wärtsilä RT-flex engines use uniflow." },
+      { q:"What is the scavenge fire and how to deal with it?", a:"Fire in scavenge space caused by oil/carbon deposits igniting. Signs: high scavenge temp, smoke from drains. Action: reduce speed, shut off fuel to affected cylinder, increase cylinder lubrication, engage scavenge space fire extinguisher. Do NOT open scavenge doors." },
+    ]
+  },
   { id:'d1_super_gp', icon:'💨', title:'Supercharging arrangements',
-    desc:"Pulse and constant pressure type. Turbocharger and its details. Two-stage, un-cooled, radial turbochargers." },
+    desc:"Pulse and constant pressure type. Turbocharger and its details. Two-stage, un-cooled, radial turbochargers.",
+    formulas:[
+      { label:"Pressure Ratio", eq:"P₂/P₁ = (T₂/T₁)^(γ/(γ-1))", note:"P₁=inlet, P₂=outlet. γ=1.4 for air. Higher ratio → more air density → more power." },
+      { label:"Compressor Efficiency", eq:"η_comp = T₂s−T₁ / T₂−T₁", note:"T₂s=isentropic outlet temp. Typical: 75–82%." },
+    ],
+    flashcards:[
+      { q:"Difference between pulse and constant pressure turbocharging?", a:"Pulse: exhaust gas pulses directly drive turbine — better response at low load, complex piping. Constant pressure: exhaust collected in large manifold, steady flow to turbine — simpler, better at high loads. Modern engines use constant pressure or hybrid." },
+      { q:"What is turbocharger surging?", a:"Compressor operates beyond its stable range — airflow reverses momentarily through compressor. Causes: dirty scavenge cooler, sudden load change, low engine load. Signs: barking noise, vibration. Prevention: scavenge cooler cleaning, auxiliary blower use at low loads." },
+    ]
+  },
   { id:'d1_cooling_gp', icon:'🌊', title:'Cooling of I.C. Engines',
-    desc:"Various Cooling media used. Cooling of Pistons, cylinder jackets & cylinder heads. Bore cooling, coolant conveying mechanism, maintenance." },
+    desc:"Various Cooling media used. Cooling of Pistons, cylinder jackets & cylinder heads. Bore cooling, coolant conveying mechanism, maintenance.",
+    formulas:[
+      { label:"Heat Rejected", eq:"Q = ṁ × Cp × ΔT   [kW]", note:"ṁ=flow(kg/s), Cp=4.186 kJ/kg·K for water, ΔT=temperature rise. 25–35% of fuel heat goes to cooling." },
+      { label:"Piston Cooling Oil Flow", eq:"ṁ_oil = Q / (Cp_oil × ΔT_oil)", note:"Cp_oil ≈ 2.0 kJ/kg·K. Oil inlet ~45°C, outlet ~55°C." },
+    ],
+    flashcards:[
+      { q:"Why is bore cooling used in modern engines?", a:"Coolant passages drilled close to the liner bore surface provide precise temperature control. Keeps liner at optimum temperature (180–220°C) to prevent cold corrosion (below dew point of H₂SO₄) and hot corrosion (above safe limits)." },
+      { q:"What is the purpose of jacket water treatment?", a:"Prevents corrosion (inhibitors: nitrites, borates), prevents scale (softened water, <5°dH), prevents biological growth. pH maintained 7–9. Chloride level <50 ppm. Regular testing essential." },
+    ]
+  },
   { id:'d1_combust_gp', icon:'🔥', title:'Combustion & Dissociation',
-    desc:"Stoichiometric combustion, Excess Air, Dissociation. Preparation of fuels, ignition delay, afterburning. Compression Pressure Ratio." },
+    desc:"Stoichiometric combustion, Excess Air, Dissociation. Preparation of fuels, ignition delay, afterburning. Compression Pressure Ratio.",
+    formulas:[
+      { label:"Stoichiometric Air", eq:"Air = (100/23.3) × [(8/3)C + 8H + S − O]   [kg/kg fuel]", note:"C,H,S,O as mass fractions. Typical: 14.5 kg air per kg fuel." },
+      { label:"Excess Air Factor", eq:"λ = actual air / stoichiometric air", note:"λ=1: perfect. Marine diesel: λ = 2.0–2.5 at full load. More air = cooler, less NOx." },
+      { label:"Compression Ratio", eq:"r = V_BDC / V_TDC", note:"Diesel: 14–22:1. Higher CR → higher thermal efficiency and peak pressure." },
+    ],
+    flashcards:[
+      { q:"What is ignition delay and why is it important?", a:"Time between start of fuel injection and start of combustion (0.001–0.003s). Long delay → large amount of fuel accumulates → violent pressure rise (diesel knock). Controlled by: injection timing, fuel quality (cetane number), compression ratio." },
+      { q:"What is dissociation in combustion?", a:"At very high temperatures (>1800°C), CO₂ and H₂O break down back into CO, H₂, O₂. This absorbs energy, reducing actual work output. It's why real engines produce less power than theoretical calculations predict." },
+    ]
+  },
   { id:'d1_fuels_gp', icon:'⛽', title:'Fuels & Lubricants',
-    desc:"Composition, properties and characteristics. Sampling and testing procedure, storage and transfer. Contamination including microbes." },
+    desc:"Composition, properties and characteristics. Sampling and testing procedure, storage and transfer. Contamination including microbes.",
+    formulas:[
+      { label:"Calorific Value", eq:"GCV ≈ 43,000 kJ/kg (HFO) to 45,000 kJ/kg (MDO)", note:"GCV=Gross Calorific Value. NCV=GCV − latent heat of water formed. NCV used for SFOC calculations." },
+      { label:"CCAI (Ignition Quality)", eq:"CCAI = D − 81 − 141×log(log(V+0.85)) − 483×log((T+273)/323)", note:"D=density at 15°C(kg/m³), V=viscosity(cSt), T=temp(°C). CCAI<850: good ignition." },
+    ],
+    flashcards:[
+      { q:"What are the main tests performed on bunker fuel?", a:"Density (15°C), viscosity (50°C), water content (Karl Fischer), CCAI (ignition quality), flash point (>60°C SOLAS), sulphur content (MARPOL), pour point, ash content, vanadium/sodium/aluminium+silicon (cat fines)." },
+      { q:"What is microbial contamination in fuel?", a:"Bacteria, yeast, and fungi (especially Hormoconis resinae) grow at water-oil interface in tanks. They produce acids that corrode tank walls and produce sludge blocking filters. Prevention: drain water regularly, use biocides, maintain good housekeeping." },
+    ]
+  },
   { id:'d1_medium_gp', icon:'⚙️', title:'Medium speed Engines',
-    desc:"Different types of medium speed engines, couplings, reduction gear. V-type engine details. Use of poor quality residual fuels." },
+    desc:"Different types of medium speed engines, couplings, reduction gear. V-type engine details. Use of poor quality residual fuels.",
+    formulas:[
+      { label:"Gear Ratio", eq:"GR = N_engine / N_propeller", note:"Medium-speed engines (500–600 rpm) need GR of 4–6 to match propeller speed (100–150 rpm)." },
+      { label:"Gear Efficiency", eq:"η_gear = P_output / P_input ≈ 98–99%", note:"Single-reduction gear loses 1–2% of transmitted power as heat in oil." },
+    ],
+    flashcards:[
+      { q:"Why are V-type medium-speed engines popular for propulsion?", a:"Compact (shorter engine room), higher power-to-weight ratio than in-line, good balance with correct firing order. Examples: Wärtsilä 46F, MAN 48/60. Disadvantage: more complex maintenance access between cylinder banks." },
+      { q:"How do medium-speed engines handle heavy fuel oil?", a:"Modern medium-speed engines burn HFO up to 700 cSt/50°C with: fuel treatment (settling, purification, heating to 130–140°C), upgraded fuel injection equipment (higher injection pressures), modified combustion chambers, and proper cylinder lube oil (high TBN)." },
+    ]
+  },
   { id:'d1_special_gp', icon:'✨', title:'Special features of I.C. Engines',
-    desc:"Development of long-stroke Engines, Implication of stroke-bore ratio. Development in materials & heat treatment of ME components." }
+    desc:"Development of long-stroke Engines, Implication of stroke-bore ratio. Development in materials & heat treatment of ME components.",
+    formulas:[
+      { label:"Stroke/Bore Ratio", eq:"S/B = stroke / bore diameter", note:"Modern 2-stroke: S/B = 3.5–4.5. Higher S/B → longer expansion stroke → better thermal efficiency. MAN G95ME-C: S/B=4.15." },
+      { label:"Power per Cylinder", eq:"P_cyl = MEP × V_swept × N / (n × 60)", note:"n=1 for 2-stroke, n=2 for 4-stroke. Single cylinder power up to 5700 kW for largest engines." },
+    ],
+    flashcards:[
+      { q:"What are the benefits of long-stroke engines?", a:"Higher thermal efficiency (longer expansion), lower specific fuel consumption, lower rpm (better propeller matching), reduced NOx at lower cylinder temperature. Trade-off: taller engine room needed, heavier rotating parts." },
+      { q:"What advanced materials are used in modern engine components?", a:"Piston crown: Nimonic alloy (heat resistant). Liner: Cr-Mo-V cast iron. Exhaust valve: Stellite facing + Inconel seat. Turbocharger blades: Inconel 713. Crankshaft: forged alloy steel (Cr-Mo)." },
+    ]
+  }
 ]);
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -447,21 +576,87 @@ setChapters('bt_aux','⚓','Auxiliary Machinery I',
   },
 
   { id:'aux_layout_gp', icon:'🏗️', title:'General Engine Room Layout',
-    desc:"Layout of main and auxiliary machinery in engine rooms in different ships." },
+    desc:"Layout of main and auxiliary machinery in engine rooms in different ships.",
+    formulas:[],
+    flashcards:[
+      { q:"Name the main machinery found in a typical engine room.", a:"Main engine, diesel generators (2-3), boiler (aux/exhaust gas), air compressors (2), purifiers (FO+LO), FW generator, steering gear, pumps (FW, SW, bilge, ballast, fuel transfer, LO), sewage treatment plant, oily water separator, emergency fire pump." },
+      { q:"What is the 'tank top' in an engine room?", a:"The inner bottom of the ship — the lowest floor level in the engine room. Main engine, generators, and heavy machinery are mounted on the tank top via chock-fastened bedplates. Provides access to double-bottom tanks below." },
+    ]
+  },
   { id:'aux_pipe_gp', icon:'🚰', title:'Layout of Pipe lines',
-    desc:"Pipe material, Piping arrangement for steam, bilge, ballast, fuel. Domestic fresh/sea water. Color code. Calculation of sizes. Cargo oil pumping. Leakage prevention." },
+    desc:"Pipe material, Piping arrangement for steam, bilge, ballast, fuel. Domestic fresh/sea water. Color code. Calculation of sizes. Cargo oil pumping. Leakage prevention.",
+    formulas:[
+      { label:"Pipe Flow (Continuity)", eq:"Q = A × v   [m³/s]", note:"A=cross-section area(m²), v=velocity(m/s). For water: v=1.5–3 m/s. For steam: v=25–40 m/s." },
+      { label:"Pipe Diameter", eq:"d = √(4Q / πv)   [m]", note:"Select next standard pipe size upward from calculation. Standard: DN15 to DN500." },
+    ],
+    flashcards:[
+      { q:"What is the IMO pipe colour code for fire main?", a:"Red. Other codes: Bilge=Green with black band, Ballast=Green, Steam=Silver/grey, Fuel oil=Brown, Lubricating oil=Yellow, Fresh water=Blue, Sea water=Green, Compressed air=Light blue." },
+      { q:"Why are expansion bends fitted in piping?", a:"Pipes expand when heated (steel: ~12mm per 10m per 100°C rise). Without expansion allowance, thermal stress causes cracking. Solution: expansion bends (U-loops), bellows expansion joints, or sliding supports." },
+    ]
+  },
   { id:'aux_filters_gp', icon:'🕸️', title:'Filters and Strainers',
-    desc:"Difference between Strainers and filters, auto-clean, Duplex, Static, micro filters. Priming and core maintenance." },
+    desc:"Difference between Strainers and filters, auto-clean, Duplex, Static, micro filters. Priming and core maintenance.",
+    formulas:[],
+    flashcards:[
+      { q:"Difference between a filter and a strainer?", a:"Strainer: coarse mesh (>100 μm), removes large particles, usually self-cleaning basket type. Filter: fine media (<100 μm down to <1 μm), uses paper, fabric, or sintered metal elements. Auto-backwash filters: clean automatically when differential pressure rises." },
+      { q:"What is a duplex filter and why is it used?", a:"Two filter housings in parallel with a changeover valve. One side in service, other on standby. Allows changeover for cleaning without stopping flow. Essential for continuous systems like fuel oil supply to main engine." },
+    ]
+  },
   { id:'aux_pumps_gp', icon:'💧', title:'Pumps and pumping systems',
-    desc:"Centrifugal, Gear, Screw, Reciprocating pumps. Care and Maintenance. Automation and control, Pump losses & efficiency, NPSH." },
+    desc:"Centrifugal, Gear, Screw, Reciprocating pumps. Care and Maintenance. Automation and control, Pump losses & efficiency, NPSH.",
+    formulas:[
+      { label:"Pump Efficiency", eq:"η = P_hydraulic / P_shaft = ρgQH / P_motor", note:"Typical centrifugal pump: 60–85%. Positive displacement: 80–95%." },
+      { label:"NPSHa", eq:"NPSHa = P_atm/(ρg) + z_s − P_v/(ρg) − h_f", note:"z_s=suction height(+ve if below), P_v=vapour pressure, h_f=friction loss. Must exceed NPSHr." },
+    ],
+    flashcards:[
+      { q:"When would you use a gear pump vs centrifugal pump?", a:"Gear pump (positive displacement): for viscous fluids (fuel oil, lube oil), precise flow regardless of pressure, self-priming. Centrifugal: for large volumes of low-viscosity fluid (sea water, ballast, fire main), variable flow with throttle valve, not self-priming." },
+      { q:"What causes a centrifugal pump to lose suction?", a:"Air leak in suction line, blocked suction strainer, low liquid level in tank, worn impeller/wear rings increasing clearance, vapour lock (liquid too hot), clogged vent. Check NPSHa > NPSHr." },
+    ]
+  },
   { id:'aux_comp_gp', icon:'🌬️', title:'Blowers and Compressors',
-    desc:"Operational and constructional details of blowers and compressors. Uses of compressed air. Air Bottles. Ventilation fans and ducting." },
+    desc:"Operational and constructional details of blowers and compressors. Uses of compressed air. Air Bottles. Ventilation fans and ducting.",
+    formulas:[
+      { label:"Starting Air Bottle Capacity", eq:"V = (n × V_cyl) / (P_bottle/P_start − 1)", note:"n=number of consecutive starts (SOLAS: 12 starts). Typical: 30 bar air bottles, 250–3000 litres." },
+      { label:"Air Delivery Rate", eq:"FAD = V_swept × η_vol × N   [m³/min]", note:"FAD=Free Air Delivery. η_vol=volumetric efficiency (75–90%). N=rpm." },
+    ],
+    flashcards:[
+      { q:"SOLAS requirements for starting air?", a:"Must store enough air for 12 consecutive starts of the main engine (6 starts per bottle × 2 bottles). Must have at least 2 starting air compressors. One compressor can be engine-driven. Emergency generator must have independent starting." },
+      { q:"Why is moisture removal critical in compressed air systems?", a:"Water causes: corrosion of air bottles and piping, malfunction of pneumatic control valves, freezing in cold weather blocking air supply. Removed by: intercoolers, aftercoolers, moisture separators, automatic drain traps." },
+    ]
+  },
   { id:'aux_evap_gp', icon:'🚰', title:'Evaporators',
-    desc:"Construction and Operation of different types of evaporators. Fresh Water generators and distillers. Reverse Osmosis process." },
+    desc:"Construction and Operation of different types of evaporators. Fresh Water generators and distillers. Reverse Osmosis process.",
+    formulas:[
+      { label:"Distillate Output", eq:"Output = Q_heat / (h_fg + Cp × ΔT_preheat)   [kg/hr]", note:"h_fg=latent heat of evaporation(2257 kJ/kg at 100°C). Vacuum operation: h_fg lower at lower pressure." },
+      { label:"RO Osmotic Pressure", eq:"π = MRT   [bar]", note:"M=molarity, R=gas constant, T=temperature(K). Seawater: ~25 bar. RO pump must exceed this (55–70 bar)." },
+    ],
+    flashcards:[
+      { q:"Why do shipboard FW generators operate under vacuum?", a:"Vacuum (0.1–0.3 bar absolute) lowers boiling point to 40–65°C, allowing use of waste heat from engine jacket water cooling (80–90°C) as heat source. No additional fuel needed. Also prevents scale formation at lower temperatures." },
+      { q:"How does Reverse Osmosis work?", a:"Seawater is pressurised (55–70 bar) through semi-permeable membrane. Water molecules pass through, salts are rejected. Recovery rate: 35–45%. Produces potable water directly. Pre-treatment needed to prevent membrane fouling." },
+    ]
+  },
   { id:'aux_hx_gp', icon:'🔄', title:'Heat Exchangers',
-    desc:"Tubular and plate type, reasons for corrosion. Tube removal and plugging of tubes. Materials used." },
+    desc:"Tubular and plate type, reasons for corrosion. Tube removal and plugging of tubes. Materials used.",
+    formulas:[
+      { label:"Heat Transfer", eq:"Q = U × A × LMTD   [kW]", note:"U=overall heat transfer coefficient(W/m²K), A=area(m²), LMTD=log mean temperature difference." },
+      { label:"Fouling Factor", eq:"1/U_dirty = 1/U_clean + R_f", note:"R_f increases with fouling → U decreases → less heat transfer. Regular cleaning essential." },
+    ],
+    flashcards:[
+      { q:"Why are tubes sometimes plugged in a shell-and-tube cooler?", a:"When a tube develops a leak (detected by oil-in-water or water-in-oil), it's plugged at both tube plates to isolate it. Up to 10–15% of tubes can be plugged before the cooler needs replacement. Reduced cooling area means lower capacity." },
+      { q:"What materials are used for heat exchanger tubes on ships?", a:"Cupro-nickel (70/30 or 90/10): excellent seawater corrosion resistance, used for SW coolers. Titanium: high-end, very corrosion resistant. Stainless steel: FW coolers. Mild steel: not used for SW (corrodes rapidly)." },
+    ]
+  },
   { id:'aux_purif_gp', icon:'🌀', title:'Oil Purification',
-    desc:"Theory of oil purifications. Use of settling/service tanks. ALCAP system, Homogenizers. Importance of LO/FO testing." }
+    desc:"Theory of oil purifications. Use of settling/service tanks. ALCAP system, Homogenizers. Importance of LO/FO testing.",
+    formulas:[
+      { label:"Separation Efficiency", eq:"η_sep ∝ d² × (ρ_w − ρ_o) × ω² × r / μ", note:"d=droplet diameter, ρ=densities, ω=angular velocity, r=radius, μ=viscosity. Smaller droplets harder to separate." },
+      { label:"Gravity Disc Selection", eq:"r_i = √[r_h² − (ρ_o/ρ_w)(r_h² − r_l²)]", note:"r_i=interface radius, r_h=heavy liquid outlet, r_l=light liquid outlet. Correct disc prevents oil/water carryover." },
+    ],
+    flashcards:[
+      { q:"What is the ALCAP system?", a:"Alfa Laval Clarifier Adaptive Performance. A self-adjusting centrifugal separator that automatically detects water content and adjusts operation. No gravity disc required. Operates in purifier mode when water is present, clarifier mode when dry. Reduces operator intervention." },
+      { q:"Why is regular fuel oil testing important?", a:"Detects: cat fines (Al+Si >15 ppm: abrasive damage to liners/rings), water contamination, incorrect viscosity, high sodium (hot corrosion), excessive sulphur (MARPOL compliance). Samples taken: bunker receipt, before/after purifier, before engine." },
+    ]
+  }
 ]);
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -907,14 +1102,10 @@ selectTopic = function(topicId, title, desc, icon, sectionName){
 
 /* ── Quiz launchers ── */
 window.launchChapterQuiz = function(parentId, chapterId, chapterTitle){
-  const lvl = APP.currentLevel;
-  const lvlLabel = lvl?.fullTitle || lvl?.title || 'B.Tech Marine Engineering';
-  if(typeof buildAdvQuizPrompt !== 'function'){ alert('Quiz engine not ready'); return; }
-
   const entry   = TOPIC_KNOWLEDGE[parentId];
   const chapter = entry?.subtopics?.find(s => s.id === chapterId);
 
-  // Build a synthetic topic knowledge entry for this chapter
+  // Ensure chapter is registered in TOPIC_KNOWLEDGE
   if(!TOPIC_KNOWLEDGE[chapterId]){
     TOPIC_KNOWLEDGE[chapterId] = {
       formulas:   chapter?.formulas   || [],
@@ -923,28 +1114,40 @@ window.launchChapterQuiz = function(parentId, chapterId, chapterTitle){
     };
   }
 
+  // Set context so quizStart picks up the right topic
+  APP.currentTopic    = parentId;
+  APP._subtopicId    = chapterId;
+  APP._subtopicTitle = chapterTitle;
+
+  // Switch to the Quiz tab if it exists
   const quizTab = document.querySelector('.mm-tab[onclick*="quiz"]');
   if(quizTab) quizTab.click();
 
-  // Set quiz UI to this chapter
   const ql = document.getElementById('quizTopic'); if(ql) ql.textContent = chapterTitle;
 
-  // Trigger quiz via the standard quiz panel
-  const qBtn = document.getElementById('btnStartQuiz') || document.querySelector('[onclick*="startQuiz"]');
-  if(qBtn){ APP.currentTopic = chapterId; qBtn.click(); }
-  else {
-    // Fallback: show modal
-    if(typeof showQuizModal === 'function') showQuizModal(chapterId, chapterTitle, 'Medium', 10);
-  }
+  // Directly invoke the quiz-v2 start function
+  setTimeout(function(){
+    if(typeof quizStart === 'function'){
+      quizStart();
+    } else if(typeof buildFlashcardQuiz === 'function'){
+      // Ultimate fallback
+      const fb = buildFlashcardQuiz(chapterId, QUIZ?.count || 10);
+      if(fb){ QUIZ.data=fb; QUIZ.index=0; QUIZ.score=0; QUIZ.wrong=[]; QUIZ.answered=false; if(typeof renderQuizQ==='function') renderQuizQ(); }
+      else { openApiModal(); }
+    }
+  }, 200);
 };
 
 window.launchSubjectQuiz = function(topicId, topicTitle){
+  APP.currentTopic = topicId;
+  APP._subtopicId = null;
+  APP._subtopicTitle = null;
   const quizTab = document.querySelector('.mm-tab[onclick*="quiz"]');
   if(quizTab) quizTab.click();
   const ql = document.getElementById('quizTopic'); if(ql) ql.textContent = topicTitle;
-  APP.currentTopic = topicId;
-  const qBtn = document.getElementById('btnStartQuiz') || document.querySelector('[onclick*="startQuiz"]');
-  if(qBtn) qBtn.click();
+  setTimeout(function(){
+    if(typeof quizStart === 'function') quizStart();
+  }, 200);
 };
 
 /* ── Helper: esc function (safe HTML) — ensure available ── */
@@ -1241,25 +1444,102 @@ setChapters('bt_materials','🔬','Engineering Materials',
   },
 
   { id:'mat_atom_gp', icon:'⚛️', title:'Structure of Atom',
-    desc:"Electrons and Bonding; Covalent, Metallic, ionic and Secondary bonding. Crystal structure- Space lattices; Interfacing in crystals Points; Elastomers." },
+    desc:"Electrons and Bonding; Covalent, Metallic, ionic and Secondary bonding. Crystal structure- Space lattices; Interfacing in crystals Points; Elastomers.",
+    formulas:[
+      { label:"Atomic Packing Factor", eq:"APF = Volume of atoms / Volume of unit cell", note:"BCC: 0.68, FCC: 0.74, HCP: 0.74. Higher APF = denser packing = generally harder material." },
+    ],
+    flashcards:[
+      { q:"What are the 3 common crystal structures in metals?", a:"BCC (Body-Centred Cubic): iron at room temp, chromium — strong but less ductile. FCC (Face-Centred Cubic): aluminium, copper, austenite — ductile and tough. HCP (Hexagonal Close-Packed): zinc, titanium — brittle at room temp." },
+      { q:"Difference between metallic and ionic bonding?", a:"Metallic: atoms share a 'sea' of delocalised electrons — gives conductivity, malleability, lustre. Ionic: electron transfer creates +/− ions held by electrostatic force — hard, brittle, high melting point (e.g., NaCl). Metals on ships use metallic bonding." },
+    ]
+  },
   { id:'mat_metals_gp', icon:'⚙️', title:'Metals and Alloys',
-    desc:"Different types of iron and steel; their manufacture, properties and uses. Alloys of iron and steel. Non-ferrous metals and alloys." },
+    desc:"Different types of iron and steel; their manufacture, properties and uses. Alloys of iron and steel. Non-ferrous metals and alloys.",
+    formulas:[
+      { label:"Carbon Content Classification", eq:"Mild steel: <0.3%C, Medium: 0.3-0.6%C, High: 0.6-1.4%C, Cast iron: 2-4%C", note:"More carbon = harder but more brittle. Mild steel most common on ships." },
+    ],
+    flashcards:[
+      { q:"Why is mild steel the most widely used material on ships?", a:"Good balance of strength, ductility, weldability, and cost. Yield strength ~250 MPa. Easy to fabricate and repair. Hull plates, frames, decks all mild steel. Disadvantage: corrodes in seawater — needs protection (paint, anodes)." },
+      { q:"Name 3 non-ferrous alloys used on ships and their applications.", a:"1) Cupro-nickel (Cu-Ni 70/30): heat exchanger tubes, seawater piping — excellent corrosion resistance. 2) Phosphor bronze: bearings, pump wear rings — good wear resistance. 3) Monel (Ni-Cu): propeller shafts, valve seats — very corrosion resistant." },
+    ]
+  },
   { id:'mat_misc_gp', icon:'🛠️', title:'Miscellaneous Eng. Materials',
-    desc:"Refractoriness, Insulating materials; Plastics and Rubber; PVC, Resins, Adhesives and Bonding Plastics, Paints. Polyurethane foam." },
+    desc:"Refractoriness, Insulating materials; Plastics and Rubber; PVC, Resins, Adhesives and Bonding Plastics, Paints. Polyurethane foam.",
+    formulas:[],
+    flashcards:[
+      { q:"Where are plastics used on ships?", a:"PVC: cable insulation, piping (non-pressure). Nylon: gears, bushings, rope. PTFE (Teflon): gaskets, valve seats, piston ring coatings. GRP (fibreglass): lifeboats, ventilation ducting, small craft hulls. Epoxy resins: coatings, adhesives." },
+      { q:"What is refractoriness and where is it needed?", a:"Ability to withstand high temperature without deforming or melting. Used in: boiler furnace linings (fire brick, castable refractory), incinerator linings (up to 1200°C), exhaust gas boiler baffles. Made from alumina, silica, or magnesia compounds." },
+    ]
+  },
   { id:'mat_test_gp', icon:'📊', title:'Testing of Materials',
-    desc:"Destructive Tests: Tensile, Compression, Hardness, Bend, Torsion, Impact. Non-destructive: MPI, Fluorescent, Ultrasonic, Radiography." },
+    desc:"Destructive Tests: Tensile, Compression, Hardness, Bend, Torsion, Impact. Non-destructive: MPI, Fluorescent, Ultrasonic, Radiography.",
+    formulas:[
+      { label:"Tensile Stress", eq:"σ = F / A₀   [MPa]", note:"F=force(N), A₀=original cross-section area(m²). UTS=maximum stress before fracture." },
+      { label:"Strain", eq:"ε = ΔL / L₀", note:"ΔL=extension(m), L₀=original length(m). Dimensionless ratio." },
+      { label:"Young's Modulus", eq:"E = σ / ε   [GPa]", note:"Stiffness measure. Steel: ~200 GPa, Aluminium: ~70 GPa, Copper: ~120 GPa." },
+    ],
+    flashcards:[
+      { q:"What does a Charpy impact test measure?", a:"Toughness — energy absorbed during fracture of a notched specimen by a swinging pendulum. Measured in Joules. Important for materials at low temperatures (ductile-to-brittle transition). Ships in cold waters need high impact values." },
+      { q:"When is ultrasonic testing (UT) used on ships?", a:"Measuring hull plate thickness (corrosion survey), detecting internal cracks in shafts/crankshafts, weld inspection for subsurface defects. Uses high-frequency sound waves (1-10 MHz). Can detect flaws as small as 1mm at depths up to 1m." },
+    ]
+  },
   { id:'mat_solid_gp', icon:'🧊', title:'Solid Solution',
-    desc:"Binary alloys, Thermal Equilibrium Diagrams, Cooling curves, Eutectic/paratactic. Allotropy of Iron, Iron-carbon diagram, T-T-T curve." },
+    desc:"Binary alloys, Thermal Equilibrium Diagrams, Cooling curves, Eutectic/paratactic. Allotropy of Iron, Iron-carbon diagram, T-T-T curve.",
+    formulas:[
+      { label:"Eutectic Composition (Fe-C)", eq:"4.3% C at 1147°C", note:"Eutectic point: liquid → austenite + cementite simultaneously. Below this = hypo-eutectic, above = hyper-eutectic." },
+      { label:"Eutectoid (Fe-C)", eq:"0.8% C at 723°C", note:"Eutectoid: austenite → pearlite (ferrite + cementite). Steel below 0.8%C = hypo-eutectoid." },
+    ],
+    flashcards:[
+      { q:"What is the iron-carbon equilibrium diagram used for?", a:"Predicts phases present at any temperature and carbon content. Shows: melting points, phase boundaries, transformation temperatures. Essential for understanding heat treatment — tells you what temperature to heat to and what structure to expect on cooling." },
+      { q:"What is allotropy of iron?", a:"Iron exists in different crystal structures at different temperatures. BCC (α-iron/ferrite) below 912°C → FCC (γ-iron/austenite) 912-1394°C → BCC (δ-iron) 1394-1538°C. This transformation enables heat treatment of steel." },
+    ]
+  },
   { id:'mat_heat_gp', icon:'🔥', title:'Heat Treatment',
-    desc:"Annealing, normalising, hardening and Tempering. Isothermal transformation diagrams. Hardenability, case hardening, carburizing, Nitriding." },
+    desc:"Annealing, normalising, hardening and Tempering. Isothermal transformation diagrams. Hardenability, case hardening, carburizing, Nitriding.",
+    formulas:[],
+    flashcards:[
+      { q:"Sequence for hardening and tempering steel?", a:"1) Heat to above upper critical temperature (austenite region, ~850°C for medium carbon steel). 2) Quench rapidly in water/oil → forms martensite (very hard, brittle). 3) Temper: reheat to 150-650°C → reduces brittleness, slight loss of hardness. Final: tough + hard." },
+      { q:"What is case hardening and why is it used?", a:"Makes surface hard (wear-resistant) while keeping core tough (shock-resistant). Methods: Carburizing (add carbon at 900°C), Nitriding (add nitrogen at 500°C), Induction hardening. Used for: gear teeth, crankshaft journals, camshaft lobes." },
+      { q:"What does a T-T-T diagram show?", a:"Time-Temperature-Transformation: shows what microstructure forms when austenite is cooled at different rates. Fast cooling → martensite (hard). Slow cooling → pearlite (soft). Intermediate → bainite. Critical for choosing quenchants and predicting hardness." },
+    ]
+  },
   { id:'mat_fatigue_gp', icon:'⏳', title:'Fatigue & Creep',
-    desc:"Mechanisms of fatigue, fatigue curve. Corrosion fatigue. Creep phenomena and creep-resisting alloys. Short time and longtime creep tests." },
+    desc:"Mechanisms of fatigue, fatigue curve. Corrosion fatigue. Creep phenomena and creep-resisting alloys. Short time and longtime creep tests.",
+    formulas:[
+      { label:"Fatigue Limit", eq:"S_e ≈ 0.5 × UTS  (for steel)", note:"Stress below which material can endure infinite cycles without failure. Only ferrous metals have a true fatigue limit." },
+      { label:"Creep Rate", eq:"ε̇ = A × σⁿ × e^(-Q/RT)", note:"A=material constant, σ=stress, n=stress exponent, Q=activation energy, R=gas constant, T=temperature(K)." },
+    ],
+    flashcards:[
+      { q:"How does fatigue failure occur?", a:"1) Crack initiation at stress concentrator (notch, scratch, corrosion pit). 2) Slow crack propagation with each load cycle (beach marks visible on fracture surface). 3) Sudden final fracture when remaining area can't support load. Prevention: smooth surfaces, avoid stress concentrators, shot peening." },
+      { q:"What is creep and where is it a concern on ships?", a:"Slow, permanent deformation under constant stress at high temperature over long time. Concerns: boiler superheater tubes, exhaust valve spindles (Nimonic alloy), turbine blades. Three stages: primary (decreasing rate), secondary (steady rate — design region), tertiary (accelerating → failure)." },
+    ]
+  },
   { id:'mat_corr_gp', icon:'🌊', title:'Corrosion and its prevention',
-    desc:"Mechanism, Thermodynamics & kinetics. Chemical/Electrochemical corrosion, Anodic and Cathodic protection, coatings. Anodizing, Introduction to ICCP." },
+    desc:"Mechanism, Thermodynamics & kinetics. Chemical/Electrochemical corrosion, Anodic and Cathodic protection, coatings. Anodizing, Introduction to ICCP.",
+    formulas:[
+      { label:"Corrosion Rate", eq:"CR = K × W / (ρ × A × t)   [mm/yr]", note:"W=weight loss(g), ρ=density(g/cm³), A=area(cm²), t=time(hr), K=constant. Acceptable: <0.1 mm/yr for steel in treated water." },
+    ],
+    flashcards:[
+      { q:"How does ICCP (Impressed Current Cathodic Protection) work?", a:"External DC power supply forces current through anodes (titanium/platinised) into seawater to ship hull (cathode). Maintains hull at -0.80 to -0.85V vs Ag/AgCl reference electrode. More controllable than sacrificial anodes. Used on larger vessels." },
+      { q:"What is galvanic corrosion and how to prevent it?", a:"When two dissimilar metals in contact in an electrolyte, the less noble metal corrodes preferentially. Prevention: use metals close in galvanic series, insulate dissimilar metals, use sacrificial anodes (zinc), apply protective coatings." },
+    ]
+  },
   { id:'mat_uses_gp', icon:'🚢', title:'Uses of materials in shipboard application',
-    desc:"Chromium, Ceramic, Titanium, PTFE in Shipboard Systems. Characteristics of above materials." },
+    desc:"Chromium, Ceramic, Titanium, PTFE in Shipboard Systems. Characteristics of above materials.",
+    formulas:[],
+    flashcards:[
+      { q:"Why is titanium used for seawater heat exchangers?", a:"Extremely corrosion resistant in seawater (forms protective TiO₂ oxide layer), lightweight, strong. Disadvantage: very expensive. Used in plate-type heat exchangers, condensers on naval vessels and high-end cargo ships." },
+      { q:"Where is PTFE (Teflon) used on ships?", a:"Valve seat seals (non-stick, chemical resistant), piston ring coatings (low friction), pump wear rings, shaft seal faces, pipe joint tape (thread sealant). Temperature range: -200°C to +260°C. Extremely low coefficient of friction (0.05-0.10)." },
+    ]
+  },
   { id:'mat_select_gp', icon:'✅', title:'Selection of Materials',
-    desc:"Boilers, Steam/Gas turbine, Purifiers/Diesel engine components, Pumps, Piping, Engine seating. Propellers and Rudders. Composition/strength requirements." }
+    desc:"Boilers, Steam/Gas turbine, Purifiers/Diesel engine components, Pumps, Piping, Engine seating. Propellers and Rudders. Composition/strength requirements.",
+    formulas:[],
+    flashcards:[
+      { q:"What materials are used for marine propellers?", a:"Nickel-Aluminium-Bronze (NAB): most common — excellent seawater corrosion resistance, good strength, castable. Manganese Bronze: cheaper, suitable for smaller vessels. Stainless steel: high-performance vessels. Composite (carbon fibre): emerging for efficiency." },
+      { q:"What material is used for boiler tubes and why?", a:"Carbon steel (SA-178/SA-192) for water tubes: adequate strength at 350–450°C, affordable. Superheater tubes: alloy steel (Cr-Mo) for higher temperatures up to 540°C — Cr provides oxidation resistance, Mo provides creep resistance." },
+    ]
+  }
 ]);
 
 setChapters('bt_workshop2','🛠️','Engineering Workshop II',
@@ -2775,17 +3055,68 @@ setChapters('bt_metec1','⚡','Marine Electro Technology – I',
     desc:'Swinburne test, brake test, regenerative test, efficiency calculation, losses in DC machines' },
 
   { id:'met1_dc_fund_gp', icon:'⚡', title:'DC Fundamentals',
-    desc:"DC Current Machines, Principle of working, construction, winding, e.m.f. Equation, Armature reaction, commutation, compensating winding, potentiometer, Galvanometer, Ammeter, voltmeter." },
+    desc:"DC Current Machines, Principle of working, construction, winding, e.m.f. Equation, Armature reaction, commutation, compensating winding, potentiometer, Galvanometer, Ammeter, voltmeter.",
+    formulas:[
+      { label:"EMF Equation (DC Generator)", eq:"E = PΦZN / (60A)   [V]", note:"P=poles, Φ=flux/pole(Wb), Z=total conductors, N=rpm, A=parallel paths. Lap: A=P, Wave: A=2." },
+      { label:"Armature Reaction Effect", eq:"MNA shift = brush advance angle", note:"Armature current creates cross-magnetising flux that distorts main field. Corrected by interpoles or compensating windings." },
+    ],
+    flashcards:[
+      { q:"What is armature reaction in a DC machine?", a:"The magnetic field produced by armature current distorts and weakens the main field. Effects: shifts neutral plane (causes sparking at brushes), reduces terminal voltage. Countered by: interpoles (commutation poles), compensating windings in pole faces." },
+      { q:"What is commutation and why is it important?", a:"The process of reversing current direction in an armature coil as it passes through the brush contact. Poor commutation → sparking at brushes → brush and commutator damage. Good commutation requires: correct brush position, interpoles, proper spring tension." },
+    ]
+  },
   { id:'met1_dc_mach_gp', icon:'⚙️', title:'DC Machines',
-    desc:"DC generators and DC motors construction and working." },
+    desc:"DC generators and DC motors construction and working.",
+    formulas:[
+      { label:"Back EMF (DC Motor)", eq:"E_b = V − I_a × R_a   [V]", note:"V=supply voltage, I_a=armature current, R_a=armature resistance. E_b opposes supply — limits current." },
+      { label:"Torque (DC Motor)", eq:"T = PΦZ I_a / (2πA)   [N·m]", note:"Torque proportional to flux × armature current. Series motor: very high starting torque." },
+    ],
+    flashcards:[
+      { q:"Why must a DC series motor never be run on no-load?", a:"Field winding is in series with armature — at no-load, current is very small → weak field → speed increases trying to generate back-EMF → motor accelerates to dangerous speeds (runaway). Always connected to load mechanically." },
+      { q:"Compare shunt and series DC motors.", a:"Shunt: field in parallel, constant speed (~5% regulation), moderate starting torque. Used for: pumps, fans, compressors. Series: field in series, speed varies inversely with load, very high starting torque. Used for: cranes, winches, windlass. Never run unloaded." },
+    ]
+  },
   { id:'met1_alt_gp', icon:'🔄', title:'Alternators',
-    desc:"AC Power Generation, Construction, working principle and routine maintenance." },
+    desc:"AC Power Generation, Construction, working principle and routine maintenance.",
+    formulas:[
+      { label:"Generated EMF", eq:"E = 4.44 × f × N × Φ × K_w   [V]", note:"f=frequency(Hz), N=turns/phase, Φ=flux/pole(Wb), K_w=winding factor (~0.95). Per phase voltage." },
+      { label:"Frequency", eq:"f = P × N / 120   [Hz]", note:"P=number of poles, N=rpm. Ship generators: 6-pole at 1200 rpm → 60Hz. Or 4-pole at 1800 rpm." },
+    ],
+    flashcards:[
+      { q:"How is voltage regulated in a marine alternator?", a:"Automatic Voltage Regulator (AVR) senses output voltage and adjusts DC field current via the exciter. Higher field current → more flux → higher voltage. AVR maintains constant voltage (440V) regardless of load changes." },
+      { q:"What routine maintenance does an alternator need?", a:"Clean air filters (prevents overheating), check bearing lubrication, inspect brush gear (if brushed type), megger test insulation resistance (min 1 MΩ), check AVR operation, tighten connections, inspect cooling fan, check vibration levels." },
+    ]
+  },
   { id:'met1_ac_fund_gp', icon:'〰️', title:'AC Fundamentals',
-    desc:"Single phase AC Supply, phase angle, frequency, RMS values, Active/Reactive/Apparent power, Power factor improvement using capacitor bank." },
+    desc:"Single phase AC Supply, phase angle, frequency, RMS values, Active/Reactive/Apparent power, Power factor improvement using capacitor bank.",
+    formulas:[
+      { label:"RMS Value", eq:"V_rms = V_peak / √2 = 0.707 × V_peak", note:"RMS = effective DC equivalent. 440V ship supply → V_peak = 622V." },
+      { label:"Power Triangle", eq:"S² = P² + Q²;  PF = P/S = cos φ", note:"S=apparent(VA), P=active(W), Q=reactive(VAr). Low PF → high current for same real power." },
+    ],
+    flashcards:[
+      { q:"What is the difference between active, reactive, and apparent power?", a:"Active (P, Watts): does useful work (heating, mechanical). Reactive (Q, VAr): oscillates between source and load (magnetising motors, charging capacitors) — no useful work. Apparent (S, VA): vector sum, what the generator actually supplies. PF = P/S." },
+      { q:"How do capacitor banks improve power factor?", a:"Inductive loads (motors) draw lagging reactive current. Capacitors supply leading reactive current that cancels the lagging component. Net effect: generator supplies less total (apparent) current for the same useful (active) power. Reduces cable heating and allows more load on generators." },
+    ]
+  },
   { id:'met1_comp_gp', icon:'⚖️', title:'Comparison DC Vs AC',
-    desc:"Waveform Comparison, Constant and RMS value, interconversion of currents, Applications, Loss of Energy comparison." },
+    desc:"Waveform Comparison, Constant and RMS value, interconversion of currents, Applications, Loss of Energy comparison.",
+    formulas:[],
+    flashcards:[
+      { q:"Why do ships use AC rather than DC for main power distribution?", a:"AC advantages: easy voltage transformation (transformers), simpler/cheaper/more reliable motors (induction motors — no brushes), easier to generate at high power, lower distribution losses. DC still used for: emergency lighting(24V), control circuits, battery systems, variable speed drives." },
+      { q:"How is DC obtained from AC on ships?", a:"Rectifiers: diode bridges convert AC to DC. Thyristor rectifiers: controlled DC output for variable speed drives. Battery chargers use rectifiers. Inverters do the reverse (DC→AC) for UPS systems and shore power conversion." },
+    ]
+  },
   { id:'met1_dist_gp', icon:'🔌', title:'Basics of AC Distribution',
-    desc:"3 phase AC Supply, phase/line voltage and current, neutral earthed system, neutral isolated system (Earth, Open Circuit and Short Circuit Faults)." }
+    desc:"3 phase AC Supply, phase/line voltage and current, neutral earthed system, neutral isolated system (Earth, Open Circuit and Short Circuit Faults).",
+    formulas:[
+      { label:"Star: Line Voltage", eq:"V_L = √3 × V_ph", note:"Ship: V_L=440V → V_ph=254V. Neutral available in star connection." },
+      { label:"Delta: Line Current", eq:"I_L = √3 × I_ph", note:"No neutral in delta. Used for motor windings and transformer connections." },
+    ],
+    flashcards:[
+      { q:"Why do most ships use insulated neutral (IT) system?", a:"Single earth fault does NOT cause a trip — essential for continuous operation at sea. Earth fault monitoring system (insulation monitor) gives alarm. Crew can locate and repair fault without losing power. If neutral were earthed, single earth fault → short circuit → trip → blackout at sea = dangerous." },
+      { q:"What happens in a dead ship (blackout) situation?", a:"Emergency generator auto-starts within 45 seconds (SOLAS). Supplies: emergency lighting, navigation lights, fire detection, communication equipment, steering gear. Crew follows blackout recovery procedure: start emergency generator, start one main generator, restore essential services first, then non-essential loads." },
+    ]
+  }
 ]);
 
 /* ── Semester 3: General Performance – I ── */
@@ -2812,21 +3143,82 @@ setChapters('bt_metec2','⚡','Marine Electro Technology – II',
     desc:'Shipboard 440V/6.6kV distribution, main & emergency switchboard, shore connection, insulation monitoring' },
 
   { id:'met2_sync_gp', icon:'⚡', title:'Synchronous Motors',
-    desc:"Construction, Starting and uses onboard." },
+    desc:"Construction, Starting and uses onboard.",
+    formulas:[
+      { label:"Synchronous Speed", eq:"N_s = 120f / P   [rpm]", note:"f=frequency(Hz), P=poles. Runs at exactly N_s — no slip. 60Hz, 6-pole → 1200 rpm." },
+    ],
+    flashcards:[
+      { q:"How is a synchronous motor started?", a:"Cannot self-start (no starting torque at standstill). Methods: 1) Damper/amortisseur windings — starts as induction motor, then DC field applied at near-sync speed. 2) Variable frequency drive (VFD) — gradual speed increase. 3) Pony motor — small motor brings to near-sync speed." },
+      { q:"Why are synchronous motors used on ships?", a:"Run at constant speed regardless of load (good for cargo pumps). Can be over-excited to provide leading PF — acts as synchronous condenser for PF correction. Used for: large cargo pumps, bow thrusters (some), compressors where exact speed is critical." },
+    ]
+  },
   { id:'met2_ind_gp', icon:'⚙️', title:'Induction Motors',
-    desc:"Construction, Slip, Power Calculation and efficiencies, uses onboard, Maintenance, Single phasing." },
+    desc:"Construction, Slip, Power Calculation and efficiencies, uses onboard, Maintenance, Single phasing.",
+    formulas:[
+      { label:"Slip", eq:"s = (N_s − N_r) / N_s × 100%", note:"N_s=synchronous speed, N_r=rotor speed. Full-load slip: 3-8%. At standstill: s=100%." },
+      { label:"Rotor Frequency", eq:"f_r = s × f_s", note:"At full load with 4% slip: f_r = 0.04 × 60 = 2.4 Hz. At standstill: f_r = f_s = 60 Hz." },
+    ],
+    flashcards:[
+      { q:"What is single phasing and why is it dangerous?", a:"Loss of one phase supply to a 3-phase motor. Motor continues running but draws excessive current in remaining phases (up to 2× normal). Causes severe overheating → insulation failure → burnout. Protection: negative phase sequence relay, single phasing relay, thermal overload." },
+      { q:"What maintenance does a squirrel cage induction motor need?", a:"Minimal — no brushes or slip rings. Regular: check bearing condition (vibration, temperature, lubrication), clean air filters/fan, megger test insulation (min 1 MΩ), check terminal connections, inspect cooling passages, verify protection relay settings. Rewind stator if insulation fails." },
+    ]
+  },
   { id:'met2_comp_gp', icon:'⚖️', title:'Comparison',
-    desc:"Induction motor Vs Synchronous Motors. Stepper Motor. Telemotor." },
+    desc:"Induction motor Vs Synchronous Motors. Stepper Motor. Telemotor.",
+    formulas:[],
+    flashcards:[
+      { q:"Compare induction and synchronous motors.", a:"Induction: simpler, cheaper, self-starting, speed drops under load (slip), always lagging PF. Synchronous: constant speed (no slip), can correct PF (leading), cannot self-start, more expensive, needs DC excitation. Ships use induction for most applications, synchronous for large loads where PF correction needed." },
+      { q:"What is a telemotor system?", a:"Hydraulic remote control system connecting bridge steering wheel to steering gear in steering flat. Transmitter (bridge) converts wheel movement to hydraulic pressure. Receiver (steering flat) converts hydraulic signal to mechanical movement of steering gear control valve. Essential for manual steering backup." },
+    ]
+  },
   { id:'met2_acgen_gp', icon:'🔄', title:'AC Power generation',
-    desc:"Alternators, voltage control, frequency control, brushless alternators, Parallel operation of alternators, load sharing and maintenance." },
+    desc:"Alternators, voltage control, frequency control, brushless alternators, Parallel operation of alternators, load sharing and maintenance.",
+    formulas:[
+      { label:"Synchronising Conditions", eq:"Same: Voltage, Frequency, Phase sequence, Phase angle", note:"All 4 must match before closing breaker. Synchroscope or 3-lamp method used to verify." },
+      { label:"Load Sharing", eq:"Governor droop = (f_NL − f_FL) / f_rated × 100%", note:"Typically 3-5% droop. Generators share load proportionally to their droop settings." },
+    ],
+    flashcards:[
+      { q:"How does a brushless alternator work?", a:"Main alternator has stationary field (stator) and rotating armature (rotor). Exciter is reversed — rotating field, stationary armature. Rotating diodes on shaft rectify exciter AC output to DC for main field. No brushes or slip rings needed — more reliable, less maintenance." },
+      { q:"What happens if you try to parallel generators that are out of sync?", a:"If voltage/frequency/phase don't match: massive circulating current flows between generators → severe mechanical shock to couplings → possible breaker trip on overcurrent → generator damage → potential blackout. Always use synchroscope and verify all conditions before closing breaker." },
+    ]
+  },
   { id:'met2_dist_gp', icon:'🔌', title:'Power Distribution',
-    desc:"Bus Bars. Transformers - construction, types, losses." },
+    desc:"Bus Bars. Transformers - construction, types, losses.",
+    formulas:[
+      { label:"Transformer Turns Ratio", eq:"V₁/V₂ = N₁/N₂ = I₂/I₁", note:"Step-down 440V→220V: ratio 2:1. Step-down 440V→24V: ratio ~18:1." },
+    ],
+    flashcards:[
+      { q:"What are bus bars and why are they important?", a:"Copper or aluminium conductors forming the power distribution backbone of the main switchboard. All generators connect to bus bars, all distribution feeders take power from them. Must be rated for full short-circuit current. Bus section breaker allows splitting into independent sections for redundancy." },
+      { q:"What voltage levels are used on ships?", a:"440V 60Hz 3-phase: standard for most ships. 6.6kV: large ships (cruise, container) for high-power motors. 220V: lighting, domestic. 24V DC: emergency, navigation lights, control circuits. 110V: portable tools (safety). Shore supply: varies by port (matching transformer needed)." },
+    ]
+  },
   { id:'met2_brk_gp', icon:'🎛️', title:'Breakers and Contactors',
-    desc:"MCB, MCCB, ACB, OCB, VCB and Sulphur Hexafluoride type Circuit breakers. Types of contactors, maintenance." },
+    desc:"MCB, MCCB, ACB, OCB, VCB and Sulphur Hexafluoride type Circuit breakers. Types of contactors, maintenance.",
+    formulas:[],
+    flashcards:[
+      { q:"What is the purpose of a circuit breaker?", a:"Automatically disconnects faulty circuit to protect equipment and cables from overcurrent (overload) and short-circuit current. Unlike a fuse, it can be reset. Types by mechanism: ACB (air), VCB (vacuum — used for 6.6kV), OCB (oil — older), SF6 (sulphur hexafluoride — high voltage)." },
+      { q:"Difference between a contactor and a circuit breaker?", a:"Contactor: designed for frequent switching of motor loads, rated for making/breaking normal load current only. Breaker: designed to interrupt fault (short-circuit) current — much higher breaking capacity. Starter = contactor + overload relay. Breaker provides short-circuit protection, contactor provides on/off control." },
+    ]
+  },
   { id:'met2_start_gp', icon:'🚀', title:'Starters',
-    desc:"Power and circuit diagrams of DOL, Star-Delta, Auto - transformer and soft starter." },
+    desc:"Power and circuit diagrams of DOL, Star-Delta, Auto - transformer and soft starter.",
+    formulas:[
+      { label:"DOL Starting Current", eq:"I_start = 6–8 × I_FL", note:"Direct-On-Line — full voltage applied. High starting current causes voltage dip. Only for small motors (<7.5 kW on ships)." },
+      { label:"Star-Delta Current Reduction", eq:"I_start(Y-Δ) = I_start(DOL) / 3", note:"Star: V_phase = V_line/√3 → current reduced to 1/3. Torque also reduced to 1/3. Used for >7.5 kW." },
+    ],
+    flashcards:[
+      { q:"How does a star-delta starter work?", a:"Start in STAR: each winding gets V_line/√3 voltage → starting current reduced to 1/3 of DOL. Timer switches to DELTA: each winding gets full V_line → motor runs at full power. Transition causes current transient. Motor must reach >75% speed in star before switching." },
+      { q:"What is a soft starter and its advantages?", a:"Uses thyristors (SCRs) to gradually increase voltage to motor from 0 to full over 5–30 seconds. Smooth start — no mechanical shock, no current surge. Also provides soft stop. More expensive than star-delta but better performance. Used for: compressors, pumps, fans on modern ships." },
+    ]
+  },
   { id:'met2_alt_gp', icon:'🔋', title:'Alternative Source of Power',
-    desc:"Emergency Generator, auto-start, emergency batteries. Rules & Regulation of emergency power. Shore Supply specifications and precautions." }
+    desc:"Emergency Generator, auto-start, emergency batteries. Rules & Regulation of emergency power. Shore Supply specifications and precautions.",
+    formulas:[],
+    flashcards:[
+      { q:"SOLAS requirements for emergency power?", a:"Emergency generator must auto-start within 45 seconds of main power failure. Located above uppermost continuous deck. Fuel for 18 hours (cargo ships) or 36 hours (passenger ships). Must supply: emergency lighting, navigation equipment, fire detection, communication, steering gear for 18/36 hours." },
+      { q:"What precautions when connecting shore supply?", a:"Check: voltage (440V/380V), frequency (50/60Hz), phase sequence (same rotation). Use shore connection box with interlock. Open main breaker first. Connect shore cable. Check phase sequence with meter. Close shore breaker. Monitor voltage and frequency. Ensure proper earthing connection." },
+    ]
+  }
 ]);
 
 /* ── Semester 4: Basic Electronics ── */
