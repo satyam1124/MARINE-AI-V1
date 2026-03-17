@@ -182,6 +182,15 @@ setChapters('bt_elec1','⚡','Basic Electrical Engineering',
       { id:'LAtDMqQeXSM', title:'Power Factor Correction & Instruments', ch:'Electrical Eng. Portal' },
     ]
   },
+
+  { id:'bee_capacitor_gp', icon:'🔋', title:'Capacitors',
+    desc:"Types of capacitor, capacitance of multiple parallel plate capacitor, energy stored, charging and discharging, time constant." },
+  { id:'bee_magnetic_gp', icon:'🧲', title:'Magnetic Circuits',
+    desc:"Law of magnetic circuit, series & parallel magnetic circuits calculation, comparison of magnetic & electric circuit." },
+  { id:'bee_emi_gp', icon:'⚡', title:'Electromagnetic Induction',
+    desc:"Faraday’s Law, Lenz’s Law, self & mutual inductance, coupled circuits, rise and decay of current in inductive circuit." },
+  { id:'bee_install_gp', icon:'🔌', title:'Electrical Installations',
+    desc:"LT switchgear: Switch fuse, MCB, ELCB, MCCB. Types of wires/cables, batteries. Power factor improvement calculations." }
 ]);
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -319,6 +328,25 @@ setChapters('bt_diesel1','🔧','Marine Diesel Engine I',
       { id:'3gNEqrGEkVg', title:'Turbocharger Working Principle',           ch:'Learn Engineering' },
     ]
   },
+
+  { id:'d1_intro_gp', icon:'📝', title:'Introduction & Characteristics of IC Engine',
+    desc:"Timing Diagrams. Comparative study of slow, medium, and high-speed engines. M.C.R & C.S.R ratings. Practical heat balance diagrams." },
+  { id:'d1_desc_gp', icon:'🔧', title:'General Description of I.C. Engines',
+    desc:"Constructional Details: fuel Injectors, Air Starting Valves, Relief Valves, hydraulic exhaust valves, air distributors, Jackets, Liners, Cylinder heads, Tie rods." },
+  { id:'d1_scav_gp', icon:'🌬️', title:'Scavenging and Supercharging System',
+    desc:"Scavenging arrangements in 2-Stroke engines. Air charging and exhausting in 4-Stroke engines. Uni-flow, loop, cross loop, and reverse loop scavenging." },
+  { id:'d1_super_gp', icon:'💨', title:'Supercharging arrangements',
+    desc:"Pulse and constant pressure type. Turbocharger and its details. Two-stage, un-cooled, radial turbochargers." },
+  { id:'d1_cooling_gp', icon:'🌊', title:'Cooling of I.C. Engines',
+    desc:"Various Cooling media used. Cooling of Pistons, cylinder jackets & cylinder heads. Bore cooling, coolant conveying mechanism, maintenance." },
+  { id:'d1_combust_gp', icon:'🔥', title:'Combustion & Dissociation',
+    desc:"Stoichiometric combustion, Excess Air, Dissociation. Preparation of fuels, ignition delay, afterburning. Compression Pressure Ratio." },
+  { id:'d1_fuels_gp', icon:'⛽', title:'Fuels & Lubricants',
+    desc:"Composition, properties and characteristics. Sampling and testing procedure, storage and transfer. Contamination including microbes." },
+  { id:'d1_medium_gp', icon:'⚙️', title:'Medium speed Engines',
+    desc:"Different types of medium speed engines, couplings, reduction gear. V-type engine details. Use of poor quality residual fuels." },
+  { id:'d1_special_gp', icon:'✨', title:'Special features of I.C. Engines',
+    desc:"Development of long-stroke Engines, Implication of stroke-bore ratio. Development in materials & heat treatment of ME components." }
 ]);
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -417,6 +445,23 @@ setChapters('bt_aux','⚓','Auxiliary Machinery I',
     ],
     videos:[{ id:'0K3sHQJwE0A', title:'Oily Water Separator MARPOL', ch:'Marine Engineers Education' }]
   },
+
+  { id:'aux_layout_gp', icon:'🏗️', title:'General Engine Room Layout',
+    desc:"Layout of main and auxiliary machinery in engine rooms in different ships." },
+  { id:'aux_pipe_gp', icon:'🚰', title:'Layout of Pipe lines',
+    desc:"Pipe material, Piping arrangement for steam, bilge, ballast, fuel. Domestic fresh/sea water. Color code. Calculation of sizes. Cargo oil pumping. Leakage prevention." },
+  { id:'aux_filters_gp', icon:'🕸️', title:'Filters and Strainers',
+    desc:"Difference between Strainers and filters, auto-clean, Duplex, Static, micro filters. Priming and core maintenance." },
+  { id:'aux_pumps_gp', icon:'💧', title:'Pumps and pumping systems',
+    desc:"Centrifugal, Gear, Screw, Reciprocating pumps. Care and Maintenance. Automation and control, Pump losses & efficiency, NPSH." },
+  { id:'aux_comp_gp', icon:'🌬️', title:'Blowers and Compressors',
+    desc:"Operational and constructional details of blowers and compressors. Uses of compressed air. Air Bottles. Ventilation fans and ducting." },
+  { id:'aux_evap_gp', icon:'🚰', title:'Evaporators',
+    desc:"Construction and Operation of different types of evaporators. Fresh Water generators and distillers. Reverse Osmosis process." },
+  { id:'aux_hx_gp', icon:'🔄', title:'Heat Exchangers',
+    desc:"Tubular and plate type, reasons for corrosion. Tube removal and plugging of tubes. Materials used." },
+  { id:'aux_purif_gp', icon:'🌀', title:'Oil Purification',
+    desc:"Theory of oil purifications. Use of settling/service tanks. ALCAP system, Homogenizers. Importance of LO/FO testing." }
 ]);
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -1194,6 +1239,27 @@ setChapters('bt_materials','🔬','Engineering Materials',
       { q:'Limitation of magnetic particle testing (MPI)?', a:'Only works on ferromagnetic materials (iron, steel). Cannot test aluminium, copper, or austenitic stainless steel.' },
     ]
   },
+
+  { id:'mat_atom_gp', icon:'⚛️', title:'Structure of Atom',
+    desc:"Electrons and Bonding; Covalent, Metallic, ionic and Secondary bonding. Crystal structure- Space lattices; Interfacing in crystals Points; Elastomers." },
+  { id:'mat_metals_gp', icon:'⚙️', title:'Metals and Alloys',
+    desc:"Different types of iron and steel; their manufacture, properties and uses. Alloys of iron and steel. Non-ferrous metals and alloys." },
+  { id:'mat_misc_gp', icon:'🛠️', title:'Miscellaneous Eng. Materials',
+    desc:"Refractoriness, Insulating materials; Plastics and Rubber; PVC, Resins, Adhesives and Bonding Plastics, Paints. Polyurethane foam." },
+  { id:'mat_test_gp', icon:'📊', title:'Testing of Materials',
+    desc:"Destructive Tests: Tensile, Compression, Hardness, Bend, Torsion, Impact. Non-destructive: MPI, Fluorescent, Ultrasonic, Radiography." },
+  { id:'mat_solid_gp', icon:'🧊', title:'Solid Solution',
+    desc:"Binary alloys, Thermal Equilibrium Diagrams, Cooling curves, Eutectic/paratactic. Allotropy of Iron, Iron-carbon diagram, T-T-T curve." },
+  { id:'mat_heat_gp', icon:'🔥', title:'Heat Treatment',
+    desc:"Annealing, normalising, hardening and Tempering. Isothermal transformation diagrams. Hardenability, case hardening, carburizing, Nitriding." },
+  { id:'mat_fatigue_gp', icon:'⏳', title:'Fatigue & Creep',
+    desc:"Mechanisms of fatigue, fatigue curve. Corrosion fatigue. Creep phenomena and creep-resisting alloys. Short time and longtime creep tests." },
+  { id:'mat_corr_gp', icon:'🌊', title:'Corrosion and its prevention',
+    desc:"Mechanism, Thermodynamics & kinetics. Chemical/Electrochemical corrosion, Anodic and Cathodic protection, coatings. Anodizing, Introduction to ICCP." },
+  { id:'mat_uses_gp', icon:'🚢', title:'Uses of materials in shipboard application',
+    desc:"Chromium, Ceramic, Titanium, PTFE in Shipboard Systems. Characteristics of above materials." },
+  { id:'mat_select_gp', icon:'✅', title:'Selection of Materials',
+    desc:"Boilers, Steam/Gas turbine, Purifiers/Diesel engine components, Pumps, Piping, Engine seating. Propellers and Rudders. Composition/strength requirements." }
 ]);
 
 setChapters('bt_workshop2','🛠️','Engineering Workshop II',
@@ -2707,6 +2773,19 @@ setChapters('bt_metec1','⚡','Marine Electro Technology – I',
     desc:'Field control, armature resistance, Ward-Leonard system, applications in marine winches & cranes' },
   { id:'met1_testing', icon:'📊', title:'Testing of DC Machines',
     desc:'Swinburne test, brake test, regenerative test, efficiency calculation, losses in DC machines' },
+
+  { id:'met1_dc_fund_gp', icon:'⚡', title:'DC Fundamentals',
+    desc:"DC Current Machines, Principle of working, construction, winding, e.m.f. Equation, Armature reaction, commutation, compensating winding, potentiometer, Galvanometer, Ammeter, voltmeter." },
+  { id:'met1_dc_mach_gp', icon:'⚙️', title:'DC Machines',
+    desc:"DC generators and DC motors construction and working." },
+  { id:'met1_alt_gp', icon:'🔄', title:'Alternators',
+    desc:"AC Power Generation, Construction, working principle and routine maintenance." },
+  { id:'met1_ac_fund_gp', icon:'〰️', title:'AC Fundamentals',
+    desc:"Single phase AC Supply, phase angle, frequency, RMS values, Active/Reactive/Apparent power, Power factor improvement using capacitor bank." },
+  { id:'met1_comp_gp', icon:'⚖️', title:'Comparison DC Vs AC',
+    desc:"Waveform Comparison, Constant and RMS value, interconversion of currents, Applications, Loss of Energy comparison." },
+  { id:'met1_dist_gp', icon:'🔌', title:'Basics of AC Distribution',
+    desc:"3 phase AC Supply, phase/line voltage and current, neutral earthed system, neutral isolated system (Earth, Open Circuit and Short Circuit Faults)." }
 ]);
 
 /* ── Semester 3: General Performance – I ── */
@@ -2731,6 +2810,23 @@ setChapters('bt_metec2','⚡','Marine Electro Technology – II',
     desc:'Alternator construction, EMF equation, voltage regulation, synchronization, parallel operation' },
   { id:'met2_marine', icon:'🚢', title:'Marine Electrical Systems',
     desc:'Shipboard 440V/6.6kV distribution, main & emergency switchboard, shore connection, insulation monitoring' },
+
+  { id:'met2_sync_gp', icon:'⚡', title:'Synchronous Motors',
+    desc:"Construction, Starting and uses onboard." },
+  { id:'met2_ind_gp', icon:'⚙️', title:'Induction Motors',
+    desc:"Construction, Slip, Power Calculation and efficiencies, uses onboard, Maintenance, Single phasing." },
+  { id:'met2_comp_gp', icon:'⚖️', title:'Comparison',
+    desc:"Induction motor Vs Synchronous Motors. Stepper Motor. Telemotor." },
+  { id:'met2_acgen_gp', icon:'🔄', title:'AC Power generation',
+    desc:"Alternators, voltage control, frequency control, brushless alternators, Parallel operation of alternators, load sharing and maintenance." },
+  { id:'met2_dist_gp', icon:'🔌', title:'Power Distribution',
+    desc:"Bus Bars. Transformers - construction, types, losses." },
+  { id:'met2_brk_gp', icon:'🎛️', title:'Breakers and Contactors',
+    desc:"MCB, MCCB, ACB, OCB, VCB and Sulphur Hexafluoride type Circuit breakers. Types of contactors, maintenance." },
+  { id:'met2_start_gp', icon:'🚀', title:'Starters',
+    desc:"Power and circuit diagrams of DOL, Star-Delta, Auto - transformer and soft starter." },
+  { id:'met2_alt_gp', icon:'🔋', title:'Alternative Source of Power',
+    desc:"Emergency Generator, auto-start, emergency batteries. Rules & Regulation of emergency power. Shore Supply specifications and precautions." }
 ]);
 
 /* ── Semester 4: Basic Electronics ── */
