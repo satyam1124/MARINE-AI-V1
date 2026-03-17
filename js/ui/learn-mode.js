@@ -309,7 +309,7 @@ function buildQuizPanel(parentId, subtopicId, title) {
     <div style="font-size:2.5rem;margin-bottom:12px">🎯</div>
     <h3 style="font-family:'Syne',sans-serif;color:var(--tx);margin:0 0 8px">Quiz — ${esc(title)}</h3>
     <p style="font-size:.82rem;color:var(--tx3);margin:0 0 20px;line-height:1.6">
-      Test your understanding of this chapter with AI-generated MCQ questions.<br>
+      Test your understanding of this chapter with MCQ questions.<br>
       10 questions · Timed · Instant feedback
     </p>
     <button onclick="launchChapterQuiz('${parentId}','${subtopicId}','${title.replace(/'/g,"\\'")}')"
@@ -318,7 +318,7 @@ function buildQuizPanel(parentId, subtopicId, title) {
                    transition:all .2s;">
       ⚡ Start Chapter Quiz
     </button>
-    <p style="font-size:.68rem;color:var(--tx3);margin-top:12px">Requires API key for AI-generated questions</p>
+    <p style="font-size:.68rem;color:var(--tx3);margin-top:12px">AI-powered with API key · Flashcard-based without</p>
   </div>`;
 }
 
