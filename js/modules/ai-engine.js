@@ -463,6 +463,10 @@ async function askStream(q, mode, t0) {
   APP.chatHistory.push({ role: 'user', content: q });
   APP.chatHistory.push({ role: 'assistant', content: full });
   if (APP.chatHistory.length > 6) APP.chatHistory = APP.chatHistory.slice(-6);
+  // Persist to chat history panel
+  if (typeof ChatHistoryManager !== 'undefined') {
+    ChatHistoryManager.saveConversation(q, full, mode, APP._swarmSources || []);
+  }
   setTimeout(function(){ renderKaTeX(body); }, 80);
   document.getElementById('ansBadges').querySelector('.abadge-time') &&
     (document.getElementById('ansBadges').querySelector('.abadge-time').textContent = ((Date.now()-t0)/1000).toFixed(1)+'s');
@@ -602,6 +606,10 @@ async function askLive(q, t0) {
   APP.chatHistory.push({ role: 'user', content: q });
   APP.chatHistory.push({ role: 'assistant', content: answer });
   if (APP.chatHistory.length > 6) APP.chatHistory = APP.chatHistory.slice(-6);
+  // Persist to chat history panel
+  if (typeof ChatHistoryManager !== 'undefined') {
+    ChatHistoryManager.saveConversation(q, answer, 'live', APP._swarmSources || []);
+  }
   showEl('answerCard');
 }
 
