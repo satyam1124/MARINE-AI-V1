@@ -181,8 +181,27 @@ function showQuizSetup() {
 /* ── Flashcard-based fallback quiz (works WITHOUT API key) ── */
 function buildFlashcardQuiz(topicId, count) {
   const kb = (typeof TOPIC_KNOWLEDGE !== 'undefined' && TOPIC_KNOWLEDGE[topicId]) || {};
-  const flashcards = kb.flashcards || [];
-  const formulas   = kb.formulas   || [];
+  let flashcards = kb.flashcards || [];
+  let formulas   = kb.formulas   || [];
+
+  // Fallback: if the subtopic lacks content, try to aggregate from the parent topic
+  if (flashcards.length < 2 && formulas.length < 2 && typeof TOPIC_KNOWLEDGE !== 'undefined') {
+    let parentKb = null;
+    for (const key in TOPIC_KNOWLEDGE) {
+      if (TOPIC_KNOWLEDGE[key].subtopics && TOPIC_KNOWLEDGE[key].subtopics.find(s => s.id === topicId)) {
+        parentKb = TOPIC_KNOWLEDGE[key];
+        break;
+      }
+    }
+    if (parentKb) {
+      flashcards = [...(parentKb.flashcards || [])];
+      formulas = [...(parentKb.formulas || [])];
+      parentKb.subtopics.forEach(st => {
+        if (st.flashcards) flashcards.push(...st.flashcards);
+        if (st.formulas) formulas.push(...st.formulas);
+      });
+    }
+  }
 
   if (flashcards.length < 2 && formulas.length < 2) return null;
 
