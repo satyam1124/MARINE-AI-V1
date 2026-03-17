@@ -18,9 +18,11 @@ function buildSystemPrompt(mode, query) {
 
   let topicCtx = '';
   if (APP.currentTopic && typeof TOPIC_KNOWLEDGE !== 'undefined') {
-    const kb = TOPIC_KNOWLEDGE[APP.currentTopic] || {};
+    const topicId = APP._subtopicId || APP.currentTopic;
+    const topicTitle = APP._subtopicTitle || APP.currentTopic;
+    const kb = TOPIC_KNOWLEDGE[topicId] || TOPIC_KNOWLEDGE[APP.currentTopic] || {};
     const fml = (kb.formulas || []).slice(0, 2).map(f => `${f.label}: ${f.eq}`).join('; ');
-    topicCtx = `\n[UI CONTEXT HINT] User is currently looking at the "${APP.currentTopic}" tab. (Formulas: ${fml || 'None'}). CRITICAL: If the user's question is unrelated to this topic context, IGNORE THIS HINT ENTIRELY. Do NOT forcefully relate unrelated subjects to it.`;
+    topicCtx = `\n[UI CONTEXT HINT] User is currently looking at the "${topicTitle}" tab. (Formulas: ${fml || 'None'}). CRITICAL: If the user's question is unrelated to this topic context, IGNORE THIS HINT ENTIRELY. Do NOT forcefully relate unrelated subjects to it.`;
   }
 
   const examInstr = APP.examMode

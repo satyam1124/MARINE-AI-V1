@@ -111,6 +111,7 @@ window.setChapters = function setChapters(topicId, icon, subjTitle, subjDesc, se
     allFmls.push(...(ch.formulas||[]));
     allFlash.push(...(ch.flashcards||[]));
     allVids.push(...(ch.videos||[]));
+    TOPIC_KNOWLEDGE[ch.id] = ch;
   });
   entry.formulas   = allFmls;
   entry.flashcards = allFlash;

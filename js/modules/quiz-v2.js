@@ -267,8 +267,10 @@ function buildFlashcardQuiz(topicId, count) {
 async function quizStart() {
   if (QUIZ.generating) return;
 
-  const topicId    = APP.currentTopic;
-  const topicTitle = document.querySelector('#topicZone .tz-header .tz-intro-title')?.textContent
+  const topicId    = APP._subtopicId || APP.currentTopic;
+  const topicTitle = APP._subtopicTitle
+                  || document.querySelector('.ch-content-title')?.textContent
+                  || document.querySelector('#topicZone .tz-header .tz-intro-title')?.textContent
                   || document.querySelector('.sb-topic.active')?.textContent?.trim()
                   || topicId || 'Marine Engineering';
 
