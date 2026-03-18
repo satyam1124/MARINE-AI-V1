@@ -44,7 +44,11 @@ function renderLearnView(parentId, subtopicId, title, desc) {
   if (!tz) return false;
 
   /* Clean existing content */
-  tz.querySelectorAll('.tz-header,.stopic-grid-wrap,.subj-header,.chapter-crumb,.chapter-content-header,#stopic-banner,.mm-section,.topic-nav-footer,.learn-view').forEach(el => el.remove());
+  tz.querySelectorAll('.tz-header,.stopic-grid-wrap,.subj-header,.chapter-crumb,.chapter-content-header,#stopic-banner,.topic-nav-footer,.learn-view').forEach(el => el.remove());
+
+  /* Hide static mm-section instead of removing it */
+  const mm = tz.querySelector('.mm-section');
+  if (mm) mm.style.display = 'none';
 
   /* Build semester & subject breadcrumb */
   const subjTitle = entry._subjTitle || parentId;
@@ -64,9 +68,11 @@ function renderLearnView(parentId, subtopicId, title, desc) {
 
       <!-- Breadcrumb -->
       <div class="learn-crumb">
-        <span class="learn-crumb-link" onclick="selectTopic('${parentId}','${subjTitle.replace(/'/g,"\\'")}','','📖','B.Tech')">${esc(semTag || 'B.Tech')}</span>
+        <span class="learn-crumb-link" style="color:var(--ac);font-weight:700;" onclick="selectTopic('${parentId}','${subjTitle.replace(/'/g,"\\\\'")}', '','📖','B.Tech')">← Back to Chapters</span>
+        <span class="learn-crumb-sep" style="margin:0 8px;color:rgba(212,160,23,0.3);">|</span>
+        <span class="learn-crumb-link" onclick="selectTopic('${parentId}','${subjTitle.replace(/'/g,"\\\\'")}', '','📖','B.Tech')">${esc(semTag || 'B.Tech')}</span>
         <span class="learn-crumb-sep">→</span>
-        <span class="learn-crumb-link" onclick="selectTopic('${parentId}','${subjTitle.replace(/'/g,"\\'")}','','📖','B.Tech')">${esc(subjTitle)}</span>
+        <span class="learn-crumb-link" onclick="selectTopic('${parentId}','${subjTitle.replace(/'/g,"\\\\'")}', '','📖','B.Tech')">${esc(subjTitle)}</span>
         <span class="learn-crumb-sep">→</span>
         <span class="learn-crumb-cur">Ch ${chapterIdx + 1}: ${esc(title)}</span>
       </div>

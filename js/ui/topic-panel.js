@@ -18,7 +18,11 @@ function selectTopic(topicId, title, desc, icon, sectionName) {
   // ── Clear any stale chapter/subtopic UI from previous topic ──
   const tz = document.getElementById('topicZone');
   if (tz) {
-    tz.querySelectorAll('.stopic-grid-wrap,.subj-header,.chapter-crumb,.chapter-content-header,.chapter-grid,.chapter-index-label,#stopic-banner,.tz-intro-card').forEach(el => el.remove());
+    tz.querySelectorAll('.stopic-grid-wrap,.subj-header,.chapter-crumb,.chapter-content-header,.chapter-grid,.chapter-index-label,#stopic-banner,.tz-intro-card,.learn-view').forEach(el => el.remove());
+    
+    // Restore static sections that might have been hidden by learn mode
+    const mm = tz.querySelector('.mm-section');
+    if (mm) mm.style.display = '';
   }
 
   // Load multimodal content
