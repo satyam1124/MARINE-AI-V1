@@ -172,13 +172,19 @@
         </div>
       </div>
 
-      <!-- Interview Prep Card -->
-      <div class="info-strip" style="margin-top:1.5rem">
-        <div class="info-card" onclick="showInterviewPrep()" style="cursor:pointer;border:1px solid rgba(56,189,248,0.2);background:rgba(56,189,248,0.05);flex:1;max-width:100%;position:relative;">
+      <!-- CBT & Interview Cards -->
+      <div class="info-strip" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+        <div class="info-card" onclick="showInterviewPrep()" style="cursor:pointer;border:1px solid rgba(56,189,248,0.2);background:rgba(56,189,248,0.05);position:relative;">
           <div class="ic-icon">🎯</div>
           <div class="ic-title">Interview & CBT Preparation</div>
           <div class="ic-text">Practice company-specific CBT exams (Anglo Eastern, MSC, Maersk, BSM, Synergy, V.Ships, Thome, Wallem), CES tests, and AI mock interviews. Simulate real exam environments!</div>
           <div style="text-align:right; margin-top:1rem; color:#38bdf8; font-weight:700; font-size:0.9rem; letter-spacing:1px;">ENTER →</div>
+        </div>
+        <div class="info-card" onclick="showCbt2ndYearPlan()" style="cursor:pointer;border:1px solid rgba(52,211,153,0.2);background:rgba(52,211,153,0.05);position:relative;">
+          <div class="ic-icon">📅</div>
+          <div class="ic-title">2nd Year CBT Guide</div>
+          <div class="ic-text">Complete daily study guide with 1,200 MCQs target, designed strictly for 2nd Year B.Tech NYK/MOL pattern CBT clearance.</div>
+          <div style="text-align:right; margin-top:1rem; color:#34d399; font-weight:700; font-size:0.9rem; letter-spacing:1px;">VIEW PLAN →</div>
         </div>
       </div>
 
@@ -189,6 +195,12 @@
       </div>
 
     </div><!-- /homeScreen -->
+
+    <!-- ════ 2ND YEAR CBT PAGE ════ -->
+    <div id="cbt2ndYearPage" class="interview-page" style="display:none; padding:2rem; max-width:1200px; margin:0 auto; width:100%; box-sizing:border-box;">
+      <button class="interview-back-btn" onclick="hideCbt2ndYearPlan()" style="margin-bottom: 2rem;">← Back to Home</button>
+      <div id="cbt2ndYearContent"></div>
+    </div>
 
     <!-- ════ INTERVIEW PREP PAGE ════ -->
     <div id="interviewPrepPage" class="interview-page">
@@ -528,6 +540,10 @@
 <script src="js/ui/btec-nav.js"></script>
 <script src="js/data/btec-chapters.js"></script>
 <script src="js/ui/learn-mode.js"></script>
+
+<!-- 6.5 2nd Year CBT -->
+<script src="js/data/cbt-2nd-year-plan.js"></script>
+<script src="js/ui/cbt-2nd-year-ui.js"></script>
 
 <!-- 6. Bootstrap — runs last, wires everything -->
 <script src="js/init.js"></script>

@@ -1,28 +1,756 @@
-for bee topic from ganpat official syallbus sem-2 
+COMPLETE CBT EXAM PREPARATION IMPLEMENTATION PLAN
+B.Tech Marine Engineering — 2nd / 3rd / 4th Year
 
-Theory syllabus Unit Content Hrs  1 D.C. Circuits: Voltage and current sources, Source transformation, Star-Delta transformation, Application of  Kirchhoff’s  Law,  Superposition  theorem,  Thevenin’s  theorem, Norton’s Theorem. 08  2 Capacitor: Types of capacitor, Capacitance of multiple parallel plate capacitor, Energy stored in a capacitor, Charging and discharging of capacitor, Time constant. 04  3 Magnetic Circuit: Law of magnetic circuit, Series & parallel magnetic circuits and calculation, Comparison of magnetic & Electric Circuit. 04  4 Electromagnetic Induction: Review of Faraday’s Law, Lenz’s Law, Self & mutual inductance, Inductance of coupled circuits, Rise and decay of current in inductive circuit. 05    5 AC Circuits: Representation of sinusoidal waveforms, Peak and rms values, Phasor representation, Real power, Reactive power, Apparent power, Power factor, Analysis of single-phase ac circuits consisting of R, L, C, RL, RC, RLC combinations (Series and parallel), Resonance. Three phase balanced circuits, Voltage and current relations in star and delta connections, Measurement of power in 3-phase circuits. 10  6 Transformer: Magnetic materials, B-H characteristics, Working principle, Construction, Core and shell type transformer, Step up and step down transformer. 04  7 Induction motor: Classification of A.C. motors, Construction and working of three-phase motor, Production of rotating field, Synchronous speed, Actual speed, Slip. 04  8 Electrical Installations:  Components of LT switchgear: Switch fuse unit, MCB, ELCB, MCCB, Types of wires and cables, Types of batteries, Important characteristics for batteries, Elementary calculations for energy consumption and power factor improvement.     06 
+SECTION A: OVERALL ARCHITECTURE & PHILOSOPHY
 
-sem-3 met
+A.1 PURPOSE
+This plan turns every student into a daily MCQ-solving machine who can crack any shipping company CBT — NYK, Synergy, MSC, Anglo Eastern, BSM, Fleet Management, Wilhelmsen, Thome, V.Ships, Executive Ship Management, Zodiac, Bernhard Schulte, and others — by building a layered knowledge base year over year.
 
-Theory Syllabus Unit Content Hrs. 1 DC Fundamentals: ● DC Current Machines, Principle of working, construction, winding, e.m.f. Equation. Armature reaction, commutation, compensating winding. potentiometer, Merits & demerits of A.C. & D.C. Galvanometer, Ammeter, voltmeter 10 2 DC Machines: ● DC generators and DC motors construction and working 8 3 Alternators: ● AC Power Generation, Construction, working principle and routine maintenance 8 4 AC Fundamentals: ● Single phase AC Supply, phase angle, frequency, RMS values current and voltage, AC Ammeter, Voltmeter, Watt meter, Ohmic resistance, Inductive Load, Capacitive Load, Phasor diagram, Real Power, Reactive Power, KVA, Power factor, Power factor improvement using capacitor bank. ● Understand the fundamentals of Alternating Current Know the importance of electromagnetic induction in today’s machinery and systems and the laws governing it Know how to calculate Work, Energy and Power  12 5 Comparison DC Vs AC: ● Waveform Comparison, Constant and RMS value, interconversion of currents, Applications, Loss of Energy comparison  8 6 Basics of AC Distribution:  ● 3 phase AC Supply, phase voltage and current, Line Voltage and current, Power calculation, neutral earthed system, neutral isolated system (Earth, Open Circuit and Short Circuit Faults). 8  Total 54 
+A.2 DAILY TARGET STRUCTURE
 
-sem3 MICE
+DAILY GRAND TOTAL: 1,200 MCQs per student
 
-Theory Syllabus Unit Content Hrs.    1 Introduction & Characteristics of IC Engine: • 4-Stroke and 2-stroke cycles; Deviation from Ideal condition in actual engines; Limitation in parameters.  • Timing Diagrams of 2 - Stroke and 4-Stroke engines. Comparative study of slow speed, medium speed and high speed diesel engines - suitability and requirements for various purposes Mean Piston speed.  • M.C.R. & C.S.R. ratings. Practical heat balance diagrams and thermal efficiency.     06   2 General Description of I.C. Engines:  • Constructional Details of I.C. Engines: Principal Components: fuel Injectors, Air Starting Valves, Relief Valves, hydraulic exhaust valves, air distributors, Jackets and Liners, Cylinder heads, Piston, Cross heads, Connecting rods, Bed Plates, A-frames, Welded construction for Bed plates & frames, Tie rods.   10   3 Scavenging and Supercharging System:  • Scavenging arrangements in 2-Stroke engines; Air charging and exhausting in 4-Stroke engines; Various types of Scavenging in 2-stroke engines; Uni-flow, loop, cross loop and reverse loop scavenging, their merits and demerits.  • Scavenge pumps for normally aspirated engines; under piston scavenging, Scavenge manifolds.   03   4 Supercharging arrangements:  • Pulse and constant pressure type; their relative merits and demerits in highly rated marine propulsion engine.  • Air movements inside the cylinders. Turbocharger and its details. Two stage, un-cooled, radial turbochargers.   03  5 Cooling of I.C. Engines:  • Various Cooling media used; their merits and demerits, cooling of Pistons, cylinder jackets & cylinder heads, Bore cooling, coolant conveying mechanism and system, maintenance of coolant and cooling system  04    6 Combustion & Dissociation:  • Definition of Fuel, combustion. Combustion Equation, Analysis of the Products of Combustion, Stoichiometric combustion, Actual combustion, Excess Air, Mixture strength. Dissociation. Effect of Dissociation on LC-Engines.  • Combustion of Fuels: Grades of suitable fuels, Preparation of fuels for efficient combustions, fuel atomization, ignition quality, fuel injectors and its details, ignition delay, afterburning, Compression Pressure Ration and its effects on Engine. Reasons for variation in compression pressure and peak pressure. Design aspects of combustion chamber. Control of NOX and SOX in Exhaust emission.    09   7 Fuels & Lubricants:  • Composition, properties and characteristics of different fuels and lubricants, additives used, flash point & viscosity as applicable to petrol, kerosene, marine diesel oil, boiler fuel oil, lube oil.  • Sampling and testing procedure, storage and transfer of fuel and lubricants.  • Contamination of fuel and lubricants including microbes.    06    8 Medium speed Engines:  • Different types of medium speed marine diesel engines, couplings, and reduction gear used in conjunction with medium speed Engine, Development in exhaust valve design, V-type engine details.  • Use of poor quality residual fuels and their consequences. • Improvements in designs for higher power output.  • Fuels, combustion process – fundamentals    08  9 Special features of I.C. Engines:  • Development of long-stroke Engines, Implication of stroke-bore ratio.  • Development in materials in construction & heat treatment of M.E. components  05  TOTAL 54 
+Broken into:
+  Morning Session   (3 hours)  → 400 MCQs
+  Afternoon Session  (3 hours)  → 400 MCQs
+  Evening Session    (3 hours)  → 400 MCQs
 
-sem-4 met-II
+Each session further divided into:
+  Timed Practice Blocks of 100 MCQs in 45 minutes
+  Review & Error Analysis: 15 minutes per block
 
-Theory Syllabus Unit Content Hrs. 1 Synchronous Motors: ●  Construction, Starting and uses onboard 4 2 Induction Motors: ●  Construction, Slip, Power Calculation and efficiencies, uses onboard, Maintenance, Single phasing. 6 3 Comparison:  ● Induction motor Vs Synchronous Motors ● Stepper Motor ● Telemotor  4 4 AC Power generation: ● Alternators, voltage control, frequency control, brushless alternators, Parallel operation of alternators, load sharing and maintenance. 8 5 Power Distribution: ● Bus Bars,  ● Transformers - construction, types, losses 6 6 Breakers and Contactors:  ● MCB, MCCB, ACB, OCB, VCB and Sulphur Hexafluoride type Circuit breakers ● Types of contactors, construction (Main winding and contacts), Normally Open and Normally Closed type, Maintenance of contactors 8 7 Starters: ● Power and circuit diagrams of DOL, Star-Delta, Auto - transformer and soft starter 8 8 Alternative Source of Power: ● Emergency Generator & Different starting method including auto -start, emergency batteries and its different types & duties, Location of emergency power. ● Different Emergency loads, Rules & Regulation of emergency power, Maintenance of the emergency power source on board. Shore Supply - Specifications as per Voltage/frequency, precautions while taking shore supply. 10  Total 54 
+A.3 SOURCE MAPPING & QUESTION BANK EXTRACTION
+Source Site	Primary Use	Question Type	Estimated Bank Size
+Marine Insight	Conceptual articles → Convert to MCQ	Theory + Application	3,000+ topics
+Ship07.com	Direct MCQ practice	Company-pattern MCQ	5,000+ MCQs
+MarineGyaan	Subject-wise marine MCQ	MEK, Naval Arch, Safety	4,000+ MCQs
+USCGQ (US Coast Guard Questions)	License exam standard MCQ	Deck + Engine both	10,000+ MCQs
+MarineSite / MCQ.MarineSite	Direct MCQ sets	All marine subjects	6,000+ MCQs
+Scribd	Documents, past papers, manuals	Reference + MCQ extraction	Unlimited
+Seagull (CBT pattern)	Exact company CBT simulation	Timed CBT format	8,000+ MCQs
+Sanfoundry	Engineering fundamentals MCQ	Thermo, Fluids, Electrical, Materials	15,000+ MCQs
+MarineBook	Comprehensive marine references	Theory to MCQ conversion	2,000+ topics
 
-sem-4 MAM - marine auxilary machines
+Source Allocation Per Day (1,200 MCQs)
+Source	Daily MCQ Count	Focus Area
+Seagull Pattern Questions	200	Company CBT simulation
+Sanfoundry	200	Core engineering fundamentals
+Ship07 + MarineGyaan	200	Marine-specific subjects
+USCGQ	150	License-standard questions
+MCQ.MarineSite + MarineSite	150	Mixed marine practice
+Marine Insight (converted)	100	Concept-based application
+Scribd (past paper extraction)	100	Company past paper patterns
+MarineBook	100	Reference-based deep questions
 
-Theory Syllabus Unit Content Hrs. 1 General Engine Room Layout:  • Layout of main and auxiliary machinery in engine rooms in different ships. 03     2 Layout of Pipe lines:  • Pipe material, Piping arrangement for steam, bilge, ballast and oil fuel systems, emergency operation arrangements, Lube oil and cooling system lines with various fittings. Domestic fresh water and sea water and sea water hydrophore system. Color code of pipelines,  • Calculation of size of various components and assemblies of marine diesel engine such as pumps, heat exchangers, pipe lines, condenser, exhaust piping.  • Cargo oil pumping system in oil tankers  • Preventive action for leakages in pipes - Isolating a section of pipe, clean & prepare joint faces, select appropriate joining material, reassembling and test hydraulically     11  3 Filters and Strainers:  • Difference between Strainers and filters, types of marine filters, different types of filter materials, auto-clean and Duplex filters, Static filters, micro filters.  • Priming and core maintenance of filters   04     4 Pumps and pumping systems:  • Types of pumps for various requirements, their characteristics and application in ships. Centrifugal Pumps, Gear Pumps, Screw Pumps and Reciprocating pumps, Care and Maintenance of pumps.  • Care and Maintenance of centrifugal pumps – check for wear & wastage of casing, trueness of shaft, condition of bearing, seals, wear rings & alignment of pump and motor.  • Care and maintenance of reciprocating pumps- measure of cylinder liner wear , ring gaps , overhaul valve/seats , various links , bushes , relief valve , gland packing etc.  • Care and maintenance of gear and screw pumps- check clearance and back lashes  • Automation and control of pumps & pumping systems, Pump losses & efficiency, NPSH Performance     12   5 Blowers and Compressors:  • Operational and constructional details of blowers and compressors used on board ships.  • Uses of compressed air.  • Air Bottles: Construction, mountings & associated system.    04 • Ventilation fans and ducting arrangements for Engine room, Pump room & Cargo spaces.    6 Evaporators:  • Construction and Operation of different types of evaporators. Fresh Water generators and distillers.  • Reverse Osmosis process, Conditioning arrangements of distilled water for drinking purpose    06  7 Heat Exchangers:  • Tubular and plate type, reasons for corrosion.  • Tube removal and plugging of tubes  • Materials used.   04   8 Oil Purification:  • Theory of oil purifications, various methods of oil purifications.  • Use of settling / service tanks & precautions taken before entering / cleaning tanks. Principles of operation and construction of different Centrifuges for heavy fuel and lubricating oil like FOPX system, Self-dislodging  • Uses of Homogenizers.  • ALCAP system.  • Importance of LO/FO testing, Method of testing    10  TOTAL 54
 
-Reference Books 1 H.D. McGeorge - Marine Auxiliary machinery, BH Publications. 2 Vikram Gokhale & N. Nanda - Marine Engineering Practice  3 J. K. Dhar - Basic Marine Engineering, Atmain 
+SECTION B: 2ND YEAR CBT PLAN (NYK Pattern & Similar Companies)
+B.1 COMPANIES THAT TEST IN 2ND YEAR
+NYK Line (Nippon Yusen Kaisha)
+MOL (Mitsui O.S.K. Lines)
+K-Line
+Some early-recruitment drives by Anglo Eastern, BSM
 
-sem-4 Engeering materilas 
 
-Theory Syllabus Unit Content Hrs. 1 Structure of Atom:  Electrons and Bonding; Wave Mechanics and electronic behaviours; Electronic structure of atoms; Covalent bonding; Metallic bonding; ionic bonding and Secondary bonding.  Atomic packing-directionally and non-directionally bonded atoms; Crystal structure- Space lattices; Ionic and molecular crystals; Interfacing in crystals Points; line, surface and volume imperfections;  Non-crystalline solids; Elastomers; Long chain and molecular compounds and threedimensional network     9  2 Metals and Alloys:  Different types of iron and steel; their manufacture, properties and uses in industry. Alloys of iron and steel.  Non-ferrous metals and alloys. Properties and uses; Miscellaneous engineering materials; their properties and uses   6  3 Miscellaneous Eng. Materials:  Refractoriness, Insulating materials; Plastics and Rubber; PVC, Resins, Adhesives and Bonding Plastics, Paints.  Manufacture, properties, and selection for various engineering applications. Polyurethane foam   5  4 Testing of Materials:  Destructive Tests: Tensile Test; Compression Test; Hardness Test; Bend Test; Torsion Test & Impact Test.  Non-destructive Tests: Magnetic Particle Test; Fluorescent Test; Ultrasonic Test, Radiography Test.   6  5 Solid Solution:  Properties of solid solutions and alloys. Types of Binary alloys, Thermal Equilibrium Diagrams, Cooling curves, Eutectic and paratactic alloys, Intermetallic compounds. Allotropy of Iron, Iron-carbon Equilibrium diagrams,  T-T-T curve, Equilibrium Diagrams for Ferrous and Non-ferrous metals and alloys   6 6 Heat Treatment:  Types of heat treatment methods - Full annealing, stress relief, recrystallisation, and Spheroidising - normalising, hardening and Tempering of steel. Isothermal transformation diagrams - Hardenability, case hardening, carburizing, Nitriding, cyaniding, carbonitriding - Flame and Induction hardening.   6 7 Fatigue & Creep:  Fatigue loading, Mechanisms of fatigue, fatigue curve, Fatigue tests. Design criteria in fatigue, Corrosion fatigue. Stress concentration.  Creep phenomena and creep-resisting alloys. Creep curve. Short time and longtime creep tests. Development of creep resisting alloys.   6 8 Corrosion and its prevention:  Mechanism of corrosion, Thermodynamics & kinetics of corrosion, Chemical corrosion Electrochemical corrosion,  Anodic and Cathodic protection, Forms of metallic coatings. Anodizing, Phosphate. Introduction to ICCP   4 9 Uses of materials in shipboard application:  Chromium, Ceramic, Titanium, PTFE in Shipboard Systems. Characteristics of above materials  3 10 Selection of Materials in Shipbuilding & Marine Engineering:  Boilers, Steam and Gas turbine, Purifiers and Diesel engine components, Pumping Machinery, Components and Piping System, Engine seating.  Propellers and Rudders. Composition, strength value and other requirements for materials used.    3  TOTAL 54 
+B.2 EXAM PATTERN — NYK 2ND YEAR CBT
+
+TOTAL DURATION    : 60–90 minutes
+TOTAL QUESTIONS   : 80–120 MCQs
+NEGATIVE MARKING  : Generally NO
+DIFFICULTY        : Basic to Moderate
+PASS PERCENTAGE   : 60% minimum (company discretion)
+
+SECTION BREAKDOWN:
+┌──────────────────────┬──────────┬───────────┬────────────┐
+│ Section              │ Questions│ Time      │ Difficulty │
+├──────────────────────┼──────────┼───────────┼────────────┤
+│ English              │ 25–30    │ 15–20 min │ Basic      │
+│ Mathematics          │ 20–25    │ 20–25 min │ Basic-Med  │
+│ Physics              │ 15–20    │ 15–20 min │ Basic-Med  │
+│ General Aptitude     │ 15–20    │ 15–20 min │ Basic      │
+│ Basic Marine Awarens │ 5–10     │ 5–10 min  │ Basic      │
+└──────────────────────┴──────────┴───────────┴────────────┘
+
+B.3 SUBJECT-WISE DETAILED TOPIC LIST — 2ND YEAR
+B.3.1 ENGLISH (25–30 Questions Daily: 250 MCQs)
+NYK focuses on BASICS — not advanced grammar. They test whether the cadet can understand simple English instructions aboard ship.
+
+TOPIC BREAKDOWN
+VOCABULARY (60 MCQs daily)
+
+- Synonyms (daily 15)
+  Level: Words like "abandon," "hazard," "ventilation," "cargo," 
+  "bulkhead," "navigable," "auxiliary," "propulsion"
+  Mix of general English + maritime vocabulary
+
+- Antonyms (daily 15)
+  Level: "ascend/descend," "starboard/port," "bow/stern," 
+  "forward/aft," "load/discharge"
+
+- Fill in the blanks with correct word (daily 15)
+  Sentences about ship operations, weather, safety procedures
+  Example: "The vessel _____ (anchored/parked) at the port."
+
+- Word meaning in context (daily 15)
+  Short paragraph about marine scenario → identify word meaning
+
+  GRAMMAR (80 MCQs daily)
+
+  - Tenses (daily 20)
+  Simple present, past, future
+  Present continuous, past continuous
+  Present perfect, past perfect
+  Focus: Logbook entry style sentences
+  Example: "The engine _____ (has been running / was running / runs) 
+  since 0600 hours."
+
+- Subject-Verb Agreement (daily 10)
+  "The crew (is/are) ready for departure."
+  "Neither the captain nor the officers (was/were) on the bridge."
+
+- Articles (daily 10)
+  "_____ anchor was dropped at 1400 hours."
+  "There was _____ oil spill near the engine room."
+
+- Prepositions (daily 15)
+  Maritime prepositions: "alongside the berth," "into the tank," 
+  "through the pipeline," "across the channel"
+
+- Active and Passive Voice (daily 10)
+  "The cargo was loaded by the crane."
+  "The chief engineer inspected the main engine."
+
+- Direct and Indirect Speech (daily 10)
+  Radio communication conversion
+  Bridge order conversion
+
+- Error Spotting (daily 5)
+  Find grammatical error in a sentence about ship operations
+
+  READING COMPREHENSION (50 MCQs daily)
+
+  - Short Passage (2 passages × 5 questions = 10 daily)
+  Topics: Safety onboard, pollution prevention, weather reports
+  Level: 100–150 words per passage
+
+- Medium Passage (2 passages × 8 questions = 16 daily)
+  Topics: Marine accident case studies, port state control, 
+  SOLAS regulations summary
+  Level: 200–300 words per passage
+
+- Sentence Rearrangement (daily 12)
+  Jumbled sentences about a marine procedure
+  Example: Steps for starting an emergency generator
+
+- Sentence Completion (daily 12)
+  "Before entering an enclosed space, the officer must _____"
+
+  MARITIME ENGLISH (60 MCQs daily)
+
+- Standard Marine Communication Phrases (SMCP) (daily 15)
+  "Mayday," "Pan-Pan," "Securité" usage
+  Bridge-to-bridge communication
+  Engine room communication terminology
+
+- Ship Parts Terminology (daily 15)
+  Identify correct name: "The vertical post at the bow = ?"
+  Match term to definition: "Freeboard," "Draft," "Beam," "LOA"
+
+- Logbook English (daily 15)
+  Correct the logbook entry
+  Choose proper logbook phrasing
+  
+- Safety Signage & Instruction English (daily 15)
+  Interpret safety signs
+  Emergency instruction comprehension
+  MSDS (Material Safety Data Sheet) reading
+
+  B.3.2 MATHEMATICS (20–25 Questions Daily: 250 MCQs)
+NYK tests applied mathematics — not pure theory. Focus on calculation speed and accuracy.
+
+TOPIC BREAKDOWN
+ARITHMETIC (80 MCQs daily)
 
 
+- Number System (daily 10)
+  HCF, LCM
+  Prime factorization
+  Divisibility rules
+  Application: Gear ratios, RPM calculations
 
+- Percentage (daily 15)
+  Fuel consumption percentage change
+  Efficiency percentage of engines
+  "If fuel consumption increases by 15% and the daily consumption 
+  was 25 MT, what is the new consumption?"
+
+- Ratio and Proportion (daily 15)
+  Mixture problems (fuel oil blending)
+  Gear ratios
+  Crew allocation ratios
+  "Mix HFO and MDO in ratio 3:1. Total 200 MT. Find each."
+
+- Average (daily 10)
+  Average speed of vessel
+  Average fuel consumption over voyage
+  Weighted average
+
+- Profit and Loss (daily 10)
+  Charter rate calculations (basic)
+  Bunker purchase economics
+
+- Simple and Compound Interest (daily 10)
+  Loan calculations
+  Depreciation of machinery
+
+- Time and Work (daily 10)
+  "Pump A fills tank in 4 hours, Pump B in 6 hours. Together = ?"
+  Multiple pump/generator problems
+
+  ALGEBRA (50 MCQs daily)
+
+- Linear Equations (daily 15)
+  Solve for unknowns in engineering contexts
+  "If 3x + 5 = 20, find x" type and word problems
+
+- Quadratic Equations (daily 10)
+  Factorization method
+  Formula method
+  Application in projectile/flow problems
+
+- Simultaneous Equations (daily 10)
+  Two-variable problems
+  "Ship A travels at x knots, Ship B at y knots..."
+
+- Indices and Logarithms (daily 10)
+  Laws of indices
+  Basic logarithm calculations
+  Application in decibel calculations, pH calculations
+
+- Polynomials (daily 5)
+  Basic operations, factor theorem
+
+  GEOMETRY & MENSURATION (60 MCQs daily)
+
+- Areas (daily 15)
+  Rectangle, triangle, circle, trapezium
+  Application: Tank surface areas, plate areas
+  "Find the area of a rectangular tank 5m × 3m × 2m (base area)"
+
+- Volumes (daily 15)
+  Cylinder, cuboid, sphere, cone
+  Application: Tank capacities, cylinder volumes
+  "Find volume of a cylindrical tank: diameter 2m, height 3m"
+
+- Surface Areas (daily 10)
+  Total and curved surface areas
+  Application: Paint coverage calculations
+
+- Coordinate Geometry (daily 10)
+  Distance formula, midpoint
+  Basic plotting
+  Application: Position plotting basics
+
+- Trigonometry Basics (daily 10)
+  Sin, Cos, Tan values (standard angles)
+  Right triangle problems
+  Application: Stability triangle, force resolution
+  "A 10m rope makes 30° with deck. Height = ?"
+
+  APPLIED MATHEMATICS (60 MCQs daily)
+  - Speed, Distance, Time (daily 15)
+  "Vessel speed 12 knots, distance 360 NM, time = ?"
+  Relative speed problems
+  Current/tide effect on speed
+
+- Unit Conversion (daily 15)
+  Nautical miles to kilometers
+  Meters to feet
+  Celsius to Fahrenheit
+  Bar to PSI
+  kW to HP
+  Tonnes to kg
+
+- Data Interpretation (daily 15)
+  Read graphs of engine performance
+  Table-based fuel consumption data
+  Bar charts of port statistics
+
+- Approximation (daily 15)
+  Quick mental math
+  Rounding and estimation
+  "Approximate: 497 × 31 ÷ 52 = ?"
+
+  B.3.3 PHYSICS (15–20 Questions Daily: 250 MCQs)
+Focus on practical physics applied to marine engineering — not theoretical derivations.
+
+TOPIC BREAKDOWN
+MECHANICS (80 MCQs daily)
+
+- Newton's Laws of Motion (daily 15)
+  Force, mass, acceleration problems
+  Application: Mooring force, propeller thrust
+  "A 50,000 DWT ship accelerates at 0.01 m/s². Force = ?"
+
+- Friction (daily 10)
+  Static vs kinetic friction
+  Coefficient of friction
+  Application: Bearing friction, brake systems
+
+- Work, Energy, Power (daily 15)
+  Work done by pumps, cranes
+  Potential and kinetic energy
+  Power of engines
+  "A pump lifts 10 m³ of water through 20m height. Work done = ?"
+  Power = Work/Time calculations
+
+- Moments and Levers (daily 10)
+  Principle of moments
+  Simple machines
+  Application: Steering gear, valve operation
+  "Force of 100N at 2m from fulcrum balances ___N at 0.5m"
+
+- Pressure (daily 15)
+  Hydrostatic pressure
+  Atmospheric pressure
+  Gauge vs absolute pressure
+  Application: Tank pressures, depth pressure
+  "Pressure at 10m depth in seawater (density 1025 kg/m³) = ?"
+
+- Density and Buoyancy (daily 15)
+  Archimedes' principle
+  Floating and sinking conditions
+  Application: Ship flotation, load line concept
+  "A block of 500 kg and volume 0.6 m³ in seawater — float or sink?"
+
+  HEAT & THERMODYNAMICS (60 MCQs daily)
+  - Temperature and Heat (daily 10)
+  Specific heat capacity
+  Heat transfer calculations
+  Q = mcΔT problems
+  "Heat required to raise 500 kg of water by 40°C = ?"
+
+- Modes of Heat Transfer (daily 10)
+  Conduction, convection, radiation
+  Application: Heat exchangers, boiler tubes, insulation
+  Identify mode in given marine scenarios
+
+- Laws of Thermodynamics (daily 10)
+  First law: Energy conservation
+  Second law: Heat flow direction, entropy concept
+  Application: Engine cycles
+
+- Gas Laws (daily 15)
+  Boyle's Law, Charles' Law, Combined Gas Law
+  Ideal Gas Equation PV = nRT
+  Application: Air compressor, gas bottles
+  "Air at 1 bar, 300K compressed to 1/5 volume. Final pressure = ?"
+
+- Change of State (daily 10)
+  Latent heat of fusion, vaporization
+  Boiling, condensation
+  Application: Boiler operation, refrigeration
+
+- Thermal Expansion (daily 5)
+  Linear and volumetric expansion
+  Application: Pipeline expansion, expansion tanks
+
+  WAVES, OPTICS & SOUND (30 MCQs daily)
+  - Wave Properties (daily 10)
+  Wavelength, frequency, amplitude, speed
+  v = fλ calculations
+  Application: Radar, sonar
+
+- Sound (daily 10)
+  Speed of sound in different media
+  Echo and sonar principles
+  Decibel levels
+  Application: Echo sounder, fog signals
+
+- Light and Optics (daily 10)
+  Reflection, refraction
+  Mirror and lens basics
+  Application: Navigation lights, signal lamps
+
+  ELECTRICITY & MAGNETISM (80 MCQs daily)
+  - Current Electricity (daily 20)
+  Ohm's Law: V = IR
+  Series and parallel circuits
+  Resistance calculations
+  Power: P = VI = I²R = V²/R
+  "Three resistors 4Ω, 6Ω, 12Ω in parallel. Total resistance = ?"
+  Application: Ship electrical circuits
+
+- Electromagnetism (daily 15)
+  Magnetic field around conductor
+  Electromagnetic induction
+  Faraday's Law basic concept
+  Application: Generator principle, motor principle
+
+- Capacitance (daily 10)
+  Capacitor basics
+  Series and parallel capacitors
+  Energy stored in capacitor
+  Application: Power factor correction concept
+
+- AC Circuits Basics (daily 15)
+  AC vs DC
+  Frequency, time period
+  RMS values
+  Single phase vs three phase (basic concept)
+  Application: Ship power supply 440V, 60Hz
+
+- Electrical Safety (daily 10)
+  Earthing/Grounding
+  Insulation resistance
+  Electric shock hazards
+  Application: Megger testing concept, earth fault
+
+- Semiconductors & Electronics Basics (daily 10)
+  Diode: Forward and reverse bias
+  LED concept
+  Transistor: Basic function (switch/amplifier)
+  Application: Alarm circuits, sensor circuits
+
+  B.3.4 GENERAL APTITUDE (15–20 Questions Daily: 250 MCQs)
+TOPIC BREAKDOWN
+LOGICAL REASONING (80 MCQs daily)
+
+- Number Series (daily 15)
+  Find next number: 2, 6, 12, 20, 30, ?
+  Marine context: RPM patterns, pressure readings
+
+- Alphabet/Letter Series (daily 10)
+  Pattern recognition in letter sequences
+
+- Coding-Decoding (daily 15)
+  "If SHIP = TIJQ, then BOAT = ?"
+  Number coding systems
+
+- Analogy (daily 15)
+  "Engine : Ship :: Heart : ?"
+  "Captain : Bridge :: Chief Engineer : ?"
+
+- Blood Relations (daily 10)
+  Family relationship puzzles
+
+- Direction Sense (daily 15)
+  "Ship sails 10 NM North, then 5 NM East..."
+  Navigation direction problems
+  Application: Chart plotting basics
+
+  QUANTITATIVE APTITUDE (80 MCQs daily)
+  - Number Problems (daily 15)
+  Odd one out, missing numbers
+  Divisibility, remainders
+
+- Age Problems (daily 10)
+  "Captain is 3 times the cadet's age..."
+
+- Pipe and Cistern / Tank Problems (daily 15)
+  "Inlet valve fills in 5 hours, outlet empties in 8 hours..."
+  Directly applicable to marine pumping systems
+
+- Clock Problems (daily 10)
+  Angle between hands
+  Time calculation
+
+- Calendar Problems (daily 5)
+  Day of week calculations
+
+- Probability (Basic) (daily 10)
+  Simple probability
+  Coin, dice problems
+  Application: Risk assessment basics
+
+- Permutation & Combination (Basic) (daily 15)
+  Arrangement and selection
+  "How many ways can 4 cadets be assigned to 4 watches?"
+
+  VISUAL/SPATIAL REASONING (50 MCQs daily)
+  - Figure Completion (daily 15)
+  Complete the pattern
+
+- Mirror Image (daily 10)
+  Find mirror image of figure/word
+
+- Paper Folding (daily 10)
+  Predict hole pattern after unfolding
+
+- Dice Problems (daily 15)
+  Opposite faces, adjacent faces
+  Application: 3D spatial thinking for machinery
+
+  GENERAL AWARENESS — MARINE (40 MCQs daily)
+  - Parts of a Ship (daily 10)
+  Bow, stern, port, starboard, midship
+  Deck names, tank names
+  Engine room layout basics
+
+- Types of Ships (daily 10)
+  Bulk carrier, tanker, container ship, LNG, LPG, Ro-Ro
+  Basic features of each
+
+- Marine Environment (daily 10)
+  IMO basics
+  MARPOL awareness
+  SOLAS awareness (just names and purpose)
+
+- Current Maritime News (daily 10)
+  Major shipping company news
+  New regulations
+  Maritime disasters and lessons
+
+  B.3.5 BASIC ELECTRICAL & ELECTRONICS — 2ND YEAR (200 MCQs daily)
+
+  This is a DEDICATED section because the user specifically requested it.
+These MCQs supplement the Physics electricity section.
+
+SECTION BREAKDOWN:
+
+DC CIRCUITS (50 daily)
+├── Ohm's Law numerical problems (15)
+├── Kirchhoff's Current Law (KCL) basics (10)
+├── Kirchhoff's Voltage Law (KVL) basics (10)
+├── Wheatstone Bridge (5)
+├── Battery: Series and Parallel connection (5)
+└── Internal resistance of cell (5)
+
+AC CIRCUITS (40 daily)
+├── AC waveform: Peak, RMS, Average values (10)
+├── Impedance concept: R, L, C in AC (10)
+├── Power Factor basics (10)
+└── Three-phase supply: Star and Delta basics (10)
+
+ELECTRICAL MACHINES (30 daily)
+├── DC Motor: Types, speed control basics (10)
+├── DC Generator: Working principle, types (10)
+└── Transformer: Turns ratio, step up/down (10)
+
+ELECTRONICS (40 daily)
+├── PN Junction Diode: V-I characteristics (10)
+├── Rectifier: Half wave, Full wave concept (10)
+├── Zener Diode: Voltage regulation (5)
+├── Transistor: NPN/PNP, CE/CB/CC basics (10)
+└── Logic Gates: AND, OR, NOT, NAND, NOR (5)
+
+ELECTRICAL SAFETY & MARINE APPLICATION (20 daily)
+├── Earthing systems aboard ships (5)
+├── Insulation resistance testing (5)
+├── Circuit breakers vs fuses (5)
+└── Emergency power supply concept (5)
+
+INSTRUMENTS & MEASUREMENTS (20 daily)
+├── Ammeter, Voltmeter connection (5)
+├── Multimeter usage (5)
+├── Megger principle (5)
+└── Clamp meter basics (5)
+
+B.4 DAILY SCHEDULE — 2ND YEAR
+
+
+╔═══════════════════════════════════════════════════════════════╗
+║              DAILY TIMETABLE — 2ND YEAR CBT PREP             ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  06:00 – 06:30  Wake up, quick revision of yesterday errors   ║
+║                                                               ║
+║  ═══════════ MORNING SESSION (400 MCQs) ═══════════          ║
+║                                                               ║
+║  06:30 – 07:15  English Block 1: 100 MCQs (Vocabulary+Grammar)║
+║  07:15 – 07:30  Review & mark errors                          ║
+║  07:30 – 08:15  Mathematics Block 1: 100 MCQs (Arithmetic)    ║
+║  08:15 – 08:30  Review & mark errors                          ║
+║  08:30 – 09:15  Physics Block 1: 100 MCQs (Mechanics+Heat)    ║
+║  09:15 – 09:30  Review & mark errors                          ║
+║  09:30 – 10:15  Aptitude Block 1: 100 MCQs (Reasoning)        ║
+║  10:15 – 10:30  Review & mark errors                          ║
+║                                                               ║
+║  10:30 – 11:00  BREAK                                         ║
+║                                                               ║
+║  ═══════════ AFTERNOON SESSION (400 MCQs) ═══════════        ║
+║                                                               ║
+║  11:00 – 11:45  English Block 2: 100 MCQs (Comprehension+SMCP)║
+║  11:45 – 12:00  Review                                        ║
+║  12:00 – 12:45  Mathematics Block 2: 100 MCQs (Algebra+Geom)  ║
+║  12:45 – 13:00  Review                                        ║
+║  13:00 – 14:00  LUNCH BREAK                                   ║
+║  14:00 – 14:45  Physics Block 2: 100 MCQs (Elec+Waves)        ║
+║  14:45 – 15:00  Review                                        ║
+║  15:00 – 15:45  Aptitude Block 2: 100 MCQs (Quant+Visual)     ║
+║  15:45 – 16:00  Review                                        ║
+║                                                               ║
+║  16:00 – 16:30  BREAK                                         ║
+║                                                               ║
+║  ═══════════ EVENING SESSION (400 MCQs) ═══════════          ║
+║                                                               ║
+║  16:30 – 17:15  Electrical & Electronics: 100 MCQs            ║
+║  17:15 – 17:30  Review                                        ║
+║  17:30 – 18:15  Electrical & Electronics: 100 MCQs            ║
+║  18:15 – 18:30  Review                                        ║
+║  18:30 – 19:15  Mixed CBT Simulation: 100 MCQs (all subjects) ║
+║  19:15 – 19:30  Review                                        ║
+║  19:30 – 20:15  Mixed CBT Simulation: 100 MCQs (timed exam)   ║
+║  20:15 – 20:30  Review                                        ║
+║                                                               ║
+║  20:30 – 21:00  DINNER                                        ║
+║  21:00 – 22:00  Error Log Analysis + Weak Area Identification  ║
+║  22:00 – 22:30  Next day topic preview                        ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+
+B.5 WEEKLY PLAN — 2ND YEAR (4-WEEK CYCLE)
+WEEK 1: FOUNDATION BUILDING
+Day	English Focus	Maths Focus	Physics Focus	Aptitude Focus	Elec/Electronics
+Mon	Tenses + Vocabulary	Number System + HCF/LCM	Newton's Laws	Number Series	Ohm's Law
+Tue	Articles + Prepositions	Percentage	Friction + Work	Coding-Decoding	KCL, KVL
+Wed	Active/Passive Voice	Ratio & Proportion	Pressure + Density	Analogy	Series-Parallel circuits
+Thu	Comprehension (Short)	Average + S.I./C.I.	Heat Transfer	Direction Sense	AC Waveforms
+Fri	Maritime English SMCP	Time & Work	Gas Laws	Pipe & Cistern	Transformers
+Sat	Error Spotting + Jumbled	Speed-Distance-Time	Thermodynamics Laws	Probability basics	DC Motors basics
+Sun	FULL MOCK TEST — 1200 MCQs in exam conditions		
+
+
+WEEK 2: STRENGTHENING
+Day	English Focus	Maths Focus	Physics Focus	Aptitude Focus	Elec/Electronics
+Mon	Synonyms/Antonyms (Marine)	Linear Equations	Wave Properties	Blood Relations	Diodes
+Tue	Direct/Indirect Speech	Quadratic Equations	Sound + Echo	Clock Problems	Rectifiers
+Wed	Logbook English	Simultaneous Equations	Light + Optics	Calendar	Transistor basics
+Thu	Comprehension (Medium)	Indices & Logs	Electromagnetism	Visual Reasoning	Logic Gates
+Fri	Sentence Rearrangement	Trigonometry Basics	Capacitance	Permutation/Combination	Megger, Instruments
+Sat	Fill in blanks + Mixed	Area & Volume	AC Circuits basics	Mixed reasoning	Marine electrical safety
+Sun	FULL MOCK TEST — NYK Pattern Simulation		
+
+WEEK 3: ACCELERATION
+Repeat Week 1 topics at HIGHER DIFFICULTY LEVEL
+Increase speed: 100 MCQs in 40 minutes (instead of 45)
+Add cross-subject questions
+
+WEEK 4: MASTERY & SIMULATION
+Daily FULL Mock Tests in exact NYK CBT pattern
+Identify remaining weak areas
+Targeted drilling on weak topics
+Speed optimization
+Final simulation under exam conditions
+
+B.6 SAMPLE QUESTIONS — 2ND YEAR (NYK Pattern)
+ENGLISH SAMPLES
+Q1. Choose the correct word:
+    "The vessel was _____ at the anchorage for 3 days."
+    (a) stationed  (b) parked  (c) anchored  (d) stopped
+    Answer: (c) anchored
+
+Q2. Identify the error:
+    "The crew was instructed to wore life jackets during the drill."
+    (a) crew  (b) instructed  (c) wore  (d) during
+    Answer: (c) wore → should be "wear"
+
+Q3. SMCP: What does "MAYDAY" signify?
+    (a) Urgency  (b) Safety  (c) Distress  (d) Warning
+    Answer: (c) Distress
+
+Q4. Choose synonym of "HAZARDOUS":
+    (a) Safe  (b) Dangerous  (c) Clean  (d) Easy
+    Answer: (b) Dangerous
+
+Q5. Fill in: "The ship _____ (has sailed / had sailed / will sailing) 
+    from Mumbai yesterday at 1400 hours."
+    Answer: sailed (Simple past — but test trick options)
+
+    MATHEMATICS SAMPLES
+    Q1. A vessel travels 180 NM in 15 hours. What is its speed in knots?
+    (a) 10  (b) 12  (c) 15  (d) 18
+    Answer: (b) 12 knots
+
+Q2. Pump A fills a tank in 6 hours. Pump B fills same tank in 4 hours.
+    Working together, how long to fill the tank?
+    (a) 2 hrs  (b) 2.4 hrs  (c) 3 hrs  (d) 5 hrs
+    Answer: (b) 2.4 hrs  [1/6 + 1/4 = 5/12; Time = 12/5 = 2.4]
+
+Q3. Convert 15 bar to PSI:
+    (a) 217.5 PSI  (b) 150 PSI  (c) 200 PSI  (d) 225 PSI
+    Answer: (a) 217.5 PSI [1 bar ≈ 14.5 PSI; 15 × 14.5 = 217.5]
+
+Q4. HFO and MDO mixed in ratio 4:1. Total bunker = 500 MT.
+    How much MDO?
+    (a) 400 MT  (b) 125 MT  (c) 100 MT  (d) 80 MT
+    Answer: (c) 100 MT [500/5 × 1 = 100]
+
+Q5. Area of a circular tank cover with diameter 1.4m:
+    (a) 1.54 m²  (b) 4.4 m²  (c) 6.16 m²  (d) 0.77 m²
+    Answer: (a) 1.54 m² [π × 0.7² = 3.14 × 0.49 = 1.54]
+
+    PHYSICS SAMPLES
+    Q1. Pressure at 15m depth in seawater (density 1025 kg/m³):
+    (a) 150.7 kPa  (b) 100 kPa  (c) 250 kPa  (d) 50 kPa
+    Answer: (a) ρgh = 1025 × 9.81 × 15 = 150,877 Pa ≈ 150.9 kPa
+
+Q2. A gas at 2 bar is compressed to half its volume at constant temp.
+    New pressure = ?
+    (a) 1 bar  (b) 4 bar  (c) 2 bar  (d) 8 bar
+    Answer: (b) 4 bar [Boyle's Law: P1V1 = P2V2]
+
+Q3. Heat needed to raise 100 kg water from 20°C to 80°C:
+    (Specific heat of water = 4.2 kJ/kg°C)
+    (a) 25,200 kJ  (b) 12,600 kJ  (c) 33,600 kJ  (d) 42,000 kJ
+    Answer: (a) Q = mcΔT = 100 × 4.2 × 60 = 25,200 kJ
+
+Q4. Three resistors 6Ω each connected in parallel. Total = ?
+    (a) 18Ω  (b) 6Ω  (c) 2Ω  (d) 3Ω
+    Answer: (c) 2Ω [1/R = 1/6 + 1/6 + 1/6 = 3/6; R = 2Ω]
+
+Q5. A 440V supply drives 10A current. Power consumed = ?
+    (a) 4.4 kW  (b) 44 kW  (c) 440 W  (d) 4400 kW
+    Answer: (a) P = VI = 440 × 10 = 4400 W = 4.4 kW
+
+    APTITUDE SAMPLES
+    Q1. Series: 3, 8, 15, 24, 35, ?
+    (a) 46  (b) 48  (c) 50  (d) 52
+    Answer: (b) 48 [Differences: 5,7,9,11,13]
+
+Q2. If ANCHOR = 1,14,3,8,15,18 then STERN = ?
+    (a) 19,20,5,18,14  (b) 20,19,5,18,14  
+    (c) 19,20,5,18,13  (d) 19,20,5,17,14
+    Answer: (a) [S=19, T=20, E=5, R=18, N=14]
+
+Q3. Inlet valve fills tank in 8 hours. Outlet valve empties in 12 hours.
+    Both open — time to fill = ?
+    (a) 20 hrs  (b) 24 hrs  (c) 10 hrs  (d) 16 hrs
+    Answer: (b) 24 hrs [1/8 - 1/12 = 1/24]
+
+Q4. Ship sails 5 NM North, 12 NM East. Distance from start = ?
+    (a) 17 NM  (b) 13 NM  (c) 7 NM  (d) 15 NM
+    Answer: (b) 13 NM [√(25+144) = √169 = 13]
+
+Q5. Analogy: Rudder : Steering :: Propeller : ?
+    (a) Navigation  (b) Propulsion  (c) Stability  (d) Mooring
+    Answer: (b) Propulsion
+
+    BASIC ELECTRICAL & ELECTRONICS SAMPLES
+    Q1. In a ship's 440V, 3-phase system, the frequency is:
+    (a) 50 Hz  (b) 60 Hz  (c) 100 Hz  (d) 25 Hz
+    Answer: (b) 60 Hz (standard marine)
+
+Q2. A diode allows current to flow in:
+    (a) Both directions  (b) One direction only  
+    (c) No direction  (d) Alternating directions
+    Answer: (b) One direction only
+
+Q3. Insulation resistance of a motor is measured using:
+    (a) Ammeter  (b) Voltmeter  (c) Megger  (d) Tachometer
+    Answer: (c) Megger
+
+Q4. In a step-down transformer:
+    (a) Output voltage > Input voltage
+    (b) Output voltage < Input voltage
+    (c) Output voltage = Input voltage
+    (d) No voltage at output
+    Answer: (b) Output voltage < Input voltage
+
+Q5. The purpose of earthing on a ship is:
+    (a) To increase voltage  (b) To improve speed
+    (c) To protect personnel from electric shock
+    (d) To reduce fuel consumption
+    Answer: (c) To protect personnel from electric shock
+
+    this for only second year students 
