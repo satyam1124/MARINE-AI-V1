@@ -103,7 +103,12 @@ function showWelcomeModal() {
           updateProfileUI();
           return;
         }
-      } catch(e) {}
+      } catch(e) {
+        console.error("Google Auth Error:", e);
+        if (e.code === 'auth/unauthorized-domain' || (e.message && e.message.includes('authorized domain'))) {
+          alert('Firebase Auth Error: Your Vercel domain is not authorized yet.\n\nTo fix this: Go to Firebase Console -> Authentication -> Settings -> Authorized Domains and add "marineiqv1.vercel.app".');
+        }
+      }
       googleBtn.textContent = 'Sign-in failed — try manual entry below';
       googleBtn.disabled = false;
     });
