@@ -1105,6 +1105,15 @@ window.launchChapterQuiz = function(parentId, chapterId, chapterTitle){
   const entry   = TOPIC_KNOWLEDGE[parentId];
   const chapter = entry?.subtopics?.find(s => s.id === chapterId);
 
+  // Close Learn Mode overlay if active so the quiz is visible
+  const tz = document.getElementById('topicZone');
+  if (tz) {
+    const lv = tz.querySelector('.learn-view');
+    if (lv) lv.remove();
+    const mm = tz.querySelector('.mm-section');
+    if (mm) mm.style.display = '';
+  }
+
   // Ensure chapter is registered in TOPIC_KNOWLEDGE
   if(!TOPIC_KNOWLEDGE[chapterId]){
     TOPIC_KNOWLEDGE[chapterId] = {
