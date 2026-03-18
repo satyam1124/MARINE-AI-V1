@@ -487,7 +487,13 @@ function handleQuizAnswer(selected, correct, explanation) {
 
   // Show explanation
   if (explanation) {
-    document.getElementById('qv2ExpText').textContent      = explanation;
+    const expEl = document.getElementById('qv2ExpText');
+    if (typeof renderAnswerBody === 'function') {
+      expEl.innerHTML = renderAnswerBody(explanation);
+      if (typeof renderKaTeX === 'function') setTimeout(() => renderKaTeX(expEl), 10);
+    } else {
+      expEl.textContent = explanation;
+    }
     document.getElementById('qv2Explanation').style.display = '';
   }
 
@@ -543,11 +549,16 @@ function quizFinish() {
         return `<div class="qv2-wrong-item">
           <div class="qv2-wrong-q">${esc(q.q)}</div>
           <div class="qv2-wrong-ans">✅ Correct: <strong>${letters[q.ans]}. ${esc(q.opts[q.ans].replace(/^[ABCD]\.\s*/,''))}</strong></div>
-          ${q.exp ? `<div class="qv2-wrong-exp">${esc(q.exp)}</div>` : ''}
+          ${q.exp ? `<div class="qv2-wrong-exp">${typeof renderAnswerBody === 'function' ? renderAnswerBody(q.exp) : esc(q.exp)}</div>` : ''}
         </div>`;
       }).join('');
   } else {
     wrongList.innerHTML = '<div class="qv2-wrong-title" style="color:var(--cadet)">🎉 Perfect score — no missed questions!</div>';
+  }
+
+  // Render any math formulas in the wrong list
+  if (typeof renderKaTeX === 'function' && wrongList) {
+    setTimeout(() => renderKaTeX(wrongList), 10);
   }
 
   // Update legacy score display if it exists
